@@ -18,3 +18,11 @@ read each other's code try to remember to use the `Source` -> `Format`
 # Respository guidelines / suggestions 
 * Commit often -- don't write a bunch of code then commit
 * Use descriptive commit messages
+
+# Other random things
+* I have set the repository to ignore all files in the /bin/ directory. These 
+files are generated automatically by Eclipse when you run your code; they're 
+ananlogous to *.o files we dealt with in C last semester. Therefore, it is
+pointless and a pain to include them in the repository. So you don't need to
+try to `git add` these files and don't worry that they're not showing up on the
+repository online.
