@@ -1,0 +1,6 @@
+/bin/
+*.log
+*.gz
+*.out
+*.aux
+
