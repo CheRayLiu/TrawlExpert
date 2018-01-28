@@ -3,4 +3,6 @@
 *.gz
 *.out
 *.aux
+*.bbl
+*.blg
 
