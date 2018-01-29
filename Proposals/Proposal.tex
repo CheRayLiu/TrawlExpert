@@ -27,7 +27,7 @@
 \maketitle
 
 \begin{abstract}
-\noindent A powerful tool to enable researchers to analyze and filter large datasets from fish trawl surveys in order to perform environmental research on fish and / or invertebrate populations. Gives researchers the ability to intelligently filter and query datasets based on biological indicators such as family, genus or species, or based on location or timeframe. Advanced outputs include statistical data on relative population abundance as a function of time and geographical distribution. Additionally, TrawlExpert gives an advanced tool for finding local subpopulations within a larger query. A dataset of thousands of Great Lakes trawl surveys from 1958-2016 will be used as a demonstration of TrawlExpert's capability to help researchers narrow down large datasets and glean data which pertains to their research. TrawlExpert will be designed to be used easily and effectively as a first step in a groundbreaking climate and ecological research pipeline.
+\noindent A powerful tool to enable researchers to analyze and filter large datasets from fish trawl surveys in order to perform environmental research on fish and / or invertebrate populations. TrawlExpert gives researchers the ability to intelligently filter and query datasets based on biological classification such as family, genus or species, or based on location or timeframe. Outputs include statistical data on relative population abundance as a function of time and geographical distribution. Additionally, TrawlExpert gives an advanced tool for finding local subpopulations within a larger query. A dataset of thousands of Great Lakes trawl surveys from 1958-2016 will be used as a demonstration of TrawlExpert's capability to help researchers narrow down large datasets and glean data which pertains to their research. TrawlExpert will be designed to be used easily and effectively as a first step in a groundbreaking climate and ecological research pipeline.
 
 \end{abstract}
 
@@ -72,15 +72,17 @@ A researcher is studying the decline of all species in the family \textit{Cyprin
 
 The researcher can now continue her scientific analysis of the data having easily and intelligently narrowed down to relevant data.
 
-\section{Algorithmic Challenges}
+\section{Algorithmic Challenges and Opportunities}
 \subsection{Searching Algorithms}
-A modified form of binary search will be used for quickly locating the first of a given key in the large dataset and will be a crucial building block of all three main types of output. This will allow all entries of that type to be found to the right of that result.
+A modified form of binary search will be used for quickly locating the first of a given key in the large dataset and will be a crucial building block of all three main types of output. This will allow all entries of a given query to be found.
 
 \subsection{Sorting Algorithms}
 Sorting will be crucial for both ordering historical data in chronological order as well as being the basis for binary search to work, since it requires data to be sorted. The mergesort algorithm will be advantageous due to its fast and predictable runtime ($N\lg N$).
 
 \subsection{Graph Algorithms}\label{sec:graphalgs}
-Graph algorithms will be used for the advanced searching features of the program. Firstly, the biological classification of each organism forms a tree from which species in the same genus, for example, can be located. Secondly, a graph algorithm will be used to find connected components for generating output of type 3 described in section \ref{sec:subgroup}. Entries form nodes which can be connected together based on their distance to surrounding points and a breadth-first search algorithm will be used to determine connected components \citep{broder2000graph}. This is visualized in figure \ref{fig:Groupings}.
+Graph algorithms will be used for the advanced searching features of the program. Firstly, the biological classification of each organism forms a tree from which species in the same genus, for example, can be located. 
+
+Secondly, a graph algorithm will be used to find connected components for generating output of type 3 described in section \ref{sec:subgroup}. Entries form nodes which can be connected together based on their distance to surrounding points and a breadth-first search algorithm will be used to determine connected components \citep{broder2000graph}. This is visualized in figure \ref{fig:Groupings}.
 
 \begin{figure*}[t]
 \centering
