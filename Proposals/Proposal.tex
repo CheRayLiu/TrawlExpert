@@ -5,6 +5,7 @@
 \hypersetup{colorlinks,urlcolor=red}
 \usepackage[margin=1in]{geometry}
 \usepackage{listing}
+\usepackage{url}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -25,10 +26,10 @@
 \author{Lab section: L01 \\ Christopher W. Schankula \\Student ID: 400026650 \\schankuc@mcmaster.ca}
 
 \maketitle
+\noindent\textit{By virtue of submitting this document I electronically sign and date that the work being submitted is my own individual work.}
 
 \begin{abstract}
 \noindent A powerful tool to enable researchers to analyze and filter large datasets from fish trawl surveys in order to perform environmental research on fish and invertebrate populations. \textit{TrawlExpert} gives researchers the ability to intelligently filter and query datasets based on biological classification such as family, genus or species, or based on location or timeframe. Advanced outputs include statistical data on relative population abundance as a function of time and geographical distribution. Additionally, \textit{TrawlExpert} provides a tool for finding local subpopulations within a larger query. A dataset of thousands of Great Lakes trawl surveys from 1958-2016 will be used as a demonstration of \textit{TrawlExpert}'s capability to help researchers narrow down large datasets and glean data which pertains to their research. \textit{TrawlExpert} will be designed to be used easily and effectively as the first step in a groundbreaking climate and ecological research pipeline.
-
 \end{abstract}
 
 \section{Objective}
@@ -37,7 +38,7 @@ Provide a statistical and visual tool for the analysis of water ecosystems, base
 \section{Motivation}
 The diminishing of fish populations in the Great Lakes became a problem in the latter half of the 20th century, with the total prey fish biomass declining in Lakes Superior, Michigan, Huron and Ontario between 1978 and 2015 \citep{michigan2017}. Annual bottom trawl surveys involve using specialized equipment to sweep an area and are used to determine the relative temporal variation in stock size, mortality and birth rates of different fish species \citep{walsh1997efficiency}. These surveys are performed annually and often have hundreds of thousands of records, making manual analysis infeasible. The ongoing protection and development of the Great Lakes water basins is considered an important topic for scientists in both Canada and the United States, as evidenced by grants such as the \textit{Michigan Sea Grant} \citep{michseagr2018}.
 
-TrawlExpert will give researchers tools to filter through these large amounts of data by allowing them to search through data based on class, order, genus, family or species. This will help support scientific researchers and fishing companies as they study fish populations. These studies help launch inform initiatives to preserve fish populations and perform their business in an environmentally friendly way going forward. As more data is collected on an annual basis, TrawlExpert can easily be injected with the new data and will adjust and scale accordingly, combining the new data with the old data for additional analysis.
+TrawlExpert will give researchers tools to filter through these large amounts of data by allowing them to search through data based on class, order, genus, family or species. This will help support scientific researchers and fishing companies as they study fish populations. These studies help inform initiatives to preserve fish populations and conduct their business in an environmentally friendly way going forward. As more data is collected on an annual basis, TrawlExpert can easily be injected with the new data and will adjust and scale accordingly, combining the new data with the old data for continued analysis.
 
 TrawlExpert will also analyze the trawl data to find connected subpopulations within the data, giving researchers tools to analyze the portions of the water body that contain different populations and even track these specific subpopulations over time.
 
@@ -52,7 +53,7 @@ Other studies, e.g \cite{swartzman1992spatial}, make use of software programs to
 For purposes of ensuring a deliverable scope, this project will consist of three main types of outputs. As a proof of concept of these outputs, a trawl survey dataset will be used. The datasets and outputs are described in this section, in addition to a use case example.
 
 \subsection{Dataset}\label{sec:out}
-The test dataset that will be used for purposes of this project is the \textit{USGS Great Lakes Science Center Research Vessel Catch Information System Trawl} published by the United States Geological Survey. Compiled on yearly operations taking place from early spring to late fall from 1958 until 2016, the dataset contains over 283,000 trawl survey records in the five Great Lakes, including the latitude and longitude co-ordinates and biological classification such as family, genus and species.
+The test dataset that will be used for purposes of this project is the \textit{USGS Great Lakes Science Center Research Vessel Catch Information System Trawl} published by the United States Geological Survey \citep{usgs2018}. Compiled on yearly operations taking place from early spring to late fall from 1958 until 2016, the dataset contains over 283,000 trawl survey records in the five Great Lakes, including the latitude and longitude co-ordinates and biological classification such as family, genus and species.
 
 \subsection{Outputs}
 This subsection describes in detail the types of data analysis that TrawlExpert will be able to perform, in addition to basic data searching capabilities. Section \ref{sec:case} describes a potential use case for a researcher performing a study.
@@ -88,7 +89,15 @@ Sorting will be crucial for both ordering data in chronological order as well as
 \subsection{Graph Algorithms}\label{sec:graphalgs}
 Graph algorithms will support advanced searching features. Firstly, the biological classification of each organism forms a tree (see figure \ref{fig:Tree}) from which species in the same genus, for example, can be located. 
 
-Secondly, a graph algorithm will be used to find connected components for generating output of type 4 described in section \ref{sec:subgroup}. Nodes are connected together based on their distance to surrounding points. Breadth-first search will be used to determine connected components \citep{broder2000graph} (see figure \ref{fig:Groupings}).
+Secondly, a graph algorithm will be used to find connected components for generating output of type 4 described in section \ref{sec:subgroup}. Nodes are connected together based on their distance to surrounding points \citep{tom10}. Breadth-first search will be used to determine connected components \citep{broder2000graph} (see figure \ref{fig:Groupings}).
+
+\begin{figure*}[p]
+\centering
+\includegraphics[width=16cm]{TreeFig.jpg}
+
+\caption{Although not necessarily representative of the species in the dataset, this figure shows an example classification tree that TrawlExpert will build in order to allow searching of data in an intelligent way \citep{plosblog2014}.}
+\label{fig:Tree}
+\end{figure*}
 
 \begin{figure*}[p]
 \centering
@@ -141,15 +150,5 @@ The following milestones will help inform our progress towards completing the go
 \bibliographystyle{apa}
 \bibliography{bib}
 
-\clearpage
-
-\begin{figure*}[p]
-\centering
-
-\includegraphics[width=15cm]{TreeFig.jpg}
-
-\caption{Although not necessarily representative of the species in the dataset, this figure shows an example a classification tree that TrawlExpert will build in order to allow searching of data in an intelligent way \citep{plosblog2014}.}
-\label{fig:Tree}
-\end{figure*}
 
 \end{document}
