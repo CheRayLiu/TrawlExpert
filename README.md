@@ -1,4 +1,4 @@
-# 2XB3 Group 11 [Def. need a better name!] Repository
+# 2XB3 Group 11 - Trawl Expert - Repository
 This is our repository for everything relating to our project for 2XB3.
 
 # Opening this project in Eclipse
@@ -26,3 +26,6 @@ ananlogous to *.o files we dealt with in C last semester. Therefore, it is
 pointless and a pain to include them in the repository. So you don't need to
 try to `git add` these files and don't worry that they're not showing up on the
 repository online.
+
+# Link for Google Drive meeting minutes
+* https://drive.google.com/drive/folders/1mKG5EY-oi8i9HsSlXeakLXsSqUTnXHjQ?usp=sharing
