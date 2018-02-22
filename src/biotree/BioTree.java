@@ -52,7 +52,7 @@ public class BioTree {
 	 * @param s
 	 *            The new Species object to overwrite the old one with.
 	 */
-	public static void updateSpecies(int i, Species s) {
+	public static void setSpecies(int i, Species s) {
 		species[i] = s;
 	}
 
