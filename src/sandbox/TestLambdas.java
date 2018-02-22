@@ -1,7 +1,12 @@
+/*
+ * More info on lambdas: http://tutorials.jenkov.com/java/lambda-expressions.html
+ */
+
 package sandbox;
 
 public class TestLambdas {
 	public static void main(String[] args) {
+		//declare the instances of BinaryIntExpression
 		BinaryIntExpression b0;
 		BinaryIntExpression b1;
 		BinaryIntExpression b2;
@@ -9,6 +14,7 @@ public class TestLambdas {
 		BinaryIntExpression b4;
 		int result;
 		
+		//specify the instances of the functions
 		b0 = (a1, a2) -> a1 + a2;
 		b1 = (a1, a2) -> a1 - a2;
 		b2 = (a1, a2) -> a1 * a2;
@@ -19,6 +25,7 @@ public class TestLambdas {
 			return n;
 		};
 			
+		//call the main function using the instances as a parameter.
 		result = binaryOperation(1,2,b0);
 		System.out.println(result);
 		
@@ -36,6 +43,7 @@ public class TestLambdas {
 	}
 	
 	public static int binaryOperation(int a1, int a2, BinaryIntExpression exp) {
+		//call the eval() function in the given BinaryIntExpression.
 		return exp.eval(a1, a2);
 	}
 	
