@@ -14,11 +14,13 @@ public class TestLambdas {
 		BinaryIntExpression b4;
 		int result;
 		
-		//specify the instances of the functions
+		//specify the instances of the functions (these implicitly become the "eval()" function)
+		//single-line examples:
 		b0 = (a1, a2) -> a1 + a2;
 		b1 = (a1, a2) -> a1 - a2;
 		b2 = (a1, a2) -> a1 * a2;
 		b3 = (a1, a2) -> a1 / a2;
+		//multi-line examples
 		b4 = (a1, a2) -> {
 			int n = a1 * a2;
 			n = n * a1 + a2;
