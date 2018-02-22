@@ -12,6 +12,8 @@ public class TestLambdas {
 		BinaryIntExpression b2;
 		BinaryIntExpression b3;
 		BinaryIntExpression b4;
+		BinaryIntExpression b5;
+		BinaryIntExpression b6;
 		int result;
 		
 		//specify the instances of the functions (these implicitly become the "eval()" function)
@@ -20,10 +22,14 @@ public class TestLambdas {
 		b1 = (a1, a2) -> a1 - a2;
 		b2 = (a1, a2) -> a1 * a2;
 		b3 = (a1, a2) -> a1 / a2;
+		b4 = (a1, a2) -> 12 * 2 + 46;
 		//multi-line examples
-		b4 = (a1, a2) -> {
+		b5 = (a1, a2) -> {
+			return a1 + a2;
+		};
+		b6 = (a1, a2) -> {
 			int n = a1 * a2;
-			n = n * a1 + a2;
+			n = n * a1 + 2 * a2;
 			return n;
 		};
 			
@@ -41,6 +47,12 @@ public class TestLambdas {
 		System.out.println(result);
 		
 		result = binaryOperation(1,2,b4);
+		System.out.println(result);
+		
+		result = binaryOperation(1,2,b5);
+		System.out.println(result);
+		
+		result = binaryOperation(1,2,b6);
 		System.out.println(result);
 	}
 	
