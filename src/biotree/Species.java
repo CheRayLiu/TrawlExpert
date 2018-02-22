@@ -7,7 +7,7 @@ public class Species {
 	private final String family;
 	private final String genus;
 	
-	public Species(String species, String bClass, String order, String family, String genus) {
+	public Species(String bClass, String order, String family, String genus, String species) {
 		this.species = species;
 		this.bClass  = bClass;
 		this.order   = order;
@@ -30,8 +30,12 @@ public class Species {
 	public String getFamily() {
 		return this.family;
 	}
-	
+
 	public String getGenus() {
 		return this.genus;
+	}
+	
+	public String toString() {
+		return bClass + " " + order + " " + family + " " + genus + " " + species;
 	}
 }
