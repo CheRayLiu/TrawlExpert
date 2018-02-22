@@ -1,6 +1,6 @@
 
 public class HelloWorld {
 	public static void main(String[] args) {
-		System.out.println("Goodbye Team B!");
+		System.out.println("I really want a monkey!");
 	}
 }
