@@ -14,6 +14,11 @@ public class mergeSort {
 		merge(gc, mid);
 		merge(gc, mid+1);
 		
+		for(int i = 1; i <= n; i++){
+			aux[i] = gc[i];
+		}
+		
+		
 	}
 	
 	
