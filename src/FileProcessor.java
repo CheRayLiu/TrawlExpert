@@ -19,15 +19,26 @@ import java.util.regex.Pattern;
 public class FileProcessor {
 	private static String path = "src/occurrence.csv";
 	
+	/**
+	 * Gets the path string
+	 * 
+	 * @return Path String
+	 */
 	public String getPath() {
 		return path;
 	}
-
+	
+	/**
+	 * Sets the path string
+	 */
 	public void setPath(String newPath) {
 		path = newPath;
 	}
 	
-	// Calls Parse automatically
+	/**
+	 *  Reads file at path. 
+	 *  Calls parse() automatically
+	 */
 	private static void read() {
 		FileReader fr;
 		BufferedReader br;
@@ -55,7 +66,12 @@ public class FileProcessor {
 		}
 	}
 	
-	//"scientificName" in raw data heading = species name
+	/**
+	 * Parses out data from string
+	 * "scientificName" in raw data heading = species name
+	 * 
+	 * @param currentLine - A line/row of data
+	 */
 	private static void parse(String currentLine) {
 		String[] splitLine = currentLine.split(",");
 		String eventId = null, taxId = null, occurrenceId, latitude, longitude, month= null, year=null, day=null, individualCount;
