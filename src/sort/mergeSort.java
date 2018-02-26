@@ -24,7 +24,7 @@ public class mergeSort implements GeneralCompare{
 			else if(mid+1 > n)
 				gc[i] = aux[2];
 			else if(compare(aux[mid+1],aux[1]) < 0)
-				gc[i] = aux[i];
+				gc[i] = aux[i]; //fill statement (incorrect)
 		}
 		
 	}
