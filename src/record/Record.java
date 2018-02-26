@@ -8,14 +8,10 @@ public class Record {
 	
 	private final float latitude;
 	private final float longitude;
-	private final String locality;
-	private final int depth;
 	
 	private final int year;
 	private final int month;
 	private final int day;
-	private final int hour;
-	private final int minute;
 	
 
 	/**
@@ -29,14 +25,10 @@ public class Record {
 		
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.locality = locality;
-		this.depth = depth;
-		
+	
 		this.year = year;
 		this.month = month;
 		this.day = day;
-		this.hour = hour;
-		this.minute = minute;
 		
 	}
 	
@@ -90,24 +82,6 @@ public class Record {
 	}
 
 	/**
-	 * Gets locality of the object
-	 * 
-	 * @return The locality of the object
-	 */
-	public String getLocality() {
-		return locality;
-	}
-
-	/**
-	 * Gets Depth of the object
-	 * 
-	 * @return The depth of the object
-	 */
-	public int getDepth() {
-		return depth;
-	}
-
-	/**
 	 * Gets year of the object
 	 * 
 	 * @return The year of the object
@@ -133,25 +107,6 @@ public class Record {
 	 */
 	public int getDay() {
 		return day;
-	}
-
-
-	/**
-	 * Gets hour of the object
-	 * 
-	 * @return The hour of the object
-	 */
-	public int getHour() {
-		return hour;
-	}
-
-	/**
-	 * Gets minute of the object
-	 * 
-	 * @return The minute of the object
-	 */
-	public int getMinute() {
-		return minute;
 	}
 
 }
