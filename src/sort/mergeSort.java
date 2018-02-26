@@ -19,10 +19,10 @@ public class mergeSort implements GeneralCompare{
 		}
 		
 		for(int k = 1; k <= n; k++){
-			if(i > j-1) //Should these not be a[i] and a[mid]?
+			if(i > j-1)
 				gc[k] = aux[j++];
-			else if(j > n) //^
-				gc[k] = aux[2];
+			else if(j > n)
+				gc[k] = aux[i++];
 			else if(compare(aux[j+1],aux[1]) < 0)// ?
 				gc[k] = aux[j++]; 
 			else 
