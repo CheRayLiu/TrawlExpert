@@ -1,6 +1,6 @@
 package sort;
 
-public class mergeSort{
+public class MergeSort{
 	
 	private static Comparable[] aux;
 	
