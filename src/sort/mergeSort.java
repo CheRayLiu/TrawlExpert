@@ -1,12 +1,12 @@
 package sort;
 
-public class mergeSort implements GeneralCompare{
-
-	private static GeneralCompare[] aux;
+public class mergeSort{
 	
-	public static void merge(GeneralCompare[] gc, int n){
+	private static Comparable[] aux;
+	
+	public static void merge(Comparable x, int n, GeneralCompare gc){
 		
-		aux = new GeneralCompare[n];
+		aux = new Comparable[n];
 		
 		if(n <= 1)
 			return;
@@ -20,13 +20,13 @@ public class mergeSort implements GeneralCompare{
 		
 		for(int k = 1; k <= n; k++){
 			if(i > j-1)
-				gc[k] = aux[j++];
+				x[k] = aux[j++];
 			else if(j > n)
-				gc[k] = aux[i++];
-			else if(compare(aux[j+1],aux[1]) < 0)// ?
-				gc[k] = aux[j++]; 
+				x[k] = aux[i++];
+			else if(gc.compare(aux[j+1],aux[1]) < 0)// ?
+				x[k] = aux[j++]; 
 			else 
-				gc[k] = aux[i++];
+				x[k] = aux[i++];
 		}
 		
 	}
