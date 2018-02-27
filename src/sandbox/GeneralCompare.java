@@ -1,5 +1,6 @@
 package sandbox;
 
-public interface GeneralCompare<T> {
-	public int eval(T a1, T a2);
+public interface GeneralCompare {
+	public int eval(Comparable a1, Comparable a2);
+
 }

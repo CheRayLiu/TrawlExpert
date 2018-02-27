@@ -1,5 +1,5 @@
 package sort;
 
-public interface GeneralCompare<T> {
-	public int compare(T a1, T a2);
+public interface GeneralCompare {
+	public int compare(Comparable a1, Comparable a2);
 }
