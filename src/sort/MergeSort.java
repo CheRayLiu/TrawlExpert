@@ -4,20 +4,33 @@ public class MergeSort{
 	
 	private static Comparable[] aux;
 	
-	public static void merge(Comparable x, int n, GeneralCompare gc){
+	public static void merge(Comparable[] x, int lo, int hi, GeneralCompare gc){
 		
+		int n = hi - lo; 
 		aux = new Comparable[n];
-		
+
 		if(n <= 1)
 			return;
-		int j = (n/2) + 1, i = 0;
-		merge(gc, j);
-		merge(gc, j+1);
+		// Recursively merge each half of the array
+		int mid = (n/2) + 1;
+		merge(x, lo, mid, gc);
+		merge(x, mid+1, hi, gc);
 		
+		// Fill auxiliary array
 		for(int k = 1; k <= n; k++){
-			aux[i] = gc[i];
+			aux[k] = x[k];
 		}
 		
+		//
+		while ((mid < hi) | (lo < mid)) {
+			if (compare(aux[lo], aux[mid]))
+				x[lo++] = mid; 
+				
+		}
+		
+		
+		
+		// Is this portion sorting the aux array? Check
 		for(int k = 1; k <= n; k++){
 			if(i > j-1)
 				x[k] = aux[j++];
