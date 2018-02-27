@@ -3,7 +3,7 @@ package record;
 public class Record {
 	private final int eventId;
 	private final String occurId;
-	private final int speciesId;
+	private final int taxonId;
 	private final int count;
 	
 	private final float latitude;
@@ -17,10 +17,10 @@ public class Record {
 	/**
 	 * Initialize Record abstract object
 	 */
-	public Record( int eventId, String occurId, int speciesId, int count, float latitude, float longitude, String locality, int depth , int year, int month, int day, int hour, int minute ) {
+	public Record( int eventId, String occurId, int taxonId, int count, float latitude, float longitude, String locality, int depth , int year, int month, int day, int hour, int minute ) {
 		this.eventId = eventId;
 		this.occurId = occurId;
-		this.speciesId = speciesId;
+		this.taxonId = taxonId;
 		this.count = count;
 		
 		this.latitude = latitude;
@@ -54,7 +54,7 @@ public class Record {
 	 * @return The species ID of the object
 	 */
 	public int getSpeciesId() {
-		return speciesId;
+		return taxonId;
 	}
 	/**
 	 * Gets the count of the object
