@@ -45,7 +45,7 @@ public class Record {
 	/**
 	 * Gets the occurrence ID
 	 * 
-	 * @return The occurence ID of the record
+	 * @return The occurrence ID of the record
 	 */
 	public String getOccurId() {
 		return occurId;
