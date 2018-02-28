@@ -4,6 +4,7 @@ public class Record {
 	private final int eventId;
 	private final String occurId;
 	private final int taxonId;
+	private final TaxonType taxon;
 	private final int count;
 	
 	private final float latitude;
@@ -17,10 +18,11 @@ public class Record {
 	/**
 	 * Initialize Record abstract object
 	 */
-	public Record( int eventId, String occurId, int taxonId, int count, float latitude, float longitude, String locality, int depth , int year, int month, int day, int hour, int minute ) {
+	public Record( int eventId, String occurId, int taxonId, TaxonType taxon, int count, float latitude, float longitude, String locality, int depth , int year, int month, int day, int hour, int minute ) {
 		this.eventId = eventId;
 		this.occurId = occurId;
 		this.taxonId = taxonId;
+		this.taxon = taxon;
 		this.count = count;
 		
 		this.latitude = latitude;
@@ -35,7 +37,7 @@ public class Record {
 	/**
 	 * Gets the event ID
 	 * 
-	 * @return The eventid of the object
+	 * @return The eventid of the record
 	 */
 	public int getEventId() {
 		return eventId;
@@ -43,57 +45,65 @@ public class Record {
 	/**
 	 * Gets the occurrence ID
 	 * 
-	 * @return The occurence ID of the object
+	 * @return The occurence ID of the record
 	 */
 	public String getOccurId() {
 		return occurId;
 	}
 	/**
-	 * Gets the species ID
+	 * Gets the taxon ID
 	 * 
-	 * @return The species ID of the object
+	 * @return The taxon ID of the record
 	 */
-	public int getSpeciesId() {
+	public int getTaxonId() {
 		return taxonId;
 	}
 	/**
-	 * Gets the count of the object
+	 * Gets the taxon type.
 	 * 
-	 * @return The count of the object
+	 * @return The taxon type of the record
+	 */
+	public TaxonType getTaxonType() {
+		return taxon;
+	}
+	/**
+	 * Gets the individual count of the record
+	 * 
+	 * @return The individual count of the record
 	 */
 	public int getCount() {
 		return count;
 	}
 	/**
-	 * Gets latitude of the object
+	 * Gets latitude of the record
 	 * 
-	 * @return The latitude of the object
+	 * @return The latitude of the record
 	 */
 	public float getLatitude() {
 		return latitude;
 	}
 	/**
-	 * Gets longitude of the object
+	 * Gets longitude of the record
 	 * 
-	 * @return The longitude of the object
+	 * @return The longitude of the record
 	 */
 	public float getLongitude() {
 		return longitude;
 	}
 
 	/**
-	 * Gets year of the object
+	 * Gets year of the record
 	 * 
-	 * @return The year of the object
+	 * @return The year of the record
 	 */
 	public int getYear() {
 		return year;
 	}
 
 	/**
-	 * Gets month of the object
+	 * Gets month of the record
 	 * 
-	 * @return The month of the object
+	 * @return The month of the record
 	 */
 	public int getMonth() {
 		return month;
@@ -101,9 +111,9 @@ public class Record {
 
 
 	/**
-	 * Gets day of the object
+	 * Gets day of the record
 	 * 
-	 * @return The day of the object
+	 * @return The day of the record
 	 */
 	public int getDay() {
 		return day;
