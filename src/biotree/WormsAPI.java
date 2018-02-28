@@ -51,6 +51,7 @@ public class WormsAPI {
 	 * @throws IOException
 	 */
 	private static String makeRequest(String url) throws IOException {
+		//Request method adapted from http://www.baeldung.com/java-http-request
 		//create new URL instance
 		URL urll = new URL(url);
 		//create and set up connection
