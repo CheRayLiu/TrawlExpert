@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import record.TaxonType;
+import tuple.Tuple;
+
 public class WormsAPI {
 	
 	public static void main(String[] args) throws IOException {
@@ -49,7 +52,9 @@ public class WormsAPI {
 	 * http://marinespecies.org/rest/
 	 * /AphiaClassificationByAphiaID/{ID}
 	 */
-	public static <Integer,String>[] idToClassification(int taxonId) {
+	public static Tuple<TaxonType,Integer>[] idToClassification(int taxonId) {
+		
+		return null;
 		
 	}
 	
