@@ -45,6 +45,17 @@ public class WormsAPI {
 	}
 	
 	/**
+	 * Search by taxonId (AphiaID) and return bioclassification of that and above.
+	 * http://marinespecies.org/rest/
+	 * /AphiaClassificationByAphiaID/{ID}
+	 */
+	public static <Integer,String>[] idToClassification(int taxonId) {
+		
+	}
+	
+	
+	
+	/**
 	 * Perform a GET request to the given URL and return the content of the response.
 	 * @param url The URL to which to make a request.
 	 * @return The content returned by the server (if successful).
