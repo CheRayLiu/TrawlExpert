@@ -1,7 +1,6 @@
 package biotree;
 
 import java.util.ArrayList;
-import java.util.List;
 
 // https://stackoverflow.com/questions/2697182/how-to-use-an-array-list
 	
@@ -11,7 +10,7 @@ public class TaxonNode {
 	private final String name;
 	
 	private TaxonNode parent;	// this can't be final unless parent is recursively returned and constructed in constructor.
-	private List<TaxonNode> children = new ArrayList<TaxonNode>();
+	private ArrayList<TaxonNode> children = new ArrayList<TaxonNode>();
 	private int count;
 	
 	public TaxonNode(int taxonId, TaxonType taxonType, String name) {
@@ -48,7 +47,7 @@ public class TaxonNode {
 	}
 	
 	//Stub Changed
-	public List<TaxonNode> getChildren() {
+	public Iterable<TaxonNode> getChildren() {
 		return this.children;
 	}
 	
