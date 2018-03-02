@@ -4,7 +4,6 @@ public class Record {
 	private final int eventId;
 	private final String occurId;
 	private final int taxonId;
-	private final TaxonType taxon;
 	private final int count;
 	
 	private final float latitude;
@@ -18,11 +17,10 @@ public class Record {
 	/**
 	 * Initialize Record abstract object
 	 */
-	public Record( int eventId, String occurId, int taxonId, TaxonType taxon, int count, float latitude, float longitude, String locality, int depth , int year, int month, int day, int hour, int minute ) {
+	public Record( int eventId, String occurId, int taxonId, int count, float latitude, float longitude, String locality, int depth , int year, int month, int day, int hour, int minute ) {
 		this.eventId = eventId;
 		this.occurId = occurId;
 		this.taxonId = taxonId;
-		this.taxon = taxon;
 		this.count = count;
 		
 		this.latitude = latitude;
@@ -57,14 +55,6 @@ public class Record {
 	 */
 	public int getTaxonId() {
 		return taxonId;
-	}
-	/**
-	 * Gets the taxon type.
-	 * 
-	 * @return The taxon type of the record
-	 */
-	public TaxonType getTaxonType() {
-		return taxon;
 	}
 	/**
 	 * Gets the individual count of the record
