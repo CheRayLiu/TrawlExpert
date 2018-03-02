@@ -1,49 +1,62 @@
 package biotree;
 
-public class TaxonNode {
+import java.util.ArrayList;
+import java.util.List;
+
+// https://stackoverflow.com/questions/2697182/how-to-use-an-array-list
 	
+public class TaxonNode {
+	private final int taxonId;
+	private final TaxonType taxonType;
+	private final String name;
+	
+	private TaxonNode parent;	// this can't be final unless parent is recursively returned and constructed in constructor.
+	private List<TaxonNode> children = new ArrayList<TaxonNode>();
+	private int count;
 	
 	public TaxonNode(int taxonId, TaxonType taxonType, String name) {
-		
+		this.taxonId = taxonId;
+		this.taxonType = taxonType;
+		this.name = name;
+		this.parent = null;
+		this.children = null;
+		this.count = 1;
 	}
 	
 	public int getTaxonId() {
-		
-		return 0;
+		return this.taxonId;
 	}
 	
 	public TaxonType getTaxonType() {
-		return null;
+		return this.taxonType;
 	}
 	
 	public String getName() {
-		return "";
+		return this.name;
 	}
 	
 	public void setParent(TaxonNode parent) {
-		
+		this.parent = parent;
 	}
 	
-	public void addChild(TaxonNode child) {
-		
+	public void addChild(TaxonNode newChild) {
+		this.children.add(newChild);
 	}
 	
 	public TaxonNode getParent() {
-		
-		return null;
+		return this.parent;
 	}
 	
-	public TaxonNode[] getChildren() {
-		
-		return null;
+	//Stub Changed
+	public List<TaxonNode> getChildren() {
+		return this.children;
 	}
 	
 	public int getCount() {
-		
-		return 0;
+		return this.count;
 	}
 	
 	public void incCount() {
-		
+		this.count ++;
 	}
 }
