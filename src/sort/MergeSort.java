@@ -9,7 +9,7 @@ public class MergeSort{
 	public static void main(String[] args) {
 		GeneralCompare b1;
 		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
-		Integer[] test = {3, 4, 2, 1, 5, 7, 9, 10};
+		Integer[] test = {3, 4, 2, 1, 5, 7, 9, 10, 11};
 		//Integer[] test = {2, 1};
 		sort(test, 0, test.length - 1, b1);
 		
@@ -48,15 +48,15 @@ public class MergeSort{
 
 		int i = lo; 
 		int j = mid + 1; 
-		for (int k = 0 ; k <= hi ;) {
+		for (int k = lo; k <= hi ; k++) {
 			if (i > mid)
-				x[k++] = aux[j++]; //All elems in first half already added to x
+				x[k] = aux[j++]; //All elems in first half already added to x
 			else if (j > hi)
-				x[k++] = aux[i++]; //All elems in second half already added to x
+				x[k] = aux[i++]; //All elems in second half already added to x
 			else if (gc.compare(aux[i], aux[j]) > 0)
-				x[k++] = aux[j++]; 
+				x[k] = aux[j++]; 
 			else
-				x[k++] = aux[i++];
+				x[k] = aux[i++];
 		}
 		
 		/*
