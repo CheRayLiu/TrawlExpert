@@ -3,6 +3,23 @@ package biotree;
 public class TaxonNode {
 	
 	
+	public TaxonNode(int taxonId, TaxonType taxonType, String name) {
+		
+	}
+	
+	public int getTaxonId() {
+		
+		return 0;
+	}
+	
+	public TaxonType getTaxonType() {
+		return null;
+	}
+	
+	public String getName() {
+		return "";
+	}
+	
 	public void setParent(TaxonNode parent) {
 		
 	}
