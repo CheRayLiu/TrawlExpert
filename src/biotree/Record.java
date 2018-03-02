@@ -1,4 +1,4 @@
-package record;
+package biotree;
 
 public class Record {
 	private final int eventId;
