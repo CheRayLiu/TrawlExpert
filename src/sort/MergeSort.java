@@ -1,7 +1,5 @@
 package sort;
 
-import java.lang.reflect.Array;
-
 public class MergeSort{
 	
 	public static void main(String[] args) {
