@@ -19,7 +19,7 @@ public class TaxonNode {
 		this.name = name;
 		this.parent = null;
 		this.children = null;
-		this.count = 1;
+		this.count = 0;
 	}
 	
 	public int getTaxonId() {
