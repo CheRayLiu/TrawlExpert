@@ -174,4 +174,13 @@ public class BST<Key extends Comparable<Key>, Value> {
 		if (cmplo <= 0 && cmphi >= 0) al.add(x.key);
 		if (cmphi > 0) keys(x.right, al, lo, hi);
 	}
+	
+	public int height() {
+		return height(root);
+	}
+	
+	private int height(Node x) {
+		if (x == null) return 0;
+		else return Math.max(height (x.left), height(x.right)) + 1;
+	}
 }
