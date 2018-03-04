@@ -5,7 +5,9 @@ package biotree;
  * @author Christopher W. Schankula
  *
  */
+
+//Changed to only capitalizing the first character
 public enum TaxonType {
-	KINGDOM, PHYLUM, CLASS, ORDER,
-	FAMILY, GENUS, SPECIES, SUBSPECIES;
+	Kingdom, Phylum, Class, Order,
+	Family, Genus, Species, Subspecies;
 }

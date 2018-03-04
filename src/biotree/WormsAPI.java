@@ -6,13 +6,33 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import tuple.Tuple;
+
+//Need to add library
+
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.json.simple.JSONObject;
+
+
+
+
+
 
 public class WormsAPI {
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
 		//small test
-		System.out.println(nameToID("Neogobius melanostomus"));
+		
+		/*
+		TaxonNode[] taxnodes = idToClassification(126916);
+
+		for (int i =0; i < taxnodes.length;i++) {
+			System.out.println(taxnodes[i].getTaxonId());
+			System.out.println(taxnodes[i].getTaxonType());
+			System.out.println(taxnodes[i].getName());
+		}
+		*/
+		
 	}
 	
 	/**
@@ -48,12 +68,24 @@ public class WormsAPI {
 	
 	/**
 	 * Search by taxonId (AphiaID) and return bioclassification of that and above.
-	 * http://marinespecies.org/rest/
+	 * 	
 	 * /AphiaClassificationByAphiaID/{ID}
+	 * @throws IOException 
+	 * @throws ParseException 
 	 */
-	public static Tuple<TaxonType,Integer>[] idToClassification(int taxonId) {
+	public static TaxonNode[] idToClassification(int taxonId) throws IOException, ParseException {
+		String resp = makeRequest(String.format("http://marinespecies.org/rest/AphiaClassificationByAphiaID/%d", taxonId));
+		JSONParser parser = new JSONParser();
+		JSONObject json = (JSONObject) parser.parse(resp);
 		
-		return null;
+		//Assume length of 8 based on number of taxontypes
+		TaxonNode[] taxnodes = new TaxonNode[8];
+		int arraysize = parseIdCall(taxnodes,json,0); 
+		TaxonNode[] copiedArray = new TaxonNode[arraysize];
+
+		System.arraycopy(taxnodes, 0, copiedArray, 0, arraysize);
+		
+		return copiedArray;
 		
 	}
 	
@@ -96,4 +128,39 @@ public class WormsAPI {
 	private static String repSpaces(String in) {
 		return in.replaceAll(" ", "%20");
 	}
+
+	/**
+	 * Parses the json request recursively and also keeping track of the array length
+	 * @param nodes the TaxonNode array
+	 * @param current current rank level of JSON file
+	 * @param n index of where the TaxonNode is being stored at 
+	 * @return arraysize number of elements added within array
+	 */
+	private static int parseIdCall(TaxonNode[] nodes,JSONObject current,int n) {
+		boolean checktype = false;
+		TaxonNode curNode = null;
+		int arraysize = n;
+		//Checks if rank matches the TaxonType Enum
+		for (TaxonType c : TaxonType.values()) {
+			
+	        if (c.name().equals((String)current.get("rank"))) {
+	            checktype= true;
+	            break;
+	        }
+	        else checktype = false;
+	    }
+		JSONObject child = (JSONObject) current.get("child");
+		
+		if (checktype == true) {
+			curNode = new TaxonNode((long) current.get("AphiaID"),TaxonType.valueOf((String) current.get("rank")) ,(String) current.get("scientificname"));
+			nodes[n]= curNode;
+			n++;
+		}
+		//If child is null, return 
+		if ((JSONObject) current.get("child") == null ) 
+			return n;
+		arraysize = parseIdCall(nodes, child, n);
+		return arraysize;
+	}
+	
 }

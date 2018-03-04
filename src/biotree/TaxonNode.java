@@ -5,7 +5,8 @@ import java.util.ArrayList;
 // https://stackoverflow.com/questions/2697182/how-to-use-an-array-list
 	
 public class TaxonNode {
-	private final int taxonId;
+	//JSON returns long
+	private final long taxonId;
 	private final TaxonType taxonType;
 	private final String name;
 	
@@ -13,7 +14,7 @@ public class TaxonNode {
 	private ArrayList<TaxonNode> children = new ArrayList<TaxonNode>();
 	private int count;
 	
-	public TaxonNode(int taxonId, TaxonType taxonType, String name) {
+	public TaxonNode(long taxonId, TaxonType taxonType, String name) {
 		this.taxonId = taxonId;
 		this.taxonType = taxonType;
 		this.name = name;
@@ -21,8 +22,8 @@ public class TaxonNode {
 		this.children = null;
 		this.count = 0;
 	}
-	
-	public int getTaxonId() {
+	//JSON returns long
+	public long getTaxonId() {
 		return this.taxonId;
 	}
 	
