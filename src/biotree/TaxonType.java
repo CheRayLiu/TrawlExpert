@@ -10,4 +10,8 @@ package biotree;
 public enum TaxonType {
 	Kingdom, Phylum, Class, Order,
 	Family, Genus, Species, Subspecies;
+	
+	public String toString() {
+		return name();
+	}
 }
