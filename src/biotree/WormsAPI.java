@@ -51,7 +51,7 @@ public class WormsAPI {
 	 * http://marinespecies.org/rest/
 	 * /AphiaClassificationByAphiaID/{ID}
 	 */
-	public static Tuple<TaxonType,Integer>[] idToClassification(int taxonId) {
+	public static TaxonNode[] idToClassification(int taxonId) {
 		
 		return null;
 		
