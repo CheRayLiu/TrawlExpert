@@ -1,14 +1,18 @@
 package biotree;
 
+import java.io.IOException;
+
+import search.BST;
+
 public class BioTree {
-	private static Species[] species;
+	private static BST<Integer, TaxonNode> nodes;
 	private static int n;
 	
 	/**
 	 * Initialize species abstract object
 	 */
 	public static void init() {
-		species = new Species[500];
+		nodes = new BST<Integer, TaxonNode>();
 		n = 0;
 	}
 
@@ -33,27 +37,48 @@ public class BioTree {
 	}
 
 	/**
-	 * Add a new species to the module
+	 * Process a record. Adds classification to tree if it doesn't exist.
+	 * Returns the taxonId of the new / existing record.
 	 * 
-	 * @param s
-	 *            New Species to add.
-	 * @return speciesid of new species entry
+	 * @param taxonId The taxonId of the possible new entry
+	 * @return taxonId of new species entry
 	 */
-	public static int addSpecies(Species s) {
-		species[n++] = s;
-		return n;
+	public static int processRecord(int taxonId) {
+		processTaxonId(taxonId);
+		return taxonId;
 	}
-
+	
 	/**
-	 * Update an existing species object.
+	 * Process a record. Adds classification to tree if it doesn't exist.
+	 * Returns the taxonId of the new / existing record.
 	 * 
-	 * @param i
-	 *            The index of the species to update.
-	 * @param s
-	 *            The new Species object to overwrite the old one with.
+	 * @param scientificName The scientific name of the possible new entry
+	 * @return taxonId of new / existing entry
+	 * @throws IOException 
 	 */
-	public static void setSpecies(int i, Species s) {
-		species[i] = s;
+	public static int processRecord(String scientificName) throws IOException {
+		int taxonId = WormsAPI.nameToID(scientificName);
+		processTaxonId(taxonId);
+		return taxonId;
+	}
+	
+	/**
+	 * Process a new entry if it doesn't exist.
+	 * @param taxonId
+	 */
+	private static void processTaxonId(int taxonId) {
+		TaxonNode[] newNodes = WormsAPI.idToClassification(taxonId);
+		for (int i = newNodes.length - 1; i > 0; i--) {
+			TaxonNode tx = newNodes[i];
+			TaxonNode result = nodes.get(tx.getTaxonId());
+			TaxonNode parent = nodes.get(newNodes[i - 1].getTaxonId());
+			if (parent == null) parent = newNodes[i - 1];
+			if (result == null) { //if node is not found, add it
+				tx.setParent(parent);
+				parent.addChild(tx);
+			} else
+				break; //stop loop if this node already exists in the tree
+		}
 	}
 
 	/**
@@ -63,58 +88,7 @@ public class BioTree {
 	 *            The speciesid (index) of the species.
 	 * @return The Species object.
 	 */
-	public static Species getSpecies(int i) {
-		return species[i];
+	public static TaxonNode getTaxonRecord(int taxonId) {
+		return nodes.get(taxonId);
 	}
-
-	/**
-	 * Search for a species by name.
-	 * 
-	 * @param s
-	 *            The name of the species.
-	 * @return The speciesid of the species or -1 if it is not found.
-	 */
-	public static int findSpecies(String s) {
-		for (int i = 0; i < n; i++)
-			if (species[i].getSpecies() == s)
-				return i;
-		return -1;
-	}
-
-	/**
-	 * TODO: Implement
-	 * 
-	 * @param s
-	 *            The name of the genus.
-	 * @return Array of speciesid belonging to the genus.
-	 */
-	public static int[] findGenus(String s) {
-		int[] dummy = { 1, 2, 3 };
-		return dummy;
-	}
-
-	/**
-	 * TODO: Implement
-	 * 
-	 * @param s
-	 *            The name of the family.
-	 * @return Array of speciesid belonging to the family.
-	 */
-	public static int[] findFamily(String s) {
-		int[] dummy = { 1, 2, 3 };
-		return dummy;
-	}
-
-	/**
-	 * TODO: Implement
-	 * 
-	 * @param s
-	 *            The name of the order.
-	 * @return Array of speciesid belonging to the order.
-	 */
-	public static int[] findOrder(String s) {
-		int[] dummy = { 1, 2, 3 };
-		return dummy;
-	}
-
 }

@@ -24,8 +24,8 @@ public class TestBioTree {
 	
 	@Test
 	public void testGetSpecies() {
-		assert BioTree.getSpecies(0).getSpecies() == "Morone chrysops";
-		assert BioTree.getSpecies(1).getSpecies() == "Perca flavescens";
+		assert BioTree.getTaxonRecord(0).getSpecies() == "Morone chrysops";
+		assert BioTree.getTaxonRecord(1).getSpecies() == "Perca flavescens";
 	}
 
 }

@@ -22,7 +22,7 @@ public class WormsAPI {
 	
 	public static void main(String[] args) throws IOException, ParseException {
 		//small test
-		
+		System.out.println(nameToID("Neogobius melanostomus"));
 		/*
 		TaxonNode[] taxnodes = idToClassification(126916);
 
@@ -73,6 +73,7 @@ public class WormsAPI {
 	 * @throws IOException 
 	 * @throws ParseException 
 	 */
+<<<<<<< HEAD
 	public static TaxonNode[] idToClassification(int taxonId) throws IOException, ParseException {
 		String resp = makeRequest(String.format("http://marinespecies.org/rest/AphiaClassificationByAphiaID/%d", taxonId));
 		JSONParser parser = new JSONParser();
@@ -84,6 +85,9 @@ public class WormsAPI {
 		TaxonNode[] copiedArray = new TaxonNode[arraysize];
 
 		System.arraycopy(taxnodes, 0, copiedArray, 0, arraysize);
+=======
+	public static TaxonNode[] idToClassification(int taxonId) {
+>>>>>>> 7713da5ef410b951f64f9d9fda4937386132f0a0
 		
 		return copiedArray;
 		
