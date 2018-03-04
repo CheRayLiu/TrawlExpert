@@ -6,7 +6,7 @@ import java.util.ArrayList;
 	
 public class TaxonNode {
 	//JSON returns long
-	private final long taxonId;
+	private final int taxonId;
 	private final TaxonType taxonType;
 	private final String name;
 	
@@ -14,16 +14,16 @@ public class TaxonNode {
 	private ArrayList<TaxonNode> children = new ArrayList<TaxonNode>();
 	private int count;
 	
-	public TaxonNode(long taxonId, TaxonType taxonType, String name) {
+	public TaxonNode(int taxonId, TaxonType taxonType, String name) {
 		this.taxonId = taxonId;
 		this.taxonType = taxonType;
 		this.name = name;
 		this.parent = null;
-		this.children = null;
+		this.children = new ArrayList<TaxonNode>();
 		this.count = 0;
 	}
-	//JSON returns long
-	public long getTaxonId() {
+	
+	public int getTaxonId() {
 		return this.taxonId;
 	}
 	
@@ -58,5 +58,20 @@ public class TaxonNode {
 	
 	public void incCount() {
 		this.count ++;
+	}
+	
+	public String toString() {
+		String s = "";
+		s += String.format("%-20s%s\n", "Scientific Name:", name);
+		s += String.format("%-20s%s\n", "Taxon Type:", taxonType);
+		s += String.format("%-20s%d\n", "Taxon ID:", taxonId);
+		if (parent != null) s += String.format("%-20s%d\n", "Parent:", parent.getTaxonId());
+		s += String.format("%-20s", "Children:");
+		for (TaxonNode tx: children) {
+			s += String.format("%d ", tx.getTaxonId());
+		}
+		s += "\n";
+		s += String.format("%-20s%d\n", "Count:", count);
+		return s;
 	}
 }

@@ -163,7 +163,7 @@ public class WormsAPI {
 		JSONObject child = (JSONObject) current.get("child");
 
 		if (checktype == true) {
-			curNode = new TaxonNode((long) current.get("AphiaID"), TaxonType.valueOf((String) current.get("rank")),
+			curNode = new TaxonNode((int) (long) current.get("AphiaID"), TaxonType.valueOf((String) current.get("rank")),
 					(String) current.get("scientificname"));
 			nodes[n] = curNode;
 			n++;
