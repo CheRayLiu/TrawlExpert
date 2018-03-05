@@ -30,7 +30,7 @@ public class Node<Key, Value, T>{
 		return this.val;
 	} 
 
-	public void val(Value val){
+	public void val(Comparable<T>[] val){
 		this.val = val;
 	}
 	
@@ -50,8 +50,12 @@ public class Node<Key, Value, T>{
 		this.right = right;
 	}
 	
-	public int N(){
+	public int n(){
 		return this.n;
+	}
+	
+	public void n(int n){
+		this.n = n;
 	}
 	
 	public boolean color(){
