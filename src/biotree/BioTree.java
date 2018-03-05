@@ -1,4 +1,4 @@
-package biotree;
+	package biotree;
 
 import java.io.IOException;
 
@@ -11,6 +11,10 @@ public class BioTree {
 	
 	public static void main(String[] args) {
 		init();
+		processRecord(125125);
+		processRecord(125125);
+		processRecord(125125);
+		processRecord(125125);
 		processRecord(125125);
 		processRecord(125125);
 		processRecord(125123);
@@ -86,33 +90,34 @@ public class BioTree {
 	 */
 	private static void processTaxonId(int taxonId) {
 		TaxonNode[] newNodes = null;
-		try {
-			newNodes = WormsAPI.idToClassification(taxonId);
-		} catch (IOException | ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		TaxonNode tx = nodes.get(newNodes[newNodes.length - 1].getTaxonId());
+		TaxonNode tx = nodes.get(taxonId);
 		if (tx != null) {
 			tx.incCount();
 		} else {
-			newNodes[newNodes.length - 1].incCount();
-		}
-		for (int i = newNodes.length - 1; i >= 0; i--) {
-			tx = newNodes[i];
-			TaxonNode result = nodes.get(tx.getTaxonId());
-			TaxonNode parent = null;
-			if (i > 0) {
-				parent = nodes.get(newNodes[i - 1].getTaxonId());
-				if (parent == null) parent = newNodes[i - 1];
+			try {
+				System.out.println("API Call");
+				newNodes = WormsAPI.idToClassification(taxonId);
+			} catch (IOException | ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			if (result == null) { //if node is not found, add it
-				nodes.put(tx.getTaxonId(), tx);
-				tx.setParent(parent);
-				if (parent != null) parent.addChild(tx);
-			} else
-				break; //stop loop if this node already exists in the tree
-
+			newNodes[newNodes.length - 1].incCount();
+			
+			for (int i = newNodes.length - 1; i >= 0; i--) {
+				tx = newNodes[i];
+				TaxonNode result = nodes.get(tx.getTaxonId());
+				TaxonNode parent = null;
+				if (i > 0) {
+					parent = nodes.get(newNodes[i - 1].getTaxonId());
+					if (parent == null) parent = newNodes[i - 1];
+				}
+				if (result == null) { //if node is not found, add it
+					nodes.put(tx.getTaxonId(), tx);
+					tx.setParent(parent);
+					if (parent != null) parent.addChild(tx);
+				} else
+					break; //stop loop if this node already exists in the tree
+			}
 		}
 	}
 
