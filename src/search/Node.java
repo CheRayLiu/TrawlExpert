@@ -4,24 +4,25 @@ package search;
 
 public class Node<Key, Value, T>{
 	
-	private Key key;
+	private Comparable<T> key;
 	private Comparable<T>[] val;
 	private Node left, right;
-	private int n;
+	private int n; //size of subtree beneath this node (inclusive)
 	private boolean color;
 
-	public Node(Key key, Comparable<T>[] val, int n, boolean color){
+	public Node(Comparable<T> key, Comparable<T>[] val, int n, boolean color){
 		this.key = key;
 		this.val = val;
 		this.n = n;
 		this.color = color;
 	}
 	
-	public Key key(){
+	
+	public Comparable<T> key(){
 		return this.key;
 	}
 	
-	public void key(Key key){
+	public void key(Comparable<T> key){
 		this.key = key;
 		
 	}

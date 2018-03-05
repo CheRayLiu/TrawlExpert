@@ -2,14 +2,19 @@ package search;
 
 public class RedBlackTree<Key, Value> {
 	
-	private Node root;
-	
-	private <T> int size(Comparable<T>[] val){
-		return val.length;
+	public static void main(String[] args) {
+		int[] x = {1,2,3,4,5,6,7,8};
+		
 	}
 	
-	public <T> void put(Key key, Comparable<T>[] val){
-		root = put(root, key, val);
+	private Node root;
+	
+	private <T> int size(Node h){
+		return h.n();
+	}
+	
+	public <T> void put(Comparable<T> key, Comparable<T>[] val, GeneralCompare gc){
+		root = put(root, key, val, gc);
 		root.color(false);
 	}
 	
@@ -48,7 +53,7 @@ public class RedBlackTree<Key, Value> {
 		}
 	}
 	
-	private <T> Node put(Node h, Key key, Comparable<T>[] val, GeneralCompare<T> gc){
+	private <T> Node put(Node h, Comparable<T> key, Comparable<T>[] val, GeneralCompare<T> gc){
 		
 		int n = size(h);
 		
@@ -57,7 +62,7 @@ public class RedBlackTree<Key, Value> {
 		if(h == null)
 			return new Node(key, val, 1, true);
 		
-		int cmp = key.compareTo(h.key());
+		int cmp = gc.compare(key, h.key());
 		if(cmp < 0)
 			h.left(put(h.left(), key, val, gc));
 		else if (cmp > 0)
@@ -73,7 +78,6 @@ public class RedBlackTree<Key, Value> {
 			flipColors(h);
 		
 		h.n(size(h.left()) + size(h.right()) + 1);
-		
 		return h;
 	}
 }
