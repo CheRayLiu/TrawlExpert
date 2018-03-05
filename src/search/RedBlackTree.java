@@ -6,22 +6,24 @@ public class RedBlackTree<Key, Value> {
 	
 	private int size();
 	
-	public void put(Key key, Value val){
+	public <T> void put(Key key, Comparable<T>[] val){
 		root = put(root, key, val);
-		root.color = BLACK;
+		root.color(false);
 	}
 	
-	private Node put(Node h, Key key, Value val){
-		if(h == null)
-			return new Node(key, val, 1, RED);
+	private <T> Node put(Node h, Key key, Comparable<T>[] val){
+		Node root = new Node(key, val, n, color);
 		
-		int cmp = key.compareTo(h.key);
+		if(h == null)
+			return new Node(key, val, 1, true);
+		
+		int cmp = key.compareTo(h.key());
 		if(cmp < 0)
-			h.left = put(h.left, key, val);
+			h.left(put(h.left(), key, val));
 		else if (cmp > 0)
-			h.right = put(h.right(), key, val);
+			h.right(put(h.right(), key, val)); 
 		else
-			h.val = val;
+			h.val(val);
 		
 		if(isRed(h.right) && !isRed(h.left))
 			h = rotateLeft(h);
