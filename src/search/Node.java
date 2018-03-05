@@ -2,15 +2,15 @@ package search;
 
 //import search.RedBlackTree.Node;
 
-public class Node<Key, Value>{
+public class Node<Key, Value, T>{
 	
 	private Key key;
-	private Value val;
+	private Comparable<T>[] val;
 	private Node left, right;
 	private int n;
 	private boolean color;
 
-	Node(Key key, Value val, int n, boolean color){
+	public Node(Key key, Comparable<T>[] val, int n, boolean color){
 		this.key = key;
 		this.val = val;
 		this.n = n;
@@ -21,16 +21,33 @@ public class Node<Key, Value>{
 		return this.key;
 	}
 	
-	public Value val(){
+	public void key(Key key){
+		this.key = key;
+		
+	}
+	
+	public Comparable<T>[] val(){
 		return this.val;
 	} 
+
+	public void val(Value val){
+		this.val = val;
+	}
 	
 	public Node left(){
 		return this.left;
 	}
 	
+	public void left(Node left){
+		this.left = left;
+	}
+	
 	public Node right(){
 		return this.right;
+	}
+	
+	public void right(Node right){
+		this.right = right;
 	}
 	
 	public int N(){
@@ -39,5 +56,9 @@ public class Node<Key, Value>{
 	
 	public boolean color(){
 		return this.color;
+	}
+	
+	public void color(boolean color){
+		this.color = color;
 	}
 }
