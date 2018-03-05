@@ -9,28 +9,6 @@ import search.BST;
 public class BioTree {
 	private static BST<Integer, TaxonNode> nodes;
 	
-	public static void main(String[] args) {
-		init();
-		processRecord(125125);
-		processRecord(125125);
-		processRecord(125125);
-		processRecord(125125);
-		processRecord(125125);
-		processRecord(125125);
-		processRecord(125123);
-		processRecord(125122);
-		processRecord(125392);
-		processRecord(125391);
-		System.out.println(nodes.size());
-		System.out.println(nodes.get(123207));
-		Iterable<Integer> keys = nodes.keys();
-		for (Integer i: keys) {
-			System.out.println(nodes.get(i));
-			//System.out.println(String.format("%-26s %s", nodes.get(i).getName(), nodes.get(i).getTaxonType()));
-		}
-		printTree(nodes.get(2), 0);
-	}
-	
 	/**
 	 * Initialize species abstract object
 	 */
@@ -39,6 +17,7 @@ public class BioTree {
 	}
 
 	/**
+	 * Reads the BioTree from a file written by write().
 	 * TODO: Implement
 	 * 
 	 * @param fn
@@ -49,6 +28,7 @@ public class BioTree {
 	}
 
 	/**
+	 * Writes the BioTree BST to a file.
 	 * TODO: Implement
 	 * 
 	 * @param fn
@@ -66,6 +46,7 @@ public class BioTree {
 	 * @return taxonId of new species entry
 	 */
 	public static int processRecord(int taxonId) {
+		//pass taxonId directly to function to add / increment it
 		processTaxonId(taxonId);
 		return taxonId;
 	}
@@ -79,50 +60,55 @@ public class BioTree {
 	 * @throws IOException 
 	 */
 	public static int processRecord(String scientificName) throws IOException {
+		//reverse lookup based on name, try adding the found taxonId.
 		int taxonId = WormsAPI.nameToID(scientificName);
 		processTaxonId(taxonId);
 		return taxonId;
 	}
 	
 	/**
-	 * Process a new entry if it doesn't exist.
-	 * @param taxonId
+	 * Process a new entry if it doesn't exist. If it does exist, increment the number
+	 * of Records for this classification by one. 
+	 * @param taxonId New / existing TaxonID to add / increment count thereof.
 	 */
 	private static void processTaxonId(int taxonId) {
-		TaxonNode[] newNodes = null;
-		TaxonNode tx = nodes.get(taxonId);
-		if (tx != null) {
+		TaxonNode[] newNodes = null;			//possible eventual new nodes
+		TaxonNode tx = nodes.get(taxonId);	//search tree to see if the node exists already
+		if (tx != null)						//if it does exist, increment its count
 			tx.incCount();
-		} else {
+		else {								//otherwise, perform API call to get tree
 			try {
-				System.out.println("API Call");
 				newNodes = WormsAPI.idToClassification(taxonId);
 			} catch (IOException | ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			newNodes[newNodes.length - 1].incCount();
+			newNodes[newNodes.length - 1].incCount();	//one of the new nodes exists
 			
-			for (int i = newNodes.length - 1; i >= 0; i--) {
+			for (int i = newNodes.length - 1; i >= 0; i--) {		//iterate over all node starting from lowest child
 				tx = newNodes[i];
-				TaxonNode result = nodes.get(tx.getTaxonId());
+				TaxonNode current = nodes.get(tx.getTaxonId());
 				TaxonNode parent = null;
-				if (i > 0) {
-					parent = nodes.get(newNodes[i - 1].getTaxonId());
-					if (parent == null) parent = newNodes[i - 1];
+				if (i > 0) {										//if this is not the highest up find its parent
+					parent = nodes.get(newNodes[i - 1].getTaxonId());		//the parent is either already in existence
+					if (parent == null) parent = newNodes[i - 1];		//or is is the old one that will be added later
 				}
-				if (result == null) { //if node is not found, add it
-					nodes.put(tx.getTaxonId(), tx);
-					tx.setParent(parent);
-					if (parent != null) parent.addChild(tx);
+				if (current == null) { 							//if this node is not found, add it
+					nodes.put(tx.getTaxonId(), tx);				//put it in the search structure
+					tx.setParent(parent);						//set its parent to the last
+					if (parent != null) parent.addChild(tx);		//if a parent exists, add it as a child to its parent
 				} else
-					break; //stop loop if this node already exists in the tree
+					//stop loop if this node already exists in the tree (all its parents must exist too!)
+					break;
 			}
 		}
 	}
 
 	/**
-	 * Get the species at a given index (speciesid).
+	 * Get the species at a given index (taxonId). This assumes that the
+	 * node already exists or else it will return null. As such, it is best
+	 * to use this function once all the data has been parsed and the BioTree
+	 * has been built. 
 	 * 
 	 * @param i
 	 *            The speciesid (index) of the species.
@@ -132,7 +118,16 @@ public class BioTree {
 		return nodes.get(taxonId);
 	}
 	
-	public static void printTree(TaxonNode tx, int level) {
+	public static void printTree() {
+		printTree(nodes.get(2), 0);
+	}
+	
+	/**
+	 * Print a taxonNode's tree starting at the supplied root.
+	 * @param tx
+	 * @param level
+	 */
+	private static void printTree(TaxonNode tx, int level) {
 		String padd = new String(new char[level * 4]).replace('\0', ' ');
 		System.out.format(padd + "%s %d\n", tx.getName(), tx.getCount());
 		for (TaxonNode tx2: tx.getChildren())

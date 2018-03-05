@@ -8,24 +8,27 @@ import org.junit.Test;
 public class TestBioTree {
 
 	@Before
-	public void setUp() throws Exception {
+	public static void main(String[] args) {
 		BioTree.init();
-		Species s0 = new Species("Actinopterygii","Perciformes","Moronidae","Morone","Morone chrysops");
-		Species s1 = new Species("Actinopterygii","Perciformes","Percidae","Perca","Perca flavescens");
-		BioTree.addSpecies(s0);
-		BioTree.addSpecies(s1);
-	}
-
-	@Test
-	public void testFindSpecies() {
-		assert BioTree.findSpecies("Morone chrysops") == 0;
-		assert BioTree.findSpecies("Perca flavescens") == 1;
+		BioTree.processRecord(125125);
+		BioTree.processRecord(125125);
+		BioTree.processRecord(125125);
+		BioTree.processRecord(125125);
+		BioTree.processRecord(125125);
+		BioTree.processRecord(125125);
+		BioTree.processRecord(125123);
+		BioTree.processRecord(125122);
+		BioTree.processRecord(125392);
+		BioTree.processRecord(125391);
+		//System.out.println(nodes.size());
+		//System.out.println(nodes.get(123207));
+		//Iterable<Integer> keys = nodes.keys();
+		//for (Integer i: keys) {
+		//	System.out.println(nodes.get(i));
+			//System.out.println(String.format("%-26s %s", nodes.get(i).getName(), nodes.get(i).getTaxonType()));
+		//}
+		BioTree.printTree();
 	}
 	
-	@Test
-	public void testGetSpecies() {
-		assert BioTree.getTaxonRecord(0).getSpecies() == "Morone chrysops";
-		assert BioTree.getTaxonRecord(1).getSpecies() == "Perca flavescens";
-	}
 
 }
