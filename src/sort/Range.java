@@ -37,7 +37,7 @@ public class Range<Key extends Comparable<Key>> {
 		this.boundType = bt;
 	}
 	
-	public boolean inBounds(Key key, GeneralCompare<Key> gc) {
+	public <T> boolean inBounds(T key) {
 		if (boundType == Bound.ANY) return true;
 		else if (boundType == Bound.LOWER) 	return gc.compare(lower, key) <= 0;
 		else if (boundType == Bound.UPPER) 	return gc.compare(upper, key) >= 0;
