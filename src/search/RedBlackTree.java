@@ -76,14 +76,22 @@ public class RedBlackTree<Key, Value> {
 		else
 			h.val(val);
 		
-		if(isRed(h.right()) && !isRed(h.left())) // Problem here. makes reference to null on second iteration
-			h = rotateLeft(h);
-		if(isRed(h.left()) && isRed(h.left().left()))
-			h = rotateRight(h);
-		if(isRed(h.left()) && isRed(h.right()))
-			flipColors(h);
+		if(n > 2){
+			if(isRed(h.right()) && !isRed(h.left()))
+				h = rotateLeft(h);
+			if(isRed(h.left()) && isRed(h.left().left()))
+				h = rotateRight(h);
+			if(isRed(h.left()) && isRed(h.right()))
+				flipColors(h);
+		}
 		
-		h.n(size(h.left()) + size(h.right()) + 1);
+		if(h.left() == null)
+			h.n(size(h.right()) + 1);
+		else if(h.right() == null)
+			h.n(size(h.left()) + 1);
+		else
+			h.n(size(h.left()) + size(h.right()) + 1);
+		
 		return h;
 	}
 }
