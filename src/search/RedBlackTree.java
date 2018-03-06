@@ -61,12 +61,12 @@ public class RedBlackTree<Key, Value> {
 	
 	private static <T> Node put(Node h, Comparable<T> key, Comparable<T>[] val, GeneralCompare<T> gc){
 		
-		int n = size(h);
-		
-		Node root = new Node(key, val, n, true);
-		
 		if(h == null)
 			return new Node(key, val, 1, true);
+		
+		int n = size(h) + 1;
+		
+		Node root = new Node(key, val, n, true);
 		
 		int cmp = gc.compare(key, h.key());
 		if(cmp < 0)
@@ -76,7 +76,7 @@ public class RedBlackTree<Key, Value> {
 		else
 			h.val(val);
 		
-		if(isRed(h.right()) && !isRed(h.left()))
+		if(isRed(h.right()) && !isRed(h.left())) // Problem here. makes reference to null on second iteration
 			h = rotateLeft(h);
 		if(isRed(h.left()) && isRed(h.left().left()))
 			h = rotateRight(h);
