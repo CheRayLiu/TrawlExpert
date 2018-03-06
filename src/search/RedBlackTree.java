@@ -3,26 +3,32 @@ package search;
 public class RedBlackTree<Key, Value> {
 	
 	public static void main(String[] args) {
-		int[] x = {1,2,3,4,5,6,7,8};
-		
+		GeneralCompare<Integer> b1;
+		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
+		Integer[] x = {1,2,3,4,5,6,7,8};
+		for(int i = 0; i <= x.length; i++){
+			put(x[i], x, b1);
+		}
 	}
 	
-	private Node root;
+	private static Node root;
 	
-	private <T> int size(Node h){
+	private static <T> int size(Node h){
 		return h.n();
 	}
 	
-	public <T> void put(Comparable<T> key, Comparable<T>[] val, GeneralCompare gc){
+	public static <T> void put(Comparable<T> key, Comparable<T>[] val, GeneralCompare gc){
 		root = put(root, key, val, gc);
 		root.color(false);
+		System.out.println(root.key());
+		System.out.println(root.val());
 	}
 	
-	private boolean isRed(Node x){
+	private static boolean isRed(Node x){
 		return x.color();
 	}
 	
-	public Node rotateLeft(Node h){
+	public static Node rotateLeft(Node h){
 		Node x = h.right();
 		h.right(x.left());
 		x.left(h);
@@ -33,7 +39,7 @@ public class RedBlackTree<Key, Value> {
 		return x;
 	}
 	
-	public Node rotateRight(Node h){
+	public static Node rotateRight(Node h){
 		Node x = h.left();
 		h.left(x.right());
 		x.right(h);
@@ -45,7 +51,7 @@ public class RedBlackTree<Key, Value> {
 		
 	}
 	
-	private void flipColors(Node h){
+	private static void flipColors(Node h){
 		if(h.left() != null && h.right() != null){
 			h.left().color(false);
 			h.right().color(false);
@@ -53,7 +59,7 @@ public class RedBlackTree<Key, Value> {
 		}
 	}
 	
-	private <T> Node put(Node h, Comparable<T> key, Comparable<T>[] val, GeneralCompare<T> gc){
+	private static <T> Node put(Node h, Comparable<T> key, Comparable<T>[] val, GeneralCompare<T> gc){
 		
 		int n = size(h);
 		
