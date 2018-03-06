@@ -5,7 +5,7 @@ public class RedBlackTree<Key, Value> {
 	public static void main(String[] args) {
 		GeneralCompare<Integer> b1;
 		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
-		Integer[] x = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+		Integer[] x = {1,2,3,4,5,6,7,8,9};
 		for(int i = 0; i < x.length; i++){
 			put(x[i], x, b1);
 		}
