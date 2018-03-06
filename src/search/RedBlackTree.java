@@ -5,8 +5,8 @@ public class RedBlackTree<Key, Value> {
 	public static void main(String[] args) {
 		GeneralCompare<Integer> b1;
 		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
-		Integer[] x = {1,2,3,4,5,6,7,8};
-		for(int i = 0; i <= x.length; i++){
+		Integer[] x = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+		for(int i = 0; i < x.length; i++){
 			put(x[i], x, b1);
 		}
 	}
@@ -14,18 +14,22 @@ public class RedBlackTree<Key, Value> {
 	private static Node root;
 	
 	private static <T> int size(Node h){
-		return h.n();
+		if(h == null)
+			return 0;
+		else
+			return h.n();
 	}
 	
 	public static <T> void put(Comparable<T> key, Comparable<T>[] val, GeneralCompare gc){
 		root = put(root, key, val, gc);
 		root.color(false);
 		System.out.println(root.key());
-		System.out.println(root.val());
 	}
 	
 	private static boolean isRed(Node x){
-		return x.color();
+		if(x == null)
+			return false;
+		return true;
 	}
 	
 	public static Node rotateLeft(Node h){
@@ -64,7 +68,7 @@ public class RedBlackTree<Key, Value> {
 		if(h == null)
 			return new Node(key, val, 1, true);
 		
-		int n = size(h) + 1;
+		int n = size(h);
 		
 		Node root = new Node(key, val, n, true);
 		
@@ -85,12 +89,12 @@ public class RedBlackTree<Key, Value> {
 				flipColors(h);
 		}
 		
-		if(h.left() == null)
+		/*if(h.left() == null)
 			h.n(size(h.right()) + 1);
 		else if(h.right() == null)
 			h.n(size(h.left()) + 1);
-		else
-			h.n(size(h.left()) + size(h.right()) + 1);
+		else*/
+		h.n(size(h.left()) + size(h.right()) + 1);
 		
 		return h;
 	}
