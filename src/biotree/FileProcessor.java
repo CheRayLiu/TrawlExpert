@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author 
  * This class reads and parses files in the format of occurences.csv
  * It provides methods to get chunks of data. 
  * 
@@ -40,7 +39,7 @@ public class FileProcessor {
 	 *  Reads file at path. 
 	 *  Calls parse() automatically
 	 */
-	private static void read() {
+	private static void initProcessing() {
 		FileReader fr;
 		BufferedReader br;
 
@@ -69,15 +68,15 @@ public class FileProcessor {
 	
 	/**
 	 * Parses out data from string
-	 * "scientificName" in raw data heading = species name
 	 * 
-	 * @param currentLine - A line/row of data
+	 * @param currentLine, a line/row of data
 	 */
-	private static void parse(String currentLine) {
+	// TODO: Fix spahgetti code where taxonId needs to be converted to a string when it is received from biotree.
+	private static void parse(String currentLine) throws IOException {
 		String[] splitLine = currentLine.split(",");
-		String eventId = null, taxId = null, occurrenceId, latitude, longitude, month= null, year=null, day=null, individualCount;
+		String eventId = null, occurId, taxonId = null, individualCount, latitude, longitude, year=null, month= null, day=null;
 		
-		occurrenceId = splitLine[3];
+		occurId = splitLine[3];
 		individualCount = splitLine[4];
 		
 		Pattern patternEventId = Pattern.compile("OP_ID (\\d+)");
@@ -107,29 +106,46 @@ public class FileProcessor {
 		Pattern patternTaxId = Pattern.compile(":(\\d+)");
 		Matcher matchTaxId = patternTaxId.matcher(splitLine[11]);
 		if(matchTaxId.find()) {
-			taxId = matchTaxId.group(1);
+			taxonId = matchTaxId.group(1);
 		}
 		else {
 			// TODO: Throw Exception?
 			System.out.println("Could not parse TaxId. String may be unique or missing.");
 		}
 		
-		//Taxonomy Info [12-18] - Using a species ADT instead?
+		// Call BioTree
+		if(taxonId != null) {
+			BioTree.processRecord(Integer.parseInt(taxonId));
+		}
+		else if (splitLine[12] != "NA") {
+			try{
+				taxonId = Integer.toString(BioTree.processRecord(splitLine[12]));
+			} catch(IOException e) {
+				System.out.println("No Taxon ID or Scientific Name");
+			}
+		}		
 		
-		// At this point, adt constructor will be called to create the object. 
+		// Create Record Object
+		createRecord(Integer.parseInt(eventId), occurId, Integer.parseInt(taxonId), Integer.parseInt(individualCount), Float.parseFloat(latitude), Float.parseFloat(longitude), Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+		
+		
 		// Testing ONLY Print lines
-		System.out.println("Occurence Id:" + occurrenceId);
-		System.out.println("Ind. Count:" + individualCount);
-		System.out.println("event Id:" + eventId);
-		System.out.println("Year:" + year);
-		System.out.println("Month:" + month);
-		System.out.println("Day:" + day);
-		System.out.println("lat:" + latitude);
-		System.out.println("long:" + longitude);
-		System.out.println("tax Id:" + taxId);
+//		System.out.println("Occurence Id:" + occurId);
+//		System.out.println("Ind. Count:" + individualCount);
+//		System.out.println("event Id:" + eventId);
+//		System.out.println("Year:" + year);
+//		System.out.println("Month:" + month);
+//		System.out.println("Day:" + day);
+//		System.out.println("lat:" + latitude);
+//		System.out.println("long:" + longitude);
+//		System.out.println("tax Id:" + taxonId);
+	}
+	
+	public static Record createRecord(int eventId, String occurId, int taxonId, int individualCount, float latitude, float longitude, int year, int month, int day) {
+		return new Record(eventId, occurId, taxonId, individualCount, latitude, longitude, year, month, day);
 	}
 	
 	public static void main(String[] args) {
-		read();
+		initProcessing();
 	}
 }
