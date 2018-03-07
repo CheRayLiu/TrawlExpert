@@ -1,4 +1,4 @@
-	package biotree;
+package biotree;
 
 import java.io.IOException;
 
