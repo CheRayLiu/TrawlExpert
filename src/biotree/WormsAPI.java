@@ -38,11 +38,11 @@ public class WormsAPI {
 	 * @return Aphia (taxon) ID of given scientific name.
 	 * @throws IOException
 	 */
-	public static int nameToID(String scientificName) throws IOException {
+	public static Integer nameToID(String scientificName) throws IOException {
 		scientificName = repSpaces(scientificName);
 		String resp = makeRequest(
 				String.format("http://marinespecies.org/rest/AphiaIDByName/%s?marine_only=false", scientificName));
-
+		if (resp.length() == 0) return null;
 		return Integer.parseInt(resp);
 	}
 

@@ -2,13 +2,15 @@ package biotree;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class TestBioTree {
 
 	@Before
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		BioTree.init();
 		BioTree.processRecord(125125);
 		BioTree.processRecord(125125);
@@ -29,6 +31,7 @@ public class TestBioTree {
 			//System.out.println(String.format("%-26s %s", nodes.get(i).getName(), nodes.get(i).getTaxonType()));
 		//}
 		BioTree.printTree();
+		System.out.println(WormsAPI.nameToID("Hello"));
 	}
 	
 
