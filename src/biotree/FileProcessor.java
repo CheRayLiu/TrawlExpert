@@ -92,25 +92,25 @@ public class FileProcessor {
 		Matcher matchEventId = patternEventId.matcher(currentLine);
 
 		if(matchEventId.find()) {
+			// Testing ONLY Print lines
+//			System.out.println("Full String:" + matchEventId.group(0));
+//			System.out.println("Occurence Id:" + matchEventId.group(1));
+//			System.out.println("Ind. Count:" + matchEventId.group(2));
+//			System.out.println("event Id:" + matchEventId.group(3));
+//			System.out.println("Year:" + matchEventId.group(4));
+//			System.out.println("Month:" + matchEventId.group(5));
+//			System.out.println("Day:" + matchEventId.group(6));
+//			System.out.println("lat:" + matchEventId.group(7));
+//			System.out.println("long:" + matchEventId.group(8));
+//			System.out.println("tax Id:" + matchEventId.group(9));
+//			System.out.println("Scientific Name:" + matchEventId.group(10));
+			
+			System.out.println("OccurID:" + matchEventId.group(1));	// FOR TESTING ONLY
 			createObjects(matchEventId);
 		}
 		else {
-			// TODO: Throw Exception?
 			System.out.println("Regex Matching Failed.");
 		}		
-		
-		// Testing ONLY Print lines
-		System.out.println("Full String:" + matchEventId.group(0));
-		System.out.println("Occurence Id:" + matchEventId.group(1));
-		System.out.println("Ind. Count:" + matchEventId.group(2));
-		System.out.println("event Id:" + matchEventId.group(3));
-		System.out.println("Year:" + matchEventId.group(4));
-		System.out.println("Month:" + matchEventId.group(5));
-		System.out.println("Day:" + matchEventId.group(6));
-		System.out.println("lat:" + matchEventId.group(7));
-		System.out.println("long:" + matchEventId.group(8));
-		System.out.println("tax Id:" + matchEventId.group(9));
-		System.out.println("Scientific Name:" + matchEventId.group(10));
 	}
 	
 	/**
@@ -125,7 +125,7 @@ public class FileProcessor {
 			// Create Record Object
 			createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), Integer.parseInt(matchEventId.group(9)), Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6)));
 		}
-		else if (matchEventId.group(10) != "NA") {
+		else if (! matchEventId.group(10).equals("NA")) {
 			try{
 				createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), BioTree.processRecord(matchEventId.group(10)), Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6)));
 			} catch(IOException e) {
