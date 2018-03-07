@@ -79,6 +79,7 @@ public class WormsAPI {
 	public static TaxonNode[] idToClassification(int taxonId) throws IOException, ParseException {
 		String resp = makeRequest(
 				String.format("http://marinespecies.org/rest/AphiaClassificationByAphiaID/%d", taxonId));
+		if (resp.length() == 0) return null;
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(resp);
 

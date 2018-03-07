@@ -45,9 +45,10 @@ public class BioTree {
 	 * @param taxonId The taxonId of the possible new entry
 	 * @return taxonId of new species entry
 	 */
-	public static int processRecord(int taxonId) {
+	public static Integer processRecord(int taxonId) {
 		//pass taxonId directly to function to add / increment it
-		processTaxonId(taxonId);
+		if (processTaxonId(taxonId)) return null;
+		System.out.println(taxonId);
 		return taxonId;
 	}
 	
@@ -59,10 +60,10 @@ public class BioTree {
 	 * @return taxonId of new / existing entry
 	 * @throws IOException 
 	 */
-	public static int processRecord(String scientificName) throws IOException {
+	public static Integer processRecord(String scientificName) throws IOException {
 		//reverse lookup based on name, try adding the found taxonId.
 		int taxonId = WormsAPI.nameToID(scientificName);
-		processTaxonId(taxonId);
+		if (processTaxonId(taxonId)) return null;
 		return taxonId;
 	}
 	
@@ -70,8 +71,9 @@ public class BioTree {
 	 * Process a new entry if it doesn't exist. If it does exist, increment the number
 	 * of Records for this classification by one. 
 	 * @param taxonId New / existing TaxonID to add / increment count thereof.
+	 * @return true if the process failed, false if nothing went wrong
 	 */
-	private static void processTaxonId(int taxonId) {
+	private static boolean processTaxonId(int taxonId) {
 		TaxonNode[] newNodes = null;			//possible eventual new nodes
 		TaxonNode tx = nodes.get(taxonId);	//search tree to see if the node exists already
 		if (tx != null)						//if it does exist, increment its count
@@ -83,6 +85,7 @@ public class BioTree {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			if (newNodes == null) return true;
 			newNodes[newNodes.length - 1].incCount();	//one of the new nodes exists
 			
 			for (int i = newNodes.length - 1; i >= 0; i--) {		//iterate over all node starting from lowest child
@@ -102,6 +105,7 @@ public class BioTree {
 					break;
 			}
 		}
+		return false;
 	}
 
 	/**

@@ -20,6 +20,7 @@ public class TestBioTree {
 		BioTree.processRecord(125122);
 		BioTree.processRecord(125392);
 		BioTree.processRecord(125391);
+		BioTree.processRecord(600000000);
 		//System.out.println(nodes.size());
 		//System.out.println(nodes.get(123207));
 		//Iterable<Integer> keys = nodes.keys();
