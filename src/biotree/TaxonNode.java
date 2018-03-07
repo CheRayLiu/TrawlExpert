@@ -18,7 +18,7 @@ public class TaxonNode {
 	
 	private TaxonNode parent;
 	private ArrayList<TaxonNode> children = new ArrayList<TaxonNode>();
-	private int count;
+	private int childrenCount;
 	
 	
 	/**
@@ -34,7 +34,7 @@ public class TaxonNode {
 		this.name = name;
 		this.parent = null;
 		this.children = new ArrayList<TaxonNode>();
-		this.count = 0;
+		this.childrenCount = 0;
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class TaxonNode {
 	 * @return Children Count
 	 */
 	public int getCount() {
-		return this.count;
+		return this.childrenCount;
 	}
 	
 	
@@ -115,7 +115,7 @@ public class TaxonNode {
 	 * Increments the children count
 	 */
 	public void incCount() {
-		this.count ++;
+		this.childrenCount ++;
 	}
 	
 	/**
@@ -134,7 +134,7 @@ public class TaxonNode {
 			s += String.format("%d ", tx.getTaxonId());
 		}
 		s += "\n";
-		s += String.format("%-20s%d\n", "Count:", count);
+		s += String.format("%-20s%d\n", "Count:", childrenCount);
 		return s;
 	}
 }

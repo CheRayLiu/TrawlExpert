@@ -4,7 +4,7 @@ public class Record {
 	private final int eventId;
 	private final String occurId;
 	private final int taxonId;
-	private final int count;
+	private final int individualCount;
 	
 	private final float latitude;
 	private final float longitude;
@@ -17,11 +17,11 @@ public class Record {
 	/**
 	 * Initialize Record abstract object
 	 */
-	public Record( int eventId, String occurId, int taxonId, int count, float latitude, float longitude, String locality, int depth , int year, int month, int day, int hour, int minute ) {
+	public Record( int eventId, String occurId, int taxonId, int individualCount, float latitude, float longitude, int year, int month, int day) {
 		this.eventId = eventId;
 		this.occurId = occurId;
 		this.taxonId = taxonId;
-		this.count = count;
+		this.individualCount = individualCount;
 		
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -62,7 +62,7 @@ public class Record {
 	 * @return The individual count of the record
 	 */
 	public int getCount() {
-		return count;
+		return individualCount;
 	}
 	/**
 	 * Gets latitude of the record
