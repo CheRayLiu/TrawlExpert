@@ -61,6 +61,15 @@ public class KDT<KeyVal extends Comparable<KeyVal>> {
 		}
 	}
 	
+	/**
+	 * Create a new KD-tree from an array of key-value paired objects.
+	 * @param axes A sequence of k GeneralCompare functions which compare based on each of the k axes.
+	 * For example, to order a point based on x in the first axis and y in the second, the two
+	 * GeneralCompares should correspond to x and y respectively. The length k of this list also
+	 * defines the number of axes contained within the tree (the number of unique values on which
+	 * to index the data).
+	 * @param keyvals An array of key-value pairs to be inserted into the tree initially.
+	 */
 	public KDT(ArrayList<GeneralCompare<KeyVal>> axes, Comparable<KeyVal>[] keyvals) {
 		this.axes = axes;
 		root = buildTree(keyvals, 0, keyvals.length - 1, 0);
@@ -85,6 +94,12 @@ public class KDT<KeyVal extends Comparable<KeyVal>> {
 		return newNode;
 	}
 	
+	/**
+	 * Range search by providing k GeneralRange functions.
+	 * @param range An ArrayList sequence of k GeneralRange functions for searching on
+	 * each of the k axes. Must equal the number of axes used in the current tree.
+	 * @return An Iterable object of all results found within the range specified.
+	 */
 	public Iterable<KeyVal> rangeSearch(ArrayList<GeneralRange<KeyVal>> range){
 		ArrayList<KeyVal> result = new ArrayList<KeyVal>();
 		rangeSearch(root, range, result, 0);
@@ -138,6 +153,10 @@ public class KDT<KeyVal extends Comparable<KeyVal>> {
 		else return x.n;
 	}
 	
+	/**
+	 * Get the number of axes in this tree.
+	 * @return The number of axes, k, in the current tree.
+	 */
 	public int getK() {
 		return axes.size();
 	}
