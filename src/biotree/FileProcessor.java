@@ -51,10 +51,13 @@ public class FileProcessor {
 			String currentLine;
 			
 			br.readLine();	// Reads Past Field Names
+			int i = 0;
 			while ((currentLine = br.readLine()) != null) {
 				//System.out.println(currentLine); //Testing ONLY for checking one line at a time
+				i++;
+				System.out.println("Processed line " + i);
 				parse(currentLine);
-				s.nextLine(); //Testing ONLY for checking one line at a time
+				//s.nextLine(); //Testing ONLY for checking one line at a time
 			}
 			
 			s.close();//Testing ONLY
@@ -120,18 +123,23 @@ public class FileProcessor {
 	 */
 	public static void createObjects(Matcher matchEventId) {
 		// Call BioTree
+		Record rec = null;
 		if(matchEventId.group(9) != null) {
-			BioTree.processRecord(Integer.parseInt(matchEventId.group(9)));
+			Integer res = BioTree.processRecord(Integer.parseInt(matchEventId.group(9)));
 			// Create Record Object
-			createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), Integer.parseInt(matchEventId.group(9)), Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6)));
+			if (res != null)
+				rec = createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), Integer.parseInt(matchEventId.group(9)), Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6)));
 		}
 		else if (! matchEventId.group(10).equals("NA")) {
 			try{
-				createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), BioTree.processRecord(matchEventId.group(10)), Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6)));
+				Integer taxonId = BioTree.processRecord(matchEventId.group(10));
+				if (taxonId != null)
+					rec = createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), taxonId, Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6)));
 			} catch(IOException e) {
 				System.out.println("No Taxon ID or Scientific Name. OR createRecord Error");
 			}
-		}		
+		}
+		//do something with rec
 	}
 	
 	/**

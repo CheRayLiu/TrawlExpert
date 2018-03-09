@@ -39,6 +39,7 @@ public class WormsAPI {
 	 * @throws IOException
 	 */
 	public static Integer nameToID(String scientificName) throws IOException {
+		System.out.println("nameToID");
 		scientificName = repSpaces(scientificName);
 		String resp = makeRequest(
 				String.format("http://marinespecies.org/rest/AphiaIDByName/%s?marine_only=false", scientificName));
@@ -77,6 +78,7 @@ public class WormsAPI {
 	 */
 
 	public static TaxonNode[] idToClassification(int taxonId) throws IOException, ParseException {
+		System.out.println("idToClassification " + taxonId);
 		String resp = makeRequest(
 				String.format("http://marinespecies.org/rest/AphiaClassificationByAphiaID/%d", taxonId));
 		if (resp.length() == 0) return null;

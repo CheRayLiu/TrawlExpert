@@ -7,13 +7,15 @@ import org.json.simple.parser.ParseException;
 import search.BST;
 
 public class BioTree {
-	private static BST<Integer, TaxonNode> nodes;
+	//FIXME: replace with a single kd-tree
+	private static BST<Integer, TaxonNode> idNodes = new BST<Integer, TaxonNode>();
+	private static BST<String, TaxonNode> strNodes = new BST<String, TaxonNode>();
 	
 	/**
 	 * Initialize species abstract object
 	 */
 	public static void init() {
-		nodes = new BST<Integer, TaxonNode>();
+		idNodes = new BST<Integer, TaxonNode>();
 	}
 
 	/**
@@ -48,7 +50,6 @@ public class BioTree {
 	public static Integer processRecord(int taxonId) {
 		//pass taxonId directly to function to add / increment it
 		if (processTaxonId(taxonId)) return null;
-		System.out.println(taxonId);
 		return taxonId;
 	}
 	
@@ -62,7 +63,13 @@ public class BioTree {
 	 */
 	public static Integer processRecord(String scientificName) throws IOException {
 		//reverse lookup based on name, try adding the found taxonId.
-		int taxonId = WormsAPI.nameToID(scientificName);
+		TaxonNode res = strNodes.get(scientificName);
+		Integer taxonId;
+		if (res == null)
+			taxonId = WormsAPI.nameToID(scientificName);
+		else
+			taxonId = res.getTaxonId();
+		if (taxonId == null) return null;
 		if (processTaxonId(taxonId)) return null;
 		return taxonId;
 	}
@@ -75,9 +82,11 @@ public class BioTree {
 	 */
 	private static boolean processTaxonId(int taxonId) {
 		TaxonNode[] newNodes = null;			//possible eventual new nodes
-		TaxonNode tx = nodes.get(taxonId);	//search tree to see if the node exists already
-		if (tx != null)						//if it does exist, increment its count
+		TaxonNode tx = idNodes.get(taxonId);	//search tree to see if the node exists already
+		System.out.println("tx" + tx);
+		if (tx != null)	{					//if it does exist, increment its count
 			tx.incCount();
+		}
 		else {								//otherwise, perform API call to get tree
 			try {
 				newNodes = WormsAPI.idToClassification(taxonId);
@@ -90,14 +99,16 @@ public class BioTree {
 			
 			for (int i = newNodes.length - 1; i >= 0; i--) {		//iterate over all node starting from lowest child
 				tx = newNodes[i];
-				TaxonNode current = nodes.get(tx.getTaxonId());
+				TaxonNode current = idNodes.get(tx.getTaxonId());
 				TaxonNode parent = null;
 				if (i > 0) {										//if this is not the highest up find its parent
-					parent = nodes.get(newNodes[i - 1].getTaxonId());		//the parent is either already in existence
+					parent = idNodes.get(newNodes[i - 1].getTaxonId());		//the parent is either already in existence
 					if (parent == null) parent = newNodes[i - 1];		//or is is the old one that will be added later
 				}
 				if (current == null) { 							//if this node is not found, add it
-					nodes.put(tx.getTaxonId(), tx);				//put it in the search structure
+					System.out.println("Put: " + tx.getTaxonId());
+					idNodes.put(tx.getTaxonId(), tx);				//put it in the search structure
+					strNodes.put(tx.getName(), tx);
 					tx.setParent(parent);						//set its parent to the last
 					if (parent != null) parent.addChild(tx);		//if a parent exists, add it as a child to its parent
 				} else
@@ -119,11 +130,11 @@ public class BioTree {
 	 * @return The Species object.
 	 */
 	public static TaxonNode getTaxonRecord(int taxonId) {
-		return nodes.get(taxonId);
+		return idNodes.get(taxonId);
 	}
 	
 	public static void printTree() {
-		printTree(nodes.get(2), 0);
+		printTree(idNodes.get(2), 0);
 	}
 	
 	/**
