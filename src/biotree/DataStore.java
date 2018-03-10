@@ -3,7 +3,6 @@ package biotree;
 import java.util.ArrayList;
 
 import sort.GeneralCompare;
-import sort.GeneralRange;
 import sort.KDT;
 
 /**
