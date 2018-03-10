@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner; // Testing ONLY
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,6 +19,7 @@ import java.util.regex.Pattern;
  */
 public class FileProcessor {
 	private static String path = "src/occurrence.csv";
+	private static ArrayList<Record> al = new ArrayList<Record>(1000);
 	
 	/**
 	 * Gets the path string
@@ -53,13 +55,16 @@ public class FileProcessor {
 			
 			br.readLine();	// Reads Past Field Names
 			int i = 0;
-			while ((currentLine = br.readLine()) != null) {
+			while ((currentLine = br.readLine()) != null && i < 100) {
 				//System.out.println(currentLine); //Testing ONLY for checking one line at a time
 				i++;
 				System.out.println("Processed line " + i);
 				parse(currentLine);
 				//s.nextLine(); //Testing ONLY for checking one line at a time
 			}
+			
+			//initialize the storage of records
+			DataStore.init(al.toArray(new Record[al.size()]));
 			
 			s.close();//Testing ONLY
 			br.close();
@@ -136,7 +141,7 @@ public class FileProcessor {
 		int errorCount=0;	// TESTING ONLY
 		if (!matchEventId.group(10).equals("NA")) {
 			try{
-				rec = createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), BioTree.processRecord(matchEventId.group(10)), Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6)));
+				al.add(createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), BioTree.processRecord(matchEventId.group(10)), Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6))));
 			} catch(IOException e) {
 				System.out.println("Input Error:" + e);
 			} catch(NullPointerException e) {

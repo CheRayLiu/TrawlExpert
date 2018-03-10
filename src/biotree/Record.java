@@ -1,6 +1,6 @@
 package biotree;
 
-public class Record {
+public class Record implements Comparable<Record> {
 	private final int eventId;
 	private final String occurId;
 	private final int taxonId;
@@ -107,6 +107,12 @@ public class Record {
 	 */
 	public int getDay() {
 		return day;
+	}
+
+	@Override
+	public int compareTo(Record o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
