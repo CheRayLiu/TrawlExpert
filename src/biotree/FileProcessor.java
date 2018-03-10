@@ -21,7 +21,7 @@ import org.json.simple.parser.ParseException;
  */
 public class FileProcessor {
 	private static String path = "src/occurrence.csv";
-	private static ArrayList<Record> al = new ArrayList<Record>(1000);
+	private static ArrayList<Record> al = new ArrayList<Record>(1000); //temporary storage for records
 	
 	/**
 	 * Gets the path string
@@ -69,7 +69,7 @@ public class FileProcessor {
 			
 			//initialize the storage of records
 			DataStore.init(al.toArray(new Record[al.size()]));
-			al = null;
+			al = null; //free temporary memory storage of Record objects now that they're in the KDTree.
 			
 			s.close();//Testing ONLY
 			br.close();
