@@ -1,5 +1,6 @@
 package biotree;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner; // Testing ONLY
@@ -108,7 +109,6 @@ public class FileProcessor {
 //			System.out.println("tax Id:" + matchEventId.group(9));
 //			System.out.println("Scientific Name:" + matchEventId.group(10));
 			
-			System.out.println("OccurID:" + matchEventId.group(1));	// FOR TESTING ONLY
 			createObjects(matchEventId);
 		}
 		else {
@@ -124,22 +124,27 @@ public class FileProcessor {
 	public static void createObjects(Matcher matchEventId) {
 		// Call BioTree
 		Record rec = null;
-		if(matchEventId.group(9) != null) {
-			Integer res = BioTree.processRecord(Integer.parseInt(matchEventId.group(9)));
-			// Create Record Object
-			if (res != null)
-				rec = createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), Integer.parseInt(matchEventId.group(9)), Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6)));
-		}
-		else if (! matchEventId.group(10).equals("NA")) {
+//		if(matchEventId.group(9) != null) {
+//			try {
+//				BioTree.processRecord(Integer.parseInt(matchEventId.group(9)));
+//				rec = createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), Integer.parseInt(matchEventId.group(9)), Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6)));
+//			} catch(NullPointerException e) {
+//				System.out.println("NPE:" + e);
+//			}				
+//		}
+//		else if (!matchEventId.group(10).equals("NA")) {
+		int errorCount=0;	// TESTING ONLY
+		if (!matchEventId.group(10).equals("NA")) {
 			try{
-				Integer taxonId = BioTree.processRecord(matchEventId.group(10));
-				if (taxonId != null)
-					rec = createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), taxonId, Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6)));
+				rec = createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), BioTree.processRecord(matchEventId.group(10)), Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6)));
 			} catch(IOException e) {
-				System.out.println("No Taxon ID or Scientific Name. OR createRecord Error");
+				System.out.println("Input Error:" + e);
+			} catch(NullPointerException e) {
+				System.out.println("Null Pointer Error:" + e);
 			}
 		}
 		//do something with rec
+		// I was thinking to just do something with the record the moment is created? Maybe saves a bit of time?
 	}
 	
 	/**
