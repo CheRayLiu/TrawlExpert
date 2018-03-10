@@ -61,7 +61,7 @@ public class WormsAPI {
 	public static int fuzzyNameToID(String fuzzyName) throws IOException {
 		fuzzyName = repSpaces(fuzzyName);
 		String resp = makeRequest(String.format(
-				"http://marinespecies.org/rest/AphiaRecordsByMatchNames?scientificnames%5B%5D=%s&marine_only=true",
+				"http://marinespecies.org/rest/AphiaRecordsByMatchNames?scientificnames%%5B%%5D=%s&marine_only=true",
 				fuzzyName));
 
 		// TODO: finish this function.
