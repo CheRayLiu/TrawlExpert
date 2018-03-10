@@ -1,6 +1,7 @@
 package biotree;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -10,13 +11,16 @@ import java.net.URL;
 
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import java.util.Iterator;
 
 public class WormsAPI {
 
 	public static void main(String[] args) throws IOException, ParseException {
 		// small test
-		System.out.println(nameToID("Neogobius melanostomus"));
+		//System.out.println(nameToID("Neogobius melanostomus"));
+		//System.out.println(fuzzyNameToID("Neogobius melanostomus"));
 		/*
 		 * TaxonNode[] taxnodes = idToClassification(126916);
 		 * 
@@ -58,16 +62,23 @@ public class WormsAPI {
 	 *            Fuzzy scientific name of taxon (family, genus, species, etc)
 	 * @return Aphia (taxon) ID of given scientific name.
 	 * @throws IOException
+	 * @throws ParseException 
 	 */
-	public static int fuzzyNameToID(String fuzzyName) throws IOException {
+	public static int fuzzyNameToID(String fuzzyName) throws IOException, ParseException {
 		System.out.println("Fuzzy name: " + fuzzyName);
 		fuzzyName = repSpaces(fuzzyName);
 		String resp = makeRequest(String.format(
 				"http://marinespecies.org/rest/AphiaRecordsByMatchNames?scientificnames%%5B%%5D=%s&marine_only=true",
 				fuzzyName));
 
-		// TODO: finish this function.
-		return 123123;
+		JSONParser parser = new JSONParser();
+		
+		JSONArray json = (JSONArray) parser.parse(resp);
+		JSONObject first = (JSONObject)((JSONArray)json.get(0)).get(0);
+		
+		return (int) (long) first.get("AphiaID");
+		
+		
 	}
 
 	/**
@@ -91,7 +102,6 @@ public class WormsAPI {
 		TaxonNode[] taxnodes = new TaxonNode[8];
 		int arraysize = parseIdCall(taxnodes, json, 0);
 		TaxonNode[] copiedArray = new TaxonNode[arraysize];
-
 		System.arraycopy(taxnodes, 0, copiedArray, 0, arraysize);
 
 		return copiedArray;
