@@ -28,7 +28,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 		else return x.N;
 	}
 	
-	public Value get(Key key) { return get(root, key); }
+	public Value get(Key key) { if (key == null) return null; return get(root, key); }
 	
 	private Value get(Node x, Key key) {
 		if (x == null) return null;

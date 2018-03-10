@@ -64,13 +64,14 @@ public class WormsAPI {
 	 * @throws IOException
 	 * @throws ParseException 
 	 */
-	public static int fuzzyNameToID(String fuzzyName) throws IOException, ParseException {
-		//System.out.println("Fuzzy name: " + fuzzyName);
+	public static Integer fuzzyNameToID(String fuzzyName) throws IOException, ParseException {
+		System.out.println("Fuzzy name: " + fuzzyName);
 		fuzzyName = repSpaces(fuzzyName);
 		String resp = makeRequest(String.format(
-				"http://marinespecies.org/rest/AphiaRecordsByMatchNames?scientificnames%%5B%%5D=%s&marine_only=true",
+				"http://marinespecies.org/rest/AphiaRecordsByMatchNames?scientificnames%%5B%%5D=%s&marine_only=false",
 				fuzzyName));
 
+		if (resp.length() == 0) return null;
 		JSONParser parser = new JSONParser();
 		
 		JSONArray json = (JSONArray) parser.parse(resp);

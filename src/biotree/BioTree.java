@@ -10,8 +10,9 @@ public class BioTree {
 	//FIXME: replace with a single kd-tree
 	private static BST<Integer, TaxonNode> idNodes = new BST<Integer, TaxonNode>();
 	private static BST<String, TaxonNode> strNodes = new BST<String, TaxonNode>();
+	private static BST<String, Integer> incorrectNames = new BST<String, Integer>();
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
 		BioTree.processRecord("Catostomus commersoni");
 	}
 	
@@ -64,16 +65,27 @@ public class BioTree {
 	 * @param scientificName The scientific name of the possible new entry
 	 * @return taxonId of new / existing entry
 	 * @throws IOException 
+	 * @throws ParseException 
 	 */
-	public static Integer processRecord(String scientificName) throws IOException {
+	public static Integer processRecord(String scientificName) throws IOException, ParseException {
 		//reverse lookup based on name, try adding the found taxonId.
 		TaxonNode res = strNodes.get(scientificName);
+		if (res == null) {
+			System.out.println("Not already found.");
+			Integer incorrectNameId = incorrectNames.get(scientificName);
+			if (incorrectNameId != null) if (incorrectNameId == -1) return null;
+			res = idNodes.get(incorrectNameId);
+		}
 		Integer taxonId = null;
 		if (res == null) {
 			try {
 				taxonId = WormsAPI.nameToID(scientificName);
 			} catch (Exception e) {
 				taxonId = WormsAPI.fuzzyNameToID(scientificName);
+				if (taxonId != null)
+					incorrectNames.put(scientificName, taxonId);
+				else
+					incorrectNames.put(scientificName, -1);
 			}
 			if (taxonId == -999)
 				taxonId = WormsAPI.fuzzyNameToID(scientificName);

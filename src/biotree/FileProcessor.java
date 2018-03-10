@@ -8,6 +8,8 @@ import java.util.Scanner; // Testing ONLY
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.json.simple.parser.ParseException;
+
 /**
  * This class reads and parses files in the format of occurences.csv
  * It provides methods to get chunks of data. 
@@ -41,8 +43,10 @@ public class FileProcessor {
 	 * Initialize Processing.
 	 *  Reads file at path. 
 	 *  Calls parse() for each line
+	 * @throws ParseException 
+	 * @throws NumberFormatException 
 	 */
-	private static void initProcessing() {
+	private static void initProcessing() throws NumberFormatException, ParseException {
 		FileReader fr;
 		BufferedReader br;
 
@@ -65,6 +69,7 @@ public class FileProcessor {
 			
 			//initialize the storage of records
 			DataStore.init(al.toArray(new Record[al.size()]));
+			al = null;
 			
 			s.close();//Testing ONLY
 			br.close();
@@ -81,8 +86,10 @@ public class FileProcessor {
 	 * 
 	 * @param currentLine, a line/row of data
 	 * @throws IOException
+	 * @throws ParseException 
+	 * @throws NumberFormatException 
 	 */
-	private static void parse(String currentLine) throws IOException {
+	private static void parse(String currentLine) throws IOException, NumberFormatException, ParseException {
 		/* Regex Pattern Grouping Guide
 		 * 	Retrieve String Groups with: matchEventId.group(x):
 		 *  group 0: full matched string
@@ -125,8 +132,10 @@ public class FileProcessor {
 	 * Calls BioTree's processRecord and another method to create a Record
 	 * 
 	 * @param matchEventId
+	 * @throws ParseException 
+	 * @throws NumberFormatException 
 	 */
-	public static void createObjects(Matcher matchEventId) {
+	public static void createObjects(Matcher matchEventId) throws NumberFormatException, ParseException {
 		// Call BioTree
 		Record rec = null;
 //		if(matchEventId.group(9) != null) {
@@ -170,7 +179,7 @@ public class FileProcessor {
 		return new Record(eventId, occurId, taxonId, individualCount, latitude, longitude, year, month, day);
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NumberFormatException, ParseException {
 		initProcessing();
 	}
 }
