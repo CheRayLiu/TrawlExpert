@@ -11,6 +11,10 @@ public class BioTree {
 	private static BST<Integer, TaxonNode> idNodes = new BST<Integer, TaxonNode>();
 	private static BST<String, TaxonNode> strNodes = new BST<String, TaxonNode>();
 	
+	public static void main(String[] args) throws IOException {
+		BioTree.processRecord("Catostomus commersoni");
+	}
+	
 	/**
 	 * Initialize species abstract object
 	 */
@@ -64,9 +68,13 @@ public class BioTree {
 	public static Integer processRecord(String scientificName) throws IOException {
 		//reverse lookup based on name, try adding the found taxonId.
 		TaxonNode res = strNodes.get(scientificName);
-		Integer taxonId;
+		Integer taxonId = null;
 		if (res == null) {
-			taxonId = WormsAPI.nameToID(scientificName);
+			try {
+				taxonId = WormsAPI.nameToID(scientificName);
+			} catch (Exception e) {
+				taxonId = WormsAPI.fuzzyNameToID(scientificName);
+			}
 			if (taxonId == -999)
 				taxonId = WormsAPI.fuzzyNameToID(scientificName);
 		}

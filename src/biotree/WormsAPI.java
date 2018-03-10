@@ -36,14 +36,15 @@ public class WormsAPI {
 	 * @param scientificName
 	 *            Scientific name of taxon (family, genus, species, etc)
 	 * @return Aphia (taxon) ID of given scientific name.
-	 * @throws IOException
+	 * @throws Exception 
 	 */
-	public static Integer nameToID(String scientificName) throws IOException {
-		System.out.println("nameToID");
+	public static Integer nameToID(String scientificName) throws Exception {
+		System.out.println("nameToID: " + scientificName);
 		scientificName = repSpaces(scientificName);
 		String resp = makeRequest(
 				String.format("http://marinespecies.org/rest/AphiaIDByName/%s?marine_only=false", scientificName));
-		if (resp.length() == 0) return null;
+		if (resp.length() == 0) 
+			throw new Exception("Name not found in WORMS database.");
 		return Integer.parseInt(resp);
 	}
 
@@ -59,6 +60,7 @@ public class WormsAPI {
 	 * @throws IOException
 	 */
 	public static int fuzzyNameToID(String fuzzyName) throws IOException {
+		System.out.println("Fuzzy name: " + fuzzyName);
 		fuzzyName = repSpaces(fuzzyName);
 		String resp = makeRequest(String.format(
 				"http://marinespecies.org/rest/AphiaRecordsByMatchNames?scientificnames%%5B%%5D=%s&marine_only=true",
