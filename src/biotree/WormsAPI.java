@@ -65,7 +65,7 @@ public class WormsAPI {
 	 * @throws ParseException 
 	 */
 	public static int fuzzyNameToID(String fuzzyName) throws IOException, ParseException {
-		System.out.println("Fuzzy name: " + fuzzyName);
+		//System.out.println("Fuzzy name: " + fuzzyName);
 		fuzzyName = repSpaces(fuzzyName);
 		String resp = makeRequest(String.format(
 				"http://marinespecies.org/rest/AphiaRecordsByMatchNames?scientificnames%%5B%%5D=%s&marine_only=true",
