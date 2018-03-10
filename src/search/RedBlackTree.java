@@ -1,6 +1,7 @@
 package search;
 
 public class RedBlackTree<Key, Value> {
+	private static Node root; // Root of the tree
 	
 	public static void main(String[] args) {
 		GeneralCompare<Integer> b1;
@@ -9,9 +10,13 @@ public class RedBlackTree<Key, Value> {
 		for(int i = 0; i < x.length; i++){
 			put(x[i], x, b1);
 		}
+		/*
+		h = x.root();
+		while (h.right())
+			System.out.println(h.right());
+			h = h.right();
+		*/
 	}
-	
-	private static Node root;
 	
 	private static <T> int size(Node h){
 		if(h == null)
@@ -20,10 +25,22 @@ public class RedBlackTree<Key, Value> {
 			return h.n();
 	}
 	
+	//Get root of the tree
+	public Node root() {
+		return this.root();
+	}
+	
 	public static <T> void put(Comparable<T> key, Comparable<T>[] val, GeneralCompare gc){
 		root = put(root, key, val, gc);
 		root.color(false);
 		System.out.println(root.key());
+		/*
+		if (((int) key) == 9) {
+			System.out.println(root.key());
+			while (root.right() != null) {
+				System.out.println(root.right().key());
+			}
+		}*/
 	}
 	
 	private static boolean isRed(Node x){
@@ -67,16 +84,24 @@ public class RedBlackTree<Key, Value> {
 		
 		if(h == null)
 			return new Node(key, val, 1, true);
-		
 		int n = size(h);
-		
-		Node root = new Node(key, val, n, true);
+		Node newNode = new Node(key, val, n, true);
 		
 		int cmp = gc.compare(key, h.key());
-		if(cmp < 0)
-			h.left(put(h.left(), key, val, gc));
-		else if (cmp > 0)
-			h.right(put(h.right(), key, val, gc)); 
+		if (cmp < 0 ) {
+			while(cmp < 0) {
+				h = h.left();
+				cmp = gc.compare(key, h.key());
+			}
+			h.left(newNode);
+		}
+		if (cmp > 0) {
+			while(cmp > 0) {
+				h = h.right();
+				cmp = gc.compare(key, h.key());
+			}
+			h.right(newNode);
+		}
 		else
 			h.val(val);
 		
@@ -89,11 +114,6 @@ public class RedBlackTree<Key, Value> {
 				flipColors(h);
 		}
 		
-		/*if(h.left() == null)
-			h.n(size(h.right()) + 1);
-		else if(h.right() == null)
-			h.n(size(h.left()) + 1);
-		else*/
 		h.n(size(h.left()) + size(h.right()) + 1);
 		
 		return h;
