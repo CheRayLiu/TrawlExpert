@@ -55,7 +55,7 @@ public class FileProcessor {
 			
 			br.readLine();	// Reads Past Field Names
 			int i = 0;
-			while ((currentLine = br.readLine()) != null && i < 100) {
+			while ((currentLine = br.readLine()) != null) {
 				//System.out.println(currentLine); //Testing ONLY for checking one line at a time
 				i++;
 				System.out.println("Processed line " + i);

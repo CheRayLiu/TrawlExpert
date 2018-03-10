@@ -65,8 +65,11 @@ public class BioTree {
 		//reverse lookup based on name, try adding the found taxonId.
 		TaxonNode res = strNodes.get(scientificName);
 		Integer taxonId;
-		if (res == null)
+		if (res == null) {
 			taxonId = WormsAPI.nameToID(scientificName);
+			if (taxonId == -999)
+				taxonId = WormsAPI.fuzzyNameToID(scientificName);
+		}
 		else
 			taxonId = res.getTaxonId();
 		if (taxonId == null) return null;
