@@ -37,7 +37,7 @@ public class MergeSort{
 		int mid = lo + (n/2);
 
 		// Fill auxiliary array
-		System.out.println("lo, mid, hi: " + lo + ", " + mid + ", " + hi);
+		//System.out.println("lo, mid, hi: " + lo + ", " + mid + ", " + hi);
 		
 		for(int k = lo; k <= hi; k++){
 			aux[k] = x[k];
