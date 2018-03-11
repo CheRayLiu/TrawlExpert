@@ -13,6 +13,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class WormsAPI {
@@ -20,7 +22,7 @@ public class WormsAPI {
 	public static void main(String[] args) throws IOException, ParseException {
 		// small test
 		//System.out.println(nameToID("Neogobius melanostomus"));
-		//System.out.println(fuzzyNameToID("Neogobius melanostomus"));
+		//System.out.println(nameToRecordID("Neogobius melanostomus"));
 		/*
 		 * TaxonNode[] taxnodes = idToClassification(126916);
 		 * 
@@ -65,7 +67,7 @@ public class WormsAPI {
 	 * @throws ParseException 
 	 */
 	public static Integer fuzzyNameToID(String fuzzyName) throws IOException, ParseException {
-		System.out.println("Fuzzy name: " + fuzzyName);
+		//System.out.println("Fuzzy name: " + fuzzyName);
 		fuzzyName = repSpaces(fuzzyName);
 		String resp = makeRequest(String.format(
 				"http://marinespecies.org/rest/AphiaRecordsByMatchNames?scientificnames%%5B%%5D=%s&marine_only=false",
@@ -78,6 +80,33 @@ public class WormsAPI {
 		JSONObject first = (JSONObject)((JSONArray)json.get(0)).get(0);
 		
 		return (int) (long) first.get("AphiaID");
+		
+		
+	}
+	
+	
+	/**
+	 * Search the WORMS database by a scientific name from multiple records  
+	 * 
+	 * @param Name
+	 * @return Aphia (taxon) ID of given scientific name.
+	 * @throws IOException
+	 * @throws ParseException 
+	 */
+	public static Integer nameToRecordID(String Name) throws IOException, ParseException {
+		//System.out.println( Name);
+		Name = repSpaces(Name);
+		String resp = makeRequest(String.format(
+				"http://marinespecies.org/rest/AphiaRecordsByName/%s?like=true&marine_only=false&offset=1",
+				Name));
+
+		if (resp.length() == 0) return null;
+		JSONParser parser = new JSONParser();
+		
+		JSONArray json = (JSONArray) parser.parse(resp);
+		int id =  (int) (long) ((JSONObject)json.get(0)).get("AphiaID");
+		
+		return id;
 		
 		
 	}
