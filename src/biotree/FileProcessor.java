@@ -64,19 +64,17 @@ public class FileProcessor {
 				i++;
 				System.out.println("Processed line " + i);
 				parse(currentLine);
-				//s.nextLine(); //Testing ONLY for checking one line at a time
 			}
 			
 			//initialize the storage of records
 			DataStore.init(al.toArray(new Record[al.size()]));
 			al = null; //free temporary memory storage of Record objects now that they're in the KDTree.
 			
-			s.close();//Testing ONLY
 			br.close();
 			fr.close();
 			
-			Scanner sc = new Scanner(System.in);
-			int j = sc.nextInt();
+			s.nextLine(); //Testing ONLY for checking one line at a time
+			s.close();//Testing ONLY
 		}
 		catch (IOException e) {
 			e.printStackTrace();
