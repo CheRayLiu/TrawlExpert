@@ -81,7 +81,7 @@ public class BioTree {
 			try {
 				taxonId = WormsAPI.nameToID(scientificName);
 			} catch (Exception e) {
-				taxonId = WormsAPI.fuzzyNameToID(scientificName);
+				taxonId = WormsAPI.nameToRecordID(scientificName);
 				if (taxonId != null)
 					incorrectNames.put(scientificName, taxonId);
 				else
