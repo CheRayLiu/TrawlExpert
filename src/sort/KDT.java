@@ -74,8 +74,6 @@ public class KDT<KeyVal extends Comparable<KeyVal>> {
 		MergeSort.sort(keyvals, lo, hi, axes.get(axis));
 		KeyVal median = (KeyVal) keyvals[mid];
 		
-		System.out.println(median);
-		
 		//TODO: fix size
 		Node newNode = new Node(median, 0);
 		newNode.left = buildTree(keyvals, lo, mid - 1, depth + 1);

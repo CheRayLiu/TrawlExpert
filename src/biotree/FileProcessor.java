@@ -74,6 +74,9 @@ public class FileProcessor {
 			s.close();//Testing ONLY
 			br.close();
 			fr.close();
+			
+			Scanner sc = new Scanner(System.in);
+			int j = sc.nextInt();
 		}
 		catch (IOException e) {
 			e.printStackTrace();

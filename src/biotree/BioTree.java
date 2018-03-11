@@ -13,7 +13,7 @@ public class BioTree {
 	private static BST<String, Integer> incorrectNames = new BST<String, Integer>();
 	
 	public static void main(String[] args) throws IOException, ParseException {
-		BioTree.processRecord("Catostomus commersoni");
+		BioTree.processRecord("Micropterus dolomieui");
 	}
 	
 	/**
@@ -69,6 +69,7 @@ public class BioTree {
 	 */
 	public static Integer processRecord(String scientificName) throws IOException, ParseException {
 		//reverse lookup based on name, try adding the found taxonId.
+		System.out.println("Processing " + scientificName);
 		TaxonNode res = strNodes.get(scientificName);
 		if (res == null) {
 			System.out.println("Not already found.");
@@ -77,6 +78,7 @@ public class BioTree {
 			res = idNodes.get(incorrectNameId);
 		}
 		Integer taxonId = null;
+		//if the taxonId was not found in the local database
 		if (res == null) {
 			try {
 				taxonId = WormsAPI.nameToID(scientificName);
@@ -84,15 +86,17 @@ public class BioTree {
 				taxonId = WormsAPI.nameToRecordID(scientificName);
 				if (taxonId != null)
 					incorrectNames.put(scientificName, taxonId);
-				else
+				else {
 					incorrectNames.put(scientificName, -1);
+					
+				}
 			}
-			if (taxonId == -999)
-				taxonId = WormsAPI.fuzzyNameToID(scientificName);
 		}
 		else
 			taxonId = res.getTaxonId();
 		if (taxonId == null) return null;
+		if (taxonId == -999)
+			taxonId = WormsAPI.fuzzyNameToID(scientificName);
 		if (processTaxonId(taxonId)) return null;
 		return taxonId;
 	}
