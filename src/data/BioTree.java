@@ -1,19 +1,32 @@
 package data;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import org.json.simple.parser.ParseException;
 
 import search.BST;
+import sort.KDT;
 
-public class BioTree {
+public class BioTree implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4291273291916906661L;
 	//FIXME: replace with a single kd-tree
 	private static BST<Integer, TaxonNode> idNodes = new BST<Integer, TaxonNode>();
 	private static BST<String, TaxonNode> strNodes = new BST<String, TaxonNode>();
 	private static BST<String, Integer> incorrectNames = new BST<String, Integer>();
 	
 	public static void main(String[] args) throws IOException, ParseException {
-		BioTree.processRecord("Micropterus dolomieui");
+		BioTree.processRecord(123123);
+		//BioTree.write("biotree");
+		BioTree.init("biotree");
+		System.out.println(idNodes.get(2));
 	}
 	
 	/**
@@ -29,9 +42,53 @@ public class BioTree {
 	 * 
 	 * @param fn
 	 *            Filename to read from
+	 * @return 
 	 */
 	public static void init(String fn) {
-
+		BST<Integer, TaxonNode> idNodes = null;
+		try {
+	         FileInputStream fileIn = new FileInputStream(fn+"/idnodes.ser");
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         idNodes = (BST<Integer, TaxonNode>) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      } catch (ClassNotFoundException c) {
+	         System.out.println("Employee class not found");
+	         c.printStackTrace();
+	      }
+		BioTree.idNodes = idNodes;
+		
+		BST<String, TaxonNode> strNodes = null;
+		try {
+	         FileInputStream fileIn = new FileInputStream(fn+"/strNodes.ser");
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         strNodes = (BST<String, TaxonNode>) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      } catch (ClassNotFoundException c) {
+	         System.out.println("Employee class not found");
+	         c.printStackTrace();
+	      }
+		BioTree.strNodes = strNodes;
+		
+		BST<String, Integer> incorrectNames = null;
+		try {
+	         FileInputStream fileIn = new FileInputStream(fn+"/incorNames.ser");
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         incorrectNames = (BST<String, Integer>) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      } catch (ClassNotFoundException c) {
+	         System.out.println("Employee class not found");
+	         c.printStackTrace();
+	      }
+		BioTree.incorrectNames = incorrectNames;
 	}
 
 	/**
@@ -42,7 +99,41 @@ public class BioTree {
 	 *            Filename to write to
 	 */
 	public static void write(String fn) {
-
+		try {
+	         FileOutputStream fileOut =
+	        		 new FileOutputStream(fn+"/idNodes.ser");
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(BioTree.idNodes);
+	         out.close();
+	         fileOut.close();
+	         System.out.printf("Serialized data is saved in /tmp/kdtree.ser");
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      }
+		
+		try {
+	         FileOutputStream fileOut =
+	        		 new FileOutputStream(fn+"/strNodes.ser");
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(BioTree.strNodes);
+	         out.close();
+	         fileOut.close();
+	         System.out.printf("Serialized data is saved in /tmp/kdtree.ser");
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      }
+		
+		try {
+	         FileOutputStream fileOut =
+	        		 new FileOutputStream(fn+"/incorNames.ser");
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(BioTree.incorrectNames);
+	         out.close();
+	         fileOut.close();
+	         System.out.printf("Serialized data is saved in /tmp/kdtree.ser");
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      }
 	}
 
 	/**

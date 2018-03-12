@@ -65,17 +65,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 
 		System.out.println(kdt.toString());
 		
-		try {
-	         FileOutputStream fileOut =
-	        		 new FileOutputStream("kdtree.ser");
-	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	         out.writeObject(kdt);
-	         out.close();
-	         fileOut.close();
-	         System.out.printf("Serialized data is saved in /tmp/kdtree.ser");
-	      } catch (IOException i) {
-	         i.printStackTrace();
-	      }
+		kdt.writeToFile("kdtree.ser");
 	}
 	
 	private class KDNode implements Serializable{
@@ -114,6 +104,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	         System.out.println("Employee class not found");
 	         c.printStackTrace();
 	      }
+		//https://stackoverflow.com/questions/26327956/set-this-in-a-class
 		this.root = kdt.root;
 		this.axes = kdt.axes;
 	}
@@ -199,6 +190,20 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	
 	public String toString() {
 		return toString(root, "");
+	}
+	
+	public void writeToFile(String fn) {
+		try {
+	         FileOutputStream fileOut =
+	        		 new FileOutputStream(fn);
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(this);
+	         out.close();
+	         fileOut.close();
+	         System.out.printf("Serialized data is saved in /tmp/kdtree.ser");
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      }
 	}
 	
 	private String toString(KDNode x, String depth) {

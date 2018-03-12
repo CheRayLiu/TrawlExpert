@@ -1,5 +1,6 @@
 package data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +12,11 @@ import java.util.ArrayList;
  * https://stackoverflow.com/questions/2697182/how-to-use-an-array-list
  */
 	
-public class TaxonNode {
+public class TaxonNode implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -317741592166253773L;
 	private final int taxonId;
 	private final TaxonType taxonType;
 	private final String name;
