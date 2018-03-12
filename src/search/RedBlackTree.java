@@ -1,12 +1,15 @@
 package search;
 
-public class RedBlackTree<Key, Value> {
-	private static Node root; // Root of the tree
+public class RedBlackTree<Key, Value, T> {
+	private Node root; // Root of the tree
+	private GeneralCompare compareType;
+	private Comparable<T> fieldType;
 	
 	public static void main(String[] args) {
 		GeneralCompare<Integer> b1;
 		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
 		Integer[] x = {1,2,3,4,5,6,7,8,9};
+		RedBlackTree myTree = RedBlackTree(x[0], x[0], b1);
 		for(int i = 0; i < x.length; i++){
 			put(x[i], x, b1);
 		}
@@ -18,93 +21,43 @@ public class RedBlackTree<Key, Value> {
 		*/
 	}
 	
-	private static <T> int size(Node h){
-		if(h == null)
-			return 0;
-		else
-			return h.n();
+	// RedBlackTree Constructor
+	public RedBlackTree<Key, Value, T> RedBlackTree(Comparable<T> fieldT, Comparable<T>[] record, GeneralCompare gc) {
+		root.val(record);
+		compareType = gc;
+		fieldType = fieldT;
+		
+		root.color(false);
+		root.key(Field.field(fieldType, record));
+		root.left(null);
+		root.right(null);
+		return this;
 	}
 	
-	//Get root of the tree
+	
+	// Get root of a tree
 	public Node root() {
 		return this.root();
 	}
 	
-	public static <T> void put(Comparable<T> key, Comparable<T>[] val, GeneralCompare gc){
-		root = put(root, key, val, gc);
-		root.color(false);
-		System.out.println(root.key());
-		/*
-		if (((int) key) == 9) {
-			System.out.println(root.key());
-			while (root.right() != null) {
-				System.out.println(root.right().key());
-			}
-		}*/
+	public void put(Comparable<T>[] val){
+		put(root, Field.field(fieldType, val), val, this.compareType);
 	}
 	
-	private static boolean isRed(Node x){
-		if(x == null)
-			return false;
-		return true;
-	}
-	
-	public static Node rotateLeft(Node h){
-		Node x = h.right();
-		h.right(x.left());
-		x.left(h);
-		x.color(h.color());
-		h.color(true);
-		x.n(h.n());
-		h.n(1 + size(h.left()) + size(h.right()));
-		return x;
-	}
-	
-	public static Node rotateRight(Node h){
-		Node x = h.left();
-		h.left(x.right());
-		x.right(h);
-		x.color(h.color());
-		h.color(true);
-		x.n(h.n());
-		h.n(1 + size(h.left()) + size(h.right()));
-		return x;
-		
-	}
-	
-	private static void flipColors(Node h){
-		if(h.left() != null && h.right() != null){
-			h.left().color(false);
-			h.right().color(false);
-			h.color(true);
-		}
-	}
-	
-	private static <T> Node put(Node h, Comparable<T> key, Comparable<T>[] val, GeneralCompare<T> gc){
+	private Node put(Node h, Comparable<T> key, Comparable<T>[] val, GeneralCompare<T> gc){
 		
 		if(h == null)
 			return new Node(key, val, 1, true);
-		int n = size(h);
+		int n = h.n();
 		Node newNode = new Node(key, val, n, true);
 		
 		int cmp = gc.compare(key, h.key());
-		if (cmp < 0 ) {
-			while(cmp < 0) {
-				h = h.left();
-				cmp = gc.compare(key, h.key());
-			}
-			h.left(newNode);
-		}
-		if (cmp > 0) {
-			while(cmp > 0) {
-				h = h.right();
-				cmp = gc.compare(key, h.key());
-			}
-			h.right(newNode);
-		}
+		if (cmp < 0 )
+			h.left(put(h.left(), Field.field(fieldType, val), val, gc));
+		else if (cmp > 0)
+			h.right(put(h.right(), Field.field(fieldType, val), val, gc));
 		else
-			h.val(val);
-		
+
 		if(n > 2){
 			if(isRed(h.right()) && !isRed(h.left()))
 				h = rotateLeft(h);
@@ -113,9 +66,47 @@ public class RedBlackTree<Key, Value> {
 			if(isRed(h.left()) && isRed(h.right()))
 				flipColors(h);
 		}
-		
-		h.n(size(h.left()) + size(h.right()) + 1);
-		
+
+		h.n(h.left().n() + h.right().n() + 1);
 		return h;
+	}
+
+
+	// Check if the link to a node's parent is red
+	private boolean isRed(Node x){
+		if(x == null)
+			return false;
+		return true;
+	}
+
+	public Node rotateLeft(Node h){
+		Node x = h.right();
+		h.right(x.left());
+		x.left(h);
+		x.color(h.color());
+		h.color(true);
+		x.n(h.n());
+		h.n(1 + h.left().n() + h.right().n());
+		return x;
+	}
+
+	public static Node rotateRight(Node h){
+		Node x = h.left();
+		h.left(x.right());
+		x.right(h);
+		x.color(h.color());
+		h.color(true);
+		x.n(h.n());
+		h.n(1 + h.left().n() + h.right().n());
+		return x;
+
+	}
+
+	private void flipColors(Node h){
+		if(h.left() != null && h.right() != null){
+			h.left().color(false);
+			h.right().color(false);
+			h.color(true);
+		}
 	}
 }
