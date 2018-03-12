@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 
 import org.json.simple.parser.ParseException;
 
+import search.BasicSearch;
+
 /**
  * This class reads and parses files in the format of occurences.csv
  * It provides methods to get chunks of data. 
@@ -59,7 +61,7 @@ public class FileProcessor {
 			
 			br.readLine();	// Reads Past Field Names
 			int i = 0;
-			while ((currentLine = br.readLine()) != null) {
+			while ((currentLine = br.readLine()) != null && i < 10) {
 				//System.out.println(currentLine); //Testing ONLY for checking one line at a time
 				i++;
 				System.out.println("Processed line " + i);
@@ -69,6 +71,8 @@ public class FileProcessor {
 			//initialize the storage of records
 			DataStore.init(al.toArray(new Record[al.size()]));
 			al = null; //free temporary memory storage of Record objects now that they're in the KDTree.
+			
+			BasicSearch.init();
 			
 			br.close();
 			fr.close();

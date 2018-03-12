@@ -95,11 +95,11 @@ public class KDT<KeyVal extends Comparable<KeyVal>> {
 		int axis = depth % getK();
 		GeneralRange<KeyVal> rg = range.get(axis);
 		
-		System.out.println("Try: " + x.keyval);
+		//System.out.println("Try: " + x.keyval);
 		
 		int bounds = rg.isInBounds((KeyVal) x.keyval);
 		if (bounds == 0) {
-			System.out.println(pointInside(x.keyval, range));
+			//System.out.println(pointInside(x.keyval, range));
 			if (pointInside(x.keyval, range)) {
 				result.add(x.keyval);
 			}
