@@ -1,12 +1,58 @@
 package search;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public class BST<Key extends Comparable<Key>, Value> {
+import sort.KDT;
+
+public class BST<Key extends Comparable<Key>, Value> implements Serializable {
+	/**
+	 * 
+	 */
+	public static void main(String[] args) {
+		//BST<Integer,Integer> bst = new BST<Integer, Integer>();
+		//bst.put(75, 9);
+		//bst.writeToFile("bst.ser");
+		BST<Integer, Integer> bst = new BST<Integer, Integer>("bst.ser");
+		
+		System.out.println(bst.get(75));
+	}
+	
+	private static final long serialVersionUID = 8775155124761510511L;
 	private Node root;
 	
-	private class Node{
+	public BST(String fn) {
+		BST<Key,Value> bst = null;
+		try {
+	         FileInputStream fileIn = new FileInputStream(fn);
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         bst = (BST<Key,Value>) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      } catch (ClassNotFoundException c) {
+	         System.out.println("Employee class not found");
+	         c.printStackTrace();
+	      }
+		this.root = bst.root;
+	}
+	
+	public BST() {
+		root = null;
+	}
+	
+	private class Node implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -8145778479611668151L;
 		private Key key;
 		private Value val;
 		private Node left, right;
@@ -182,5 +228,19 @@ public class BST<Key extends Comparable<Key>, Value> {
 	private int height(Node x) {
 		if (x == null) return 0;
 		else return Math.max(height (x.left), height(x.right)) + 1;
+	}
+	
+	public void writeToFile(String fn) {
+		try {
+	         FileOutputStream fileOut =
+	        		 new FileOutputStream(fn);
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(this);
+	         out.close();
+	         fileOut.close();
+	         System.out.printf("Serialized data is saved in /tmp/kdtree.ser");
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      }
 	}
 }
