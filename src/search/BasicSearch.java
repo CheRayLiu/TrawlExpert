@@ -18,7 +18,7 @@ public class BasicSearch {
 			int taxonId = s.nextInt();
 			
 			GeneralRange<Record> a0 = r -> 0;
-			GeneralRange<Record> a1 = r -> r.getTaxonId() - taxonId;//RangeHelper.taxonID(Bound.EQUALS, taxonId);
+			GeneralRange<Record> a1 = RangeHelper.taxonID(Bound.EQUALS, taxonId);
 			GeneralRange<Record> a2 = r -> 0;
 			GeneralRange<Record> a3 = r -> 0;
 			
