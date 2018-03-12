@@ -1,4 +1,4 @@
-package biotree;
+package data;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package biotree;
+package data;
 
 public class Date implements Comparable<Date> {
 	private final int year;

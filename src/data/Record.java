@@ -1,4 +1,4 @@
-package biotree;
+package data;
 
 public class Record implements Comparable<Record> {
 	private final int eventId;

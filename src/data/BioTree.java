@@ -1,4 +1,4 @@
-package biotree;
+package data;
 
 import java.io.IOException;
 
@@ -88,7 +88,6 @@ public class BioTree {
 					incorrectNames.put(scientificName, taxonId);
 				else {
 					incorrectNames.put(scientificName, -1);
-					
 				}
 			}
 		}
@@ -96,7 +95,7 @@ public class BioTree {
 			taxonId = res.getTaxonId();
 		if (taxonId == null) return null;
 		if (taxonId == -999)
-			taxonId = WormsAPI.fuzzyNameToID(scientificName);
+			taxonId = WormsAPI.nameToRecordID(scientificName);
 		if (processTaxonId(taxonId)) return null;
 		return taxonId;
 	}
