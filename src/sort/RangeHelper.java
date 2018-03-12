@@ -1,6 +1,6 @@
 package sort;
 
-import biotree.Record;
+import data.Record;
 
 public class RangeHelper {
 	public static GeneralRange<Record> taxonID(Bound boundtype) {

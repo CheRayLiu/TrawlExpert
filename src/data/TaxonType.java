@@ -1,4 +1,4 @@
-package biotree;
+package data;
 
 /**
  * Enumeration of classifications of Taxa.
