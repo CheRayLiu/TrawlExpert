@@ -1,5 +1,5 @@
 package sort;
 
 public enum Bound {
-	LOWER, UPPER, LOWHIGH, ANY;
+	LOWER, UPPER, LOWHIGH, ANY, EQUALS;
 }
