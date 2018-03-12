@@ -12,6 +12,7 @@ public class Record implements Comparable<Record> {
 	private final int year;
 	private final int month;
 	private final int day;
+	private final Date recDate;
 	
 
 	/**
@@ -29,6 +30,7 @@ public class Record implements Comparable<Record> {
 		this.year = year;
 		this.month = month;
 		this.day = day;
+		this.recDate = new Date(year,month,day);
 		
 	}
 	
@@ -109,6 +111,15 @@ public class Record implements Comparable<Record> {
 		return day;
 	}
 
+	/**
+	 * Gets date of the record
+	 * 
+	 * @return The date of the record
+	 */
+	public Date getDate() {
+		return recDate;
+	}
+	
 	@Override
 	public int compareTo(Record o) {
 		// TODO Auto-generated method stub
