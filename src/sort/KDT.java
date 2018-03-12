@@ -1,10 +1,24 @@
 package sort;
 
 import sandbox.Point;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class KDT<KeyVal extends Comparable<KeyVal>> {
-	Node root;
+public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8807259801436570835L;
+	/**
+	 * 
+	 */
+	KDNode root;
 	ArrayList<GeneralCompare<KeyVal>> axes;
 	
 	public static void main(String[] args) {
@@ -26,7 +40,8 @@ public class KDT<KeyVal extends Comparable<KeyVal>> {
 		
 		Point[] pts = {p1, p2, p3, p4, p5, p6};
 		
-		KDT<Point> kdt = new KDT<Point>(axes, pts);
+		//KDT<Point> kdt = new KDT<Point>(axes, pts);
+		KDT<Point> kdt = new KDT<Point>("kdtree.ser");
 		System.out.println(kdt.size());
 		System.out.println(kdt.height());
 		
@@ -49,17 +64,58 @@ public class KDT<KeyVal extends Comparable<KeyVal>> {
 		}
 
 		System.out.println(kdt.toString());
+		
+		try {
+	         FileOutputStream fileOut =
+	        		 new FileOutputStream("kdtree.ser");
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(kdt);
+	         out.close();
+	         fileOut.close();
+	         System.out.printf("Serialized data is saved in /tmp/kdtree.ser");
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      }
 	}
 	
-	private class Node{
+	private class KDNode implements Serializable{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -664511393872278542L;
+		/**
+		 * 
+		 */
 		private KeyVal keyval;
-		private Node left, right;
+		private KDNode left, right;
 		private int n;
 		
-		public Node(KeyVal keyval, int n) {
+		public KDNode(KeyVal keyval, int n) {
 			this.keyval = keyval;
 			this.n = n;
 		}
+	}
+	
+	/**
+	 * Load a kd-tree from a serialized file.
+	 * @param fn
+	 */
+	public KDT(String fn) {
+		KDT<KeyVal> kdt = null;
+		try {
+	         FileInputStream fileIn = new FileInputStream(fn);
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         kdt = (KDT<KeyVal>) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      } catch (ClassNotFoundException c) {
+	         System.out.println("Employee class not found");
+	         c.printStackTrace();
+	      }
+		this.root = kdt.root;
+		this.axes = kdt.axes;
 	}
 	
 	public KDT(ArrayList<GeneralCompare<KeyVal>> axes, Comparable<KeyVal>[] keyvals) {
@@ -67,7 +123,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> {
 		root = buildTree(keyvals, 0, keyvals.length - 1, 0);
 	}
 	
-	private Node buildTree(Comparable<KeyVal>[] keyvals, int lo, int hi, int depth) {
+	private KDNode buildTree(Comparable<KeyVal>[] keyvals, int lo, int hi, int depth) {
 		if (lo > hi) return null;
 		int axis = depth % getK();
 		
@@ -76,7 +132,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> {
 		KeyVal median = (KeyVal) keyvals[mid];
 		
 		//TODO: fix size
-		Node newNode = new Node(median, 0);
+		KDNode newNode = new KDNode(median, 0);
 		newNode.left = buildTree(keyvals, lo, mid - 1, depth + 1);
 		newNode.right = buildTree(keyvals, mid + 1, hi, depth + 1);
 		
@@ -90,7 +146,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> {
 		return result;
 	}
 	
-	private void rangeSearch(Node x, ArrayList<GeneralRange<KeyVal>> range, ArrayList<KeyVal> result, int depth) {
+	private void rangeSearch(KDNode x, ArrayList<GeneralRange<KeyVal>> range, ArrayList<KeyVal> result, int depth) {
 		if (x == null) return;
 		int axis = depth % getK();
 		GeneralRange<KeyVal> rg = range.get(axis);
@@ -127,12 +183,12 @@ public class KDT<KeyVal extends Comparable<KeyVal>> {
 		return height(root);
 	}
 	
-	private int height(Node x) {
+	private int height(KDNode x) {
 		if (x == null) return 0;
 		return 1 + Math.max(height(x.left), height(x.right));
 	}
 	
-	private int size(Node x) {
+	private int size(KDNode x) {
 		if (x == null) return 0;
 		else return x.n;
 	}
@@ -145,7 +201,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> {
 		return toString(root, "");
 	}
 	
-	private String toString(Node x, String depth) {
+	private String toString(KDNode x, String depth) {
 		if (x == null) return depth + "null\n";
 		String result = "";
 		result += depth + x.keyval.toString() + "\n";

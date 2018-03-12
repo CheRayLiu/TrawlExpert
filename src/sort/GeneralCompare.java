@@ -1,6 +1,8 @@
 package sort;
 
-public interface GeneralCompare<T> {
+import java.io.Serializable;
+
+public interface GeneralCompare<T> extends Serializable {
 	/**
 	 * Compare two Comparable elements based on an arbitrary ordering definition.
 	 * @param a1 The first value to be compared.
