@@ -9,9 +9,7 @@ public class Record implements Comparable<Record> {
 	private final float latitude;
 	private final float longitude;
 	
-	private final int year;
-	private final int month;
-	private final int day;
+
 	private final Date recDate;
 	
 
@@ -27,9 +25,7 @@ public class Record implements Comparable<Record> {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	
-		this.year = year;
-		this.month = month;
-		this.day = day;
+		
 		this.recDate = new Date(year,month,day);
 		
 	}
@@ -81,34 +77,6 @@ public class Record implements Comparable<Record> {
 	 */
 	public float getLongitude() {
 		return longitude;
-	}
-
-	/**
-	 * Gets year of the record
-	 * 
-	 * @return The year of the record
-	 */
-	public int getYear() {
-		return year;
-	}
-
-	/**
-	 * Gets month of the record
-	 * 
-	 * @return The month of the record
-	 */
-	public int getMonth() {
-		return month;
-	}
-
-
-	/**
-	 * Gets day of the record
-	 * 
-	 * @return The day of the record
-	 */
-	public int getDay() {
-		return day;
 	}
 
 	/**
