@@ -36,6 +36,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> {
 		GeneralRange<Point> xRange = p -> p.getX() < 2 ? -1 : (p.getX() > 7 ? 1 : 0);
 		GeneralRange<Point> yRange = p -> 0;//p.getY() < 3 ? -1 : (p.getY() > 6 ? 1 : 0);
 		
+		
 		ArrayList<GeneralRange<Point>> ranges = new ArrayList<GeneralRange<Point>>();
 		ranges.add(xRange);
 		ranges.add(yRange);
