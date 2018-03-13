@@ -19,11 +19,11 @@ public class Record implements Comparable<Record>, Serializable {
 	private final Date recDate;
 	
 	
-//	public static void main(String[] args) {
-//		///test main
-//		Record record = new Record(1111,"11",11,111,(float) 94.56, 94,1998,1,9);
-//		record.printString();
-//	}
+	public static void main(String[] args) {
+		///test main
+		Record record = new Record(1111,"11",11,111,(float) 94.56, 94,1998,1,9);
+		System.out.println(record.toString());
+	}
 
 	/**
 	 * Initialize Record abstract object
@@ -100,14 +100,17 @@ public class Record implements Comparable<Record>, Serializable {
 		return recDate;
 	}
 	
-	public void printString() {
+	public String toString() {
 		String format = "|%1$-15s|%2$-15s|%3$-15s|%4$-15s|%5$-15s|%6$-15s|%7$-15s|%8$-15s|%9$-15s|\n";
-		System.out.format(format, "EventId", "OccurenceId", "TaxonId", "IndividualCount", "Latitude", "Longitude","Year","Month","Day");
-		System.out.format(format, this.eventId, this.occurId,this.taxonId,this.individualCount,this.longitude, this.latitude, this.recDate.getYear(),this.recDate.getMonth(),this.recDate.getDay());
+		String s= String.format(format, "EventId", "OccurenceId", "TaxonId", "IndividualCount", "Latitude", "Longitude","Year","Month","Day");
+		String num = String.format(format, this.eventId, this.occurId,this.taxonId,this.individualCount,this.longitude, this.latitude, this.recDate.getYear(),this.recDate.getMonth(),this.recDate.getDay());
+		String snum = s+num;
 		for (int i = 0; i < 15*10 ;i++ ) {
-			System.out.print("_");
+			snum += "_";
 		}
-		System.out.println("\n");
+
+		
+		return snum;
 		}
 
 	@Override
