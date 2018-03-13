@@ -12,6 +12,9 @@ public class GraphBuild {
 		GraphBuild gb = new GraphBuild(5);
 		System.out.println(gb.V());
 		System.out.println(gb.E());
+		for(int i = 0; i < gb.adj.length; i++){
+			System.out.println(gb.adj[i]);
+		}
 	}
 	
 	public GraphBuild(int V){
