@@ -26,6 +26,7 @@ public class Main {
 			BioTree.write("data/biotree/");
 			DataStore.records.writeToFile("data/kdt.ser");
 		};
+		BioTree.printTree();
 		BasicSearch.init();
 	}
 }
