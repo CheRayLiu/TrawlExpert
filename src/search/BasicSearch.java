@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import utils.Stopwatch;
 import data.DataStore;
+import data.Date;
 import data.Record;
 import sort.Bound;
 import sort.GeneralRange;
@@ -18,7 +19,10 @@ public class BasicSearch {
 			Scanner s = new Scanner(System.in);
 			int taxonId = s.nextInt();
 			
-			GeneralRange<Record> a0 = r -> r.getDate().getYear() < 1990 ? 0 : 1;
+			Date lower = new Date(1990,01,01);
+			Date upper = new Date(2001,01,01);
+			
+			GeneralRange<Record> a0 = RangeHelper.date(Bound.LOWHIGH, lower, upper);
 			GeneralRange<Record> a1 = RangeHelper.taxonID(Bound.EQUALS, taxonId);
 			GeneralRange<Record> a2 = r -> 0;
 			GeneralRange<Record> a3 = r -> 0;
