@@ -2,7 +2,7 @@ package search;
 
 //import search.RedBlackTree.Node;
 
-public class Node<Key, Value, T>{
+public class Node<T>{
 	
 	private Comparable<T> key;
 	private Comparable<T>[] val;
