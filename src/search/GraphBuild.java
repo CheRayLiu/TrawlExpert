@@ -1,10 +1,18 @@
 package search;
 
+import java.io.*;
+
 public class GraphBuild {
 	
 	private final int V;
 	private int E;
 	private Fish<Integer>[] adj;
+	
+	public static void main(String[] args) {
+		GraphBuild gb = new GraphBuild(5);
+		System.out.println(gb.V());
+		System.out.println(gb.E());
+	}
 	
 	public GraphBuild(int V){
 		this.V = V;
@@ -15,7 +23,13 @@ public class GraphBuild {
 	}
 	
 	/*public GraphBuild(In in){
-		
+		this(in.readInt());
+		int E = in.readInt();
+		for(int i = 0; i < E; i++){
+			int v = in.readInt();
+			int w = in.readInt();
+			addEdge(v, w);
+		}
 	}*/
 	
 	public int V(){
