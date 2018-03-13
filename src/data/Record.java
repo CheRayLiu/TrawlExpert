@@ -19,11 +19,11 @@ public class Record implements Comparable<Record>, Serializable {
 	private final Date recDate;
 	
 	
-	public static void main(String[] args) {
-		///test main
-		Record record = new Record(1111,"11",11,111,(float) 94.56, 94,1998,1,9);
-		record.printString();
-	}
+//	public static void main(String[] args) {
+//		///test main
+//		Record record = new Record(1111,"11",11,111,(float) 94.56, 94,1998,1,9);
+//		record.printString();
+//	}
 
 	/**
 	 * Initialize Record abstract object
