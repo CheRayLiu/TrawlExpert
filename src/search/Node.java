@@ -2,52 +2,46 @@ package search;
 
 //import search.RedBlackTree.Node;
 
-public class Node<T>{
+public class Node<Key, Value>{
 	
-	private Comparable<T> key;
-	private Comparable<T>[] val;
-	private Node left, right;
+	private final Comparable<Key> key;
+	private Value val;
+	private Node<Key, Value> left, right;
 	private int n; //size of subtree beneath this node (inclusive)
 	private boolean color;
 
-	public Node(Comparable<T> key, Comparable<T>[] val, int n, boolean color){
+	public Node(Comparable<Key> key, Value val, int n, boolean color){
 		this.key = key;
 		this.val = val;
 		this.n = n;
 		this.color = color;
 	}
 	
-	
-	public Comparable<T> key(){
+	public Comparable<Key> key(){
 		return this.key;
 	}
 	
-	public void key(Comparable<T> key){
-		this.key = key;
-		
-	}
-	
-	public Comparable<T>[] val(){
+	public Value val(){
 		return this.val;
 	} 
 
-	public void val(Comparable<T>[] val){
+	public void val(Value val){
 		this.val = val;
 	}
 	
-	public Node left(){
+	public Node<Key, Value> left(){
 		return this.left;
 	}
 	
-	public void left(Node left){
+	public void left(Node<Key, Value> left){
 		this.left = left;
 	}
 	
-	public Node right(){
+	public Node<Key, Value> right(){
 		return this.right;
 	}
 	
-	public void right(Node right){
+	public void right(Node<Key, Value> right){
 		this.right = right;
 	}
 	

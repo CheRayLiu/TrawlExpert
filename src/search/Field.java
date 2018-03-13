@@ -1,6 +1,6 @@
 package search;
 
-public interface Field<T> {
-	public Comparable<T> field(Comparable<T>[] a1);
+public interface Field<Key, Value> {
+	public Comparable<Key> field(Value a1);
 }
 

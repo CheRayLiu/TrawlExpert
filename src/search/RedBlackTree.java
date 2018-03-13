@@ -1,21 +1,21 @@
 package search;
 
-public class RedBlackTree<T> {
-	private Node root; // Root of the tree
-	private GeneralCompare compare;
-	private Field field;
+public class RedBlackTree<Key, Value> {
+	private Node<Key, Value> root; // Root of the tree
+	private GeneralCompare<Key> compare;
+	private Field<Key, Value> field;
 	
 	public static void main(String[] args) {
 		GeneralCompare<Integer> b1;
 		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
-		Field<Integer> fld;
+		Field<Integer, Integer[]> fld;
 		fld = (a1) -> (Integer) a1[0];
 		
 		
 		Integer[][] x = {{1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 5}, {6, 6}, {7, 7}, {8, 8}, {9, 9}};
-		RedBlackTree myTree = RedBlackTree<Integer>(fld, x[0], b1);
+		RedBlackTree<Integer, Integer[]> myTree = new RedBlackTree<Integer, Integer[]>(fld, b1);
 		for(int i = 1; i < x.length; i++){
-			myTree.put(x[i], x, b1);
+			myTree.put(x[i]);
 		}
 		/*
 		h = x.root();
@@ -32,23 +32,25 @@ public class RedBlackTree<T> {
 	 * @param gc - A function that compares two comparable items
 	 * @return The object itself
 	 */
-	public RedBlackTree<T> RedBlackTree(Field fld, Comparable<T>[] record, GeneralCompare gc) {
-		root.val(record);
+	public RedBlackTree(Field<Key, Value> fld, GeneralCompare<Key> gc) {
+
 		compare = gc;
 		field = fld;
 		
-		root.color(false);
-		root.key(fld.field(record));
-		root.left(null);
-		root.right(null);
-		return this;
+		//move to when you insert (put)
+//		root.val(record);
+//		root.color(false);
+//		root.key(fld.field(record));
+//		root.left(null);
+//		root.right(null);
+//		return this;
 	}
 	
 	/**
 	 * Getter method for the root of a tree
 	 * @return The root of a tree object
 	 */
-	public Node root() {
+	public Node<Key, Value> root() {
 		return this.root();
 	}
 	
@@ -56,7 +58,7 @@ public class RedBlackTree<T> {
 	 * Wrapper method for adding a new node
 	 * @param val - A new record
 	 */
-	public void put(Comparable<T>[] val){
+	public void put(Value val){
 		put(root, field.field(val), val, this.compare);
 	}
 	
@@ -68,12 +70,12 @@ public class RedBlackTree<T> {
 	 * @param gc - A function that compares two comparable items
 	 * @return
 	 */
-	private Node put(Node h, Comparable<T> key, Comparable<T>[] val, GeneralCompare<T> gc){
+	private Node<Key, Value> put(Node<Key, Value> h, Comparable<Key> key, Value val, GeneralCompare<Key> gc){
 		
 		if(h == null)
 			return new Node(key, val, 1, true);
 		int n = h.n();
-		Node newNode = new Node(key, val, n, true);
+		Node<Key, Value> newNode = new Node(key, val, n, true);
 		
 		// Place new element in the tree
 		int cmp = gc.compare(key, h.key());
@@ -102,7 +104,7 @@ public class RedBlackTree<T> {
 	 * @param x - Node in a tree
 	 * @return Boolean result of whether the node is red or not
 	 */
-	private boolean isRed(Node x){
+	private boolean isRed(Node<Key, Value> x){
 		if(x == null)
 			return false;
 		return true;
@@ -113,8 +115,8 @@ public class RedBlackTree<T> {
 	 * @param h - Root of a tree segment to be rotated
 	 * @return New root of the rotated segment
 	 */
-	public Node rotateLeft(Node h){
-		Node x = h.right();
+	public Node<Key, Value> rotateLeft(Node<Key, Value> h){
+		Node<Key, Value> x = h.right();
 		h.right(x.left());
 		x.left(h);
 		x.color(h.color());
@@ -129,8 +131,8 @@ public class RedBlackTree<T> {
 	 * @param h - Root of a tree segment to be rotated
 	 * @return New root of the rotated segment
 	 */
-	public static Node rotateRight(Node h){
-		Node x = h.left();
+	public Node<Key, Value> rotateRight(Node<Key, Value> h){
+		Node<Key, Value> x = h.left();
 		h.left(x.right());
 		x.right(h);
 		x.color(h.color());
@@ -145,7 +147,7 @@ public class RedBlackTree<T> {
 	 * Changes two red connections from a single node to black
 	 * @param h - Root of tree segment whose colors are to be switched
 	 */
-	private void flipColors(Node h){
+	private void flipColors(Node<Key, Value> h){
 		if(h.left() != null && h.right() != null){
 			h.left().color(false);
 			h.right().color(false);
