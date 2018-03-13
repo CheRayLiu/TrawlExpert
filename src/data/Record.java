@@ -101,16 +101,14 @@ public class Record implements Comparable<Record>, Serializable {
 	}
 	
 	public String toString() {
-		String format = "|%1$-15s|%2$-15s|%3$-15s|%4$-15s|%5$-15s|%6$-15s|%7$-15s|%8$-15s|%9$-15s|\n";
-		String s= String.format(format, "EventId", "OccurenceId", "TaxonId", "IndividualCount", "Latitude", "Longitude","Year","Month","Day");
-		String num = String.format(format, this.eventId, this.occurId,this.taxonId,this.individualCount,this.longitude, this.latitude, this.recDate.getYear(),this.recDate.getMonth(),this.recDate.getDay());
-		String snum = s+num;
+		String format = "|%1$-15s|%2$-15s|%3$-15s|%4$-15s|%5$-15s|%6$-15s|%7$-15s|%8$-15s|\n";
+		String num = String.format(format, this.eventId,this.taxonId,this.individualCount,this.longitude, this.latitude, this.recDate.getYear(),this.recDate.getMonth(),this.recDate.getDay());
 		for (int i = 0; i < 15*10 ;i++ ) {
-			snum += "_";
+			num += "_";
 		}
 
 		
-		return snum;
+		return num;
 		}
 
 	@Override
