@@ -18,7 +18,7 @@ public class BasicSearch {
 			Scanner s = new Scanner(System.in);
 			int taxonId = s.nextInt();
 			
-			GeneralRange<Record> a0 = r -> 0;
+			GeneralRange<Record> a0 = r -> r.getDate().getYear() < 1990 ? 0 : 1;
 			GeneralRange<Record> a1 = RangeHelper.taxonID(Bound.EQUALS, taxonId);
 			GeneralRange<Record> a2 = r -> 0;
 			GeneralRange<Record> a3 = r -> 0;
@@ -32,7 +32,7 @@ public class BasicSearch {
 			double elapsed = sw.elapsedTime();
 			
 			for (Record r: results) {
-				System.out.println(r.getTaxonId());
+				System.out.println(r);
 			}
 			
 			System.out.println("Found " + ((ArrayList) results).size() + " records in " + elapsed + " seconds.");
