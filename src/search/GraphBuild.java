@@ -17,4 +17,22 @@ public class GraphBuild {
 	/*public GraphBuild(In in){
 		
 	}*/
+	
+	public int V(){
+		return V;
+	}
+	
+	public int E(){
+		return E;
+	}
+	
+	public void addEdge(int v, int w){
+		adj[v].add(w);
+		adj[w].add(v);
+		E++;
+	}
+	
+	public Iterable<Integer> adj(int V){
+		return adj[V];
+	}
 }

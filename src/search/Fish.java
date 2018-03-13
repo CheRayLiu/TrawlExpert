@@ -10,6 +10,11 @@ public class Fish<Integer> implements Iterable<Integer> {
 		return null;
 	}
 
+	public void add(int w) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }
