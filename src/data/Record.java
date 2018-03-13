@@ -19,11 +19,11 @@ public class Record implements Comparable<Record>, Serializable {
 	private final Date recDate;
 	
 	
-	public static void main(String[] args) {
-		///test main
-		Record record = new Record(1111,"11",11,111,(float) 94.56, 94,1998,1,9);
-		System.out.println(record.toString());
-	}
+//	public static void main(String[] args) {
+//		///test main
+//		Record record = new Record(1111,"11",11,111,(float) 94.56, 94,1998,1,9);
+//		System.out.println(record.toString());
+//	}
 
 	/**
 	 * Initialize Record abstract object
@@ -101,8 +101,8 @@ public class Record implements Comparable<Record>, Serializable {
 	}
 	
 	public String toString() {
-		String format = "|%1$-15s|%2$-15s|%3$-15s|%4$-15s|%5$-15s|%6$-15s|%7$-15s|%8$-15s|\n";
-		String num = String.format(format, this.eventId,this.taxonId,this.individualCount,this.longitude, this.latitude, this.recDate.getYear(),this.recDate.getMonth(),this.recDate.getDay());
+		String format = "|%1$-45s|%2$-15s|%3$-15s|%4$-15s|%5$-15s|%6$-15s\n";
+		String num = String.format(format, BioTree.getTaxonRecord(this.taxonId).getName(),this.individualCount,this.longitude, this.latitude, this.recDate.getYear(),this.recDate.getMonth(),this.recDate.getDay());
 		for (int i = 0; i < 15*10 ;i++ ) {
 			num += "_";
 		}

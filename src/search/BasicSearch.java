@@ -30,8 +30,8 @@ public class BasicSearch {
 			Stopwatch sw = new Stopwatch();
 			Iterable<Record> results = DataStore.records.rangeSearch(axes);
 			double elapsed = sw.elapsedTime();
-			String format = "|%1$-15s|%2$-15s|%3$-15s|%4$-15s|%5$-15s|%6$-15s|%7$-15s|%8$-15s|\n";
-			System.out.format(format, "EventId", "TaxonId", "IndividualCount", "Latitude", "Longitude","Year","Month","Day");
+			String format = "|%1$-45s|%2$-15s|%3$-15s|%4$-15s|%5$-15s|%6$-15s\n";
+			System.out.format(format, "Scientific Name", "IndividualCount", "Latitude", "Longitude","Year","Month","Day");
 			for (Record r: results) {
 				System.out.println(r);
 			}
