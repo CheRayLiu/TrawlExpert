@@ -22,7 +22,7 @@ public class GraphBuild {
 			adj[v] = new Fish<Integer>(); 
 	}
 	
-	/*public GraphBuild(In in){
+	public GraphBuild(In in){
 		this(in.readInt());
 		int E = in.readInt();
 		for(int i = 0; i < E; i++){
@@ -30,7 +30,7 @@ public class GraphBuild {
 			int w = in.readInt();
 			addEdge(v, w);
 		}
-	}*/
+	}
 	
 	public int V(){
 		return V;
