@@ -48,7 +48,7 @@ public class FileProcessor {
 	 * @throws ParseException 
 	 * @throws NumberFormatException 
 	 */
-	private static void initProcessing() throws NumberFormatException, ParseException {
+	public static void initProcessing() throws NumberFormatException, ParseException {
 		FileReader fr;
 		BufferedReader br;
 
@@ -61,7 +61,7 @@ public class FileProcessor {
 			
 			br.readLine();	// Reads Past Field Names
 			int i = 0;
-			while ((currentLine = br.readLine()) != null && i < 10) {
+			while ((currentLine = br.readLine()) != null) {
 				//System.out.println(currentLine); //Testing ONLY for checking one line at a time
 				i++;
 				System.out.println("Processed line " + i);
@@ -72,12 +72,10 @@ public class FileProcessor {
 			DataStore.init(al.toArray(new Record[al.size()]));
 			al = null; //free temporary memory storage of Record objects now that they're in the KDTree.
 			
-			BasicSearch.init();
-			
 			br.close();
 			fr.close();
 			
-			s.nextLine(); //Testing ONLY for checking one line at a time
+			//s.nextLine(); //Testing ONLY for checking one line at a time
 			s.close();//Testing ONLY
 		}
 		catch (IOException e) {

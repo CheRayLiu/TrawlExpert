@@ -3,6 +3,7 @@ package search;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import utils.Stopwatch;
 import data.DataStore;
 import data.Record;
 import sort.Bound;
@@ -26,11 +27,15 @@ public class BasicSearch {
 			
 			axes.add(a0);axes.add(a1);axes.add(a2);axes.add(a3);
 			
+			Stopwatch sw = new Stopwatch();
 			Iterable<Record> results = DataStore.records.rangeSearch(axes);
+			double elapsed = sw.elapsedTime();
 			
 			for (Record r: results) {
 				System.out.println(r.getTaxonId());
 			}
+			
+			System.out.println("Found " + ((ArrayList) results).size() + " records in " + elapsed + " seconds.");
 		}
 	}
 }

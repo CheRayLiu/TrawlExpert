@@ -1,6 +1,12 @@
 package data;
 
-public class Date implements Comparable<Date> {
+import java.io.Serializable;
+
+public class Date implements Comparable<Date>, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5256185778691324647L;
 	private final int year;
 	private final int month;
 	private final int day;

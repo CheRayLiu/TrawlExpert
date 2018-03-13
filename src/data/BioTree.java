@@ -1,5 +1,6 @@
 package data;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -34,6 +35,8 @@ public class BioTree implements Serializable {
 	 */
 	public static void init() {
 		idNodes = new BST<Integer, TaxonNode>();
+		strNodes = new BST<String, TaxonNode>();
+		incorrectNames = new BST<String, Integer>();
 	}
 
 	/**
@@ -95,13 +98,17 @@ public class BioTree implements Serializable {
 	 * Writes the BioTree BST to a file.
 	 * TODO: Implement
 	 * 
-	 * @param fn
+	 * @param dir
 	 *            Filename to write to
 	 */
-	public static void write(String fn) {
+	public static void write(String dir) {
+		//https://examples.javacodegeeks.com/core-java/io/file/check-if-directory-exists/
+		File d = new File(dir);
+		if (!d.exists())
+			d.mkdirs();
 		try {
 	         FileOutputStream fileOut =
-	        		 new FileOutputStream(fn+"/idNodes.ser");
+	        		 new FileOutputStream(dir+"/idNodes.ser");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(BioTree.idNodes);
 	         out.close();
@@ -113,7 +120,7 @@ public class BioTree implements Serializable {
 		
 		try {
 	         FileOutputStream fileOut =
-	        		 new FileOutputStream(fn+"/strNodes.ser");
+	        		 new FileOutputStream(dir+"/strNodes.ser");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(BioTree.strNodes);
 	         out.close();
@@ -125,7 +132,7 @@ public class BioTree implements Serializable {
 		
 		try {
 	         FileOutputStream fileOut =
-	        		 new FileOutputStream(fn+"/incorNames.ser");
+	        		 new FileOutputStream(dir+"/incorNames.ser");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(BioTree.incorrectNames);
 	         out.close();

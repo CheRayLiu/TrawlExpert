@@ -1,6 +1,12 @@
 package data;
 
-public class Record implements Comparable<Record> {
+import java.io.Serializable;
+
+public class Record implements Comparable<Record>, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3564218991166319058L;
 	private final int eventId;
 	private final String occurId;
 	private final int taxonId;
