@@ -261,6 +261,26 @@ public class BioTree implements Serializable {
 		printTree(idNodes.get(2), 0);
 	}
 	
+	public static void printTree(int taxonId) {
+		TaxonNode txNode = idNodes.get(taxonId);
+		if (txNode == null) return;
+		printTree(txNode, 0);
+	}
+	
+	public static void printTree(String scientificName) {
+		TaxonNode txNode = strNodes.get(scientificName);
+		if (txNode == null)
+			try {
+				int taxonId = WormsAPI.nameToRecordID(scientificName);
+				txNode = idNodes.get(taxonId);
+			} catch (IOException | ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		if (txNode == null) return;
+		printTree(txNode, 0);
+	}
+	
 	/**
 	 * Print a taxonNode's tree starting at the supplied root.
 	 * @param tx
