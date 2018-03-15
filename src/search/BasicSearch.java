@@ -51,16 +51,17 @@ public class BasicSearch {
 		Integer start = null;
 		Integer end = null;
 		GeneralRange<Record> a0 = RangeHelper.date(Bound.ANY);
-		if (matcher.group(2) == "-t") {
-			if (matcher.group(3) != null)
-				start = Integer.parseInt(matcher.group(3));
-			if (matcher.group(4) != null)
-				end = Integer.parseInt(matcher.group(4));
-			Date lower = new Date(start,01,01);
-			Date upper = new Date(end+1,01,01);
-			
-			a0 = RangeHelper.date(Bound.LOWHIGH, lower, upper);
-		}
+		if (matcher.group(3) != null)
+			if (matcher.group(3).equals("t")) {
+				if (matcher.group(4) != null)
+					start = Integer.parseInt(matcher.group(4));
+				if (matcher.group(5) != null)
+					end = Integer.parseInt(matcher.group(5));
+				Date lower = new Date(start,01,01);
+				Date upper = new Date(end+1,01,01);
+				
+				a0 = RangeHelper.date(Bound.LOWHIGH, lower, upper);
+			}
 		
 		Integer taxonId = null;
 		try {
