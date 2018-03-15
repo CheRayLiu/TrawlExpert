@@ -49,7 +49,8 @@ public class RedBlackTree<Key, Value> {
 	 * @param val - A new record
 	 */
 	public void put(Value val){
-		put(root, field.field(val), val, this.compare);
+		Node<Key, Value> newNode = new Node(field.field(val), val, 0, true);
+		put(root, newNode);
 	}
 	
 	/**
@@ -60,41 +61,36 @@ public class RedBlackTree<Key, Value> {
 	 * @param gc - A function that compares two comparable items
 	 * @return
 	 */
-	private Node<Key, Value> put(Node<Key, Value> h, Comparable<Key> key, Value val, GeneralCompare<Key> gc){
+	private Node<Key, Value> put(Node<Key, Value> h, Node<Key, Value> newNode){
 		
 		// Placing the first node in a tree
 		if (root == null) {
-			root = new Node(key, val, 1, false);
+			root = newNode;
 			return root;
 		}
 		
-		if(h == null)
-			return new Node(key, val, 1, true);
-		int n = h.n();
-		Node<Key, Value> newNode = new Node(key, val, n, true);
-		
 		// Place new element in the tree
-		int cmp = gc.compare(key, h.key());
+		int cmp = compare.compare(newNode.key(), h.key());
 		if (cmp < 0 & (h.left() == null))
 				h.left(newNode);
 		else if (cmp < 0 )
-			h.left(put(h.left(), field.field(val), val, gc));
+			h.left(put(h.left(), newNode));
 		else if (cmp > 0 & (h.right() == null))
 			h.right(newNode);
 		else if (cmp > 0)
-			h.right(put(h.right(), field.field(val), val, gc));
+			h.right(put(h.right(), newNode));
 		else
 			h = newNode;
 
 		// Rearrange the tree to maintain balance
-		if(n > 2){
+		//if(n > 2){
 			if(isRed(h.right()) && (isRed(h.left())))
 				h = rotateLeft(h);
 			if(isRed(h.left()) && isRed(h.left().left()))
 				h = rotateRight(h);
 			if(isRed(h.left()) && isRed(h.right()))
 				flipColors(h);
-		}
+		//}
 
 		// Increment how many nodes are in a subtree
 		if ((h.left() != null) && (h.right() != null))
