@@ -26,7 +26,8 @@ public class BasicSearch {
 			System.out.println("Main Menu");
 			System.out.println("Available commands:");
 			System.out.println("\ttree [taxonId / scientific name]");
-			System.out.println("\trecords (taxonId / scientific name) [-t start end]\n");
+			System.out.println("\trecords (taxonId / scientific name) [-t start end]");
+			System.out.print("> ");
 			Pattern pat = Pattern.compile("([a-zA-Z]+)[ ]?([0-9a-zA-Z ]+[0-9a-zA-Z])?[ ]?[-]?([a-zA-Z])?[ ]?([A-Za-z0-9]+)?[ ]?([A-Za-z0-9]+)?[ ]?([A-Za-z0-9]+)?[ ]?([A-Za-z0-9]+)?[ ]?([A-Za-z0-9]+)?[ ]?");
 			Scanner s = new Scanner(System.in);
 			String line = s.nextLine();
@@ -104,6 +105,7 @@ public class BasicSearch {
 		
 		while(true) {
 			System.out.println("Available commands: list, histogram, sum, exit");
+			System.out.print("> ");
 			
 			Scanner s = new Scanner(System.in);
 			String command = s.nextLine();
