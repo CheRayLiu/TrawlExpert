@@ -16,12 +16,12 @@ public class RedBlackTree<Key, Value> {
 		RedBlackTree<Integer, Integer[]> myTree = new RedBlackTree<Integer, Integer[]>(fld, b1);
 		for(int i = 0; i < x.length; i++){
 			myTree.put(x[i]);
-			System.out.println(x[i][0]);
-			System.out.println(" root: " + myTree.root().key());
-			if (myTree.root().left() != null)
-				System.out.println(" left: " + myTree.root().left().key());
-			if (myTree.root().right() != null)
-				System.out.println("right: " + myTree.root().right().key());
+		}
+		Node h = myTree.root(); 
+		System.out.println(h.key());
+		while (h.left() != null) {
+			System.out.println(h.left().key());
+			h = h.left();
 		}
 	}
 	
@@ -50,8 +50,8 @@ public class RedBlackTree<Key, Value> {
 	 * @param val - A new record
 	 */
 	public void put(Value val){
-		Node<Key, Value> newNode = new Node(field.field(val), val, 0, true);
-		put(root, newNode);
+		Node<Key, Value> newNode = new Node<Key, Value>(field.field(val), val, 1, true);
+		root = put(root, newNode);
 	}
 	
 	/**
@@ -63,35 +63,37 @@ public class RedBlackTree<Key, Value> {
 	 * @return
 	 */
 	private Node<Key, Value> put(Node<Key, Value> h, Node<Key, Value> newNode){
-		System.out.println("Newnode key: " + newNode.key());
 		// Placing the first node in a tree
 		if (root == null) {
 			root = newNode;
+			root.color(false);
 			return root;
 		}
 		
 		// Place new element in the tree
 		int cmp = compare.compare(newNode.key(), h.key());
-		if (cmp < 0 & (h.left() == null))
+		if (cmp < 0 && (h.left() == null))
 				h.left(newNode);
 		else if (cmp < 0 )
 			h.left(put(h.left(), newNode));
-		else if (cmp > 0 & (h.right() == null))
+		else if (cmp > 0 && (h.right() == null))
 			h.right(newNode);
 		else if (cmp > 0)
 			h.right(put(h.right(), newNode));
 		else
 			h = newNode;
-		System.out.println("h.right: " + h.right().key());
+		
+		//System.out.println("h.right: " + h.right().key());
+		
 		// Rearrange the tree to maintain balance
-		//if(n > 2){
+		if(h.n() > 2){
 			if(isRed(h.right()) && !isRed(h.left()))
 				h = rotateLeft(h);
 			if(isRed(h.left()) && isRed(h.left().left()))
 				h = rotateRight(h);
 			if(isRed(h.left()) && isRed(h.right()))
 				flipColors(h);
-		//}
+		}
 
 		// Increment how many nodes are in a subtree
 		if ((h.left() != null) && (h.right() != null))
@@ -123,7 +125,7 @@ public class RedBlackTree<Key, Value> {
 	 * @return New root of the rotated segment
 	 */
 	public Node<Key, Value> rotateLeft(Node<Key, Value> h){
-		//System.out.println("Rotate left!");
+		System.out.println("Rotate left!");
 		Node<Key, Value> x = h.right();
 		h.right(x.left());
 		x.left(h);
