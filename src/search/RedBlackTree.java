@@ -14,15 +14,14 @@ public class RedBlackTree<Key, Value> {
 		
 		Integer[][] x = {{1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 5}, {6, 6}, {7, 7}, {8, 8}, {9, 9}};
 		RedBlackTree<Integer, Integer[]> myTree = new RedBlackTree<Integer, Integer[]>(fld, b1);
-		for(int i = 1; i < x.length; i++){
+		for(int i = 0; i < x.length; i++){
 			myTree.put(x[i]);
+			System.out.println(" root: " + myTree.root().key());
+			if (myTree.root().left() != null)
+				System.out.println(" left: " + myTree.root().left().key());
+			if (myTree.root().right() != null)
+				System.out.println("right: " + myTree.root().right().key());
 		}
-		/*
-		h = x.root();
-		while (h.right())
-			System.out.println(h.right());
-			h = h.right();
-		*/
 	}
 	
 	/**
@@ -33,17 +32,8 @@ public class RedBlackTree<Key, Value> {
 	 * @return The object itself
 	 */
 	public RedBlackTree(Field<Key, Value> fld, GeneralCompare<Key> gc) {
-
 		compare = gc;
 		field = fld;
-		
-		//move to when you insert (put)
-//		root.val(record);
-//		root.color(false);
-//		root.key(fld.field(record));
-//		root.left(null);
-//		root.right(null);
-//		return this;
 	}
 	
 	/**
@@ -51,7 +41,7 @@ public class RedBlackTree<Key, Value> {
 	 * @return The root of a tree object
 	 */
 	public Node<Key, Value> root() {
-		return this.root();
+		return root;
 	}
 	
 	/**
@@ -72,6 +62,12 @@ public class RedBlackTree<Key, Value> {
 	 */
 	private Node<Key, Value> put(Node<Key, Value> h, Comparable<Key> key, Value val, GeneralCompare<Key> gc){
 		
+		// Placing the first node in a tree
+		if (root == null) {
+			root = new Node(key, val, 1, false);
+			return root;
+		}
+		
 		if(h == null)
 			return new Node(key, val, 1, true);
 		int n = h.n();
@@ -79,15 +75,20 @@ public class RedBlackTree<Key, Value> {
 		
 		// Place new element in the tree
 		int cmp = gc.compare(key, h.key());
-		if (cmp < 0 )
+		if (cmp < 0 & (h.left() == null))
+				h.left(newNode);
+		else if (cmp < 0 )
 			h.left(put(h.left(), field.field(val), val, gc));
+		else if (cmp > 0 & (h.right() == null))
+			h.right(newNode);
 		else if (cmp > 0)
 			h.right(put(h.right(), field.field(val), val, gc));
 		else
+			h = newNode;
 
 		// Rearrange the tree to maintain balance
 		if(n > 2){
-			if(isRed(h.right()) && !isRed(h.left()))
+			if(isRed(h.right()) && (isRed(h.left())))
 				h = rotateLeft(h);
 			if(isRed(h.left()) && isRed(h.left().left()))
 				h = rotateRight(h);
@@ -95,7 +96,16 @@ public class RedBlackTree<Key, Value> {
 				flipColors(h);
 		}
 
-		h.n(h.left().n() + h.right().n() + 1);
+		// Increment how many nodes are in a subtree
+		if ((h.left() != null) && (h.right() != null))
+			h.n(h.left().n() + h.right().n() + 1);
+		else if (h.left() != null)
+			h.n(h.left().n() + 1);
+		else if (h.right() != null)
+			h.n(h.right().n() + 1);
+		else 
+			h.n(1);
+		
 		return h;
 	}
 
@@ -105,9 +115,9 @@ public class RedBlackTree<Key, Value> {
 	 * @return Boolean result of whether the node is red or not
 	 */
 	private boolean isRed(Node<Key, Value> x){
-		if(x == null)
-			return false;
-		return true;
+		if (x == null)
+			return false; 
+		return x.color();
 	}
 
 	/**
@@ -116,13 +126,25 @@ public class RedBlackTree<Key, Value> {
 	 * @return New root of the rotated segment
 	 */
 	public Node<Key, Value> rotateLeft(Node<Key, Value> h){
+		System.out.println("Rotate left!");
 		Node<Key, Value> x = h.right();
 		h.right(x.left());
 		x.left(h);
 		x.color(h.color());
 		h.color(true);
 		x.n(h.n());
-		h.n(1 + h.left().n() + h.right().n());
+		
+		//h.n(1 + h.left().n() + h.right().n());
+		// Increment how many nodes are in a subtree
+		if (h.left() != null & h.right() != null)
+			h.n(h.left().n() + h.right().n() + 1);
+		else if (h.left() != null)
+			h.n(h.left().n() + 1);
+		else if (h.right() != null)
+			h.n(h.right().n() + 1);
+		else 
+			h.n(1);
+		
 		return x;
 	}
 
@@ -138,7 +160,18 @@ public class RedBlackTree<Key, Value> {
 		x.color(h.color());
 		h.color(true);
 		x.n(h.n());
-		h.n(1 + h.left().n() + h.right().n());
+		
+		//h.n(1 + h.left().n() + h.right().n());
+		// Increment how many nodes are in a subtree
+		if (h.left() != null & h.right() != null)
+			h.n(h.left().n() + h.right().n() + 1);
+		else if (h.left() != null)
+			h.n(h.left().n() + 1);
+		else if (h.right() != null)
+			h.n(h.right().n() + 1);
+		else 
+			h.n(1);
+		
 		return x;
 
 	}
