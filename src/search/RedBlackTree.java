@@ -16,6 +16,7 @@ public class RedBlackTree<Key, Value> {
 		RedBlackTree<Integer, Integer[]> myTree = new RedBlackTree<Integer, Integer[]>(fld, b1);
 		for(int i = 0; i < x.length; i++){
 			myTree.put(x[i]);
+			System.out.println(x[i][0]);
 			System.out.println(" root: " + myTree.root().key());
 			if (myTree.root().left() != null)
 				System.out.println(" left: " + myTree.root().left().key());
@@ -62,7 +63,7 @@ public class RedBlackTree<Key, Value> {
 	 * @return
 	 */
 	private Node<Key, Value> put(Node<Key, Value> h, Node<Key, Value> newNode){
-		
+		System.out.println("Newnode key: " + newNode.key());
 		// Placing the first node in a tree
 		if (root == null) {
 			root = newNode;
@@ -81,10 +82,10 @@ public class RedBlackTree<Key, Value> {
 			h.right(put(h.right(), newNode));
 		else
 			h = newNode;
-
+		System.out.println("h.right: " + h.right().key());
 		// Rearrange the tree to maintain balance
 		//if(n > 2){
-			if(isRed(h.right()) && (isRed(h.left())))
+			if(isRed(h.right()) && !isRed(h.left()))
 				h = rotateLeft(h);
 			if(isRed(h.left()) && isRed(h.left().left()))
 				h = rotateRight(h);
@@ -122,7 +123,7 @@ public class RedBlackTree<Key, Value> {
 	 * @return New root of the rotated segment
 	 */
 	public Node<Key, Value> rotateLeft(Node<Key, Value> h){
-		System.out.println("Rotate left!");
+		//System.out.println("Rotate left!");
 		Node<Key, Value> x = h.right();
 		h.right(x.left());
 		x.left(h);
