@@ -30,6 +30,7 @@ public class GraphBuild {
 			int w = x[i++];
 			addEdge(v,w);
 			i++;
+			E--;
 		}
 	}
 	
