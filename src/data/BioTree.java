@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import org.json.simple.parser.ParseException;
 
@@ -24,10 +25,11 @@ public class BioTree implements Serializable {
 	private static BST<String, Integer> incorrectNames = new BST<String, Integer>();
 	
 	public static void main(String[] args) throws IOException, ParseException {
-		BioTree.processRecord(123123);
-		//BioTree.write("biotree");
-		BioTree.init("biotree");
+		BioTree.init("data/biotree");
 		System.out.println(idNodes.get(2));
+		Iterable<Integer> children = getNonEmptyChildren(159512);
+		for (Integer i: children)
+			System.out.println(i);
 	}
 	
 	/**
@@ -255,6 +257,23 @@ public class BioTree implements Serializable {
 	 */
 	public static TaxonNode getTaxonRecord(int taxonId) {
 		return idNodes.get(taxonId);
+	}
+	
+	public static Iterable<Integer> getNonEmptyChildren(int taxonId){
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		
+		getNonEmptyChildren(idNodes.get(taxonId), result);
+		
+		return result;
+		
+	}
+	
+	private static void getNonEmptyChildren(TaxonNode txNode, ArrayList<Integer> result) {
+		if (txNode == null) return;
+		if (txNode.getCount() > 0) result.add(txNode.getTaxonId());
+		for (TaxonNode tx: txNode.getChildren()) {
+			getNonEmptyChildren(tx, result);
+		}
 	}
 	
 	public static void printTree() {

@@ -38,14 +38,15 @@ public class Histogram {
 
 		}
 		System.out.println("     |" + (new String(new char[scale]).replace('\0', '-')) + "|");
-		String format = "%1$-5d|%2$-40s\n";
+		String format = "%1$-5d|%2$-" + (scale + 1) + "s";
 		for (Integer year: results) {
 			String s = "=";
 			int loopc = (int) ((float)(record.get(year)/ (float) max) * scale);
 			for (int j=0; j< loopc; j++) {
 				s+="=";
 			}
-			System.out.format(format,year, s);
+			System.out.format(format, year, s);
+			System.out.println("| " + record.get(year));
 		}
 		System.out.format("Scale: one = is %d individuals.\n", max / scale);
 	}

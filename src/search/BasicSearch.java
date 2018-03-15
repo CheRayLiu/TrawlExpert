@@ -2,6 +2,7 @@ package search;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -78,19 +79,27 @@ public class BasicSearch {
 			}
 		}
 		
-		GeneralRange<Record> a1 = RangeHelper.taxonID(Bound.EQUALS, taxonId);
 		GeneralRange<Record> a2 = r -> 0;
 		GeneralRange<Record> a3 = r -> 0;
 		
-		ArrayList<GeneralRange<Record>> axes = new ArrayList<GeneralRange<Record>>();
-		
-		axes.add(a0);axes.add(a1);axes.add(a2);axes.add(a3);
+		GeneralRange<Record> a1;
 		
 		Stopwatch sw = new Stopwatch();
-		Iterable<Record> results = DataStore.records.rangeSearch(axes);
+		Iterable<Integer> searches = BioTree.getNonEmptyChildren(taxonId);
+		
+		ArrayList<Record> results = new ArrayList<Record>();
+		for (Integer txId: searches) {
+			a1 = RangeHelper.taxonID(Bound.EQUALS, txId);
+			ArrayList<GeneralRange<Record>> axes = new ArrayList<GeneralRange<Record>>();
+			
+			axes.add(a0);axes.add(a1);axes.add(a2);axes.add(a3);
+			
+			results.addAll((Collection<? extends Record>) DataStore.records.rangeSearch(axes));
+		}
+		
 		double elapsed = sw.elapsedTime();
 		
-		System.out.println("Found " + ((ArrayList) results).size() + " records in " + elapsed + " seconds.");
+		System.out.println("Found " + ((ArrayList<Record>) results).size() + " records in " + elapsed + " seconds.");
 		
 		while(true) {
 			System.out.println("Available commands: list, histogram, sum, exit");
