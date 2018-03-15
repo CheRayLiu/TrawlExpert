@@ -7,12 +7,10 @@ public class GraphBuild {
 	private Fish<Integer>[] adj;
 	
 	public static void main(String[] args) {
-		GraphBuild gb = new GraphBuild(5);
-		System.out.println(gb.V());
+		
+		int[] testArray = {5,5,0,3,1,5,2,3,3,5,4,7};
+		GraphBuild gb = new GraphBuild(testArray);
 		System.out.println(gb.E());
-		for(int i = 0; i < gb.adj.length; i++){
-			System.out.println(gb.adj[i]);
-		}
 	}
 	
 	public GraphBuild(int V){
@@ -23,13 +21,15 @@ public class GraphBuild {
 			adj[v] = new Fish<Integer>(); 
 	}
 	
-	public GraphBuild(In in){
-		this(in.readInt());
-		int E = in.readInt();
-		for(int i = 0; i < E; i++){
-			int v = in.readInt();
-			int w = in.readInt();
-			addEdge(v, w);
+	public GraphBuild(int[] x){
+		this(x[0]);
+		E = x[1];
+		int i = 2;
+		while(i < x.length){
+			int v = x[i];
+			int w = x[i++];
+			addEdge(v,w);
+			i++;
 		}
 	}
 	
