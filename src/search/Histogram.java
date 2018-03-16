@@ -29,6 +29,11 @@ public class Histogram {
 		return tree;
 	}
 
+	/**
+	 * Prints a histogram based on a BST of records
+	 * 
+	 * @param record -An BST of records
+	 */
 	public static void printHistogram(BST<Integer,Integer> record) {
 		int max = 0;
 		int scale = 100;

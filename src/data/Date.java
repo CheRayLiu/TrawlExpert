@@ -1,16 +1,19 @@
 package data;
 
 import java.io.Serializable;
-
-public class Date implements Comparable<Date>, Serializable {
 	/**
-	 * 
+	 * Date ADT for Records
 	 */
+public class Date implements Comparable<Date>, Serializable {
+	
 	private static final long serialVersionUID = -5256185778691324647L;
 	private final int year;
 	private final int month;
 	private final int day;
 	
+	/**
+	 * Initializes the object
+	 */
 	public Date (int year, int month, int day) {
 		this.year= year;
 		this.month= month;
@@ -18,20 +21,38 @@ public class Date implements Comparable<Date>, Serializable {
 		
 	}
 	
-	
+	/**
+	 * Gets the year
+	 * 
+	 * @return The year of the date
+	 */
 	public int getYear() {
 		return this.year;
 	}
 	
+	/**
+	 * Gets the month
+	 * 
+	 * @return The month of the date
+	 */
 	public int getMonth() {
 		return this.month;
 	}
 	
+	/**
+	 * Gets the day
+	 * 
+	 * @return The day of the date
+	 */
 	public int getDay() {
 		return this.day;
 	}
 
-
+	/**
+	 * Gets the day
+	 * @param other -date object that it's comparing to
+	 * @return comparedToValue -1 if greater, -1 if smaller and 0 if equal
+	 */
 	public int compareTo(Date other) {
 		
 		if (this.year > other.getYear())  return 1;
