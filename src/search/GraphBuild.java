@@ -8,9 +8,10 @@ public class GraphBuild {
 	
 	public static void main(String[] args) {
 		
-		int[] testArray = {5,5,0,3,1,5,2,3,3,5,4,7};
+		int[] testArray = {6,6,0,3,1,5,2,3,3,5,4,7,5,6};
 		GraphBuild gb = new GraphBuild(testArray);
 		System.out.println(gb.E());
+		System.out.println(gb.V());
 	}
 	
 	public GraphBuild(int V){
