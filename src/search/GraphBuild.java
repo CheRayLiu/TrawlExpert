@@ -2,9 +2,9 @@ package search;
 
 public class GraphBuild {
 	
-	private final int V;
-	private int E;
-	private Fish<Integer>[] adj;
+	private final int V; // Number of nodes
+	private int E; // Number of edges
+	private Fish<Integer>[] adj; // Adjacency list for a node
 	
 	public static void main(String[] args) {
 		
