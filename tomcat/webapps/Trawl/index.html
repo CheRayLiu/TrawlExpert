@@ -42,28 +42,28 @@
                 Class:
                 <select name="phylum" size="1">
                 </select>
-                <input type="SUBMIT">
+                <!--<input type="SUBMIT">-->
             </form>
 
             <form>
                 Order:
                 <select name="phylum" size="1">
                 </select>
-                <input type="SUBMIT">
+                <!--<input type="SUBMIT">-->
             </form>
 
             <form>
                 Family:
                 <select name="phylum" size="1">
                 </select>
-                <input type="SUBMIT">
+                <!--<input type="SUBMIT">-->
             </form>
 
             <form>
                 Genus:
                 <select name="phylum" size="1">
                 </select>
-                <input type="SUBMIT">
+                <!--<input type="SUBMIT">-->
             </form>
 
             <form>
@@ -71,7 +71,7 @@
                 <select name="phylum" size="1">
 
                 </select>
-                <input type="SUBMIT">
+                <!--<input type="SUBMIT">-->
             </form>
         </section>
 
@@ -79,8 +79,10 @@
             Year Range
             <form>
                 <!--TODO: Get proper ranges, make max automatic.-->
-                <input type="range" id="yearR" value="2000" min="1950" max="2018" oninput="brightR()"><br>
-                <input type="number" id="yearN" value="2000" min="1950" max="2018" oninput="brightN()">
+                <input type="range" id="yearR" value="2000" min="1960" max="2016" oninput="brightR()"><br>
+                <input type="number" id="fromYear" class="yearN" value="2000" min="1960" max="2016" oninput="brightN()">
+                -
+                <input type="number" id ="toYear" class="yearN" value="2000" min="1960" max="2016" oninput="brightN()">
             </form>
         </section>
 
@@ -88,6 +90,7 @@
             <form>
                 <input type="radio" name="gender" value="male"> Map
                 <input type="radio" name="gender" value="female"> Histogram
+                <input type="SUBMIT">
             </form>
             <form>
                 <input type="submit" value="Individual Records"> <!--To records.html-->
