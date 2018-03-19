@@ -7,5 +7,9 @@
 *.blg
 *DS_Store*
 *.csv
+<<<<<<< Upstream, based on origin/master
 *.ser
 .idea/
+=======
+.idea/
+>>>>>>> ae77450 Update .gitignore
