@@ -1,6 +1,6 @@
 import subprocess
 
-pathToTomcat = "C:\\Users\\liang\\Documents\\Git\\Trawl\\tomcat" # REPLACE ME - CUSTOM
+pathToTomcat = "C:\\Users\\liang\\Documents\\Git\\Trawl\\src\\tomcat" # REPLACE ME - CUSTOM
 
 pathToSrc = "\\webapps\\Trawl\\bin\\com\\example\\"
 pathToFin = "\\webapps\\Trawl\\WEB-INF\\classes\\com\\example\\"
