@@ -7,4 +7,5 @@
 *.blg
 *DS_Store*
 *.csv
+*.ser
 .idea/
