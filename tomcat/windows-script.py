@@ -1,10 +1,10 @@
 import subprocess
 
-pathToTomcat = "C:\\Users\\liang\\Documents\\Git\\Trawl\\tomcat" # CUSTOM
-pathClasspath = "C:\\Users\\liang\\Documents\\Git\\Trawl\\tomcat\\lib\\servlet-api.jar;C:\\Users\\liang\\Documents\\Git\\Trawl\\tomcat\\webapps\\Trawl\\bin" # CUSTOM
+pathToTomcat = "C:\\Users\\liang\\Documents\\Git\\Trawl\\tomcat" # REPLACE ME - CUSTOM
 
 pathToSrc = "\\webapps\\Trawl\\bin\\com\\example\\"
 pathToFin = "\\webapps\\Trawl\\WEB-INF\\classes\\com\\example\\"
+pathClasspath = pathToTomcat + "\\lib\\servlet-api.jar;" + pathToTomcat + "\\webapps\\Trawl\\bin"
 
 compileCMD1 = "javac -cp " + pathClasspath + " " + pathToTomcat + pathToSrc + "web\\Director.java"
 compileCMD2 = "javac -cp " + pathClasspath + " " + pathToTomcat + pathToSrc + "model\\TrawlExpert.java"
