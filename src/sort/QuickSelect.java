@@ -1,20 +1,24 @@
 package sort;
 
+import search.GeneralCompare;
+
 // Code from "Algorithms: 4th Edition" by Robert Sedgewick
 // Adapted from the Sedgewick Quicksort implementation
 
-public class QuickSelect {
+public class QuickSelect<Key, Record> {
 
 	private static int median;
 	private static int count;
+	private GeneralCompare<Key> gc;
 
+	//
 	public static void sort(Comparable[] a) {
 		//StdRandom.shuffle(a); // Eliminate dependence on input
 		median = a.length/2; 
 		sort(a, 0, a.length - 1);
 	}
 
-	private static void sort(Comparable[] a, int lo, int hi) {
+	public static void sort(Comparable[] a, int lo, int hi) {
 		if (hi <= lo)
 			return;
 		int j = partition(a, lo, hi);

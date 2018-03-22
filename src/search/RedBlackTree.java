@@ -27,10 +27,8 @@ public class RedBlackTree<Key, Value> {
 	
 	/**
 	 * Constructor for a red black tree object
-	 * @param fld - A function that retrieves the desired field from an array of comparable items
-	 * @param record - An array of comparable items holding data about a fish
-	 * @param gc - A function that compares two comparable items
-	 * @return The object itself
+	 * @param fld A function that retrieves the desired field from an array of comparable items
+	 * @param gc A function that compares two comparable items
 	 */
 	public RedBlackTree(Field<Key, Value> fld, GeneralCompare<Key> gc) {
 		compare = gc;
@@ -47,7 +45,7 @@ public class RedBlackTree<Key, Value> {
 	
 	/**
 	 * Wrapper method for adding a new node
-	 * @param val - A new record
+	 * @param val A new record
 	 */
 	public void put(Value val){
 		Node<Key, Value> newNode = new Node<Key, Value>(field.field(val), val, 1, true);
@@ -56,10 +54,8 @@ public class RedBlackTree<Key, Value> {
 	
 	/**
 	 * Adds a new node to an existing tree
-	 * @param h - An existing node on the tree
-	 * @param key - The field being compared to place a record in a sorted tree
-	 * @param val - The record being added to a tree
-	 * @param gc - A function that compares two comparable items
+	 * @param h An existing node on the tree
+	 * @param newNode A node to be added to the tree
 	 * @return
 	 */
 	private Node<Key, Value> put(Node<Key, Value> h, Node<Key, Value> newNode){
@@ -82,9 +78,7 @@ public class RedBlackTree<Key, Value> {
 			h.right(put(h.right(), newNode));
 		else
 			h = newNode;
-		
-		//System.out.println("h.right: " + h.right().key());
-		
+
 		// Rearrange the tree to maintain balance
 		if(h.n() > 2){
 			if(isRed(h.right()) && !isRed(h.left()))
@@ -110,7 +104,7 @@ public class RedBlackTree<Key, Value> {
 
 	/**
 	 * Check if the link to a node's parent is red
-	 * @param x - Node in a tree
+	 * @param x Node in a tree
 	 * @return Boolean result of whether the node is red or not
 	 */
 	private boolean isRed(Node<Key, Value> x){
@@ -121,7 +115,7 @@ public class RedBlackTree<Key, Value> {
 
 	/**
 	 * Rotates a subtree in a counterclockwise direction
-	 * @param h - Root of a tree segment to be rotated
+	 * @param h Root of a tree segment to be rotated
 	 * @return New root of the rotated segment
 	 */
 	public Node<Key, Value> rotateLeft(Node<Key, Value> h){
@@ -133,7 +127,6 @@ public class RedBlackTree<Key, Value> {
 		h.color(true);
 		x.n(h.n());
 		
-		//h.n(1 + h.left().n() + h.right().n());
 		// Increment how many nodes are in a subtree
 		if (h.left() != null & h.right() != null)
 			h.n(h.left().n() + h.right().n() + 1);
@@ -149,7 +142,7 @@ public class RedBlackTree<Key, Value> {
 
 	/**
 	 * Rotates a subtree in a clockwise direction
-	 * @param h - Root of a tree segment to be rotated
+	 * @param h Root of a tree segment to be rotated
 	 * @return New root of the rotated segment
 	 */
 	public Node<Key, Value> rotateRight(Node<Key, Value> h){
@@ -160,7 +153,6 @@ public class RedBlackTree<Key, Value> {
 		h.color(true);
 		x.n(h.n());
 		
-		//h.n(1 + h.left().n() + h.right().n());
 		// Increment how many nodes are in a subtree
 		if (h.left() != null & h.right() != null)
 			h.n(h.left().n() + h.right().n() + 1);
@@ -177,7 +169,7 @@ public class RedBlackTree<Key, Value> {
 
 	/**
 	 * Changes two red connections from a single node to black
-	 * @param h - Root of tree segment whose colors are to be switched
+	 * @param h Root of tree segment whose colors are to be switched
 	 */
 	private void flipColors(Node<Key, Value> h){
 		if(h.left() != null && h.right() != null){

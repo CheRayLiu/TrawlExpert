@@ -2,6 +2,7 @@ package sort;
 
 public class MergeSort{
 	
+	/*// Main Function for Testing Purposes Only
 	public static void main(String[] args) {
 		GeneralCompare<Integer> b1;
 		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
@@ -12,16 +13,30 @@ public class MergeSort{
 		for (int i = 0 ; i < (test.length) ; i++) {
 			System.out.println(test[i]);
 		}
-	}
+	}*/
 
+	/**
+	 * Wrapper function for the MergeSort implementation
+	 * @param x Array of comparable items to be sorted
+	 * @param lo Lower bound of a sub-array to be sorted
+	 * @param hi Upper bound of a  sub-array to be sorted
+	 * @param gc A lambda function that compares two comparable items
+	 */
 	public static <T> void sort(Comparable<T>[] x, int lo, int hi, GeneralCompare<T> gc) {
 		Comparable<T>[] aux;
 		aux = (Comparable<T>[]) new Comparable[x.length];
 		sortWrapped(x, lo, hi, gc, aux);
 	}
 	
+	/**
+	 * Recursively sort each half of a sub-array
+	 * @param lo
+	 * @param hi
+	 * @param gc
+	 * @param aux Auxiliary array to accommodate temporary memory use in the algorithm
+	 */
 	private static <T> void sortWrapped(Comparable<T>[] x, int lo, int hi, GeneralCompare<T> gc, Comparable<T>[] aux) {
-		int n = hi - lo; 
+		int n = hi - lo;
 		if(n < 1)
 			return;
 		// Recursively sort each half of the array
@@ -31,13 +46,19 @@ public class MergeSort{
 		merge(x, lo, hi, gc, aux);
 	}
 
+	/**
+	 * Merges two sorted sub-arrays into a single sorted array
+	 * @param x
+	 * @param lo
+	 * @param hi
+	 * @param gc
+	 * @param aux
+	 */
 	private static <T> void merge(Comparable<T>[] x, int lo, int hi, GeneralCompare<T> gc, Comparable<T>[] aux){
 
 		int n = hi - lo;
 		int mid = lo + (n/2);
 
-		// Fill auxiliary array
-		//System.out.println("lo, mid, hi: " + lo + ", " + mid + ", " + hi);
 		
 		for(int k = lo; k <= hi; k++){
 			aux[k] = x[k];
