@@ -5,8 +5,10 @@
 <p>
 
 <%
-	long time = (long)request.getAttribute("time");
-	out.print("The server was started at " + time);
+	Iterable<Integer> species = (Iterable<Integer>)request.getAttribute("species");
+	for (Integer s: species)
+		out.print("SpeciesID: " + s + "<br>");
+	out.print((String) request.getAttribute("url"));
 %>
 </body>
 </html>

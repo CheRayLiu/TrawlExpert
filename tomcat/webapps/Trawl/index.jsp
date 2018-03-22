@@ -1,3 +1,4 @@
+<%@ page import="java.util.*" %>
 <!--
 
 Double Handle Slider Modified from: http://jqueryui.com/slider/#range
@@ -41,7 +42,7 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
 
     <section id="options">
         <section id="nameDropdownIn">
-            <form method="POST" action="callServlet.do"> <!--.do extension is not necessary. This field is the servlet's url in web.xml-->
+            <form method="POST" action="doBioLookup.do"> <!--.do extension is not necessary. This field is the servlet's url in web.xml-->
                 Phylum:
                 <select name="phylum" size="1">
                     <option>Arthropoda</option>
@@ -49,39 +50,29 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
                     <option>Mollusca</option>
                 </select>
                 <input type="SUBMIT">
-            </form>
 
-            <form>
                 Class:
-                <select name="phylum" size="1">
+                <select name="class" size="1">
                 </select>
                 <!--<input type="SUBMIT">-->
-            </form>
 
-            <form>
                 Order:
-                <select name="phylum" size="1">
+                <select name="order" size="1">
                 </select>
                 <!--<input type="SUBMIT">-->
-            </form>
 
-            <form>
                 Family:
-                <select name="phylum" size="1">
+                <select name="family" size="1">
                 </select>
                 <!--<input type="SUBMIT">-->
-            </form>
 
-            <form>
                 Genus:
-                <select name="phylum" size="1">
+                <select name="genus" size="1">
                 </select>
                 <!--<input type="SUBMIT">-->
-            </form>
 
-            <form>
-                Scientific Name:
-                <select name="phylum" size="1">
+                Species:
+                <select name="species" size="1">
 
                 </select>
                 <!--<input type="SUBMIT">-->
@@ -104,7 +95,7 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
                 <input type="radio" name="gender" value="female"> Histogram
                 <input type="submit">
             </form>
-            <form>
+            <form method="POST" action=">
                 <input type="submit" value="Individual Records"> <!--To records.html-->
             </form>
         </section>

@@ -11,10 +11,25 @@ import sort.KDT;
 
 public class TrawlExpert {
 	public TrawlExpert() {
-		
+		//load data
+		DataStore.records = new KDT<Record>("data/kdt.ser");
+		try {
+			BioTree.init("data/biotree/");
+			DataStore.records = new KDT<Record>("data/kdt.ser");
+		} catch (Exception e0) {
+			try {
+				BioTree.init();
+				FileProcessor.initProcessing();
+			} catch (NumberFormatException | ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			BioTree.write("data/biotree/");
+			DataStore.records.writeToFile("data/kdt.ser");
+		};
 	}
 	
-	public String sayHello() {
-		return "Hello";
+	public Iterable<Integer> listAllSpecies(){
+		return BioTree.getNonEmptyChildren(2);
 	}
 }

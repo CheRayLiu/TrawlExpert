@@ -1,7 +1,7 @@
 server:
 	cp -rf bin/* tomcat/webapps/Trawl/WEB-INF/classes
 
-start:
+start: server
 	tomcat/bin/startup.sh
 
 stop:
