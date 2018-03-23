@@ -1,6 +1,6 @@
 package search;
 
-public class GraphBuild {
+public class Graph {
 	
 	private final int V; // Number of nodes
 	private int E; // Number of edges
@@ -9,30 +9,18 @@ public class GraphBuild {
 	public static void main(String[] args) {
 		
 		int[] testArray = {6,6,0,3,1,5,2,3,3,5,4,7,5,6};
-		GraphBuild gb = new GraphBuild(testArray);
+		Graph gb = new Graph(testArray);
 		System.out.println(gb.E());
 		System.out.println(gb.V());
+		
 	}
 	
-	public GraphBuild(int V){
+	public Graph(int V){
 		this.V = V;
 		this.E = 0;
 		adj = (Fish<Integer>[]) new Fish[V];
 		for(int v = 0; v < V; v++)
 			adj[v] = new Fish<Integer>(); 
-	}
-	
-	public GraphBuild(int[] x){
-		this(x[0]);
-		E = x[1];
-		int i = 2;
-		while(i < x.length){
-			int v = x[i];
-			int w = x[i++];
-			addEdge(v,w);
-			i++;
-			E--;
-		}
 	}
 	
 	public int V(){
