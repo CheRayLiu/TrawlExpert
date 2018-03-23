@@ -8,11 +8,12 @@ public class Graph {
 	
 	public static void main(String[] args) {
 		
-		int[] testArray = {6,6,0,3,1,5,2,3,3,5,4,7,5,6};
-		Graph gb = new Graph(testArray);
-		System.out.println(gb.E());
-		System.out.println(gb.V());
-		
+		Graph g = new Graph(5);
+		g.addEdge(4, 3);
+		g.addEdge(2, 3);
+		g.addEdge(1, 2);
+		for(int i = 0; i < 5; i++)
+			System.out.println(g.adj(i));
 	}
 	
 	public Graph(int V){
