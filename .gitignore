@@ -10,3 +10,4 @@
 *.ser
 .idea/
 *.class
+logs/
