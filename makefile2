@@ -1,0 +1,69 @@
+TOMCAT_DIR = tomcat/webapps/Trawl
+BIN_DIR = tomcat/webapps/Trawl/bin
+
+server: $(BIN_DIR)/TrawlExpert.class $(BIN_DIR)/../WEB-INF/classes/com/example/web/Director.class
+	javac -d $(TOMCAT_DIR)/WEB-INF/classes/ -classpath tomcat/lib/servlet-api.jar $(TOMCAT_DIR)/src/com/example/listener/StartUpContext.java
+
+
+start:
+	tomcat/bin/startup.sh
+
+stop:
+	tomcat/bin/shutdown.sh
+
+$(BIN_DIR)/TrawlExpert.class: $(BIN_DIR)/data/BioTree.class $(BIN_DIR)/data/DataStore.class $(BIN_DIR)/data/Date.class $(BIN_DIR)/data/FileProcessor.class $(BIN_DIR)/data/Record.class $(BIN_DIR)/data/TaxonNode.class $(BIN_DIR)/data/TaxonType.class $(BIN_DIR)/data/WormsAPI.class $(BIN_DIR)/search/BasicSearch.class $(BIN_DIR)/search/BST.class $(BIN_DIR)/search/Histogram.class $(BIN_DIR)/sort/Bound.class $(BIN_DIR)/sort/GeneralCompare.class $(BIN_DIR)/sort/GeneralRange.class $(BIN_DIR)/sort/KDT.class $(BIN_DIR)/sort/MergeSort.class $(BIN_DIR)/sort/RangeHelper.class
+	javac -d $(TOMCAT_DIR)/WEB-INF/classes/ -classpath $(TOMCAT_DIR)/lib/servlet-api.jar:$(BIN_DIR):bin:json-simple-1.1.1.jar $(TOMCAT_DIR)/src/com/example/model/TrawlExpert.java
+
+$(BIN_DIR)/data/BioTree.class: src/data/BioTree.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/data/BioTree.java
+
+$(BIN_DIR)/data/DataStore.class: src/data/DataStore.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/data/DataStore.java
+
+$(BIN_DIR)/data/Date.class: src/Data/date.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/data/Date.java
+
+$(BIN_DIR)/data/FileProcessor.class: src/data/FileProcessor.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/data/FileProcessor.java
+
+$(BIN_DIR)/data/Record.class: src/data/Record.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/data/Record.java
+
+$(BIN_DIR)/data/TaxonNode.class: src/data/TaxonNode.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/data/TaxonNode.java
+
+$(BIN_DIR)/data/TaxonType.class: src/data/TaxonType.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/data/TaxonType.java
+
+$(BIN_DIR)/data/WormsAPI.class: src/data/WormsAPI.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/data/WormsAPI.java
+
+$(BIN_DIR)/search/BasicSearch.class: src/search/BasicSearch.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/search/BasicSearch.java
+
+$(BIN_DIR)/search/BST.class: src/search/BST.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/search/BST.java
+
+$(BIN_DIR)/search/Histogram.class: src/search/Histogram.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/search/Histogram.java
+
+$(BIN_DIR)/sort/Bound.class: src/sort/Bound.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/sort/Bound.java
+
+$(BIN_DIR)/sort/GeneralCompare.class: src/sort/GeneralCompare.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/sort/GeneralCompare.java
+
+$(BIN_DIR)/sort/GeneralRange.class: src/sort/GeneralRange.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/sort/GeneralRange.java
+
+$(BIN_DIR)/sort/KDT.class: src/sort/KDT.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/sort/KDT.java
+
+$(BIN_DIR)/sort/MergeSort.class: src/sort/MergeSort.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/sort/MergeSort.java
+
+$(BIN_DIR)/sort/RangeHelper.class: src/sort/RangeHelper.java
+	javac -d $(BIN_DIR) -classpath bin::json-simple-1.1.1.jar src/sort/RangeHelper.java
+
+$(BIN_DIR)/../WEB-INF/classes/com/example/web/Director.class: $(BIN_DIR)/com/example/web/Director.java
+	javac -d $(TOMCAT_DIR)/WEB-INF/classes -classpath src/tomcat/lib/servlet-api.jar:$(BIN_DIR) $(BIN_DIR)/com/example/web/Director.java

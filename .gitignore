@@ -9,4 +9,4 @@
 *.csv
 *.ser
 .idea/
-
+*.class
