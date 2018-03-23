@@ -6,19 +6,22 @@ public class DepthFirstSearch {
 		private int count;
 		
 		public static void main(String[] args) {
-			int[] testArray = {6,6,0,3,1,5,2,3,3,5,4,7,5,6};
-			GraphBuild gb = new GraphBuild(testArray);
-			//GraphBuild gb1 = new GraphBuild(gb.V());
-			DepthFirstSearch s = new DepthFirstSearch(gb, gb.V());
+		
+			Graph g = new Graph(5);
+			g.addEdge(4, 3);
+			g.addEdge(2, 3);
+			g.addEdge(1, 2);
+			g.addEdge(0, 2);
+			DepthFirstSearch s = new DepthFirstSearch(g, g.V());
 		}
 		
-		public DepthFirstSearch(GraphBuild G, int s){
+		public DepthFirstSearch(Graph G, int s){
 			marked = new boolean[G.V()];
 			dfs(G, s);
 			
 		}
 		
-		public void dfs(GraphBuild G, int v){
+		public void dfs(Graph G, int v){
 			marked[v] = true;
 			count++;
 			for(int w : G.adj(v))
