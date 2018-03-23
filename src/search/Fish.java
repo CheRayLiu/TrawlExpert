@@ -20,8 +20,23 @@ public class Fish<Integer> implements Iterable<Integer> {
 	
 	@Override
 	public Iterator<Integer> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ListIterator();
+	}
+	
+	private class ListIterator implements Iterator<Integer>{
+		
+		private Node current = first;
+		
+		public boolean hasNext(){
+			return current != null;
+		}
+		
+		public Integer next(){
+			
+			Integer item = current.item;
+			current = current.next;
+			return item;
+		}
 	}
 
 	
