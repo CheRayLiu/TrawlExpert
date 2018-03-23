@@ -5,6 +5,8 @@ public class RedBlackTree<Key, Value> {
 	private GeneralCompare<Key> compare;
 	private Field<Key, Value> field;
 	
+	// Main method only used for testing
+	
 	public static void main(String[] args) {
 		GeneralCompare<Integer> b1;
 		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
@@ -24,6 +26,7 @@ public class RedBlackTree<Key, Value> {
 			h = h.left();
 		}
 	}
+	
 	
 	/**
 	 * Constructor for a red black tree object
