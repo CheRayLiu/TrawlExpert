@@ -7,18 +7,27 @@ import search.GeneralCompare;
 
 public class QuickSelect<Key, Record> {
 
-	private static int median;
-	private static int count;
+	private int median;
+	private int count;
 	private GeneralCompare<Key> gc;
 
-	//
-	public static void sort(Comparable[] a) {
+	public static void main(String[] args) {
+		//{1, 2, 3, 4, 5, 6, 7, 8, 9} 5 is median. 
+		int[] test = {4, 6, 7, 2, 3, 9, 8, 1, 5};
+		GeneralCompare<Integer> b1;
+		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
+		
+		sort<Integer, Integer>(test, b1);
+	}
+	
+	public void sort(Comparable<Record>[] a, GeneralCompare<Key> genComp) {
 		//StdRandom.shuffle(a); // Eliminate dependence on input
+		gc = genComp;
 		median = a.length/2; 
 		sort(a, 0, a.length - 1);
 	}
 
-	public static void sort(Comparable[] a, int lo, int hi) {
+	public void sort(Comparable<Record>[] a, int lo, int hi) {
 		if (hi <= lo)
 			return;
 		int j = partition(a, lo, hi);
@@ -29,16 +38,16 @@ public class QuickSelect<Key, Record> {
 		return;
 	}
 
-	private static int partition(Comparable[] a, int lo, int hi) {
+	private int partition(Comparable<Record>[] a, int lo, int hi) {
 		// Partition into a[lo..i-1], a[i], a[i+1..hi].
 		int i = lo, j = hi + 1; // left and right scan indices
 		Comparable v = a[lo]; // partitioning item
 
 		while (true) { // Scan right, scan left, check for scan complete, and exchange.
-			while (less(a[++i], v))
+			while (gc.compare((Value) a[++i], (Value) v) < 0)
 				if (i == hi)
 					break;
-			while (less(v, a[--j]))
+			while (gc.compare(v, a[--j]) < 0)
 				if (j == lo)
 					break;
 			if (i >= j)
@@ -55,4 +64,5 @@ public class QuickSelect<Key, Record> {
 		a[c] = a[b];
 		a[b] = temp;
 	}
+	
 }
