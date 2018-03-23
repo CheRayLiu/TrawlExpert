@@ -30,12 +30,15 @@ public class Fish<Integer> implements Iterable<Integer> {
 		public boolean hasNext(){
 			return current != null;
 		}
-		
+		public void remove(){
+			current.next = current.next.next;
+		}
 		public Integer next(){
 			
 			Integer item = current.item;
 			current = current.next;
 			return item;
+			
 		}
 	}
 
