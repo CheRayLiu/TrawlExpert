@@ -1,24 +1,21 @@
 package search;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.json.simple.parser.ParseException;
-
 import utils.Stopwatch;
 import data.BioTree;
 import data.DataStore;
 import data.Date;
 import data.Record;
-import data.WormsAPI;
 import sort.Bound;
 import sort.GeneralRange;
 import sort.RangeHelper;
 
+/**
+ * Provides functionality for range searching the Record database.
+ * @author Christopher W. Schankula
+ *
+ */
 public class BasicSearch {
 	/**
 	 * Returns all records matching any of the children of the given TaxonID and in the 
