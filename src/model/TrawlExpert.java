@@ -7,6 +7,7 @@ import data.DataStore;
 import data.FileProcessor;
 import data.Record;
 import search.BasicSearch;
+import search.BasicSearchResult;
 import sort.KDT;
 
 public class TrawlExpert {
@@ -31,5 +32,9 @@ public class TrawlExpert {
 	
 	public Iterable<Integer> listAllSpecies(){
 		return BioTree.getNonEmptyChildren(2);
+	}
+	
+	public BasicSearchResult rangeSearch(Integer taxonId, Integer yearLo, Integer yearHi) {
+		return BasicSearch.range(taxonId, yearLo, yearHi);
 	}
 }
