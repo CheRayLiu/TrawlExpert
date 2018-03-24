@@ -1,6 +1,16 @@
 package sandbox;
 
+<<<<<<< HEAD
 public class Point implements Comparable<Point> {
+=======
+import java.io.Serializable;
+
+public class Point implements Comparable<Point>, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5361956730616676054L;
+>>>>>>> refs/remotes/origin/master
 	private final int x;
 	private final int y;
 	

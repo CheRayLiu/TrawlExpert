@@ -7,5 +7,10 @@
 *.blg
 *DS_Store*
 *.csv
+<<<<<<< HEAD
 */bin
 *.ser
+=======
+*.ser
+.idea/
+>>>>>>> refs/remotes/origin/master
