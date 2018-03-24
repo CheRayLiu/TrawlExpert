@@ -7,9 +7,9 @@ package sandbox;
 public class TestLambdas {
 	public static void main(String[] args) {
 		//declare the instances of BinaryIntExpression
-		BinaryIntExpression b0;
-		BinaryIntExpression b1;
-		BinaryIntExpression b2;
+		GeneralCompare<Integer> b0;
+		GeneralCompare<Integer> b1;
+		GeneralCompare<Integer> b2;
 		BinaryIntExpression b3;
 		BinaryIntExpression b4;
 		BinaryIntExpression b5;
@@ -34,13 +34,13 @@ public class TestLambdas {
 		};
 			
 		//call the main function using the instances as a parameter.
-		result = binaryOperation(1,2,b0);
+		result = binaryIntegerOperation(1,2,b0);
 		System.out.println(result);
 		
-		result = binaryOperation(1,2,b1);
+		result = binaryIntegerOperation(1,2,b1);
 		System.out.println(result);
 		
-		result = binaryOperation(1,2,b2);
+		result = binaryIntegerOperation(1,2,b2);
 		System.out.println(result);
 		
 		result = binaryOperation(1,2,b3);
@@ -57,6 +57,11 @@ public class TestLambdas {
 	}
 	
 	public static int binaryOperation(int a1, int a2, BinaryIntExpression exp) {
+		//call the eval() function in the given BinaryIntExpression.
+		return exp.eval(a1, a2);
+	}
+	
+	public static int binaryIntegerOperation(int a1, int a2, GeneralCompare<Integer> exp) {
 		//call the eval() function in the given BinaryIntExpression.
 		return exp.eval(a1, a2);
 	}
