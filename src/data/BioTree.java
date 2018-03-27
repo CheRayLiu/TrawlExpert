@@ -2,6 +2,7 @@ package data;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -172,6 +173,7 @@ public class BioTree implements Serializable {
 		Integer taxonId = getTaxonRecord(scientificName);
 		System.out.println(scientificName + ": " + taxonId);
 		if (taxonId == null) return null;
+		if (taxonId == -1)   return null;
 		if (processTaxonId(taxonId)) return null;
 		return taxonId;
 	}
@@ -255,9 +257,10 @@ public class BioTree implements Serializable {
 		else System.out.println(scientificName + " not in local db");
 		//look up in local incorrect names database, return if it exists
 		taxonId = incorrectNames.get(scientificName);
-		if (taxonId != null)
-			return idNodes.get(taxonId).getTaxonId();
-		else {		//otherwise use Worms to look it up
+		if (taxonId != null) {
+			tx = idNodes.get(taxonId);
+			if (tx != null) return tx.getTaxonId();
+		} else {		//otherwise use Worms to look it up
 			System.out.println(scientificName + " not in incor db");
 			taxonId = WormsAPI.nameToRecordID(scientificName);
 			if (taxonId == null) //if nothing is found, mark this species as not existing.
