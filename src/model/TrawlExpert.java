@@ -1,11 +1,14 @@
 package model;
 
+import java.io.IOException;
+
 import org.json.simple.parser.ParseException;
 
 import data.BioTree;
 import data.DataStore;
 import data.FileProcessor;
 import data.Record;
+import data.TaxonNode;
 import search.BasicSearch;
 import search.BasicSearchResult;
 import sort.KDT;
@@ -36,5 +39,19 @@ public class TrawlExpert {
 	
 	public BasicSearchResult rangeSearch(Integer taxonId, Integer yearLo, Integer yearHi) {
 		return BasicSearch.range(taxonId, yearLo, yearHi);
+	}
+	
+	public TaxonNode getTaxonRecord(Integer taxonId) {
+		return BioTree.getTaxonRecord(taxonId);
+	}
+	
+	public TaxonNode getTaxonRecord(String scientificName) {
+		try {
+			return BioTree.getTaxonRecord(scientificName);
+		} catch (IOException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

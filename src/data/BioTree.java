@@ -170,7 +170,7 @@ public class BioTree implements Serializable {
 	 */
 	public static Integer processRecord(String scientificName) throws IOException, ParseException {
 		//reverse lookup based on name, try adding the found taxonId.
-		Integer taxonId = getTaxonRecord(scientificName);
+		Integer taxonId = nameToTaxonId(scientificName);
 		System.out.println(scientificName + ": " + taxonId);
 		if (taxonId == null) return null;
 		if (taxonId == -1)   return null;
@@ -238,6 +238,22 @@ public class BioTree implements Serializable {
 	}
 	
 	/**
+	 * Get the species at a given index (taxonId). This assumes that the
+	 * node already exists or else it will return null. As such, it is best
+	 * to use this function once all the data has been parsed and the BioTree
+	 * has been built. 
+	 * 
+	 * @param i
+	 *            The speciesid (index) of the species.
+	 * @return The Species object.
+	 * @throws ParseException 
+	 * @throws IOException 
+	 */
+	public static TaxonNode getTaxonRecord(String scientificName) throws IOException, ParseException {
+		return idNodes.get(nameToTaxonId(scientificName));
+	}
+	
+	/**
 	 * Get the TaxonNode containing information about the given scientific name. 
 	 * This assumes that thenode already exists locally or else it will return null. 
 	 * As such, it is best to use this function once all the data has been parsed 
@@ -249,7 +265,7 @@ public class BioTree implements Serializable {
 	 * @throws ParseException 
 	 * @throws IOException 
 	 */
-	public static Integer getTaxonRecord(String scientificName) throws IOException, ParseException {
+	public static Integer nameToTaxonId(String scientificName) throws IOException, ParseException {
 		Integer taxonId;
 		//look up based on string literal, return if found
 		TaxonNode tx = strNodes.get(scientificName);
