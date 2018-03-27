@@ -7,16 +7,20 @@ public class CC {
 	private int count;
 	
 	public static void main(String[] args) {
-		Graph g = new Graph(6);
+		Graph g = new Graph(7);
 		g.addEdge(4, 3);
 		g.addEdge(2, 3);
 		g.addEdge(1, 2);
 		g.addEdge(0, 2);
+		g.addEdge(5, 6);
 		CC component = new CC(g);
 		System.out.println(component.connected(2, 0)); //true
 		System.out.println(component.connected(0,1)); //true
 		System.out.println(component.connected(1, 5)); //false
-		System.out.println(component.connected(1,6)); //throws exception (supposed to)
+		//System.out.println(component.connected(1,6)); //throws exception (supposed to)
+		System.out.println(component.id(0));
+		System.out.println(component.id(5));
+		System.out.println(component.id(6));
 	}
 	/**
 	 * Constructor for Connected Component 
@@ -56,7 +60,7 @@ public class CC {
 	}
 	
 	/**
-	 * accesses the value of id array
+	 * accesses the value of component id
 	 * @param v indexed value
 	 * @return value at index v
 	 */
@@ -64,7 +68,7 @@ public class CC {
 		return id[v];
 	}
 	
-//	public int count(){
-//		return count;
-//	}
+	public int count(){
+		return count;
+	}
 }
