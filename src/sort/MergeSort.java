@@ -29,9 +29,9 @@ public class MergeSort{
 	
 	/**
 	 * Recursively sort each half of a sub-array
-	 * @param lo
-	 * @param hi
-	 * @param gc
+	 * @param lo Lower bound of a sub-array to be sorted
+	 * @param hi Upper bound of a  sub-array to be sorted
+	 * @param gc A lambda function that compares two comparable items
 	 * @param aux Auxiliary array to accommodate temporary memory use in the algorithm
 	 */
 	private static <T> void sortWrapped(Comparable<T>[] x, int lo, int hi, GeneralCompare<T> gc, Comparable<T>[] aux) {
@@ -47,11 +47,11 @@ public class MergeSort{
 
 	/**
 	 * Merges two sorted sub-arrays into a single sorted array
-	 * @param x
-	 * @param lo
-	 * @param hi
-	 * @param gc
-	 * @param aux
+	 * @param x Array of comparable items to be sorted
+	 * @param lo Lower bound of a sub-array to be sorted
+	 * @param hi Upper bound of a  sub-array to be sorted
+	 * @param gc A lambda function that compares two comparable items
+	 * @param aux Auxiliary array to accommodate temporary memory use in the algorithm
 	 */
 	private static <T> void merge(Comparable<T>[] x, int lo, int hi, GeneralCompare<T> gc, Comparable<T>[] aux){
 
