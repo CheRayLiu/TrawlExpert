@@ -29,10 +29,11 @@ var data = [
 ];
 
 var layout = {
-    xaxis:{
+	title: '',
+    xaxis:{title: 'Year',
         autorange:'reversed'
     },
-    yaxis:{
+    yaxis:{title: 'Individual count',
       side:'right'
     }
 }
