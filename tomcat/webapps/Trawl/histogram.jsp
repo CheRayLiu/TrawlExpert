@@ -13,7 +13,7 @@
 	<%
 
 		TrawlExpert te = (TrawlExpert)request.getServletContext().getAttribute("trawl");
-		BasicSearchResult result = te.rangeSearch(159512, 1960, 2016);
+		BasicSearchResult result = te.rangeSearch(2, 1960, 2016);
 
 		BST<Integer, Integer> histogram = result.histogram();
 		Iterable<Integer> results = histogram.keys();
