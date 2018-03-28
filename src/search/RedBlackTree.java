@@ -6,7 +6,7 @@ public class RedBlackTree<Key, Value> {
 	private Field<Key, Value> field;
 	
 	// Main method only used for testing
-	
+	/*
 	public static void main(String[] args) {
 		GeneralCompare<Integer> b1;
 		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
@@ -21,11 +21,13 @@ public class RedBlackTree<Key, Value> {
 		}
 		Node h = myTree.root(); 
 		System.out.println(h.key());
-		while (h.left() != null) {
-			System.out.println(h.left().key());
-			h = h.left();
+		while (h.right() != null) {
+			System.out.println(h.right().key());
+			h = h.right();
 		}
 	}
+	*/
+	
 	
 	
 	/**
@@ -122,7 +124,6 @@ public class RedBlackTree<Key, Value> {
 	 * @return New root of the rotated segment
 	 */
 	public Node<Key, Value> rotateLeft(Node<Key, Value> h){
-		System.out.println("Rotate left!");
 		Node<Key, Value> x = h.right();
 		h.right(x.left());
 		x.left(h);

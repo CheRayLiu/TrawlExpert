@@ -1,18 +1,6 @@
 package sort;
 
 public class MergeSort{
-	/*// Main Function for Testing Purposes Only
-	public static void main(String[] args) {
-		GeneralCompare<Integer> b1;
-		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
-		Integer[] test = {3, 4, 2, 1, 5, 7, 9, 10, 11};
-		//Integer[] test = {2, 1};
-		sort(test, 0, test.length - 1, b1);
-		
-		for (int i = 0 ; i < (test.length) ; i++) {
-			System.out.println(test[i]);
-		}
-	}*/
 
 	/**
 	 * Wrapper function for the MergeSort implementation
