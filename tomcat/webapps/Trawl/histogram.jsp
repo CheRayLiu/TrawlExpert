@@ -21,7 +21,7 @@
 		out.print("var x=[];");
 		for (Integer year: results){
 			out.print("y.push("+ histogram.get(year) +");");
-			out.print("x.push("+ year +");");
+			out.print("x.push('"+ year +"');");
 		}
 
 		out.print((String) request.getAttribute("url"));
