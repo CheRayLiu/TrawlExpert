@@ -17,7 +17,7 @@
 </tr>
 <%
 	TrawlExpert te = (TrawlExpert)request.getServletContext().getAttribute("trawl");
-	BasicSearchResult results = (BasicSearchResult) request.getAttribute("results");
+	BasicSearchResult results = te.rangeSearch(159512, 1960, 2016);
 	for (Record r: results.results()){
 		out.print("<tr>\n");
 		out.print("<th>" + te.getTaxonRecord(r.getTaxonId()).getName() + "</th>\n");

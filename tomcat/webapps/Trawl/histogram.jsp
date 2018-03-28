@@ -1,16 +1,19 @@
+<%@ page import="java.util.*, data.Record, model.TrawlExpert, search.BST, search.BasicSearchResult" %>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
 
 <%
 
+	TrawlExpert te = (TrawlExpert)request.getServletContext().getAttribute("trawl");
+	BasicSearchResult result = te.rangeSearch(159512, 1960, 2016);
 
-	Iterable<Integer, Integer> = (Iterable<Integer,Integer>)request.getAttribute("record");
-	Iterable<Integer> results = record.keys();
+	BST<Integer, Integer> histogram = result.histogram();
+	Iterable<Integer> results = histogram.keys();
 	out.print("var y=[];");
 	out.print("var x=[];");
 	for (Integer year: results){
-		out.print("y.push("+(String) record.get(year) +");");
-		out.print("x.push("+ (String) year+");");
+		out.print("y.push("+ histogram.get(year) +");");
+		out.print("x.push("+ year +");");
 	}
 
 	out.print((String) request.getAttribute("url"));

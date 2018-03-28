@@ -18,14 +18,7 @@ public class Director extends HttpServlet {
 	    //if (req == "doBioLookup.do")
 	    		//doBioLookup(request, response);
 	    
-	    TrawlExpert te = (TrawlExpert) request.getServletContext().getAttribute("trawl");
-	    //very basic example of listing all species
-	   // Iterable<Integer> result = te.listAllSpecies();
-	    
-	    BasicSearchResult result = te.rangeSearch(159512, 1960, 2016);
-
-	    request.setAttribute("results", result);
-	    RequestDispatcher view = request.getRequestDispatcher("result.jsp");
+	    RequestDispatcher view = request.getRequestDispatcher("histogram.jsp");
 	    view.forward(request, response);
     }
 	
