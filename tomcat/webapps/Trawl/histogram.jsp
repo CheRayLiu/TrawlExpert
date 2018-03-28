@@ -45,7 +45,7 @@
 	];
 
 	var layout = {
-		title: '',
+		title: 'Individual count vs Year',
     	xaxis:{title: 'Year',
        		autorange:'reversed'
     	},
