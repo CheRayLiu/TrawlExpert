@@ -39,6 +39,7 @@
 	var layout = {
 		title: 'Individual count vs Year',
     	xaxis:{title: 'Year',
+    			type: 'category',
     		titlefont: {
       			family: 'Courier New, monospace',
       			size: 18,
