@@ -11,7 +11,7 @@
 
 <body>
   
-  <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
+  <div id="histogram"><!-- Plotly chart will be drawn inside this DIV --></div>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	<script>
 
@@ -53,6 +53,6 @@
       		side:'right'
     		}
 	}
-	Plotly.newPlot('Histogram', data,layout);  
+	Plotly.newPlot('histogram', data,layout);  
 	</script>
 </body>
