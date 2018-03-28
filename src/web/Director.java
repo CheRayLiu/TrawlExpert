@@ -34,6 +34,8 @@ public class Director extends HttpServlet {
 	    TrawlExpert te = (TrawlExpert)request.getServletContext().getAttribute("trawl");
 	    //find all applicable things underneath the top most one, need API for this
 	    
+	    //result = te.getPhylum(); // SOmething like this
+	    
 	    //send lists of things to build the dropdowns
 	    request.setAttribute("phylum", result);
 	    request.setAttribute("bioClass", result);
@@ -50,5 +52,32 @@ public class Director extends HttpServlet {
 		String url = (String) request.getRequestURL().toString();
 		String[] s = url.split("/");
 		return s[s.length - 1];
+	}
+	
+	
+	private void doChangedPhyum(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//get answers from form
+		String phylum = request.getParameter("phylum");
+		String bioClass = request.getParameter("class");
+		String order = request.getParameter("order");
+		String family = request.getParameter("family");
+		String genus = request.getParameter("genus");
+		String species = request.getParameter("species");
+
+	    TrawlExpert te = (TrawlExpert)request.getServletContext().getAttribute("trawl");
+	    //find all applicable things underneath the top most one, need API for this
+	    
+	    //result = te.getPhylum(); // SOmething like this
+	    
+	    //send lists of things to build the dropdowns
+	    request.setAttribute("phylum", result);
+	    request.setAttribute("bioClass", result);
+	    request.setAttribute("order", result);
+	    request.setAttribute("family", result);
+	    request.setAttribute("genus", result);
+	    request.setAttribute("species", result);
+	    //send back the index.jsp page
+	    RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+	    view.forward(request, response);
 	}
 }
