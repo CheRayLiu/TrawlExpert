@@ -47,10 +47,18 @@
 	var layout = {
 		title: 'Individual count vs Year',
     	xaxis:{title: 'Year',
-       		autorange:'reversed'
+    		titlefont: {
+      			family: 'Courier New, monospace',
+      			size: 18,
+      			color: '#7f7f7f'
+    			}
     	},
     	yaxis:{title: 'Individual count',
-      		side:'right'
+    		titlefont: {
+      			family: 'Courier New, monospace',
+      			size: 18,
+      			color: '#7f7f7f'
+    			}
     		}
 	}
 	Plotly.newPlot('Histogram', data,layout);  
