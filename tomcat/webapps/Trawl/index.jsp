@@ -1,8 +1,6 @@
 <%@ page import="java.util.*" %>
 <!--
-
 Double Handle Slider Modified from: http://jqueryui.com/slider/#range
-
 -->
 
 <!DOCTYPE html>
@@ -29,7 +27,6 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
 
     <!--Plugins-->
 </head>
-
 <body>
     <header>
         <a href="index.html" >TrawlTool</a>
@@ -44,32 +41,28 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
         <section id="nameDropdownIn">
             <form method="POST" action="doBioLookup.do"> <!--.do extension is not necessary. This field is the servlet's url in web.xml-->
                 Phylum:
-                <select name="phylum" size="1">
-                    <option>Arthropoda</option>
+                <select name="phylum" size="1" onChange="this.form.submit()">
+                    <option value="0">Arthropoda</option>
                     <option>Chordata</option>
                     <option>Mollusca</option>
                 </select>
-                <input type="SUBMIT">
 
                 Class:
-                <select name="class" size="1">
+                <select name="class" size="1" onChange="alert()">
+                    <option>SomeClass</option>
                 </select>
-                <!--<input type="SUBMIT">-->
 
                 Order:
                 <select name="order" size="1">
                 </select>
-                <!--<input type="SUBMIT">-->
 
                 Family:
                 <select name="family" size="1">
                 </select>
-                <!--<input type="SUBMIT">-->
 
                 Genus:
                 <select name="genus" size="1">
                 </select>
-                <!--<input type="SUBMIT">-->
 
                 Species:
                 <select name="species" size="1">
