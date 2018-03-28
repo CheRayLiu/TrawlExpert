@@ -1,14 +1,35 @@
-<%@ page import="java.util.*" %>
+<%@page import="search.BasicSearchResult"%>
+<%@ page import="java.util.*, data.Record, model.TrawlExpert" %>
 <html>
 <body>
 <h1 align="center">Trawl Results</h1>
 <p>
 
+<table>
+<tr>
+	<th>Scientific Name</th>
+	<th>Year</th>
+	<th>Month</th>
+	<th>Day</th>
+	<th>Latitude</th>
+	<th>Longitude</th>
+	<th>Individual Count</th>
+</tr>
 <%
-	Iterable<Integer> species = (Iterable<Integer>)request.getAttribute("species");
-	for (Integer s: species)
-		out.print("SpeciesID: " + s + "<br>");
-	out.print((String) request.getAttribute("url"));
+	TrawlExpert te = (TrawlExpert)request.getServletContext().getAttribute("trawl");
+	BasicSearchResult results = (BasicSearchResult) request.getAttribute("results");
+	for (Record r: results.results()){
+		out.print("<tr>\n");
+		out.print("<th>" + te.getTaxonRecord(r.getTaxonId()).getName() + "</th>\n");
+		out.print("<th>" + r.getDate().getYear() + "</th>\n");
+		out.print("<th>" + r.getDate().getMonth() + "</th>\n");
+		out.print("<th>" + r.getDate().getDay() + "</th>\n");
+		out.print("<th>" + r.getLatitude() + "</th>\n");
+		out.print("<th>" + r.getLongitude() + "</th>\n");
+		out.print("<th>" + r.getCount() + "</th>\n");
+		out.print("</tr>\n");
+	}
 %>
+</table>
 </body>
 </html>
