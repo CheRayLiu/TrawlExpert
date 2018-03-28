@@ -72,6 +72,7 @@ public class Histogram {
 		for (Record r: records)
 			sum += r.getCount();
 		return sum;
+		
 	}
-	
+}
 	

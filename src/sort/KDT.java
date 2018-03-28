@@ -1,7 +1,5 @@
 package sort;
 
-import sandbox.Point;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import sandbox.Point;
 
 public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	/**
@@ -22,8 +22,8 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	ArrayList<GeneralCompare<KeyVal>> axes;
 	
 	public static void main(String[] args) {
-		GeneralCompare<Point> compX = (p1, p2) -> ((Point) p1).getX() - ((Point) p2).getX();
-		GeneralCompare<Point> compY = (p1, p2) -> ((Point) p1).getY() - ((Point) p2).getY();
+		GeneralCompare<Point> compX = (p1, p2) -> (int) ((Point) p1).getX() - (int) ((Point) p2).getX();
+		GeneralCompare<Point> compY = (p1, p2) -> (int) ((Point) p1).getY() - (int) ((Point) p2).getY();
 		
 		//(2,3), (4,7), (5,4), (7,2), (8,1), (9,6)
 		//(8,1), (7,2), (2,3), (5,4), (9,6), (4,7)

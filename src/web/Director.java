@@ -2,10 +2,14 @@ package web;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
+
+import data.Record;
+
 import java.io.*;
 import java.util.*;
 //import com.example.model.TrawlExpert; // notice this
 import model.*; // notice this
+import search.BasicSearchResult;
 
 
 public class Director extends HttpServlet {
@@ -14,11 +18,13 @@ public class Director extends HttpServlet {
 	    //if (req == "doBioLookup.do")
 	    		//doBioLookup(request, response);
 	    
-	    TrawlExpert te = (TrawlExpert)request.getServletContext().getAttribute("trawl");
+	    TrawlExpert te = (TrawlExpert) request.getServletContext().getAttribute("trawl");
 	    //very basic example of listing all species
-	    Iterable<Integer> result = te.listAllSpecies();
+	   // Iterable<Integer> result = te.listAllSpecies();
+	    
+	    BasicSearchResult result = te.rangeSearch(159512, 1960, 2016);
 
-	    request.setAttribute("species", result);
+	    request.setAttribute("results", result);
 	    RequestDispatcher view = request.getRequestDispatcher("result.jsp");
 	    view.forward(request, response);
     }

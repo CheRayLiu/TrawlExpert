@@ -31,7 +31,7 @@ public class WormsAPI {
 		 * System.out.println(taxnodes[i].getTaxonType());
 		 * System.out.println(taxnodes[i].getName()); }
 		 */
-
+		System.out.println(nameToRecordID("Hello"));
 	}
 
 	/**
@@ -107,8 +107,6 @@ public class WormsAPI {
 		int id =  (int) (long) ((JSONObject)json.get(0)).get("AphiaID");
 		
 		return id;
-		
-		
 	}
 
 	/**

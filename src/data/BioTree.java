@@ -2,6 +2,7 @@ package data;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -169,33 +170,10 @@ public class BioTree implements Serializable {
 	 */
 	public static Integer processRecord(String scientificName) throws IOException, ParseException {
 		//reverse lookup based on name, try adding the found taxonId.
-		System.out.println("Processing " + scientificName);
-		TaxonNode res = strNodes.get(scientificName);
-		if (res == null) {
-			System.out.println("Not already found.");
-			Integer incorrectNameId = incorrectNames.get(scientificName);
-			if (incorrectNameId != null) if (incorrectNameId == -1) return null;
-			res = idNodes.get(incorrectNameId);
-		}
-		Integer taxonId = null;
-		//if the taxonId was not found in the local database
-		if (res == null) {
-			try {
-				taxonId = WormsAPI.nameToID(scientificName);
-			} catch (Exception e) {
-				taxonId = WormsAPI.nameToRecordID(scientificName);
-				if (taxonId != null)
-					incorrectNames.put(scientificName, taxonId);
-				else {
-					incorrectNames.put(scientificName, -1);
-				}
-			}
-		}
-		else
-			taxonId = res.getTaxonId();
+		Integer taxonId = nameToTaxonId(scientificName);
+		System.out.println(scientificName + ": " + taxonId);
 		if (taxonId == null) return null;
-		if (taxonId == -999)
-			taxonId = WormsAPI.nameToRecordID(scientificName);
+		if (taxonId == -1)   return null;
 		if (processTaxonId(taxonId)) return null;
 		return taxonId;
 	}
@@ -257,6 +235,58 @@ public class BioTree implements Serializable {
 	 */
 	public static TaxonNode getTaxonRecord(int taxonId) {
 		return idNodes.get(taxonId);
+	}
+	
+	/**
+	 * Get the species at a given index (taxonId). This assumes that the
+	 * node already exists or else it will return null. As such, it is best
+	 * to use this function once all the data has been parsed and the BioTree
+	 * has been built. 
+	 * 
+	 * @param i
+	 *            The speciesid (index) of the species.
+	 * @return The Species object.
+	 * @throws ParseException 
+	 * @throws IOException 
+	 */
+	public static TaxonNode getTaxonRecord(String scientificName) throws IOException, ParseException {
+		return idNodes.get(nameToTaxonId(scientificName));
+	}
+	
+	/**
+	 * Get the TaxonNode containing information about the given scientific name. 
+	 * This assumes that thenode already exists locally or else it will return null. 
+	 * As such, it is best to use this function once all the data has been parsed 
+	 * and the BioTree has been built. 
+	 * 
+	 * @param scientificName
+	 *            The scientific name of the taxon.
+	 * @return The Species object.
+	 * @throws ParseException 
+	 * @throws IOException 
+	 */
+	public static Integer nameToTaxonId(String scientificName) throws IOException, ParseException {
+		Integer taxonId;
+		//look up based on string literal, return if found
+		TaxonNode tx = strNodes.get(scientificName);
+		if (tx != null) return tx.getTaxonId();
+		else System.out.println(scientificName + " not in local db");
+		//look up in local incorrect names database, return if it exists
+		taxonId = incorrectNames.get(scientificName);
+		if (taxonId != null) {
+			tx = idNodes.get(taxonId);
+			if (tx != null) return tx.getTaxonId();
+		} else {		//otherwise use Worms to look it up
+			System.out.println(scientificName + " not in incor db");
+			taxonId = WormsAPI.nameToRecordID(scientificName);
+			if (taxonId == null) //if nothing is found, mark this species as not existing.
+				incorrectNames.put(scientificName, -1);
+			else {
+				System.out.println(scientificName + " found in Worms: " + taxonId);
+				incorrectNames.put(scientificName, taxonId);
+			}
+		}
+		return taxonId;
 	}
 	
 	public static Iterable<Integer> getNonEmptyChildren(int taxonId){
