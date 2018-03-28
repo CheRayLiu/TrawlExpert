@@ -1,8 +1,3 @@
-
-
-
-
-
 <%@ page import="java.util.*, data.Record, model.TrawlExpert, search.BST, search.BasicSearchResult" %>
 <head>
   <!-- Plotly.js -->
@@ -37,7 +32,6 @@
   	{ 	x: x,
     	y: y,
     	type: 'bar',
-    	orientation: 'h',
      	marker: {
     	color: 'blue',
     	},
@@ -47,10 +41,18 @@
 	var layout = {
 		title: 'Individual count vs Year',
     	xaxis:{title: 'Year',
-       		autorange:'reversed'
+    		titlefont: {
+      			family: 'Courier New, monospace',
+      			size: 18,
+      			color: '#7f7f7f'
+    			}
     	},
     	yaxis:{title: 'Individual count',
-      		side:'right'
+    		titlefont: {
+      			family: 'Courier New, monospace',
+      			size: 18,
+      			color: '#7f7f7f'
+    			}
     		}
 	}
 	Plotly.newPlot('histogram', data,layout);  
