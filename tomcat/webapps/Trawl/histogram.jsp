@@ -20,12 +20,10 @@
 		out.print("var y=[];");
 		out.print("var x=[];");
 		for (Integer year: results){
-			out.print("y.push("+ histogram.get(year) +");");
-			out.print("x.push('"+ year +"');");
+			out.print("\ty.push("+ histogram.get(year) +");\n");
+			out.print("\tx.push('"+ year +"');\n");
 		}
-
-		out.print((String) request.getAttribute("url"));
-
+		
 	%>
 
 	var data = [
