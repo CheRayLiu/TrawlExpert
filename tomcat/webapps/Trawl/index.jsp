@@ -34,11 +34,11 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
     </header>
 
     <span id="menu-bar">
-        <a href="index.html">Item 1</a> |
-        <a href="index.html" target="_blank">Item 2</a>
+        <a href="index.html">About</a> |
+        <a href="index.html" target="_blank">Gitlab/Github</a>
     </span>
 
-    <section id="options">
+    <section id="formWrapper">
         <section id="pickSciRanks">
             <%--<form method="POST" action="doBioLookup.do"> <!--.do extension is not necessary. This field is the servlet's url in web.xml-->--%>
             <form>
@@ -88,8 +88,8 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
         <section id="outputIn">
             <form>
                 <!--TODO: Set Default button entered-->
-                <input type="radio" name="gender" value="male"> Map
-                <input type="radio" name="gender" value="female"> Histogram
+                <input type="radio" value="map"> Map
+                <input type="radio" value="histogram"> Histogram
                 <input type="submit">
             </form>
             <form method="POST" action=""">
@@ -101,6 +101,7 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
     <section id="outputWrapper">
         <section id="outputDetails">Stuff like population count, entries found, etc. go here</section>
         <section id="outputBox">Map, Histogram Box</section>
+        <section id="console">~~~ PSEUDO-CONSOLE ~~~<br></section>
     </section>
 
     <%--<footer>--%>
