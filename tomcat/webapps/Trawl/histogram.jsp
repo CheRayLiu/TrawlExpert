@@ -1,8 +1,3 @@
-
-
-
-
-
 <%@ page import="java.util.*, data.Record, model.TrawlExpert, search.BST, search.BasicSearchResult" %>
 <head>
   <!-- Plotly.js -->
