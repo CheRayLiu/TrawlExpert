@@ -1,12 +1,14 @@
 // Initialization
 function init() {
-    initPhylum()
+    updateSciR(2); // Init Phylum. [Animalia == 2]
 }
 
 // Post Function
 // Used by getChildren(id)
-function post(path, params) {
-    document.getElementById("console").innerHTML += "In | post()<br>"; //TODO: Console REMOVEME
+function getChildren(id) {
+    document.getElementById("console").innerHTML += "In | getChildren()<br>"; //TODO: Console REMOVEME
+    var path = 'doBioLookup.do';
+    var params = { taxid: id};
     var xhr = new XMLHttpRequest();
     xhr.open("POST", path);
 
@@ -19,9 +21,27 @@ function post(path, params) {
             //this is where we can update the various dropdowns
             if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
                 document.getElementById("console").innerHTML += "Retrieved:<br>"; //TODO: Console REMOVEME
-                document.getElementById("console").innerHTML += xhr.responseText + "<br>"; //TODO: Console REMOVEME
+
                 console.log("RETRIEVED:")
                 console.log(this.responseText); // Have to go to dev console to print this. Won't show up on pseudo-console.
+                var nodeList;
+
+                nodeList = JSON.parse(this.responseText);
+
+                // nodeList = {
+                //     "taxonId":[1821,51,1065],
+                //     "taxonName":["Chordata","Mollusca","Arthropoda"]
+                // };
+                document.getElementById("console").innerHTML += nodeList + "<br>"; //TODO: Console REMOVEME
+
+                var content = "", x, y;
+                for (i in nodeList.taxonId){
+                    x = nodeList.taxonId[i];
+                    y = nodeList.taxonName[i];
+                    content += '"<option value="' + x + '">' + y + '</option>';
+                }
+
+                document.getElementById("pickPhylum").innerHTML = content;
                 // return this.responseText;
             }
             else{
@@ -30,40 +50,20 @@ function post(path, params) {
     };
     //generate JSON string
     var jsonString= JSON.stringify(params);
-    console.log(jsonString);
+
     //send request to server
-    xhr.send(jsonString);
-    // xhr.send('{taxid":"2"}');
+    xhr.send(jsonString);   // xhr.send('{taxid":"2"}');
     document.getElementById("console").innerHTML += "Sent request to " + path + ": "  + jsonString + "<br>"; //TODO: Console REMOVEME
 }
 
-// Get Children ranks of Parent ranks from Java
-function getChildren(id) {
-    document.getElementById("console").innerHTML += "In | getChildren()<br>"; //TODO: Console REMOVEME
-    var nodeList;
-    //nodeList = {
-    //    "taxonId":[1821,51,1065],
-    //    "taxonName":["Chordata","Mollusca","Arthropoda"]
-    //};
-    nodeList = post('doBioLookup.do', { taxid: id});    // {taxid: intID}
-    return nodeList;
-}
+nodeList = {
+   "taxonId":[1821,51,1065],
+   "taxonName":["Chordata","Mollusca","Arthropoda"]
+};
 
-// Creates Phylum dropdown choices on page load
-function initPhylum(){
-    // alert("initPhylum function");
-    document.getElementById("console").innerHTML += "init phylum<br>"; //TODO: Console REMOVEME
-    var parentId = 2;   //Animalia AphiaID = 2
-    var nodeList = getChildren(parentId);
-    var content = "", x, y;
-
-    for (i in nodeList.taxonId){
-        x = nodeList.taxonId[i];
-        y = nodeList.taxonName[i];
-        content += '"<option value="' + x + '">' + y + '</option>';
-    }
-
-    document.getElementById("pickPhylum").innerHTML = content;
+function updateSciR(rank){
+    document.getElementById("console").innerHTML += "In | init phylum<br>"; //TODO: Console REMOVEME
+    getChildren(rank);
 }
 
 function changedSciR(rank){

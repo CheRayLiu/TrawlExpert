@@ -35,7 +35,7 @@ header{
 }
 
 .nav-bar{
-    border: 1px solid white;
+    /*border: 1px solid white;*/
     font-size: 18px;
     position: absolute;
     bottom: 0;
@@ -43,7 +43,7 @@ header{
 }
 
 .nav-bar>*{
-    border: 1px solid orange;
+    /*border: 1px solid orange;*/
 }
 
 body{
