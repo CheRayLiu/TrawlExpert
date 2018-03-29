@@ -38,7 +38,6 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
         </div>
     </header>
 
-
     <section id="main">
         <section id="formWrapper">
             <section id="pickSciRanks">
@@ -91,8 +90,4 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
     <%--</footer>--%>
 </body>
 </html>
-
-    <%--Notes--%>
-    <%--http://www.color-hex.com/color/002856--%>
-    <%--http://www.color-hex.com/color-palette/58262--%>
 
