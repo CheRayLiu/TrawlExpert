@@ -119,7 +119,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		int axis = depth % getK();
 		
 		int mid = (lo + hi) / 2;
-		MergeSort.sort(keyvals, lo, hi, axes.get(axis));
+		QuickSelect.median(keyvals, lo, hi, axes.get(axis));
 		KeyVal median = (KeyVal) keyvals[mid];
 		
 		//TODO: fix size

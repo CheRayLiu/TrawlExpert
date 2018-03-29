@@ -1,24 +1,25 @@
 package sort;
 
-import search.GeneralCompare;
+//import search.GeneralCompare;
 
 // Code from "Algorithms: 4th Edition" by Robert Sedgewick
 // Adapted from the Sedgewick Quicksort implementation
 
 public class QuickSelect {
 
-	/*
+	
 	// Main function for testing purposes only
 	public static void main(String[] args) {
 		//{1, 2, 3, 4, 5, 6, 7, 8, 9} 5 is median. 
 		Integer[] test = {4, 6, 7, 2, 2, 2, 2,2, 2, 2,2 ,2 ,2, 2, 2};
+		//Integer[] test = {10};
 		GeneralCompare<Integer> b1;
 		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
 		
 		median(test, b1);
 		System.out.println(test[test.length/2]);
 	}
-	*/
+	
 	
 	/**
 	 * Partially sorts a comparable array such that elements smaller than the median occur in
@@ -28,6 +29,19 @@ public class QuickSelect {
 	 */
 	public static <T> void median(Comparable<T>[] a, GeneralCompare<T> gc) {
 		sort(a, 0, a.length - 1, a.length/2, gc);
+	}
+	
+	/**
+	 * Partially sorts a comparable array such that elements smaller than the median of a 
+	 * range occur in the first half of the range, and elements larger than the median occur
+	 * in the second half
+	 * @param a Array of comparable items
+	 * @param lo Lower bound of the range
+	 * @param hi Upper bound of the range
+	 * @param gc Lambda function to compare items
+	 */
+	public static <T> void median(Comparable<T>[] a, int lo, int hi, GeneralCompare<T> gc) {
+		sort(a, lo, hi, (hi - lo) / 2, gc);
 	}
 	
 	/**
