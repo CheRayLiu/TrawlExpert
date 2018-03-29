@@ -292,17 +292,24 @@ public class BioTree implements Serializable {
 	public static Iterable<Integer> getNonEmptyChildren(int taxonId){
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		
-		getNonEmptyChildren(idNodes.get(taxonId), result);
+		getAllChildren(idNodes.get(taxonId), result, false);
 		
 		return result;
-		
 	}
 	
-	private static void getNonEmptyChildren(TaxonNode txNode, ArrayList<Integer> result) {
+	public static Iterable<Integer> getAllChildren(int taxonId){
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		
+		getAllChildren(idNodes.get(taxonId), result, true);
+		
+		return result;
+	}
+	
+	private static void getAllChildren(TaxonNode txNode, ArrayList<Integer> result, boolean emptyAllowed) {
 		if (txNode == null) return;
-		if (txNode.getCount() > 0) result.add(txNode.getTaxonId());
+		if ((txNode.getCount() > 0) || emptyAllowed) result.add(txNode.getTaxonId());
 		for (TaxonNode tx: txNode.getChildren()) {
-			getNonEmptyChildren(tx, result);
+			getAllChildren(tx, result, emptyAllowed);
 		}
 	}
 	

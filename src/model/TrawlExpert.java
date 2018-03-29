@@ -1,6 +1,7 @@
 package model;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.json.simple.parser.ParseException;
 
@@ -54,4 +55,13 @@ public class TrawlExpert {
 		}
 		return null;
 	}
+	
+	public Iterable<Integer> getNonEmptyChildren(int taxonId){
+		return BioTree.getNonEmptyChildren(taxonId);
+	}
+	
+	public Iterable<Integer> getAllChildren(int taxonId){
+		return BioTree.getAllChildren(taxonId);
+	}
+	
 }

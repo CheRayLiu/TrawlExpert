@@ -10,7 +10,7 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="insert, some, keywords"> <!--TODO-->
     <meta name="description" content="insert a description"> <!--TODO-->
-    <title>TrawlTool</title>
+    <title>TrawlExpert</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <!--JQuery-->
@@ -30,7 +30,7 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
 <body>
     <header>
         <div class="headerWrapper">
-            <a href="index.jsp" >TrawlTool</a>
+            <a href="index.jsp" >TrawlExpert</a>
             <span class="nav-bar">
                 <a href="about.html">About</a> |
                 <a href="index.html" target="_blank">Gitlab/Github Nonfunc!</a>
