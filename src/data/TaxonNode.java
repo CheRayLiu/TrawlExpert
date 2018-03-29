@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * https://stackoverflow.com/questions/2697182/how-to-use-an-array-list
  */
 	
-public class TaxonNode implements Serializable {
+public class TaxonNode implements Serializable, Comparable<TaxonNode> {
 	/**
 	 * 
 	 */
@@ -141,5 +141,11 @@ public class TaxonNode implements Serializable {
 		s += "\n";
 		s += String.format("%-20s%d\n", "Count:", childrenCount);
 		return s;
+	}
+
+	@Override
+	public int compareTo(TaxonNode o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

@@ -16,9 +16,8 @@ public class Director extends HttpServlet {
 	public void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher view = null;
 		String req = getUrlDoPortion(request);
-	    //if (req == "doBioLookup.do")
+	    if (req.equals("doBioLookup.do"))
 	    		view = request.getRequestDispatcher("bioresult.jsp");
-	    		request.setAttribute("url", req);
 	    
 	    //RequestDispatcher view = request.getRequestDispatcher("histogram.jsp");
 	    view.forward(request, response);
