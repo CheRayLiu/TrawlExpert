@@ -41,11 +41,11 @@ function post(path, params) {
 function getChildren(id) {
     document.getElementById("console").innerHTML += "In | getChildren()<br>"; //TODO: Console REMOVEME
     var nodeList;
-    nodeList = {
-        "taxonId":[1821,51,1065],
-        "taxonName":["Chordata","Mollusca","Arthropoda"]
-    };
-    //nodeList = post('doBioLookup.do', { taxid: id});    // {taxid: intID}
+    //nodeList = {
+    //    "taxonId":[1821,51,1065],
+    //    "taxonName":["Chordata","Mollusca","Arthropoda"]
+    //};
+    nodeList = post('doBioLookup.do', { taxid: id});    // {taxid: intID}
     return nodeList;
 }
 
