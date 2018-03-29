@@ -12,5 +12,4 @@
 .idea/
 *.class
 logs/
-tomcat/work/Catalina/localhost/Trawl/org/apache
-
+tomcat/work/*
