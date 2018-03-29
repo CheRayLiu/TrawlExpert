@@ -38,6 +38,7 @@ public class QuickSelectTest {
 
 	/**
 	 * Test method for {@link sort.QuickSelect#median(java.lang.Comparable<T>[], search.GeneralCompare)}.
+	 * Ensure each median matches what is expected
 	 */
 	@Test
 	public void testMedian() {
@@ -53,19 +54,17 @@ public class QuickSelectTest {
 
 	/**
 	 * Test method for {@link sort.QuickSelect#partialSort(java.lang.Comparable<T>[], int, search.GeneralCompare)}.
+	 * Ensure the kth largest element matches what is expected
 	 */
-	/*
 	@Test
 	public void testPartialSort() {		
 		QuickSelect.partialSort((Comparable<Integer>[]) test1, 5, b1);
-		assert(test1[test1.length - 1] == 2);
+		assert(test1[test1.length - 5] == 2);
 		
 		QuickSelect.partialSort((Comparable<Integer>[]) test2, 1, b1);
 		assert(test2[test2.length - 1] == 10);
 		
 		QuickSelect.partialSort((Comparable<Integer>[]) test3, 4, b1);
 		assert(test3[test3.length - 4] == -200);
-	}*/
-
-
+	}
 }

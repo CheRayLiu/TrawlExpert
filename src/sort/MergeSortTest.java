@@ -58,7 +58,4 @@ public class MergeSortTest {
 				fail("MergeSort test2 fails.");
 		}
 	}
-	
-	
-	
 }
