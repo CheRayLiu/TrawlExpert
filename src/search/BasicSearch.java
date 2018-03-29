@@ -17,6 +17,10 @@ import sort.RangeHelper;
  *
  */
 public class BasicSearch {
+	public static BasicSearchResult range(Integer taxonId, Integer yearLo, Integer yearHi){
+		return range(taxonId, yearLo, yearHi, -90.0, 90.0, -180.0, 180.0);
+	}
+	
 	/**
 	 * Returns all records matching any of the children of the given TaxonID and in the 
 	 * date range given
@@ -25,29 +29,37 @@ public class BasicSearch {
 	 * @param yearHi The upper bound on the year range
 	 * @return
 	 */
-	public static BasicSearchResult range(Integer taxonId, Integer yearLo, Integer yearHi){
-		GeneralRange<Record> a0 = RangeHelper.date(Bound.ANY);
+	public static BasicSearchResult range(Integer taxonId, Integer yearLo, Integer yearHi, Double latLo, Double latHi, Double longLo, Double longHi){
+		GeneralRange<Record> dateRange = RangeHelper.date(Bound.ANY);
 		
 		if ((yearLo != null) && (yearHi != null)) {
 			Date lower = new Date(yearLo,01,01);
 			Date upper = new Date(yearHi+1,01,01);
-			a0 = RangeHelper.date(Bound.LOWHIGH, lower, upper);
+			dateRange = RangeHelper.date(Bound.LOWHIGH, lower, upper);
 		}
 		
-		GeneralRange<Record> a2 = r -> 0;
-		GeneralRange<Record> a3 = r -> 0;
+		GeneralRange<Record> latRange = RangeHelper.latitude(Bound.ANY);
+		GeneralRange<Record> longRange = RangeHelper.longitude(Bound.ANY);
 		
-		GeneralRange<Record> a1;
+		if ((latLo != null) && (latHi != null)) {
+			latRange = RangeHelper.latitude(Bound.LOWHIGH, latLo, latHi);
+		}
+		
+		if ((longLo != null) && (longHi != null)) {
+			longRange = RangeHelper.longitude(Bound.LOWHIGH, longLo, longHi);
+		}
+		
+		GeneralRange<Record> taxonRange;
 		
 		Iterable<Integer> searches = BioTree.getNonEmptyChildren(taxonId);
 		
 		Stopwatch sw = new Stopwatch();
 		ArrayList<Record> results = new ArrayList<Record>();
 		for (Integer txId: searches) {
-			a1 = RangeHelper.taxonID(Bound.EQUALS, txId);
+			taxonRange = RangeHelper.taxonID(Bound.EQUALS, txId);
 			ArrayList<GeneralRange<Record>> axes = new ArrayList<GeneralRange<Record>>();
 			
-			axes.add(a0);axes.add(a1);axes.add(a2);axes.add(a3);
+			axes.add(dateRange);axes.add(taxonRange);axes.add(latRange);axes.add(longRange);
 			
 			results.addAll((Collection<? extends Record>) DataStore.records.rangeSearch(axes));
 		}
