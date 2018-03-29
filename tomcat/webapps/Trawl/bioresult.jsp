@@ -8,7 +8,7 @@
 	JSONParser parser = new JSONParser();
 	JSONObject req = (JSONObject) parser.parse(request.getReader().readLine());
 	
-	Integer taxonId = (int) (long) req.get("taxid");
+	Integer taxonId = (int) (long) req.get("taxId");
 	//System.out.println(taxonId);
 	ArrayList<TaxonNode> txNodes = ((ArrayList<TaxonNode>) te.getTaxonRecord(taxonId).getChildren());
 	TaxonNode[] txNodesAr = txNodes.toArray(new TaxonNode[txNodes.size()]);

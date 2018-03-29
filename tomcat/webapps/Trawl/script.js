@@ -17,8 +17,8 @@ function initPickPhylum(){
 // taxID = id of parent of the thing that changes
 function updateSciR(tagID, object) {
     var path = 'doBioLookup.do';
-    var taxID = object.value;
-    alert("Updating: " + tagID + "with children of: " + taxID);   //TODO Remove me
+    var taxID = Number(object.value);
+   // alert("Updating: " + tagID + "with children of: " + taxID);   //TODO Remove me
     var params = { taxId: taxID};
     var xhr = new XMLHttpRequest();
     xhr.open("POST", path);
