@@ -17,6 +17,10 @@ import sort.RangeHelper;
  *
  */
 public class BasicSearch {
+	public static BasicSearchResult range(Integer taxonId, Integer yearLo, Integer yearHi){
+		return range(taxonId, yearLo, yearHi, -90.0, 90.0, -180.0, 180.0);
+	}
+	
 	/**
 	 * Returns all records matching any of the children of the given TaxonID and in the 
 	 * date range given
@@ -25,7 +29,7 @@ public class BasicSearch {
 	 * @param yearHi The upper bound on the year range
 	 * @return
 	 */
-	public static BasicSearchResult range(Integer taxonId, Integer yearLo, Integer yearHi){
+	public static BasicSearchResult range(Integer taxonId, Integer yearLo, Integer yearHi, Double latLo, Double latHi, Double longLo, Double longHi){
 		GeneralRange<Record> a0 = RangeHelper.date(Bound.ANY);
 		
 		if ((yearLo != null) && (yearHi != null)) {
@@ -34,8 +38,16 @@ public class BasicSearch {
 			a0 = RangeHelper.date(Bound.LOWHIGH, lower, upper);
 		}
 		
-		GeneralRange<Record> a2 = r -> 0;
-		GeneralRange<Record> a3 = r -> 0;
+		GeneralRange<Record> a2 = RangeHelper.latitude(Bound.ANY);
+		GeneralRange<Record> a3 = RangeHelper.longitude(Bound.ANY);
+		
+		if ((latLo != null) && (latHi != null)) {
+			a2 = RangeHelper.latitude(Bound.LOWHIGH, latLo, latHi);
+		}
+		
+		if ((longLo != null) && (longHi != null)) {
+			a3 = RangeHelper.longitude(Bound.LOWHIGH, longLo, longHi);
+		}
 		
 		GeneralRange<Record> a1;
 		

@@ -84,7 +84,7 @@ public class RangeHelper {
 	 * @param bound -Value of bound
 	 * @return -General range that matches the bound
 	 */
-	public static GeneralRange<Record> longitude(Bound boundtype, float bound) {
+	public static GeneralRange<Record> longitude(Bound boundtype, double bound) {
 		if (boundtype == Bound.LOWER) {
 			GeneralRange<Record> range = p -> p.getLongitude() < bound ? 0 : 1;
 			return range;
@@ -94,7 +94,7 @@ public class RangeHelper {
 			return range;
 		}
 		else if (boundtype == Bound.EQUALS) {
-			GeneralRange<Record> range = p -> Float.compare(p.getLongitude(), bound) ;
+			GeneralRange<Record> range = p -> Double.compare(p.getLongitude(), bound) ;
 			return range;
 		}
 		else return null;
@@ -108,7 +108,7 @@ public class RangeHelper {
 	 * @param rightbound -Value of right bound
 	 * @return -General range that matches the bound
 	 */
-	public static GeneralRange<Record> longitude(Bound boundtype, float leftbound, float rightbound) {
+	public static GeneralRange<Record> longitude(Bound boundtype, double leftbound, double rightbound) {
 		if (boundtype == Bound.LOWHIGH) {
 			GeneralRange<Record> range = p -> p.getLongitude() < leftbound ? -1 : (p.getLongitude() > rightbound ? 1 : 0);
 			return range;
@@ -138,7 +138,7 @@ public class RangeHelper {
 	 * @param bound -Value of bound
 	 * @return -General range that matches the bound
 	 */
-	public static GeneralRange<Record> latitude(Bound boundtype, float bound) {
+	public static GeneralRange<Record> latitude(Bound boundtype, double bound) {
 		if (boundtype == Bound.LOWER) {
 			GeneralRange<Record> range = p -> p.getLatitude() < bound ? 0 : 1;
 			return range;
@@ -148,7 +148,7 @@ public class RangeHelper {
 			return range;
 		}
 		else if (boundtype == Bound.EQUALS) {
-			GeneralRange<Record> range = p -> Float.compare(p.getLatitude(), bound);
+			GeneralRange<Record> range = p -> Double.compare(p.getLatitude(), bound);
 			return range;
 		}
 		else return null;
@@ -163,7 +163,7 @@ public class RangeHelper {
 	 * @param rightbound -Value of right bound
 	 * @return -General range that matches the bound
 	 */
-	public static GeneralRange<Record> latitude(Bound boundtype, int leftbound, int rightbound) {
+	public static GeneralRange<Record> latitude(Bound boundtype, double leftbound, double rightbound) {
 		if (boundtype == Bound.LOWHIGH) {
 			GeneralRange<Record> range = p -> p.getLatitude() < leftbound ? -1 : (p.getLatitude() > rightbound ? 1 : 0);
 			return range;
