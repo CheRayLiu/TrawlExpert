@@ -43,20 +43,20 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
             <section id="pickSciRanks">
                 Phylum:
                 <%--<select name="pickSciR" id="pickPhylum" size="1" onChange="updateSci(this)"><!--Dynamically Filled--></select>--%>
-                <select name="pickSciR" id="pickPhylum" size="1" onChange="updateSci('pickPhylum', this)"><!--Dynamically Filled--></select>
+                <select name="pickSciR" id="pickPhylum" size="1" onChange="callUpdateSci(this)"><!--Dynamically Filled--></select>
 
                 Class:
-                <select name="pickSciR" id="pickClass" size="1" onChange="updateSci('pickClass', this)">
+                <select name="pickSciR" id="pickClass" size="1" onChange="callUpdateSci(this)">
                     <%--<option value="00">Arthropoda</option>--%>
                     <%--<option value="01">Chordata</option>--%>
                     <%--<option value="03">Mollusca</option>--%>
                 </select>
                 Order:
-                <select name="pickSciR" id="pickOrder" size="1" onChange="updateSci('pickOrder', this)""><!--Dynamically Filled--></select>
+                <select name="pickSciR" id="pickOrder" size="1" onChange="callUpdateSci(this)""><!--Dynamically Filled--></select>
                 Family:
-                <select name="pickSciR" id="pickFamily" size="1" onChange="updateSci('pickFamily', this)"><!--Dynamically Filled--></select>
+                <select name="pickSciR" id="pickFamily" size="1" onChange="callUpdateSci(this)"><!--Dynamically Filled--></select>
                 Genus:
-                <select name="pickSciR" id="pickGenus" size="1" onChange="updateSci('pickGenus', this)"><!--Dynamically Filled--></select>
+                <select name="pickSciR" id="pickGenus" size="1" onChange="callUpdateSci(this)"><!--Dynamically Filled--></select>
                 Species:
                 <select name="pickSciR" id="pickSpecies" size="1" onChange="alert("No function atm")"><!--Dynamically Filled--></select>
             </section>
