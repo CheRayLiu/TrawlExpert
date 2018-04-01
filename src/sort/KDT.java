@@ -10,6 +10,19 @@ import java.util.ArrayList;
 
 import sandbox.Point;
 
+/**
+ * A class for constructing KD-trees with range-searching abilities. Written using
+ * pseudocode from https://en.wikipedia.org/wiki/K-d_tree for building the tree
+ * and referencing several resources: 
+ * - http://www.cs.utah.edu/~lifeifei/cs6931/kdtree.pdf
+ * - https://www.youtube.com/watch?v=Z4dNLvno-EY
+ * - http://www.cs.uu.nl/docs/vakken/ga/slides5a.pdf
+ * - https://www.datasciencecentral.com/profiles/blogs/implementing-kd-tree-for-fast-range-search-nearest-neighbor
+ * All code is original and was written by Christopher W. Schankula.
+ * @author Christopher W. Schankula
+ *
+ * @param <KeyVal> The type of key-value objects to insert into the tree.
+ */
 public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	/**
 	 * 
@@ -68,6 +81,11 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		kdt.writeToFile("kdtree.ser");
 	}
 	
+	/**
+	 * A node in a serializable KD-tree.
+	 * @author Christopher W. Schankula
+	 *
+	 */
 	private class KDNode implements Serializable{
 		/**
 		 * 
@@ -80,6 +98,11 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		private KDNode left, right;
 		private int n;
 		
+		/**
+		 * Constructor for KDNode. Creates a new KD-tree node.
+		 * @param keyval
+		 * @param n
+		 */
 		public KDNode(KeyVal keyval, int n) {
 			this.keyval = keyval;
 			this.n = n;
@@ -109,6 +132,13 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		this.axes = kdt.axes;
 	}
 	
+	/**
+	 * Construct a new kd-tree from an array of nodes.
+	 * @param axes A GeneralCompare instance for each dimension of the kd-tree. This
+	 * GeneralCompare must input an object of type KeyVal and output an ordering correspoding
+	 * to that axis.
+	 * @param keyvals An array of Key-Value pairs to insert into the tree.
+	 */
 	public KDT(ArrayList<GeneralCompare<KeyVal>> axes, Comparable<KeyVal>[] keyvals) {
 		this.axes = axes;
 		root = buildTree(keyvals, 0, keyvals.length - 1, 0);
@@ -131,6 +161,13 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		return newNode;
 	}
 	
+	/**
+	 * Perform a range search for nodes in the tree.
+	 * @param range	An ArrayList of GeneralRange instances. This must take a value of type
+	 * KeyVal and return whether that value is in the range for the given axis. Must provide
+	 * an ArrayList with a size equal to the current tree's number of axes, k.
+	 * @return An Iterable of nodes found to be matchign the range search.
+	 */
 	public Iterable<KeyVal> rangeSearch(ArrayList<GeneralRange<KeyVal>> range){
 		ArrayList<KeyVal> result = new ArrayList<KeyVal>();
 		rangeSearch(root, range, result, 0);
@@ -166,10 +203,18 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		return true;
 	}
 	
+	/**
+	 * Returns the number of nodes in the tree.
+	 * @return the number of nodes present in the kd-tree.
+	 */
 	public int size() {
 		return size(root);
 	}
 	
+	/**
+	 * The maximum depth for any node in the kd-tree.
+	 * @return the depth of the maximum-depth node in the kd-tree.
+	 */
 	public int height() {
 		return height(root);
 	}
@@ -184,12 +229,30 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		else return x.n;
 	}
 	
+	/**
+	 * Return the number of axes in the current kd-tree.
+	 * @return the nubmer of axes in the current kd-tree.
+	 */
 	public int getK() {
 		return axes.size();
 	}
 	
+	/**
+	 * Generates and returns a string representation of the nodes in the kd-tree.
+	 * Note: for large trees, this may be slow and unstable.
+	 * @return a string representation of the nodes in the kd-tree.
+	 */
 	public String toString() {
 		return toString(root, "");
+	}
+	
+	private String toString(KDNode x, String depth) {
+		if (x == null) return depth + "null\n";
+		String result = "";
+		result += depth + x.keyval.toString() + "\n";
+		result += toString(x.left, depth + "    ");
+		result += toString(x.right, depth + "    ");
+		return result;
 	}
 	
 	public void writeToFile(String fn) {
@@ -204,14 +267,5 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	      } catch (IOException i) {
 	         i.printStackTrace();
 	      }
-	}
-	
-	private String toString(KDNode x, String depth) {
-		if (x == null) return depth + "null\n";
-		String result = "";
-		result += depth + x.keyval.toString() + "\n";
-		result += toString(x.left, depth + "    ");
-		result += toString(x.right, depth + "    ");
-		return result;
 	}
 }

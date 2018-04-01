@@ -1,9 +1,9 @@
 <%@ page import="java.util.*, data.Record, model.TrawlExpert, search.BST, search.BasicSearchResult" %>
 <%@page import="org.json.simple.JSONArray"%>
+<%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.parser.JSONParser"%>
 
 <%
-
 		TrawlExpert te = (TrawlExpert)request.getServletContext().getAttribute("trawl");
 		BasicSearchResult result = te.rangeSearch(2, 1960, 2016);
 
@@ -23,12 +23,13 @@
 			y.add(histogram.get(year));
 		}
 	
-		js.put("year", x);
-		js.put("individualCount", y);
+		js.put("x", x);
+		js.put("y", y);
+		js.put("time", result.time());
+		js.put("n", result.n());
+		js.put("individualCount", result.sum());
 	
 		out.print(js.toJSONString());
-			
-		
 %>
 
 	

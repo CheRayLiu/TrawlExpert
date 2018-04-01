@@ -18,8 +18,11 @@ public class Director extends HttpServlet {
 		String req = getUrlDoPortion(request);
 	    if (req.equals("doBioLookup.do"))
 	    		view = request.getRequestDispatcher("bioresult.jsp");
+	    else if (req.equals("doHist.do"))
+	    		view = request.getRequestDispatcher("histogram.jsp");
+	    else if (req.equals("doResult.do"))
+	    		view = request.getRequestDispatcher("result.jsp");
 	    
-	    //RequestDispatcher view = request.getRequestDispatcher("histogram.jsp");
 	    view.forward(request, response);
     }
 	

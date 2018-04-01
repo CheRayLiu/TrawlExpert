@@ -1,7 +1,5 @@
 package sort;
 
-import search.GeneralCompare;
-
 // Code from "Algorithms: 4th Edition" by Robert Sedgewick
 // Adapted from the Sedgewick Quicksort implementation
 
@@ -37,7 +35,7 @@ public class QuickSelect {
 	 * @param gc Lambda function to compare items
 	 */
 	public static <T> void median(Comparable<T>[] a, int lo, int hi, GeneralCompare<T> gc) {
-		sort(a, lo, hi, (hi - lo) / 2, gc);
+		sort(a, lo, hi, (hi + lo) / 2, gc);
 	}
 	
 	/**
