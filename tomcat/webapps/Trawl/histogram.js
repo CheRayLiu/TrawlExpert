@@ -5,7 +5,7 @@ function histogram(x,y){
 	    	y: y,
 	    	type: 'bar',
 	     	marker: {
-	    	color: 'blue',
+	    	color: '#76ADD6',
 	    	},
 	  	}
 		];
@@ -31,6 +31,4 @@ function histogram(x,y){
 		Plotly.newPlot('histogram', data,layout);  
 		
 }
-
-window.onload = histogram([1990,1991,1992],[54656,65654,32555]);
 

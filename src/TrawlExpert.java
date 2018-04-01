@@ -24,6 +24,5 @@ public class TrawlExpert {
 			BioTree.write("data/biotree/");
 			DataStore.records.writeToFile("data/kdt.ser");
 		};
-		BasicSearch.init();
 	}
 }

@@ -1,6 +1,7 @@
 // Initialization
 function init() {
     callUpdateSci({id:"pickAnimalia", value:2});    // Propagate Dropdowns on Startup
+    reqHistogram(2);
 }
 
 function resolveAny(obj) {
@@ -103,6 +104,31 @@ function reqBioLookup(tagID, parentId){
     var jsonString= JSON.stringify(params);     //generate JSON string
     xhr.send(jsonString);                       //send request to server
     // document.getElementById("console").innerHTML += "Sent request to " + path + ": "  + jsonString + "<br>"; //RME
+}
+
+//This function will get the new nodelist from the server.
+//ParentId is the taxId of the node that holds the list of children we want.
+function reqHistogram(taxonId){
+ var path = 'doHist.do';
+ var params = {taxId: Number(taxonId)};
+ var xhr = new XMLHttpRequest();
+ xhr.open("POST", path);
+ xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  //Send the proper header info
+
+ xhr.onreadystatechange = function() {//Call a function when the state changes (i.e. response comes back)
+     // Update the dropdown when response is ready
+     if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+         var nodeList = JSON.parse(this.responseText);
+         histogram(nodeList["x"], nodeList["y"]);
+     }
+     else{
+         console.log("Server Response: Error"); //RME
+     }
+ };
+
+ var jsonString= JSON.stringify(params);     //generate JSON string
+ xhr.send(jsonString);                       //send request to server
+ // document.getElementById("console").innerHTML += "Sent request to " + path + ": "  + jsonString + "<br>"; //RME
 }
 
 // JQuery for Range Slider

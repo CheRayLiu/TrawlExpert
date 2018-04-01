@@ -16,6 +16,9 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
     <!--JQuery-->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="histogram.js"></script>
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- MUST load JQuery Library before loading this-->
@@ -33,7 +36,7 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
             <a href="index.jsp" >TrawlExpert</a>
             <span class="nav-bar">
                 <a href="about.html">About</a> |
-                <a href="index.html" target="_blank">Gitlab/Github Nonfunc!</a>
+                <a href="index.html" target="_blank">GitHub</a>
             </span>
         </div>
     </header>
@@ -63,7 +66,7 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
 
             <section id="yearIn">
                 Year Range:
-                <span id="fromtoYear">InnerHtml</span>
+                <span id="fromtoYear"></span>
                 <form>
                     <div id="slider-range"></div>
                 </form>
@@ -80,9 +83,10 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
 
 
         <section id="outputWrapper">
-            <section id="outputDetails">Stuff like population count, entries found, etc. go here</section>
-            <section id="outputBox">Map, Histogram Box. Histogram selected by default but we might want to have a loading screen instead.
-                <div id="console">~~~ PSEUDO-CONSOLE ~~~<br></div>
+            <section id="outputDetails"><bold>Found 278143 results (0.204 seconds)</bold><br><bold>Total population:</bold> 66122855<br><!--  Stuff like population count, entries found, etc. go here --></section>
+            <section id="outputBox"><!--  Map, Histogram Box. Histogram selected by default but we might want to have a loading screen instead.-->
+                <!--  <div id="console">~~~ PSEUDO-CONSOLE ~~~<br></div> -->
+                <div id="histogram"></div>
             </section>
         </section>
     </section>

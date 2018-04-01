@@ -114,7 +114,7 @@ public class Main {
 		} catch (NumberFormatException e) {
 			if (taxonId == null) {
 				try {
-					taxonId = WormsAPI.nameToRecordID(matcher.group(2));
+					taxonId = BioTree.nameToTaxonId(matcher.group(2));
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -74,30 +74,41 @@ a:hover{
 }
 
 #pickSci{
-    border: 1px solid olivedrab;
+    /*border: 1px solid olivedrab;*/
 }
 
 #yearIn{
-    width: 80%;
+    width: 30%;
+}
+
+#slider-range{
+	margin-left:4%;
 }
 
 #outputIn{
-    border: 1px solid blueviolet;
+	margin-left:1%;
+    /*border: 1px solid blueviolet;*/
 }
 
 #outputWrapper{
-    border: 1px solid grey;
+    /*border: 1px solid grey;*/
     height: 100%;
     margin-top: 3%;
 }
 
 #outputDetails{
-    border: 1px solid saddlebrown;
+    /*border: 1px solid saddlebrown;*/
 }
 
 #outputBox{
-    border: 1px solid darkred;
+    /*border: 1px solid darkred;*/
     min-height: 60vh;   /*TODO Perhaps replace this with something less volatile*/
+}
+
+#histogram{
+    /*border: 1px solid darkred;*/
+    min-height: 60vh;   /*TODO Perhaps replace this with something less volatile*/
+    width:100%;
 }
 
 /*300/400/600/700*/

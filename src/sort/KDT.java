@@ -211,4 +211,30 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	public int getK() {
 		return axes.size();
 	}
+	public String toString() {
+		return toString(root, "");
+	}
+	
+	public void writeToFile(String fn) {
+		try {
+	         FileOutputStream fileOut =
+	        		 new FileOutputStream(fn);
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(this);
+	         out.close();
+	         fileOut.close();
+	         System.out.printf("Serialized data is saved in /tmp/kdtree.ser");
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      }
+	}
+	
+	private String toString(KDNode x, String depth) {
+		if (x == null) return depth + "null\n";
+		String result = "";
+		result += depth + x.keyval.toString() + "\n";
+		result += toString(x.left, depth + "    ");
+		result += toString(x.right, depth + "    ");
+		return result;
+	}
 }
