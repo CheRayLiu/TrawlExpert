@@ -55,7 +55,7 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
                 Genus:
                 <select name="pickSciR" id="pickGenus" size="1" onChange="callUpdateSci(this)"><!--Dynamically Filled--></select>
                 Species:
-                <select name="pickSciR" id="pickSpecies" size="1" onChange="alert('No function atm')"><!--Dynamically Filled--></select>
+                <select name="pickSciR" id="pickSpecies" size="1"><!--Dynamically Filled--></select>
             </section>
 
             <section id="yearIn">
