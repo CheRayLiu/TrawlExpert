@@ -4,6 +4,7 @@
 <%@page import="org.json.simple.parser.JSONParser"%>
 
 <%
+	// Sample result data containing an iterable of records
 		TrawlExpert te = (TrawlExpert)request.getServletContext().getAttribute("trawl");
 		BasicSearchResult result = te.rangeSearch(2, 1960, 2016);
 
@@ -11,7 +12,7 @@
 		
 		JSONParser parser = new JSONParser();
 		
-		
+		// Initialize JSON Object and Arrays
 		JSONObject js = new JSONObject();
 		JSONArray longitude = new JSONArray();
 		JSONArray latitude = new JSONArray();
@@ -20,7 +21,7 @@
 		JSONArray count = new JSONArray();
 		
 		
-		
+		// Update value of each JSON Object/Array at the same index as the corresponding Record in Result input
 		for (Record r: result.results()){
 			longitude.add(r.getLongitude());
 			latitude.add(r.getLatitude());
@@ -33,6 +34,7 @@
 			count.add(r.getCount());
 		}
 	
+		// Insert JSON Array and Objects into main Object
 		js.put("latitude", latitude);
 		js.put("longitude", longitude);
 		js.put("name", name);

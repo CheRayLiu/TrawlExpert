@@ -7,6 +7,7 @@
 
 var map, heatmap;
 
+// Generate map
 function initMap(longi,lati) {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 13,
@@ -20,10 +21,12 @@ function initMap(longi,lati) {
   });
 }
 
+// Check if a heatmap already exists
 function toggleHeatmap() {
   heatmap.setMap(heatmap.getMap() ? null : map);
 }
 
+// Initialize colour scheme for heatmap gradient
 function changeGradient() {
 	var gradient = [
 		‘rgba(0, 255, 255, 0)’,
@@ -44,16 +47,18 @@ function changeGradient() {
 	heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
 }
 
+// Set heatmap radius about each point
 function changeRadius() {
   heatmap.set('radius', heatmap.get('radius') ? null : 20);
 }
 
+// Set opacity of colours
 function changeOpacity() {
   heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
 }
 
 
-// Heatmap data
+// Input latitude and longitude into map points
 function getPoints(latitude, longitude) {
 	var result = [];
 	for (int i = 0 ; i < latitude.length ; i++) {
