@@ -3,6 +3,7 @@ package search;
 import java.util.ArrayList;
 
 import data.Record;
+import java.lang.Math;
 
 public class BasicSearchResult {
 	private ArrayList<Record> results;
@@ -10,13 +11,18 @@ public class BasicSearchResult {
 	private BST<Integer, Integer> histogram;
 	private Integer sum;
 	
+	public static void main(String[] args) {
+		
+		//Graph g = new Graph();
+	}
+	
 	public BasicSearchResult(ArrayList<Record> results, double time) {
 		this.results = results;
 		this.time = time;
 	}
 
 	public Iterable<Record> results() {
-		return (Iterable<Record>) results;
+		return (Iterable<Record>) results; 
 	}
 	
 	public int n() {
@@ -41,4 +47,13 @@ public class BasicSearchResult {
 		}
 		return this.sum;
 	}
+	
+	private double lngRange(double dist, double lat){
+		return dist/(Math.cos(lat)*222);
+	}
+	
+	private double latRange(double dist){
+		return (dist/111)/2;
+	}
+	
 }
