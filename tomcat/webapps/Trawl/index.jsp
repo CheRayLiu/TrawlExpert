@@ -18,7 +18,12 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="histogram.js"></script>
-    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9xCYy2Co-0GWfHT8e1smTjIneNbWSfPgY&libraries=visualization"></script>
+
+    <script src="map.js"></script>
+    <script src="infoWindow.js"></script>
+    <script src="infoGenerator.js"></script>
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- MUST load JQuery Library before loading this-->
@@ -69,6 +74,7 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
             <section id="outputIn">
                 <%--Map and Histogram must have the same name for default checkbox to function correctly--%>
                 <input type="radio" name="pickOutput" value="map"> Map
+                <input type="radio" name="pickOutput" value="heat"> Heatmap
                 <input type="radio" name="pickOutput" value="histogram" checked> Histogram
                 <button type="button" onClick="callOutput()">Load</button>
                 <button type="button" onClick="">View Individual Records</button> <!--To records.html-->
@@ -84,13 +90,11 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
             <section id="outputBox"><!--  Map, Histogram Box. Histogram selected by default but we might want to have a loading screen instead.-->
                 <div display="none" id="histogram"></div>
                 <div display="none" id="map"></div>
+                <div display="none" id="heat"></div>
                 <%--<div id="console">~~~ PSEUDO-CONSOLE ~~~<br></div>--%>
             </section>
         </section>
     </section>
-    <%--<footer>--%>
-        <%--Footer--%>
-    <%--</footer>--%>
 </body>
 </html>
 

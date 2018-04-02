@@ -194,8 +194,8 @@ function reqMap(params){
         // Update the dropdown when response is ready
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
             var nodeList = JSON.parse(this.responseText);
-            initMap(nodeList["x"], nodeList["y"]);
-            document.getElementById("outputDetails").innerHTML = "Found " + nodeList["n"] + " results " + "(" + nodeList["time"] + " seconds)<br> Total Population: " + nodeList["individualCount"];
+            initMap(nodeList["latitude"], nodeList["longitude"]);
+            // document.getElementById("outputDetails").innerHTML = "Found " + nodeList["n"] + " results " + "(" + nodeList["time"] + " seconds)<br> Total Population: " + nodeList["individualCount"];
         }
         else {
             console.log("Server Response: Error"); //RME
@@ -204,6 +204,27 @@ function reqMap(params){
     xhr.send(params);                       //send request to server
     // document.getElementById("console").innerHTML += "Sent request to " + path + ": "  + jsonString + "<br>"; //RME
 }
+
+// function reqHeat(params){
+//     var path = 'doMap.do';
+//     var xhr = new XMLHttpRequest();
+//     xhr.open("POST", path);
+//     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  //Send the proper header info
+//
+//     xhr.onreadystatechange = function() {//Call a function when the state changes (i.e. response comes back)
+//         // Update the dropdown when response is ready
+//         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+//             var nodeList = JSON.parse(this.responseText);
+//             // initMap(nodeList["latitude"], nodeList["longitude"]);
+//             document.getElementById("outputDetails").innerHTML = "Found " + nodeList["n"] + " results " + "(" + nodeList["time"] + " seconds)<br> Total Population: " + nodeList["individualCount"];
+//         }
+//         else {
+//             console.log("Server Response: Error"); //RME
+//         }
+//     };
+//     xhr.send(params);                       //send request to server
+//     // document.getElementById("console").innerHTML += "Sent request to " + path + ": "  + jsonString + "<br>"; //RME
+// }
 
 function callOutput(){
     var pickOutputType = document.getElementsByName('pickOutput');
@@ -224,6 +245,7 @@ function callOutput(){
     //Switch Output Display
     document.getElementById("histogram").style.display = "none";
     document.getElementById("map").style.display = "none";
+    document.getElementById("heat").style.display = "none";
 
     if(outType === "histogram"){
         reqHistogram(params);
@@ -233,9 +255,13 @@ function callOutput(){
         reqMap(params);
         document.getElementById("map").style.display = "block";
     }
-    else{
-        console.log("Heatmap/Cluster")
-    }
+    // else if(outType === "heat"){
+    //     reqHeat(params);
+    //     document.getElementById("heat").style.display = "block";
+    // }
+    // else{
+    //     console.log("Heatmap/Cluster")
+    // }
 }
 
 
