@@ -196,7 +196,7 @@ function callOutput(){
     yearFrom = $( "#slider-range" ).slider( "values", 0 );
     yearTo = $( "#slider-range" ).slider( "values", 1 );
 
-    var params= JSON.stringify({taxId: Number(taxGroup), yearF: yearFrom, yearT: yearTo});
+    var params= JSON.stringify({taxId: Number(taxGroup), yearF: Number(yearFrom), yearT: Number(yearTo)});
 
     //Switch Output Display
     if(outType === "Histogram"){
