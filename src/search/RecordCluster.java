@@ -9,6 +9,11 @@ public class RecordCluster {
 	private ArrayList<Record> records;
 	private Point centroid;
 	
+	public RecordCluster() {
+		records = new ArrayList<Record>();
+		centroid = new Point(0,0);
+	}
+	
 	public void addRecord(Record r) {
 		records.add(r);
 	}

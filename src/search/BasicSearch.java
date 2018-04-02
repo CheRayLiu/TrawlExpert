@@ -65,6 +65,6 @@ public class BasicSearch {
 		}
 		double time = sw.elapsedTime();
 		
-		return new BasicSearchResult(results, time);
+		return new BasicSearchResult(taxonId, yearLo, yearHi, results, time);
 	}
 }

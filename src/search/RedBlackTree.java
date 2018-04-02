@@ -1,5 +1,7 @@
 package search;
 
+import sort.GeneralCompare;
+
 public class RedBlackTree<Key, Value> {
 	private Node<Key, Value> root; // Root of the tree
 	private GeneralCompare<Key> compare;
@@ -39,11 +41,6 @@ public class RedBlackTree<Key, Value> {
 			h = h.left();
 		}
 	}
-<<<<<<< HEAD
-=======
-	
-	
->>>>>>> 459508d... get method added to redBlackTree
 	
 	
 	/**

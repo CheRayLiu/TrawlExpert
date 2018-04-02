@@ -18,6 +18,7 @@ import search.BST;
 import search.BasicSearch;
 import search.BasicSearchResult;
 import search.Histogram;
+import search.RecordCluster;
 import sort.Bound;
 import sort.GeneralRange;
 import sort.KDT;
@@ -71,6 +72,11 @@ public class Main {
 	
 	public static void init() {
 		System.out.println("Welcome!");
+		
+		BasicSearchResult bsr = BasicSearch.range(159512, 1960, 2016);
+		ArrayList<RecordCluster> rc = (ArrayList<RecordCluster>) bsr.cluster(1000000);
+		System.out.println(rc.size());
+		
 		while(true) {
 			System.out.println("Main Menu");
 			System.out.println("Available commands:");
