@@ -33,11 +33,18 @@ function callUpdateSci(object){
 
 function populateDropdown(childTagID, nodeList, subnode){
     var x, y, content="";
-    for (var i in nodeList[subnode]["taxonName"]){
-        x = nodeList[subnode]["taxonId"][i];
-        y = nodeList[subnode]["taxonName"][i];
-        content += '"<option value="' + x + '">' + y + '</option>';
+    console.log(nodeList[subnode]);
+    if(nodeList[subnode] != null){
+        for (var i in nodeList[subnode]["taxonName"]){
+            x = nodeList[subnode]["taxonId"][i];
+            y = nodeList[subnode]["taxonName"][i];
+            content += '"<option value="' + x + '">' + y + '</option>';
+        }
     }
+    // else {
+    //     content
+    // }
+
     document.getElementById(childTagID).innerHTML = content;
 }
 
