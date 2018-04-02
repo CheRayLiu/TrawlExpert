@@ -4,7 +4,7 @@
 // Displays markers on a map centred at the Laurentian Great Lakes 
 // When the user clicks the marker, an info window opens
 
-function initMap(lati, longi,info) {
+function initInfo(lati, longi,info) {
 	for(int i=0; i < lati.length; i++){
 		
 		// Generate map centred at Great Lakes
