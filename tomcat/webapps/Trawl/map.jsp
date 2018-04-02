@@ -33,8 +33,8 @@
 			count.add(r.getCount());
 		}
 	
-		js.put("longitude", longitude);
 		js.put("latitude", latitude);
+		js.put("longitude", longitude);
 		js.put("name", name);
 		js.put("date", date);
 		js.put("individual count", count);
