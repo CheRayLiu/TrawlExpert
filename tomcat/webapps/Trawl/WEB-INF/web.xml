@@ -13,5 +13,6 @@
         <servlet-name>Trawl</servlet-name>
         <url-pattern>/doBioLookup.do</url-pattern>
         <url-pattern>/doHist.do</url-pattern>
+        <url-pattern>/doMap.do</url-pattern>
     </servlet-mapping>
 </web-app>
