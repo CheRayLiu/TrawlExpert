@@ -54,6 +54,28 @@ public class RedBlackTreeTest {
 		}
 		assert((Integer) myTree.root().key() == 4);
 	}
+	
+	/**
+	 * Test method for {@link search.RedBlackTree#get(Node<Key, Value> node, Comparable<Key> key)}.
+	 */
+	@Test
+	public void testGet() {
+		Integer[][] x = {{1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 5}, {6, 6}, {7, 7}, {8, 8}, {9, 9}};
+		RedBlackTree<Integer, Integer[]> myTree = new RedBlackTree<Integer, Integer[]>(fld, b1);
+		
+		// Add first 5 nodes, expected get(6) result is null
+		for(int i = 0; i < 4; i++){
+			myTree.put(x[i]);
+		}
+		assert(myTree.get((Comparable<Integer>) 6) == null);
+		
+		// Add remaining nodes, expected get(6) result is {6, 6} 
+		for(int i = 5; i < x.length; i++){
+			myTree.put(x[i]);
+		}
+		assert(myTree.get(6).key() == (Comparable<Integer>) 6);
+		
+	}
 
 	/**
 	 * Test method for {@link search.RedBlackTree#put(java.lang.Object)}.
