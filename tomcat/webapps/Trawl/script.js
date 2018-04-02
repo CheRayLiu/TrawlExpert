@@ -126,6 +126,7 @@ function reqHistogram(params){
          if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
              var nodeList = JSON.parse(this.responseText);
              histogram(nodeList["x"], nodeList["y"]);
+             document.getElementById("outputDetails").innerHTML = "Found " + nodeList["n"] + " results " + "(" + nodeList["time"] + " seconds)<br> Total Population: " + nodeList["individualCount"];
          }
          else {
              console.log("Server Response: Error"); //RME

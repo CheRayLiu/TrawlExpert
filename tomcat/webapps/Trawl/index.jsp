@@ -78,8 +78,6 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
 
         <section id="outputWrapper">
             <section id="outputDetails">
-                Found x results (x seconds)<br>
-                Total population:</bold> 66122855<br>
                 <!--  Stuff like population count, entries found, etc. go here -->
             </section>
 
