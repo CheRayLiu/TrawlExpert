@@ -45,23 +45,17 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
         <section id="formWrapper">
             <section id="pickSciRanks">
                 Phylum:
-                <%--<select name="pickSciR" id="pickPhylum" size="1" onChange="updateSci(this)"><!--Dynamically Filled--></select>--%>
                 <select name="pickSciR" id="pickPhylum" size="1" onChange="callUpdateSci(this)"><!--Dynamically Filled--></select>
-
                 Class:
-                <select name="pickSciR" id="pickClass" size="1" onChange="callUpdateSci(this)">
-                    <%--<option value="00">Arthropoda</option>--%>
-                    <%--<option value="01">Chordata</option>--%>
-                    <%--<option value="03">Mollusca</option>--%>
-                </select>
+                <select name="pickSciR" id="pickClass" size="1" onChange="callUpdateSci(this)"><%--<option value="00">Arthropoda</option>--%></select>
                 Order:
-                <select name="pickSciR" id="pickOrder" size="1" onChange="callUpdateSci(this)""><!--Dynamically Filled--></select>
+                <select name="pickSciR" id="pickOrder" size="1" onChange="callUpdateSci(this)"><!--Dynamically Filled--></select>
                 Family:
                 <select name="pickSciR" id="pickFamily" size="1" onChange="callUpdateSci(this)"><!--Dynamically Filled--></select>
                 Genus:
                 <select name="pickSciR" id="pickGenus" size="1" onChange="callUpdateSci(this)"><!--Dynamically Filled--></select>
                 Species:
-                <select name="pickSciR" id="pickSpecies" size="1" onChange="alert("No function atm")"><!--Dynamically Filled--></select>
+                <select name="pickSciR" id="pickSpecies" size="1" onChange="alert('No function atm')"><!--Dynamically Filled--></select>
             </section>
 
             <section id="yearIn">
@@ -76,17 +70,22 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
                 <%--Map and Histogram must have the same name for default checkbox to function correctly--%>
                 <input type="radio" name="pickOutput" value="map"> Map
                 <input type="radio" name="pickOutput" value="histogram" checked> Histogram
-                <button type="button" onclick="">Load</button>
-                <button type="button" onclick="">View Individual Records</button> <!--To records.html-->
+                <button type="button" onClick="callOutput()">Load</button>
+                <button type="button" onClick="">View Individual Records</button> <!--To records.html-->
             </section>
         </section>
 
 
         <section id="outputWrapper">
-            <section id="outputDetails"><bold>Found 278143 results (0.204 seconds)</bold><br><bold>Total population:</bold> 66122855<br><!--  Stuff like population count, entries found, etc. go here --></section>
+            <section id="outputDetails">
+                Found x results (x seconds)<br>
+                Total population:</bold> 66122855<br>
+                <!--  Stuff like population count, entries found, etc. go here -->
+            </section>
+
             <section id="outputBox"><!--  Map, Histogram Box. Histogram selected by default but we might want to have a loading screen instead.-->
-                <!--  <div id="console">~~~ PSEUDO-CONSOLE ~~~<br></div> -->
                 <div id="histogram"></div>
+                <%--<div id="console">~~~ PSEUDO-CONSOLE ~~~<br></div>--%>
             </section>
         </section>
     </section>

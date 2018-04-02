@@ -115,28 +115,99 @@ function reqBioLookup(tagID, parentId){
 
 //This function will get the new nodelist from the server.
 //ParentId is the taxId of the node that holds the list of children we want.
-function reqHistogram(taxonId){
- var path = 'doHist.do';
- var params = {taxId: Number(taxonId)};
- var xhr = new XMLHttpRequest();
- xhr.open("POST", path);
- xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  //Send the proper header info
+function reqHistogram(params){
+     var path = 'doHist.do';
+     var xhr = new XMLHttpRequest();
+     xhr.open("POST", path);
+     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  //Send the proper header info
 
- xhr.onreadystatechange = function() {//Call a function when the state changes (i.e. response comes back)
-     // Update the dropdown when response is ready
-     if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-         var nodeList = JSON.parse(this.responseText);
-         histogram(nodeList["x"], nodeList["y"]);
-     }
-     else{
-         console.log("Server Response: Error"); //RME
-     }
- };
+     xhr.onreadystatechange = function() {//Call a function when the state changes (i.e. response comes back)
+         // Update the dropdown when response is ready
+         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+             var nodeList = JSON.parse(this.responseText);
+             histogram(nodeList["x"], nodeList["y"]);
+         }
+         else {
+             console.log("Server Response: Error"); //RME
+         }
+     };
+     xhr.send(params);                       //send request to server
+     // document.getElementById("console").innerHTML += "Sent request to " + path + ": "  + jsonString + "<br>"; //RME
+ }
 
- var jsonString= JSON.stringify(params);     //generate JSON string
- xhr.send(jsonString);                       //send request to server
- // document.getElementById("console").innerHTML += "Sent request to " + path + ": "  + jsonString + "<br>"; //RME
+ //Returns the most general taxon group (leftmost)
+function getTaxGroup() {
+    var tagID = "pickSpecies"
+    var taxGroup = document.getElementById(tagID);
+
+    while (true){
+        console.log(taxGroup.value);
+        if(taxGroup.value !== null && taxGroup.value !== "-1"){
+            console.log("returning Animalia");
+            return Number(taxGroup.value);
+        }
+        else if(tagID === "pickAnimalia"){
+            console.log("in pick Animalia");
+            return 2;
+        }
+        else{
+            taxGroup = document.getElementById(tagID);
+            console.log("Switching: " + tagID);
+            switch (tagID){
+                case "pickPhylum":
+                    tagID = "pickAnimalia";
+                    break;
+
+                case "pickClass":
+                    tagID = "pickPhylum";
+                    break;
+
+                case "pickOrder":
+                    tagID = "pickClass";
+                    break;
+
+                case "pickFamily":
+                    tagID = "pickOrder";
+                    break;
+
+                case "pickGenus":
+                    tagID = "pickFamily";
+                    break;
+
+                case "pickSpecies":
+                    tagID = "pickGenus";
+                    break;
+            }
+        }
+    }
 }
+
+function callOutput(){
+    var pickOutputType = document.getElementsByName('pickOutput');
+    var outType, taxGroup, yearFrom, yearTo;
+    // Get output selection: Map/Histogram
+    for(var i = 0; i < pickOutputType.length; i++){
+        if(pickOutputType[i].checked){
+            console.log(pickOutputType[i].value);   //RME
+            outType = pickOutputType[i].value;
+        }
+    }
+    taxGroup = getTaxGroup();
+    yearFrom = $( "#slider-range" ).slider( "values", 0 );
+    yearTo = $( "#slider-range" ).slider( "values", 1 );
+
+    var params= JSON.stringify({taxId: Number(taxGroup), yearF: yearFrom, yearT: yearTo});
+
+    //Switch Output Display
+    if(outType === "Histogram"){
+        reqHistogram(params);
+    }
+    else{
+        console.log("Map or Heatmap");
+    }
+}
+
+
 
 // JQuery for Range Slider
 $( function() {
