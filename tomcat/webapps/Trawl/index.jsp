@@ -82,7 +82,8 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
             </section>
 
             <section id="outputBox"><!--  Map, Histogram Box. Histogram selected by default but we might want to have a loading screen instead.-->
-                <div id="histogram"></div>
+                <div display="none" id="histogram"></div>
+                <div display="none" id="map"></div>
                 <%--<div id="console">~~~ PSEUDO-CONSOLE ~~~<br></div>--%>
             </section>
         </section>
