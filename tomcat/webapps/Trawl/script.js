@@ -199,7 +199,7 @@ function callOutput(){
     var params= JSON.stringify({taxId: Number(taxGroup), yearF: Number(yearFrom), yearT: Number(yearTo)});
 
     //Switch Output Display
-    if(outType === "Histogram"){
+    if(outType === "histogram"){
         reqHistogram(params);
     }
     else{
