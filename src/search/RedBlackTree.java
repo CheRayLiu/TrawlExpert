@@ -16,9 +16,22 @@ public class RedBlackTree<Key, Value> {
 		
 		Integer[][] x = {{1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 5}, {6, 6}, {7, 7}, {8, 8}, {9, 9}};
 		RedBlackTree<Integer, Integer[]> myTree = new RedBlackTree<Integer, Integer[]>(fld, b1);
-		for(int i = 0; i < x.length; i++){
+
+		// Add first 5 nodes, expected get(6) result is null
+		for(int i = 0; i < 4; i++){
 			myTree.put(x[i]);
 		}
+		assert(myTree.get((Comparable<Integer>) 6) == null);
+
+		// Add remaining nodes, expected get(6) result is {6, 6} 
+		for(int i = 5; i < x.length; i++){
+			//System.out.println(x[i][0]);
+			myTree.put(x[i]);
+		}
+		
+		System.out.println("Root: " + myTree.root().key());
+		System.out.println("myTree.get(6).key(): " + (Integer) myTree.get((Comparable<Integer>) 6).key());
+
 		Node h = myTree.root(); 
 		System.out.println(h.key());
 		while (h.left() != null) {
@@ -26,6 +39,11 @@ public class RedBlackTree<Key, Value> {
 			h = h.left();
 		}
 	}
+<<<<<<< HEAD
+=======
+	
+	
+>>>>>>> 459508d... get method added to redBlackTree
 	
 	
 	/**
@@ -37,6 +55,41 @@ public class RedBlackTree<Key, Value> {
 		compare = gc;
 		field = fld;
 	}
+	
+	/**
+	 * Wrapper method for retrieving the node that matches a desired key
+	 * @param key Key pointing to the desired node
+	 * @return A node containing who's key matches the input
+	 */
+	public Node<Key, Value> get(Comparable<Key> key) {
+		return get(this.root, key);
+	}
+	
+	/**
+	 * Finds the node in a tree whose key matches a desired key (if the matching node exists)
+	 * @param node Root of the subtree being searched
+	 * @param key Desired key to be searched for in a tree
+	 * @return The node containing the key, returns null if the key is not found
+	 */
+	private Node<Key, Value> get(Node<Key, Value> node, Comparable<Key> key) {
+		if (node.key() == key)
+			return node; 
+		// If key is greater than current node, look right
+		if (this.compare.compare(node.key(), key) < 0)
+			if (node.right() != null)
+				return get(node.right(), key);
+			else 
+				return null;
+		// If key is smaller than current node, look left
+		else if (this.compare.compare(node.key(), key) > 0)
+			if (node.left() != null)
+				return get(node.left(), key);
+			else 
+				return null;
+		// If node == null, key does not exist in the tree
+		return null;
+	}
+	
 	
 	/**
 	 * Getter method for the root of a tree
