@@ -3,12 +3,14 @@ package search;
 import java.util.ArrayList;
 
 import data.Record;
+import sort.GeneralRange;
 
 public class BasicSearchResult {
 	private ArrayList<Record> results;
 	private final double time;
 	private BST<Integer, Integer> histogram;
 	private Integer sum;
+	private 
 	
 	public BasicSearchResult(ArrayList<Record> results, double time) {
 		this.results = results;
@@ -40,5 +42,17 @@ public class BasicSearchResult {
 				sum += r.getCount();
 		}
 		return this.sum;
+	}
+	
+	/**
+	 * 
+	 * @param area
+	 */
+	public Iterable<RecordCluster> cluster(double area){
+		
+	}
+	
+	private ArrayList<GeneralRange> ranges(double lat, double lon, double area){
+		ArrayList<GeneralRange>()
 	}
 }
