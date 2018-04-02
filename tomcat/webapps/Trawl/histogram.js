@@ -19,6 +19,7 @@ function histogram(x,y){
 	      			size: 18,
 	      			color: '#7f7f7f'
 	    			}
+		, autosize: true
 	    	},
 	    	yaxis:{title: 'Individual count',
 	    		titlefont: {
