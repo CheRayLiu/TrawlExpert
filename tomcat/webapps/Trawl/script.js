@@ -1,5 +1,6 @@
 // Initialization
 function init() {
+    console.log("trying to init");
     callUpdateSci({id:"pickAnimalia", value:2});    // Propagate Dropdowns on Startup
     reqHistogram(2);
 }
@@ -280,3 +281,4 @@ $( function() {
     $( "#fromtoYear" ).html($( "#slider-range" ).slider( "values", 0 ) + " - " + $( "#slider-range" ).slider( "values", 1 ))
 } );
 
+window.onload = init;

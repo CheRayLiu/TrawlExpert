@@ -5,14 +5,7 @@
 // When the user clicks the marker, an info window opens
 var openWindow;
 
-<<<<<<< HEAD
 function initInfo(lati, longi,name, date, individualCount) {
-=======
-
-
-function initInfo(lati, longi,name, date, count ) {
-	console.log("Trying to gen. info map");
->>>>>>> origin/web
     // Generate map centred at Great Lakes
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 5.5,
