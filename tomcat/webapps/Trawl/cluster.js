@@ -3,7 +3,7 @@
 
 // Displays markers on a map centred at the Laurentian Great Lakes 
 // When the user clicks the marker, an info window opens
-var openWindow;
+var openCWindow;
 
 function initCluster(lati, longi,n,  individualCount) {
     // Generate map centred at Great Lakes
@@ -31,10 +31,10 @@ function setCluster(map, lati, longi,n, individualCount) {
         google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
             return function() {
                 console.log("Clicked!!!!");
-                if (openWindow)
-                    openWindow.close();
+                if (openCWindow)
+                    openCWindow.close();
                 infowindow.setContent(content);
-				openWindow = infowindow;
+				openCWindow = infowindow;
                 infowindow.open(map,marker);
             };
         })(marker,content,infowindow));
