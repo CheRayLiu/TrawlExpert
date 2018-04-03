@@ -234,7 +234,7 @@ function reqCluster(params){
         // Update the dropdown when response is ready
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
             var nodeList = JSON.parse(this.responseText);
-            initCluster(nodeList["latitude"], nodeList["longitude"], nodeList["area"]);
+            initCluster(nodeList["latitude"], nodeList["longitude"], nodeList["n"], nodeList["individualCount"]);
         }
         else {
             console.log("Server Response: Error"); //RME
