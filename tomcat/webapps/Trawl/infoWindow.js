@@ -4,7 +4,6 @@
 // Displays markers on a map centred at the Laurentian Great Lakes 
 // When the user clicks the marker, an info window opens
 
-<<<<<<< HEAD
 function initInfo(lati, longi,info) {
 	for(var i=0; i < lati.length; i++){
 		
@@ -14,7 +13,7 @@ function initInfo(lati, longi,info) {
 		    center:  {lat: 45.0349575, lng: -88.6941305};
 		  });
 		  
-=======
+
 function initInfo(lati, longi,name, date, count ) {
 	console.log("Trying to gen. info map");
     // Generate map centred at Great Lakes
@@ -25,7 +24,7 @@ function initInfo(lati, longi,name, date, count ) {
     console.log("Gened info map");
 
 
->>>>>>> d1f7464b4ffda020ccd6a1dc06a4f3b8386384ee
+
 		  // Set info window contents to input string
 
 	var infowindow = new google.maps.InfoWindow();

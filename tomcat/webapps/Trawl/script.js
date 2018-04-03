@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 // Initialization
 function init() {
     callUpdateSci({id:"pickAnimalia", value:2});    // Propagate Dropdowns on Startup
@@ -564,5 +564,3 @@ $( function() {
     $( "#fromtoYear" ).html($( "#slider-range" ).slider( "values", 0 ) + " - " + $( "#slider-range" ).slider( "values", 1 ))
 } );
 
->>>>>>> d1f7464b4ffda020ccd6a1dc06a4f3b8386384ee
-window.onload=init;
