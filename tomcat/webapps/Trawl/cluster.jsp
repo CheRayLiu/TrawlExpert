@@ -12,11 +12,11 @@
 		Integer taxonId = (int) (long) req.get("taxId");
 		Integer yearLo = (int) (long) req.get("yearF");
 		Integer yearHi = (int) (long) req.get("yearT");
-		double area = (double) req.get("area");
+		double area = (double) (long) req.get("area");
 
 		BasicSearchResult result = te.rangeSearch(taxonId, yearLo, yearHi);
 		
-		Iterable<RecordCluster> clusters = result.cluster(area);
+		ArrayList<RecordCluster> clusters = result.cluster(area);
 		
 		// Initialize JSON Object and Arrays
 		JSONObject js = new JSONObject();
@@ -37,8 +37,8 @@
 		// Insert JSON Array and Objects into main Object
 		js.put("latitude", latitude);
 		js.put("longitude", longitude);
-		js.put("n", result.n());
-		js.put("individualCount", count);
+		js.put("n", count);
+		js.put("individualCount", result.sum());
 		js.put("time", result.time());
 
 		out.print(js.toJSONString());

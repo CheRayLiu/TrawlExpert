@@ -58,7 +58,7 @@ public class BasicSearchResult {
 	 * 
 	 * @param area
 	 */
-	public Iterable<RecordCluster> cluster(double area){
+	public ArrayList<RecordCluster> cluster(double area){
 		HashMap<String, Integer> nodeMap = new HashMap<String, Integer>();
 		HashMap<String, Boolean> marked = new HashMap<String, Boolean>();
 		
