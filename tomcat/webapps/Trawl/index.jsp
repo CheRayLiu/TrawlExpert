@@ -71,9 +71,12 @@
 
             <section id="outputIn">
                 <%--Map and Histogram must have the same name for default checkbox to function correctly--%>
-                <input type="radio" name="pickOutput" value="map" checked> Map
+                Cluster Size:
+                <input type="number" id="pickSize" value="clusterSize" > Map
+                <input type="radio" name="pickOutput" value="cluster" > Map
+                <input type="radio" name="pickOutput" value="map"> Map
                 <input type="radio" name="pickOutput" value="heat"> Heatmap
-                <input type="radio" name="pickOutput" value="histogram"> Histogram
+                <input type="radio" name="pickOutput" value="histogram" checked> Histogram
                 <button type="button" onClick="callOutput()">Load</button>
                 <button type="button" onClick="">View Individual Records</button> <!--To records.html-->
             </section>
@@ -89,6 +92,7 @@
                 <%--<div id="histogram"></div>--%>
                 <%--<div id="map"></div>--%>
                 <%--<div id="heat"></div>--%>
+                <%--<div id="cluster"></div>--%>
                 <%--<div id="console">~~~ PSEUDO-CONSOLE ~~~<br></div>--%>
             </section>
         </section>
