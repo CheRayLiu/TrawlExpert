@@ -67,14 +67,26 @@ public class RedBlackTreeTest {
 		for(int i = 0; i < 4; i++){
 			myTree.put(x[i]);
 		}
-		assert(myTree.get((Comparable<Integer>) 6) == null);
+		assert(myTree.get(6) == null);
 		
 		// Add remaining nodes, expected get(6) result is {6, 6} 
 		for(int i = 5; i < x.length; i++){
 			myTree.put(x[i]);
 		}
-		assert(myTree.get(6).key() == (Comparable<Integer>) 6);
+		assert(myTree.get(6).key() == 6);
 		
+		// ==== TESTING WEIRD VALUES ==== //
+		Integer[][] y = {{100, 1}, {200000, 2}, {-3, 3}, {45, 4}, {-125, 2}};
+		RedBlackTree<Integer, Integer[]> newTree = new RedBlackTree<Integer, Integer[]>(fld, b1);
+		
+		for(int i = 0; i < 5; i++){
+			newTree.put(y[i]);
+		}
+		assert(newTree.get(6) == null);
+		assert(newTree.get(-3).key() == (-3));
+		assert(newTree.get(100).key() == 100);
+		assert(newTree.get(-125).key() == (-125));
+		assert(newTree.get(200000).key() == 200000);
 	}
 
 	/**

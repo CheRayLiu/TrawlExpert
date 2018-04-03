@@ -1,5 +1,5 @@
 package search;
 
-public interface GeneralCompare<T> {
-	public int compare(Comparable<T> a1, Comparable<T> a2);
+public interface GeneralCompare<T extends Comparable<T>> {
+	public int compare(T a1, T a2);
 }

@@ -1,12 +1,12 @@
 package search;
 
-public class RedBlackTree<Key, Value> {
+public class RedBlackTree<Key extends Comparable<Key>, Value> {
 	private Node<Key, Value> root; // Root of the tree
 	private GeneralCompare<Key> compare;
 	private Field<Key, Value> field;
 	
 	// Main method only used for testing
-	
+	/*
 	public static void main(String[] args) {
 		GeneralCompare<Integer> b1;
 		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
@@ -31,14 +31,15 @@ public class RedBlackTree<Key, Value> {
 		
 		System.out.println("Root: " + myTree.root().key());
 		System.out.println("myTree.get(6).key(): " + (Integer) myTree.get((Comparable<Integer>) 6).key());
-
+		/*
 		Node h = myTree.root(); 
 		System.out.println(h.key());
 		while (h.right() != null) {
 			System.out.println(h.right().key());
 			h = h.right();
 		}
-	}
+		
+	}*/
 	
 	
 	
@@ -58,7 +59,7 @@ public class RedBlackTree<Key, Value> {
 	 * @param key Key pointing to the desired node
 	 * @return A node containing who's key matches the input
 	 */
-	public Node<Key, Value> get(Comparable<Key> key) {
+	public Node<Key, Value> get(Key key) {
 		return get(this.root, key);
 	}
 	
@@ -68,11 +69,12 @@ public class RedBlackTree<Key, Value> {
 	 * @param key Desired key to be searched for in a tree
 	 * @return The node containing the key, returns null if the key is not found
 	 */
-	private Node<Key, Value> get(Node<Key, Value> node, Comparable<Key> key) {
-		if (node.key() == key)
+	private Node<Key, Value> get(Node<Key, Value> node, Key key) {
+		if (node.key().equals(key)) {
 			return node; 
+		}
 		// If key is greater than current node, look right
-		if (this.compare.compare(node.key(), key) < 0)
+		if (this.compare.compare(node.key(), (Key) key) < 0)
 			if (node.right() != null)
 				return get(node.right(), key);
 			else 

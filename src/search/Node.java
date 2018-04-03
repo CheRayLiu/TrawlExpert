@@ -1,9 +1,9 @@
 package search;
 
 // An abstract data type that represents a node in a Red Black Search Tree
-public class Node<Key, Value>{
+public class Node<Key extends Comparable<Key>, Value>{
 	
-	private final Comparable<Key> key;
+	private final Key key;
 	private Value val;
 	private Node<Key, Value> left, right;
 	private int n; 
@@ -16,7 +16,7 @@ public class Node<Key, Value>{
 	 * @param n How many nodes are in the subtree beneath this node (inclusive)
 	 * @param color True represents a red connection between the current node and its parent, black represents false
 	 */
-	public Node(Comparable<Key> key, Value val, int n, boolean color){
+	public Node(Key key, Value val, int n, boolean color){
 		this.key = key;
 		this.val = val;
 		this.n = n;
@@ -27,7 +27,7 @@ public class Node<Key, Value>{
 	 * Getter for a node's key
 	 * @return The node's key
 	 */
-	public Comparable<Key> key(){
+	public Key key(){
 		return this.key;
 	}
 	
