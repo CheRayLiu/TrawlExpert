@@ -195,7 +195,7 @@ function reqMap(params){
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
             var nodeList = JSON.parse(this.responseText);
             console.log(nodeList);
-            initInfo(nodeList["latitude"], nodeList["longitude"], nodeList["name"], nodeList["date"], nodeList["individual count"]);
+            initInfo(nodeList["latitude"], nodeList["longitude"], nodeList["name"], nodeList["date"], nodeList["individualCount"]);
         }
         else {
             console.log("Server Response: Error"); //RME
