@@ -256,8 +256,8 @@ function callOutput(){
     taxGroup = getTaxGroup();
     yearFrom = $( "#slider-range" ).slider( "values", 0 );
     yearTo = $( "#slider-range" ).slider( "values", 1 );
-    clusterSize = document.getElementById("pickSize");
-
+    clusterSize = document.getElementById("pickSize").value;
+    console.log("Cs: " + clusterSize);
     var params= JSON.stringify({taxId: Number(taxGroup), yearF: Number(yearFrom), yearT: Number(yearTo), area: Number(clusterSize)});
 
     //Switch Output Display

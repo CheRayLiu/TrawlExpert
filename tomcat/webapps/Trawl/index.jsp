@@ -72,7 +72,7 @@
             <section id="outputIn">
                 <%--Map and Histogram must have the same name for default checkbox to function correctly--%>
                 Cluster Size:
-                <input type="number" id="pickSize" value="clusterSize" >
+                <input type="number" id="pickSize" >
                 <input type="radio" name="pickOutput" value="cluster" > Cluster
                 <input type="radio" name="pickOutput" value="map"> Map
                 <input type="radio" name="pickOutput" value="heat"> Heatmap
