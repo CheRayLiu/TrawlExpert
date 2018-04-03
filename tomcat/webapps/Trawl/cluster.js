@@ -12,7 +12,7 @@ function initCluster(lati, longi,n,  individualCount) {
         center: {lat: 45.0349575, lng: -88.6941305}
     });
     console.log("Gened info map");
-    setClusters(map, lati, longi,n, individualCount);
+    setCluster(map, lati, longi,n, individualCount);
 }
 
 

@@ -122,6 +122,13 @@ a:hover{
     position: absolute !important;
 }
 
+#cluster{
+    height: inherit;
+    width: inherit;
+    overflow: hidden !important;
+    position: absolute !important;
+}
+
 /*#map>*{*/
     /*overflow: visible !important;*/
 /*}*/
