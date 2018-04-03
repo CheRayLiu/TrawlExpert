@@ -13,3 +13,4 @@
 *.class
 logs/
 tomcat/work/*
+*.zip
