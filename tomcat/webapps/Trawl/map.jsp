@@ -6,11 +6,14 @@
 <%
 	// Sample result data containing an iterable of records
 		TrawlExpert te = (TrawlExpert)request.getServletContext().getAttribute("trawl");
-		BasicSearchResult result = te.rangeSearch(2, 1960, 2016);
-
-		
-		
 		JSONParser parser = new JSONParser();
+		JSONObject req = (JSONObject) parser.parse(request.getReader().readLine());
+		
+		Integer taxonId = (int) (long) req.get("taxId");
+		Integer yearLo = (int) (long) req.get("yearF");
+		Integer yearHi = (int) (long) req.get("yearT");
+
+		BasicSearchResult result = te.rangeSearch(taxonId, yearLo, yearHi);
 		
 		// Initialize JSON Object and Arrays
 		JSONObject js = new JSONObject();
