@@ -14,5 +14,6 @@
         <url-pattern>/doBioLookup.do</url-pattern>
         <url-pattern>/doHist.do</url-pattern>
         <url-pattern>/doMap.do</url-pattern>
+        <url-pattern>/doCluster.do</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -8,14 +8,17 @@ import sandbox.Point;
 public class RecordCluster {
 	private ArrayList<Record> records;
 	private Point centroid;
+	private int individualCount;
 	
 	public RecordCluster() {
 		records = new ArrayList<Record>();
 		centroid = new Point(0,0);
+		individualCount = 0;
 	}
 	
 	public void addRecord(Record r) {
 		records.add(r);
+		individualCount++;
 	}
 	
 	public Iterable<Record> records(){
@@ -23,6 +26,10 @@ public class RecordCluster {
 	}
 	
 	public int N() {
+		return records.size();
+	}
+	
+	public int getCount() {
 		return records.size();
 	}
 	
