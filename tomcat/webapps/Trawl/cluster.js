@@ -7,7 +7,7 @@ var openCWindow;
 
 function initCluster(lati, longi,n,  individualCount) {
     // Generate map centred at Great Lakes
-    var map = new google.maps.Map(document.getElementById('map'), {
+    var map = new google.maps.Map(document.getElementById('cluster'), {
         zoom: 5.5,
         center: {lat: 45.0349575, lng: -88.6941305}
     });
