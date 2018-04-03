@@ -61,7 +61,7 @@ function changeOpacity() {
 // Input latitude and longitude into map points
 function getPoints(latitude, longitude) {
 	var result = [];
-	for (int i = 0 ; i < latitude.length ; i++) {
+	for (var i = 0 ; i < latitude.length ; i++) {
 		result.push( new google.maps.LatLng(latitude[i], longitude[i]));
 	}
 	
