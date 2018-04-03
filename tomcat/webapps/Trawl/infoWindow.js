@@ -13,34 +13,34 @@ function initInfo(lati, longi,name, date, count ) {
     });
     console.log("Gened info map");
 
-	for(var i=0; i < lati.length; i++){
-        console.log("Trying to plot");
-		  // Set info window contents to input string
-        var contentString = '<div id=“content”>'+
-            '<div id=“siteNotice”>'+
-            '</div>'+
-            '<h1 id=“firstHeading” class=“firstHeading”>' + name[i] + '</h1>'+
-            '<div id=“bodyContent”>'+
-            '<p><b>Name: </b>' + name[i] + '</p>'+
-            '<p><b>Date: </b>' + findMonth(date[i].month) + ' ' + date[i].day + ', ' + date[i].year + '</p>'+
-            '<p><b>Count: </b>' + count[i] + '</p>'+
-            '</div>'+
-            '</div>';
-		  var infowindow = new google.maps.InfoWindow({
-		    content: contentString
-		  });
-		
-		  // Plot points
-			  // var marker = new google.maps.Marker({
-			  //   position: {lat: lati[i], lng: longi[i]} ,
-			  //   map: map,
-			  // });
-		  google.maps.event.addListener('click', function(marker) {
-		  	return function(){
-                infowindow.open(map, marker);
-			}
 
-		  });
+		  // Set info window contents to input string
+
+	var infowindow = new google.maps.InfoWindow();
+	var marker, i;
+	for (i = 0; i < lati.length; i++) {
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lati[i], longi[i]),
+            map: map
+        });
+
+
+        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+            return function () {
+                infowindow.setContent('<div id=“content”>' +
+                    '<div id=“siteNotice”>' +
+                    '</div>' +
+                    '<h1 id=“firstHeading” class=“firstHeading”>' + name[i] + '</h1>' +
+                    '<div id=“bodyContent”>' +
+                    '<p><b>Name: </b>' + name[i] + '</p>' +
+                    '<p><b>Date: </b>' + findMonth(date[i].month) + ' ' + date[i].day + ', ' + date[i].year + '</p>' +
+                    '<p><b>Count: </b>' + count[i] + '</p>' +
+                    '</div>' +
+                    '</div>');
+                infowindow.open(map, marker);
+            }
+        })(marker, i));
+
         console.log("Plotted" + i + " markers");
-	}
+    }
 }
