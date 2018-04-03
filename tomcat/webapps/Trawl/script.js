@@ -193,6 +193,7 @@ function reqMap(params){
     xhr.onreadystatechange = function() {//Call a function when the state changes (i.e. response comes back)
         // Update the dropdown when response is ready
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+            console.log(this.responseText);
             var nodeList = JSON.parse(this.responseText);
             initMap(nodeList["latitude"], nodeList["longitude"]);
             // document.getElementById("outputDetails").innerHTML = "Found " + nodeList["n"] + " results " + "(" + nodeList["time"] + " seconds)<br> Total Population: " + nodeList["individualCount"];

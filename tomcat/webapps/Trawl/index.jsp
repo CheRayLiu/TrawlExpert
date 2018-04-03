@@ -18,7 +18,7 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="histogram.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9xCYy2Co-0GWfHT8e1smTjIneNbWSfPgY&libraries=visualization"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9xCYy2Co-0GWfHT8e1smTjIneNbWSfPgY&libraries=visualization&callback=initMap"></script>
 
     <script src="map.js"></script>
     <script src="infoWindow.js"></script>

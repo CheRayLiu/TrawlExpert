@@ -30,7 +30,7 @@
 			dateobj.put("year",r.getDate().getYear());
 			dateobj.put("month",r.getDate().getMonth());
 			dateobj.put("day",r.getDate().getDay());
-			date.add(r.getDate());
+			date.add(dateobj);
 			count.add(r.getCount());
 		}
 	
