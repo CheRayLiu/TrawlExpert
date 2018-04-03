@@ -5,7 +5,7 @@
 // When the user clicks the marker, an info window opens
 
 function initInfo(lati, longi,info) {
-	for(int i=0; i < lati.length; i++){
+	for(var i=0; i < lati.length; i++){
 		
 		// Generate map centred at Great Lakes
 		  var map = new google.maps.Map(document.getElementById('map'), {
