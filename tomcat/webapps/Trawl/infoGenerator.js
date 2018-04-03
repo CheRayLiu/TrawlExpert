@@ -31,9 +31,6 @@ function findMonth(month){
 	
 }
 
-
-
-
 /**
  * Generates html text to fill info windows on a Google Maps API
  * @param names String array of scientific fish names
@@ -46,7 +43,7 @@ function infoGenerator(names, dates, count){
 
 	var infoArray =[];
 	
-	for (int i=0; i < names.length; i++){
+	for (var i=0; i < names.length; i++){
 		// Initialize variables to each data point's information
 		 var year = dates[i][0];
 		 var month = findMonth(dates[i][1]);
@@ -55,16 +52,16 @@ function infoGenerator(names, dates, count){
 		 var count = count[i];
 
 		 // Generate string of html
-		 var contentString = ‘<div id=“content”>‘+
-		     ‘<div id=“siteNotice”>‘+
-		     ‘</div>‘+
-		     ‘<h1 id=“firstHeading” class=“firstHeading”>’ + name + ‘</h1>‘+
-		     ‘<div id=“bodyContent”>‘+
-		     ‘<p><b>Name: </b>’ + name + ‘</p>‘+
-		     ‘<p><b>Date: </b>’ + month + ' ' + day + ‘, ’ + year + ‘</p>‘+
-		     ‘<p><b>Count: </b>’ + count + ‘</p>‘+
-		     ‘</div>‘+
-		     ‘</div>’;	
+		 var contentString = '<div id=“content”>'+
+		     '<div id=“siteNotice”>'+
+		     '</div>'+
+		     '<h1 id=“firstHeading” class=“firstHeading”>' + name + '</h1>'+
+		     '<div id=“bodyContent”>'+
+		     '<p><b>Name: </b>' + name + '</p>'+
+		     '<p><b>Date: </b>' + month + ' ' + day + ', ' + year + '</p>'+
+		     '<p><b>Count: </b>' + count + '</p>'+
+		     '</div>'+
+		     '</div>';
 		     
 		 infoArray.push(contentString);
 		    }

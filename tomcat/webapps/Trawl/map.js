@@ -9,16 +9,17 @@ var map, heatmap;
 
 // Generate map
 function initMap(longi,lati) {
-  map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 13,
-    center: {lat: 37.775, lng: -122.434},
-    mapTypeId: 'satellite'
+    map = new google.maps.Map(document.getElementById('heat'), {
+    zoom: 5.5,
+    center: {lat: 44.86, lng: -82.02}
   });
-
   heatmap = new google.maps.visualization.HeatmapLayer({
     data: getPoints(longi,lati),
     map: map
+
   });
+    google.maps.event.trigger(map, 'resize');
+    console.log("fin heat")
 }
 
 // Check if a heatmap already exists
@@ -29,21 +30,21 @@ function toggleHeatmap() {
 // Initialize colour scheme for heatmap gradient
 function changeGradient() {
 	var gradient = [
-		‘rgba(0, 255, 255, 0)’,
-		‘rgba(0, 255, 255, 1)’,
-		‘rgba(0, 191, 255, 1)’,
-		‘rgba(0, 127, 255, 1)’,
-		‘rgba(0, 63, 255, 1)’,
-		‘rgba(0, 0, 255, 1)’,
-		‘rgba(0, 0, 223, 1)’,
-		‘rgba(0, 0, 191, 1)’,
-		‘rgba(0, 0, 159, 1)’,
-		‘rgba(0, 0, 127, 1)’,
-		‘rgba(0, 63, 91, 1)’,
-		‘rgba(0, 127, 63, 1)’,
-		‘rgba(0, 191, 10, 1)’,
-		‘rgba(0, 255, 0, 1)’
-		]
+		'rgba(0, 255, 255, 0)',
+		'rgba(0, 255, 255, 1)',
+		'rgba(0, 191, 255, 1)',
+		'rgba(0, 127, 255, 1)',
+		'rgba(0, 63, 255, 1)',
+		'rgba(0, 0, 255, 1)',
+		'rgba(0, 0, 223, 1)',
+		'rgba(0, 0, 191, 1)',
+		'rgba(0, 0, 159, 1)',
+		'rgba(0, 0, 127, 1)',
+		'rgba(0, 63, 91, 1)',
+		'rgba(0, 127, 63, 1)',
+		'rgba(0, 191, 10, 1)',
+		'rgba(0, 255, 0, 1)'
+		];
 	heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
 }
 

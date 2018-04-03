@@ -18,7 +18,7 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="histogram.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9xCYy2Co-0GWfHT8e1smTjIneNbWSfPgY&libraries=visualization&callback=initMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmfzgAfA1sXItGVdGiC5txAieu8VYXcZM&libraries=visualization"></script>
 
     <script src="map.js"></script>
     <script src="infoWindow.js"></script>
@@ -73,9 +73,9 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
 
             <section id="outputIn">
                 <%--Map and Histogram must have the same name for default checkbox to function correctly--%>
-                <input type="radio" name="pickOutput" value="map"> Map
+                <input type="radio" name="pickOutput" value="map" checked> Map
                 <input type="radio" name="pickOutput" value="heat"> Heatmap
-                <input type="radio" name="pickOutput" value="histogram" checked> Histogram
+                <input type="radio" name="pickOutput" value="histogram"> Histogram
                 <button type="button" onClick="callOutput()">Load</button>
                 <button type="button" onClick="">View Individual Records</button> <!--To records.html-->
             </section>
@@ -88,9 +88,9 @@ Double Handle Slider Modified from: http://jqueryui.com/slider/#range
             </section>
 
             <section id="outputBox"><!--  Map, Histogram Box. Histogram selected by default but we might want to have a loading screen instead.-->
-                <div display="none" id="histogram"></div>
-                <div display="none" id="map"></div>
-                <div display="none" id="heat"></div>
+                <%--<div id="histogram"></div>--%>
+                <%--<div id="map"></div>--%>
+                <%--<div id="heat"></div>--%>
                 <%--<div id="console">~~~ PSEUDO-CONSOLE ~~~<br></div>--%>
             </section>
         </section>

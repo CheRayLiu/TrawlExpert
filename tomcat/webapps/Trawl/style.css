@@ -92,8 +92,9 @@ a:hover{
 
 #outputWrapper{
     /*border: 1px solid grey;*/
-    height: 100%;
-    margin-top: 3%;
+    margin: 2% auto;
+    height: 70vh;
+    width: 88vw;
 }
 
 #outputDetails{
@@ -102,8 +103,28 @@ a:hover{
 
 #outputBox{
     /*border: 1px solid darkred;*/
+    height: inherit;
+    width: inherit;
     min-height: 60vh;   /*TODO Perhaps replace this with something less volatile*/
 }
+
+#heat{
+    height: inherit;
+    width: inherit;
+    overflow: hidden !important;
+    position: absolute !important;
+}
+
+#map{
+    height: inherit;
+    width: inherit;
+    overflow: hidden !important;
+    position: absolute !important;
+}
+
+/*#map>*{*/
+    /*overflow: visible !important;*/
+/*}*/
 
 #histogram{
     /*border: 1px solid darkred;*/
