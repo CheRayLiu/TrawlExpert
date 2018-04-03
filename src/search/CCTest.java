@@ -59,6 +59,9 @@ public class CCTest {
 		g.addEdge(4, 6);
 		g.addEdge(0, 5);
 		CC cc = new CC(g);
-		assertEquals(cc.count(), 4);
+		assertEquals(cc.count(), 4); //4 sets of clusters
+		g.addEdge(0, 9);
+		CC cc1 = new CC(g);
+		assertEquals(cc1.count(), 3);//3 sets of clusters
 	}
 }
