@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -15,4 +16,24 @@
         <url-pattern>/doHist.do</url-pattern>
         <url-pattern>/doMap.do</url-pattern>
     </servlet-mapping>
+=======
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+    <servlet>
+        <servlet-name>Trawl</servlet-name>
+        <servlet-class>web.Director</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Trawl</servlet-name>
+        <url-pattern>/doBioLookup.do</url-pattern>
+        <url-pattern>/doHist.do</url-pattern>
+        <url-pattern>/doMap.do</url-pattern>
+        <url-pattern>/doCluster.do</url-pattern>
+    </servlet-mapping>
+>>>>>>> d1f7464b4ffda020ccd6a1dc06a4f3b8386384ee
 </web-app>
