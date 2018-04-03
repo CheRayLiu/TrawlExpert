@@ -23,7 +23,9 @@ public class Director extends HttpServlet {
 	    else if (req.equals("doResult.do"))
     			view = request.getRequestDispatcher("result.jsp");
 	    else if (req.equals("doMap.do"))
-    			view = request.getRequestDispatcher("map.jsp");
+			view = request.getRequestDispatcher("map.jsp");
+	    else if (req.equals("doCluster.do"))
+			view = request.getRequestDispatcher("cluster.jsp");
 	    
 	    view.forward(request, response);
     }
