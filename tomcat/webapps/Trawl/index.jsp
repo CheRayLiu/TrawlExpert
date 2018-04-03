@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <%@ page import="java.util.*" %>
 <!--
 Double Handle Slider Modified from: http://jqueryui.com/slider/#range
