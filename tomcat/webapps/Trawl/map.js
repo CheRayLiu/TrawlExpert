@@ -27,7 +27,7 @@ function toggleHeatmap() {
   heatmap.setMap(heatmap.getMap() ? null : map);
 }
 
-// Initialize colour scheme for heatmap gradient
+//Initialize colour scheme for heatmap gradient
 function changeGradient() {
 	var gradient = [
 		'rgba(0, 255, 255, 0)',
@@ -40,17 +40,17 @@ function changeGradient() {
 		'rgba(0, 0, 191, 1)',
 		'rgba(0, 0, 159, 1)',
 		'rgba(0, 0, 127, 1)',
-		'rgba(0, 63, 91, 1)',
-		'rgba(0, 127, 63, 1)',
-		'rgba(0, 191, 10, 1)',
-		'rgba(0, 255, 0, 1)'
+		'rgba(63, 0, 91, 1)',
+		'rgba(127, 0, 63, 1)',
+		'rgba(191, 0, 31, 1)',
+		'rgba(255, 0, 0, 1)'
 		];
 	heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
 }
 
 // Set heatmap radius about each point
 function changeRadius() {
-  heatmap.set('radius', heatmap.get('radius') ? null : 20);
+  heatmap.set('radius', heatmap.get('radius') ? null : 80);
 }
 
 // Set opacity of colours
