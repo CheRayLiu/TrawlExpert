@@ -30,7 +30,6 @@ function setMarkers(map, lati, longi,name, date, individualCount) {
 
         google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
             return function() {
-                console.log("Clicked!!!!");
                 if (openWindow)
                     openWindow.close();
                 infowindow.setContent(content);

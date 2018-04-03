@@ -224,9 +224,28 @@ xhr.onreadystatechange = function() {//Call a function when the state changes (i
 xhr.send(params);                       //send request to server
 }
 
+function reqCluster(params){
+    var path = 'doCluster.do';
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", path);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  //Send the proper header info
+
+    xhr.onreadystatechange = function() {//Call a function when the state changes (i.e. response comes back)
+        // Update the dropdown when response is ready
+        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+            var nodeList = JSON.parse(this.responseText);
+            initCluster(nodeList["latitude"], nodeList["longitude"], nodeList["area"]);
+        }
+        else {
+            console.log("Server Response: Error"); //RME
+        }
+    };
+    xhr.send(params);                       //send request to server
+}
+
 function callOutput(){
     var pickOutputType = document.getElementsByName('pickOutput');
-    var outType, taxGroup, yearFrom, yearTo;
+    var outType, taxGroup, yearFrom, yearTo, clusterSize;
     // Get output selection: Map/Histogram
     for(var i = 0; i < pickOutputType.length; i++){
         if(pickOutputType[i].checked){
@@ -237,8 +256,9 @@ function callOutput(){
     taxGroup = getTaxGroup();
     yearFrom = $( "#slider-range" ).slider( "values", 0 );
     yearTo = $( "#slider-range" ).slider( "values", 1 );
+    clusterSize = document.getElementById("pickSize");
 
-    var params= JSON.stringify({taxId: Number(taxGroup), yearF: Number(yearFrom), yearT: Number(yearTo)});
+    var params= JSON.stringify({taxId: Number(taxGroup), yearF: Number(yearFrom), yearT: Number(yearTo), area: Number(clusterSize)});
 
     //Switch Output Display
     document.getElementById("outputBox").innerHTML = "";
@@ -247,25 +267,20 @@ function callOutput(){
     if(outType === "histogram"){
         document.getElementById("outputBox").innerHTML='<div id="histogram"></div>';
         reqHistogram(params);
-        // document.getElementById("histogram").style.display = "block";
     }
     else if(outType === "map"){
         document.getElementById("outputBox").innerHTML='<div id="map"></div>';
-        console.log("generated info div");
         reqMap(params);
-        // document.getElementById("map").style.display = "block";
     }
     else if(outType === "heat"){
         document.getElementById("outputBox").innerHTML='<div id="heat"></div>';
         reqHeat(params);
-        // document.getElementById("heat").style.display = "block";
     }
-    // else{
-    //     console.log("Heatmap/Cluster")
-    // }
+    else if(outType === "cluster"){
+        document.getElementById("outputBox").innerHTML='<div id="cluster"></div>';
+        reqCluster(params);
+    }
 }
-
-
 
 // JQuery for Range Slider
 $( function() {

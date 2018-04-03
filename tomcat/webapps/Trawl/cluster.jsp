@@ -24,7 +24,6 @@
 		JSONArray latitude = new JSONArray();
 		JSONArray count = new JSONArray();
 		
-		
 		// Update value of each JSON Object/Array at the same index as the corresponding Record in Result input
 		for (RecordCluster rc: clusters){
 			Point centroid = rc.centroid();
@@ -41,8 +40,7 @@
 		js.put("n", result.n());
 		js.put("individualCount", count);
 		js.put("time", result.time());
-		
-	
+
 		out.print(js.toJSONString());
 %>
 
