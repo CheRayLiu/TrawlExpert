@@ -1,8 +1,3 @@
-<%@ page import="java.util.*" %>
-<!--
-Double Handle Slider Modified from: http://jqueryui.com/slider/#range
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

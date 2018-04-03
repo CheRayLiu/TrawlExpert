@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 // Initialization
 function init() {
     callUpdateSci({id:"pickAnimalia", value:2});    // Propagate Dropdowns on Startup
@@ -479,7 +479,7 @@ function reqMap(params){
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
             var nodeList = JSON.parse(this.responseText);
             console.log(nodeList);
-            initInfo(nodeList["latitude"], nodeList["longitude"], nodeList["name"], nodeList["date"], nodeList["individual count"]);
+            initInfo(nodeList["latitude"], nodeList["longitude"], nodeList["name"], nodeList["date"], nodeList["individualCount"]);
         }
         else {
             console.log("Server Response: Error"); //RME
@@ -564,5 +564,3 @@ $( function() {
     $( "#fromtoYear" ).html($( "#slider-range" ).slider( "values", 0 ) + " - " + $( "#slider-range" ).slider( "values", 1 ))
 } );
 
->>>>>>> d1f7464b4ffda020ccd6a1dc06a4f3b8386384ee
-window.onload=init;
