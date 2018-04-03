@@ -2,6 +2,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{fancyvrb}
+\usepackage{vhistory}
 \hypersetup{colorlinks,urlcolor=red}
 \usepackage[margin=1in]{geometry}
 \usepackage{listing}
@@ -21,15 +22,30 @@
 \newcommand{\pnote}[1]{{\langle \text{#1} \rangle}}
 
 \begin{document}
-
-\title{TrawlExpert: Tool for Watershed Biological Research}
-\author{McMaster University Dept. of Computing and Software \\ \\ Trawlstars Inc. (Group 11) \\ Lab section: L01  \\ Version: 1 \\ \\ Christopher W. Schankula, 400026650, schankuc \\ Haley Glavina, 001412343, glavinhc \\ Winnie Liang, 400074498, liangw15 \\ Ray Liu, 400055250, liuc40 \\ Lawrence Chung, 400014482, chungl1}
-
+\vfil
+\title{\textbf{TrawlExpert: Tool for Watershed Biological Research}}
+\author{\textbf{McMaster University Dept. of Computing and Software} \\ \\ Trawlstars Inc. (Group 11) \\ Lab section: L01  \\ Version: 1 \\ \\ Christopher W. Schankula, 400026650, schankuc \\ Haley Glavina, 001412343, glavinhc \\ Winnie Liang, 400074498, liangw15 \\ Ray Liu, 400055250, liuc40 \\ Lawrence Chung, 400014482, chungl1}
+\vfil
 \maketitle
 
-\noindent\textit{By virtue of submitting this document I electronically sign and date that the work being submitted by all individuals in the group is their exclusive work as a group and we consent to make available the application developed through SE-2XB3 project, the reports, presentations, and assignments (not including my name and student number) for future teaching purposes.}
+\newpage
+\begin{versionhistory}
+  \vhEntry{1.0}{03.04.18}{HG}{created}
+\end{versionhistory}
+
+\noindent\textit{By virtue of submitting this document I electronically sign and date that the work being submitted by all individuals in the group is their exclusive work as a group and we consent to make available the application developed through SE-2XB3 project, the reports, presentations, and assignments (not including my name and student number) for future teaching purposes.} 
 
 \newpage
+
+
+Put contributions table here
+
+
+\newpage
+
+
+
+\newpage 
 
 \begin{abstract}
 \noindent A powerful tool to enable researchers to analyze and filter large datasets from fish trawl surveys in order to perform environmental research on fish and invertebrate populations. \textit{TrawlExpert} gives researchers the ability to intelligently filter and query datasets based on biological classification such as family, genus or species, or based on location or timeframe. Advanced outputs include statistical data on relative population abundance as a function of time and geographical distribution. Additionally, \textit{TrawlExpert} provides a tool for finding local subpopulations within a larger query. A dataset of thousands of Great Lakes trawl surveys from 1958-2016 will be used as a demonstration of \textit{TrawlExpert}'s capability to help researchers narrow down large datasets and glean data which pertains to their research. \textit{TrawlExpert} will be designed to be used easily and effectively as the first step in a groundbreaking climate and ecological research pipeline.
