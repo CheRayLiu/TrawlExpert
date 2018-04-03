@@ -37,7 +37,6 @@ function setMarkers(map, lati, longi,name, date, individualCount) {
                 infowindow.open(map,marker);
             };
         })(marker,content,infowindow));
-        console.log(i);
 	}
 }
 

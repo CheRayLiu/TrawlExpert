@@ -23,9 +23,9 @@ function setCluster(map, lati, longi,n, individualCount) {
         var marker = new google.maps.Marker({position: new google.maps.LatLng(lati[i], longi[i]), map: map});
         // var content = "point numero" + i;
         var content = '<div>' +
-			'Name:' + name[i] +
-            '<br>Cluster Count: ' + n[i]+
-            '<br>Individual Count:' + individualCount[i] + '</div></div>';
+			'<b>Cluster #</b>' + i +
+            '<br><b>Record Count</b>: ' + n[i]+
+            '<br><b>Individual Count</b>: ' + individualCount[i] + '</div></div>';
 		var infowindow = new google.maps.InfoWindow();
 
         google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
@@ -38,7 +38,6 @@ function setCluster(map, lati, longi,n, individualCount) {
                 infowindow.open(map,marker);
             };
         })(marker,content,infowindow));
-        console.log(i);
 	}
 }
 

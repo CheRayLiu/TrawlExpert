@@ -18,7 +18,7 @@ public class RecordCluster {
 	
 	public void addRecord(Record r) {
 		records.add(r);
-		individualCount++;
+		individualCount+=r.getCount();
 	}
 	
 	public Iterable<Record> records(){
@@ -30,7 +30,7 @@ public class RecordCluster {
 	}
 	
 	public int getCount() {
-		return records.size();
+		return individualCount;
 	}
 	
 	public Point centroid() {
