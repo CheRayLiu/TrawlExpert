@@ -243,6 +243,29 @@ function reqCluster(params){
     xhr.send(params);                       //send request to server
 }
 
+function reqResults(params, lo, hi){
+    var path = 'doList.do';
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", path);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  //Send the proper header info
+
+    xhr.onreadystatechange = function() {//Call a function when the state changes (i.e. response comes back)
+        // Update the dropdown when response is ready
+        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+            var respHtml = this.responseText;
+            document.getElementById("list").innerHTML = respHtml;
+        }
+        else {
+            console.log("Server Response: Error"); //RME
+        }
+    };
+    params = JSON.parse(params);
+    params["searchLo"] = lo;
+    params["searchHi"] = hi;
+    params = JSON.stringify(params);
+    xhr.send(params);                       //send request to server
+}
+
 function callOutput(){
     var pickOutputType = document.getElementsByName('pickOutput');
     var outType, taxGroup, yearFrom, yearTo, clusterSize;
@@ -279,6 +302,10 @@ function callOutput(){
     else if(outType === "cluster"){
         document.getElementById("outputBox").innerHTML='<div id="cluster"></div>';
         reqCluster(params);
+    }
+    else if(outType === "list"){
+        document.getElementById("outputBox").innerHTML='<div id="list"></div>';
+        reqResults(params, 0, 50);
     }
 }
 

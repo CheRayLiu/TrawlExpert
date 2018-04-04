@@ -22,8 +22,10 @@ function setCluster(map, lati, longi,n, individualCount) {
 	{
         var marker = new google.maps.Marker({position: new google.maps.LatLng(lati[i], longi[i]), map: map});
         // var content = "point numero" + i;
-        var content = '<div>' +
-			'<b>Cluster #</b>' + i +
+        var content = '<div id="content">' +
+			'Cluster #' + i +
+			'<br>Latitude: ' + lati[i]+
+			'<br>Longitude: ' + longi[i]+
             '<br><b>Record Count</b>: ' + n[i]+
             '<br><b>Individual Count</b>: ' + individualCount[i] + '</div></div>';
 		var infowindow = new google.maps.InfoWindow();
