@@ -47,7 +47,7 @@ public class CCTest {
 	}
 	
 	@Test
-	public void testCluster(){//test if, after all the connected(x,y) calls, the nodes are clustered correctly
+	public void testCluster(){//test if, after all the addEdge calls, the nodes are clustered correctly
 		int v = 11;
 		Graph g = new Graph(v);
 		g.addEdge(1,3);
