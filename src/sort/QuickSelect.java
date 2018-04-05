@@ -7,7 +7,7 @@ package sort;
 
 public class QuickSelect {
 
-	
+	/*
 	// Main function for testing purposes only
 	public static void main(String[] args) {
 		//{1, 2, 3, 4, 5, 6, 7, 8, 9} 5 is median. 
@@ -19,6 +19,7 @@ public class QuickSelect {
 		median(test, b1);
 		System.out.println(test[test.length/2]);
 	}
+	*/
 	
 	
 	/**
