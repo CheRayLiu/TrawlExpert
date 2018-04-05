@@ -48,7 +48,7 @@ public class Graph {
 	/**
 	 * Method to access value in adjacency list
 	 * @param V Vertex to be accessed
-	 * @return Value of vertex V
+	 * @return Adjacency list at V
 	 */
 	public Iterable<Integer> adj(int V){
 		return adj[V];
