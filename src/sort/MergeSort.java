@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package sort;
 
 public class MergeSort{
@@ -144,4 +144,4 @@ public class MergeSort{
 		}
 	}
 }
->>>>>>> b9cba827252461540a3adde3e53442162b843b0f
+

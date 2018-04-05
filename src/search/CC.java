@@ -21,6 +21,7 @@ public class CC {
 		System.out.println(component.id(0));
 		System.out.println(component.id(5));
 		System.out.println(component.id(6));
+		System.out.println(component.count());
 	}
 	/**
 	 * Constructor for Connected Component 
@@ -62,7 +63,7 @@ public class CC {
 	/**
 	 * accesses the value of component id
 	 * @param v indexed value
-	 * @return value at index v
+	 * @return The component id
 	 */
 	public int id(int v){
 		return id[v];

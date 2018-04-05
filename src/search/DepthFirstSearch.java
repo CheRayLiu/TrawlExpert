@@ -13,6 +13,9 @@ public class DepthFirstSearch {
 			g.addEdge(1, 2);
 			g.addEdge(0, 2);
 			DepthFirstSearch s = new DepthFirstSearch(g, g.V());
+			for(int i = 0; i < 5; i++){
+				System.out.println(s.marked(i));
+			}
 		}
 		
 		public DepthFirstSearch(Graph G, int s){
