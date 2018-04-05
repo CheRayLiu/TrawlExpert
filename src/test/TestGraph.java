@@ -12,7 +12,7 @@ public class TestGraph {
 	}
 	
 	@Test
-	public void testV(){
+	public void testV(){ //Tests if graph is constructed correctly
 		Graph g = new Graph(8);
 		assertEquals(g.V(), 8);
 		assertNotEquals(g.V(), 7);
@@ -20,7 +20,7 @@ public class TestGraph {
 	}
 	
 	@Test
-	public void testAddEdgeAndE(){
+	public void testAddEdgeAndE(){//tests to see if edges are added to nodes, therefore increasing edge count
 		Graph g = new Graph(8);
 		g.addEdge(4, 3);
 		g.addEdge(2, 3);
@@ -31,14 +31,5 @@ public class TestGraph {
 		g.addEdge(7, 2);
 		assertNotEquals(g.E(), 4);
 		assertEquals(g.E(), 5);
-	}
-	
-	@Test
-	public void adj(){
-		Graph g = new Graph(8);
-		g.addEdge(4, 3);
-		g.addEdge(2, 3);
-		g.addEdge(1, 2);
-		g.addEdge(0, 2);
 	}
 }
