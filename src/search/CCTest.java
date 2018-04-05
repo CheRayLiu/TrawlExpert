@@ -11,7 +11,7 @@ public class CCTest {
 	}
 	
 	@Test
-	public void testId(){
+	public void testId(){//Test to check if connected components have the same component ID
 		int v = 11;
 		Graph g = new Graph(v);
 		g.addEdge(1,3);
@@ -28,7 +28,7 @@ public class CCTest {
 	}
 	
 	@Test
-	public void TestConnected(){
+	public void TestConnected(){//test to check if connected(x,y) connects correctly
 		int v = 11;
 		Graph g = new Graph(v);
 		g.addEdge(1,3);
@@ -47,7 +47,7 @@ public class CCTest {
 	}
 	
 	@Test
-	public void testCount(){
+	public void testCluster(){//test if, after all the connected(x,y) calls, the nodes are clustered correctly
 		int v = 11;
 		Graph g = new Graph(v);
 		g.addEdge(1,3);
