@@ -36,7 +36,8 @@ public class QuickSelect {
 	 */
 	public static <T> void median(Comparable<T>[] a, int lo, int hi, GeneralCompare<T> gc) {
 		sort(a, lo, hi, (hi + lo) / 2, gc);
-	
+	}
+		
 	/**
 	 * Partially sorts a comparable array such that elements smaller than the kth largest element
 	 * occur in the first half of the array, and larger elements occur in the second half
