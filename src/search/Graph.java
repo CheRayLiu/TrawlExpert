@@ -8,13 +8,7 @@ public class Graph {
 	
 	public static void main(String[] args) {
 		
-		Graph g = new Graph(5);
-		g.addEdge(4, 3);
-		g.addEdge(2, 3);
-		g.addEdge(1, 2);
-		g.addEdge(0, 2);
-		for(int i = 0; i < 5; i++)
-			System.out.println(g.adj(i));
+		
 	}
 	
 	public Graph(int V){

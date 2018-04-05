@@ -153,7 +153,9 @@ public class FileProcessor {
 		int errorCount=0;	// TESTING ONLY
 		if (!matchEventId.group(10).equals("NA")) {
 			try{
-				al.add(createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), BioTree.processRecord(matchEventId.group(10)), Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6))));
+				Integer taxonId = BioTree.processRecord(matchEventId.group(10));
+				if (taxonId != null)
+					al.add(createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), taxonId, Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6))));
 			} catch(IOException e) {
 				System.out.println("Input Error:" + e);
 			} catch(NullPointerException e) {

@@ -10,3 +10,7 @@
 */bin
 *.ser
 .idea/
+*.class
+logs/
+tomcat/work/*
+*.zip

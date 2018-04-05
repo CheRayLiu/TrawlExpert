@@ -1,5 +1,7 @@
 package search;
 
+import java.util.ArrayList;
+
 public class CC {
 
 	private boolean[] marked;
