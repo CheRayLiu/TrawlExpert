@@ -15,6 +15,13 @@ import sort.RangeHelper;
 
 import java.lang.Math;
 
+/**
+ * Class for storing the results of a Basic Search, including the 
+ * search results themselves, as well as some metadata such as the
+ * search time in seconds. Also provides hooks to other functionality
+ * such as histogram, sum and clustering.
+ *
+ */
 public class BasicSearchResult {
 	private final Integer taxonId;
 	private final Integer yearLo;
@@ -24,6 +31,14 @@ public class BasicSearchResult {
 	private BST<Integer, Integer> histogram;
 	private Integer sum;
 	
+	/**
+	 * Constructor for BasicSearchResult
+	 * @param taxonId The taxon id of the search.
+	 * @param yearLo The lower year bound on the search.
+	 * @param yearHi The upper year bound on the search.
+	 * @param results A list of results from the search.
+	 * @param time The time in seconds of the search query.
+	 */
 	public BasicSearchResult(Integer taxonId, Integer yearLo, Integer yearHi, ArrayList<Record> results, double time) {
 		this.taxonId = taxonId;
 		this.yearLo = yearLo;

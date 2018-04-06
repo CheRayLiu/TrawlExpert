@@ -362,7 +362,7 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="60">    
-    <bendpoint x="1465" y="100"/>    
+    <bendpoint x="1172" y="-6"/>    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="61" name="incorrectNames"/>      
       <multiplicity id="62" minimum="0" maximum="1"/>    
