@@ -13,9 +13,6 @@ import java.util.ArrayList;
  */
 	
 public class TaxonNode implements Serializable, Comparable<TaxonNode> {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -317741592166253773L;
 	private final int taxonId;
 	private final TaxonType taxonType;
@@ -108,7 +105,7 @@ public class TaxonNode implements Serializable, Comparable<TaxonNode> {
 	}
 
 	/**
-	 * Adds a new child to the children list 
+	 * Add a new child to the children list 
 	 * 
 	 * @param newChild
 	 */
@@ -117,7 +114,7 @@ public class TaxonNode implements Serializable, Comparable<TaxonNode> {
 	}
 	
 	/**
-	 * Increments the children count
+	 * Increments the children count  by 1
 	 */
 	public void incCount() {
 		this.childrenCount ++;
