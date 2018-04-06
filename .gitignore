@@ -14,3 +14,4 @@
 logs/
 tomcat/work/*
 *.zip
+*DS_Store
