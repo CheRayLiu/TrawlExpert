@@ -11,6 +11,10 @@ import java.net.URL;
 
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import data.biotree.TaxonNode;
+import data.biotree.TaxonType;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

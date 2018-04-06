@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 
 import org.json.simple.parser.ParseException;
 
-import data.BioTree;
 import data.Record;
+import data.biotree.BioTree;
 import graph.RecordCluster;
 import model.TrawlExpert;
 import search.BST;

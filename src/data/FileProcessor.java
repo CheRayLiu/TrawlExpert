@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 import org.json.simple.parser.ParseException;
 
+import data.biotree.BioTree;
 import search.trawl.BasicSearch;
 
 /**

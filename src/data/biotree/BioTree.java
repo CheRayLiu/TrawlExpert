@@ -1,4 +1,4 @@
-package data;
+package data.biotree;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import org.json.simple.parser.ParseException;
 
+import data.WormsAPI;
 import search.BST;
 import search.Field;
 import search.kdt.KDT;

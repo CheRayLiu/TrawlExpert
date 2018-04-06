@@ -7,6 +7,8 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
+import data.biotree.BioTree;
+
 public class TestBioTree {
 
 	@Before

@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import org.json.simple.parser.ParseException;
 
-import data.BioTree;
 import data.DataStore;
 import data.FileProcessor;
 import data.Record;
-import data.TaxonNode;
+import data.biotree.BioTree;
+import data.biotree.TaxonNode;
 import search.kdt.KDT;
 import search.trawl.BasicSearch;
 import search.trawl.BasicSearchResult;

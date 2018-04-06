@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="data.BioTree" project="Project" file="/Project/src/data/BioTree.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="data.biotree.BioTree" project="Project" 
+    file="/Project/src/data/biotree/BioTree.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="776" y="-195"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -226,8 +226,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <enumeration id="26" language="java" name="data.TaxonType" project="Project" file="/Project/src/data/TaxonType.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <enumeration id="26" language="java" name="data.biotree.TaxonType" project="Project" 
+    file="/Project/src/data/biotree/TaxonType.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="776" y="-868"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -235,8 +235,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="27" language="java" name="data.TaxonNode" project="Project" file="/Project/src/data/TaxonNode.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="27" language="java" name="data.biotree.TaxonNode" project="Project" 
+    file="/Project/src/data/biotree/TaxonNode.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="504" y="-1070"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
