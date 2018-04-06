@@ -1,4 +1,4 @@
-<%@page import="search.BasicSearchResult"%>
+<%@page import="search.trawl.BasicSearchResult"%>
 <%@ page import="java.util.*, data.Record, model.TrawlExpert" %>
 <%@page import="org.json.simple.JSONArray"%>
 <%@page import="org.json.simple.JSONObject"%>

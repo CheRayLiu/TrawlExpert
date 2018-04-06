@@ -1,51 +1,27 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.json.simple.parser.ParseException;
 
-import data.BioTree;
-import data.DataStore;
-import data.Date;
-import data.FileProcessor;
 import data.Record;
-import data.WormsAPI;
+import data.biotree.BioTree;
+import graph.RecordCluster;
+import model.TrawlExpert;
 import search.BST;
-import search.BasicSearch;
-import search.BasicSearchResult;
-import search.Histogram;
-import search.RecordCluster;
-import sort.Bound;
-import sort.GeneralRange;
-import sort.KDT;
-import sort.RangeHelper;
-import utils.Stopwatch;
+import search.trawl.BasicSearchResult;
 
 public class Main {
+	public static TrawlExpert te;
+	
 	public static void main(String[] args) {
 		printLogo();
-		//load data
-		try {
-			BioTree.init("data/biotree/");
-			DataStore.records = new KDT<Record>("data/kdt.ser");
-		} catch (Exception e0) {
-			try {
-				BioTree.init();
-				FileProcessor.initProcessing();
-			} catch (NumberFormatException | ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			BioTree.write("data/biotree/");
-			DataStore.records.writeToFile("data/kdt.ser");
-		};
+		te = new TrawlExpert();
 		init();
 	}
-	
+
 	private static void printLogo() {
 		System.out.println("======== TRAWLEXPERT ALPHA v1 ========");
 		System.out.println("                                   _...----.\r\n" + 
@@ -73,7 +49,7 @@ public class Main {
 	public static void init() {
 		System.out.println("Welcome!");
 		
-		BasicSearchResult bsr = BasicSearch.range(159512, 1960, 2016);
+		BasicSearchResult bsr = te.rangeSearch(159512, 1960, 2016);
 		ArrayList<RecordCluster> rc = (ArrayList<RecordCluster>) bsr.cluster(1000000);
 		System.out.println(rc.size());
 		
@@ -103,6 +79,10 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param matcher
+	 */
 	private static void rangeSearch(Matcher matcher) {
 		Integer start = null;
 		Integer end = null;
@@ -131,7 +111,7 @@ public class Main {
 			}
 		}
 		
-		BasicSearchResult result = BasicSearch.range(taxonId, start, end);
+		BasicSearchResult result = te.rangeSearch(taxonId, start, end);
 		
 		System.out.println("Found " + result.n() + " records in " + result.time() + " seconds.");
 		

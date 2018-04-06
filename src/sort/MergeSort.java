@@ -21,9 +21,9 @@ public class MergeSort{
 	 * @param hi Upper bound of a  sub-array to be sorted
 	 * @param gc A lambda function that compares two comparable items
 	 */
-	public static <T> void sort(Comparable<T>[] x, int lo, int hi, GeneralCompare<T> gc) {
-		Comparable<T>[] aux;
-		aux = (Comparable<T>[]) new Comparable[x.length];
+	public static <T extends Comparable<T>> void sort(T[] x, int lo, int hi, GeneralCompare<T> gc) {
+		T[] aux;
+		aux = (T[]) new Object[x.length];
 		sortWrapped(x, lo, hi, gc, aux);
 	}
 	
@@ -34,7 +34,7 @@ public class MergeSort{
 	 * @param gc A lambda function that compares two comparable items
 	 * @param aux Auxiliary array to accommodate temporary memory use in the algorithm
 	 */
-	private static <T> void sortWrapped(Comparable<T>[] x, int lo, int hi, GeneralCompare<T> gc, Comparable<T>[] aux) {
+	private static <T extends Comparable<T>> void sortWrapped(T[] x, int lo, int hi, GeneralCompare<T> gc, T[] aux) {
 		int n = hi - lo;
 		if(n < 1)
 			return;
@@ -53,7 +53,7 @@ public class MergeSort{
 	 * @param gc A lambda function that compares two comparable items
 	 * @param aux Auxiliary array to accommodate temporary memory use in the algorithm
 	 */
-	private static <T> void merge(Comparable<T>[] x, int lo, int hi, GeneralCompare<T> gc, Comparable<T>[] aux){
+	private static <T extends Comparable<T>> void merge(T[] x, int lo, int hi, GeneralCompare<T> gc, T[] aux){
 
 		int n = hi - lo;
 		int mid = lo + (n/2);

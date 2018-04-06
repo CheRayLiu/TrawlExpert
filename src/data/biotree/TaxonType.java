@@ -1,4 +1,4 @@
-package data;
+package data.biotree;
 
 /**
  * Enumeration of classifications of Taxontype.

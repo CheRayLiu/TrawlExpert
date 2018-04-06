@@ -1,12 +1,12 @@
-package search;
+package search.trawl;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import utils.Stopwatch;
-import data.BioTree;
 import data.DataStore;
 import data.Date;
 import data.Record;
+import data.biotree.BioTree;
 import sort.Bound;
 import sort.GeneralRange;
 import sort.RangeHelper;

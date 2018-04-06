@@ -1,4 +1,4 @@
-package sort;
+package search.kdt;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,6 +9,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.hamcrest.core.IsInstanceOf;
+
+import sort.GeneralCompare;
+import sort.GeneralRange;
+import sort.QuickSelect;
 
 /**
  * A class for constructing KD-trees with range-searching abilities. Written using
@@ -92,7 +96,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	 * to that axis.
 	 * @param keyvals An array of Key-Value pairs to insert into the tree.
 	 */
-	public KDT(ArrayList<GeneralCompare<KeyVal>> axes, Comparable<KeyVal>[] keyvals) {
+	public KDT(ArrayList<GeneralCompare<KeyVal>> axes, KeyVal[] keyvals) {
 		this.axes = axes;
 		root = buildTree(keyvals, 0, keyvals.length - 1, 0);
 	}
@@ -107,7 +111,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	 * @param depth The depth of the new node to be created
 	 * @return The new node
 	 */
-	private KDNode buildTree(Comparable<KeyVal>[] keyvals, int lo, int hi, int depth) {
+	private KDNode buildTree(KeyVal[] keyvals, int lo, int hi, int depth) {
 		if (lo > hi) return null;
 		int axis = depth % getK();
 		

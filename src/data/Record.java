@@ -2,6 +2,8 @@ package data;
 
 import java.io.Serializable;
 
+import data.biotree.BioTree;
+
 public class Record implements Comparable<Record>, Serializable {
 	/**
 	 * 

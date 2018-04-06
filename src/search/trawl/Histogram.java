@@ -1,8 +1,9 @@
-package search;
+package search.trawl;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import data.Record;
+import search.BST;
 
 public class Histogram {
 
