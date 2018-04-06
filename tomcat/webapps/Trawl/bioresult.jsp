@@ -5,7 +5,7 @@
 <%@page import="search.Field"%>
 <%@page import="data.TaxonType"%>
 <%@page import="org.json.simple.parser.JSONParser"%>
-<%@ page import="java.util.*, data.Record, model.TrawlExpert, search.BST, search.BasicSearchResult, org.json.simple.JSONObject, data.TaxonNode" %>
+<%@ page import="java.util.*, data.Record, model.TrawlExpert, search.BST,search.trawl.BasicSearchResult, org.json.simple.JSONObject, data.TaxonNode" %>
 <%
 	TrawlExpert te = (TrawlExpert)request.getServletContext().getAttribute("trawl");
 	JSONParser parser = new JSONParser();

@@ -1,4 +1,4 @@
-package search;
+package search.trawl;
 
 import java.util.ArrayList;
 import java.util.Collection;

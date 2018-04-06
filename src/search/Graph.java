@@ -1,5 +1,7 @@
 package search;
 
+import graph.Bag;
+
 public class Graph {
 	
 	private final int V; // Number of nodes

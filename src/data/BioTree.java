@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import org.json.simple.parser.ParseException;
 
 import search.BST;
-import sort.KDT;
+import search.Field;
+import search.kdt.KDT;
+import sort.GeneralCompare;
 
 public class BioTree implements Serializable {
 	/**
@@ -21,6 +23,7 @@ public class BioTree implements Serializable {
 	 */
 	private static final long serialVersionUID = 4291273291916906661L;
 	//FIXME: replace with a single kd-tree
+	private static KDT<TaxonNode> nodes;
 	private static BST<Integer, TaxonNode> idNodes = new BST<Integer, TaxonNode>();
 	private static BST<String, TaxonNode> strNodes = new BST<String, TaxonNode>();
 	private static BST<String, Integer> incorrectNames = new BST<String, Integer>();
@@ -37,6 +40,12 @@ public class BioTree implements Serializable {
 	 * Initialize species abstract object
 	 */
 	public static void init() {
+		GeneralCompare<TaxonNode> compName = (tn0, tn1) -> tn0.getName().compareTo(tn1.getName());
+		GeneralCompare<TaxonNode> compTxId = (tn0, tn1) -> tn0.getTaxonId() - tn1.getTaxonId();
+		Field<String, TaxonNode> fld = tn -> tn.getName();
+		
+		//nodes = new KDT<>(axes, keyvals);
+		
 		idNodes = new BST<Integer, TaxonNode>();
 		strNodes = new BST<String, TaxonNode>();
 		incorrectNames = new BST<String, Integer>();
@@ -91,7 +100,6 @@ public class BioTree implements Serializable {
 	      } catch (IOException i) {
 	         i.printStackTrace();
 	      } catch (ClassNotFoundException c) {
-	         System.out.println("Employee class not found");
 	         c.printStackTrace();
 	      }
 		BioTree.incorrectNames = incorrectNames;

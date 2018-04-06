@@ -2,8 +2,8 @@ package data;
 
 import java.util.ArrayList;
 
+import search.kdt.KDT;
 import sort.GeneralCompare;
-import sort.KDT;
 
 /**
  * Module for storing Record objects in a central place.

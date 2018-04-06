@@ -2,7 +2,7 @@ package search;
 
 import sort.GeneralCompare;
 
-public class RedBlackTree<Key, Value> {
+public class RedBlackTree<Key extends Comparable<Key>, Value> {
 	private Node<Key, Value> root; // Root of the tree
 	private GeneralCompare<Key> compare;
 	private Field<Key, Value> field;
@@ -23,7 +23,7 @@ public class RedBlackTree<Key, Value> {
 		for(int i = 0; i < 4; i++){
 			myTree.put(x[i]);
 		}
-		assert(myTree.get((Comparable<Integer>) 6) == null);
+		assert(myTree.get(6) == null);
 
 		// Add remaining nodes, expected get(6) result is {6, 6} 
 		for(int i = 5; i < x.length; i++){
@@ -32,7 +32,7 @@ public class RedBlackTree<Key, Value> {
 		}
 		
 		System.out.println("Root: " + myTree.root().key());
-		System.out.println("myTree.get(6).key(): " + (Integer) myTree.get((Comparable<Integer>) 6).key());
+		System.out.println("myTree.get(6).key(): " + (Integer) myTree.get(6).key());
 
 		Node h = myTree.root(); 
 		System.out.println(h.key());
@@ -58,7 +58,7 @@ public class RedBlackTree<Key, Value> {
 	 * @param key Key pointing to the desired node
 	 * @return A node containing who's key matches the input
 	 */
-	public Node<Key, Value> get(Comparable<Key> key) {
+	public Node<Key, Value> get(Key key) {
 		return get(this.root, key);
 	}
 	
@@ -68,7 +68,7 @@ public class RedBlackTree<Key, Value> {
 	 * @param key Desired key to be searched for in a tree
 	 * @return The node containing the key, returns null if the key is not found
 	 */
-	private Node<Key, Value> get(Node<Key, Value> node, Comparable<Key> key) {
+	private Node<Key, Value> get(Node<Key, Value> node, Key key) {
 		if (node.key() == key)
 			return node; 
 		// If key is greater than current node, look right

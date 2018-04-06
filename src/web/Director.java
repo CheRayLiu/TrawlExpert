@@ -3,13 +3,7 @@ package web;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import data.Record;
-
 import java.io.*;
-import java.util.*;
-//import com.example.model.TrawlExpert; // notice this
-import model.*; // notice this
-import search.BasicSearchResult;
 
 
 public class Director extends HttpServlet {

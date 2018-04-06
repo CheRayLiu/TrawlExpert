@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 import org.json.simple.parser.ParseException;
 
-import search.BasicSearch;
+import search.trawl.BasicSearch;
 
 /**
  * This class reads and parses files in the format of occurences.csv
@@ -23,7 +23,7 @@ import search.BasicSearch;
  */
 public class FileProcessor {
 	private static String path = "src/occurrence.csv";
-	private static ArrayList<Record> al = new ArrayList<Record>(1000); //temporary storage for records
+	private static ArrayList<Record> tempRecords = new ArrayList<Record>(1000); //temporary storage for records
 	
 	/**
 	 * Gets the path string
@@ -69,8 +69,8 @@ public class FileProcessor {
 			}
 			
 			//initialize the storage of records
-			DataStore.init(al.toArray(new Record[al.size()]));
-			al = null; //free temporary memory storage of Record objects now that they're in the KDTree.
+			DataStore.init(tempRecords.toArray(new Record[tempRecords.size()]));
+			tempRecords = null; //free temporary memory storage of Record objects now that they're in the KDTree.
 			
 			br.close();
 			fr.close();
@@ -155,7 +155,7 @@ public class FileProcessor {
 			try{
 				Integer taxonId = BioTree.processRecord(matchEventId.group(10));
 				if (taxonId != null)
-					al.add(createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), taxonId, Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6))));
+					tempRecords.add(createRecord(Integer.parseInt(matchEventId.group(3)), matchEventId.group(1), taxonId, Integer.parseInt(matchEventId.group(2)), Float.parseFloat(matchEventId.group(7)), Float.parseFloat(matchEventId.group(8)), Integer.parseInt(matchEventId.group(4)), Integer.parseInt(matchEventId.group(5)), Integer.parseInt(matchEventId.group(6))));
 			} catch(IOException e) {
 				System.out.println("Input Error:" + e);
 			} catch(NullPointerException e) {

@@ -3,11 +3,11 @@
  */
 package search;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import sort.GeneralCompare;
 
 /**
  * @author HaleyGlavina
@@ -23,7 +23,7 @@ public class RedBlackTreeTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
+		b1 = (a1, a2) -> a1 - a2;
 		fld = (a1) -> (Integer) a1[0];
 	}
 
@@ -67,7 +67,7 @@ public class RedBlackTreeTest {
 		for(int i = 0; i < 4; i++){
 			myTree.put(x[i]);
 		}
-		assert(myTree.get((Comparable<Integer>) 6) == null);
+		assert(myTree.get(6) == null);
 		
 		// Add remaining nodes, expected get(6) result is {6, 6} 
 		for(int i = 5; i < x.length; i++){

@@ -1,9 +1,13 @@
-package search;
+package search.trawl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import data.Record;
+import graph.CC;
+import graph.RecordCluster;
+import search.BST;
+import search.Graph;
 import sort.Bound;
 import sort.GeneralRange;
 import sort.RangeHelper;

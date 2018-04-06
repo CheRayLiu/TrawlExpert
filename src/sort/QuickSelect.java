@@ -24,7 +24,7 @@ public class QuickSelect {
 	 * @param a Array of comparable items
 	 * @param gc Lambda function to compare items
 	 */
-	public static <T> void median(Comparable<T>[] a, GeneralCompare<T> gc) {
+	public static <T extends Comparable<T>> void median(T[] a, GeneralCompare<T> gc) {
 		sort(a, 0, a.length - 1, a.length/2, gc);
 	}
 	
@@ -34,7 +34,7 @@ public class QuickSelect {
 	 * @param a Array of comparable items
 	 * @param gc Lambda function to compare items
 	 */
-	public static <T> void median(Comparable<T>[] a, int lo, int hi, GeneralCompare<T> gc) {
+	public static <T extends Comparable<T>> void median(T[] a, int lo, int hi, GeneralCompare<T> gc) {
 		sort(a, lo, hi, (hi + lo) / 2, gc);
 	}
 		
@@ -45,7 +45,7 @@ public class QuickSelect {
 	 * @param k Pivot element that will be in its sorted place in the array
 	 * @param gc Lambda function to compare items
 	 */
-	public static <T> void partialSort(Comparable<T>[] a, int k, GeneralCompare<T> gc) {
+	public static <T extends Comparable<T>> void partialSort(T[] a, int k, GeneralCompare<T> gc) {
 		sort(a, 0, a.length - 1, k, gc);
 	}
 
@@ -57,7 +57,7 @@ public class QuickSelect {
 	 * @param k Pivot element that will be in its sorted place in the array
 	 * @param gc Lambda function to compare items
 	 */
-	public static <T> void sort(Comparable<T>[] a, int lo, int hi, int k, GeneralCompare<T> gc) {
+	public static <T extends Comparable<T>> void sort(T[] a, int lo, int hi, int k, GeneralCompare<T> gc) {
 		if (hi <= lo)
 			return;
 		int j = partition(a, lo, hi, gc);
@@ -77,10 +77,10 @@ public class QuickSelect {
 	 * @param gc Lambda function to compare items
 	 * @return
 	 */
-	private static <T> int partition(Comparable<T>[] a, int lo, int hi, GeneralCompare<T> gc) {
+	private static <T extends Comparable<T>> int partition(T[] a, int lo, int hi, GeneralCompare<T> gc) {
 		// Partition into a[lo..i-1], a[i], a[i+1..hi].
 		int i = lo, j = hi + 1; // left and right scan indices
-		Comparable<T> v = a[lo]; // partitioning item
+		T v = a[lo]; // partitioning item
 
 		while (true) { // Scan right, scan left, check for scan complete, and exchange.
 			while (gc.compare(a[++i], v) < 0)
@@ -104,7 +104,7 @@ public class QuickSelect {
 	 * @param b Index of an item to be swapped
 	 * @param c Index of an item to be swapped
 	 */
-	private static <T> void exch(Comparable<T>[] a, int b, int c) {
+	private static <T extends Comparable<T>> void exch(Comparable<T>[] a, int b, int c) {
 		Comparable<T> temp = a[c];
 		a[c] = a[b];
 		a[b] = temp;
