@@ -19,7 +19,9 @@ function initMap(longi,lati) {
 
   });
     google.maps.event.trigger(map, 'resize');
-    console.log("fin heat")
+    console.log("fin heat");
+    changeGradient();
+    changeRadius();
 }
 
 // Check if a heatmap already exists
@@ -50,7 +52,7 @@ function changeGradient() {
 
 // Set heatmap radius about each point
 function changeRadius() {
-  heatmap.set('radius', heatmap.get('radius') ? null : 80);
+  heatmap.set('radius', heatmap.get('radius') ? null : 15);
 }
 
 // Set opacity of colours

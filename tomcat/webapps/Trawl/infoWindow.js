@@ -23,9 +23,11 @@ function setMarkers(map, lati, longi,name, date, individualCount) {
         var marker = new google.maps.Marker({position: new google.maps.LatLng(lati[i], longi[i]), map: map});
         // var content = "point numero" + i;
         var content = '<div>' +
-			'Name:' + name[i] +
-            '<br>Date:' + findMonth(date[i].month) + ' ' + date[i].day + ', ' + date[i].year +
-            '<br>Count:' + individualCount[i] + '</div></div>';
+			'Scientific name: ' + name[i] +
+            '<br>Date: ' + findMonth(date[i].month) + ' ' + date[i].day + ', ' + date[i].year +
+            '<br>Latitude: ' + lati[i] +
+            '<br>Longitude: ' + longi[i] +
+            '<br>Count: ' + individualCount[i] + '</div></div>';
 		var infowindow = new google.maps.InfoWindow();
 
         google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
