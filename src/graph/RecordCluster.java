@@ -3,7 +3,6 @@ package graph;
 import java.util.ArrayList;
 
 import data.Record;
-import sandbox.Point;
 
 public class RecordCluster {
 	private ArrayList<Record> records;

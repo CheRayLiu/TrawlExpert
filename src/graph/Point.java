@@ -1,4 +1,4 @@
-package sandbox;
+package graph;
 
 import java.io.Serializable;
 

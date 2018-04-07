@@ -12,7 +12,9 @@ import org.hamcrest.core.IsInstanceOf;
 
 import sort.GeneralCompare;
 import sort.GeneralRange;
+import sort.MergeSort;
 import sort.QuickSelect;
+import utils.Stopwatch;
 
 /**
  * A class for constructing KD-trees with range-searching abilities. Written using
@@ -31,7 +33,10 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8807259801436570835L;
+	private static final long serialVersionUID = -5494252458136566820L;
+	/**
+	 * 
+	 */
 	/**
 	 * 
 	 */
@@ -47,7 +52,10 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		/**
 		 * 
 		 */
-		private static final long serialVersionUID = -664511393872278542L;
+		private static final long serialVersionUID = 320302736359757688L;
+		/**
+		 * 
+		 */
 		/**
 		 * 
 		 */
@@ -116,7 +124,10 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		int axis = depth % getK();
 		
 		int mid = (lo + hi) / 2;
-		QuickSelect.median(keyvals, lo, hi, axes.get(axis));
+		
+		Stopwatch sw = new Stopwatch();
+		MergeSort.sort(keyvals, lo, hi, axes.get(axis));
+		System.out.println(sw.elapsedTime());
 		KeyVal median = (KeyVal) keyvals[mid];
 		
 		//TODO: fix size

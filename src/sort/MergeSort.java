@@ -23,7 +23,7 @@ public class MergeSort{
 	 */
 	public static <T extends Comparable<T>> void sort(T[] x, int lo, int hi, GeneralCompare<T> gc) {
 		T[] aux;
-		aux = (T[]) new Object[x.length];
+		aux = (T[]) new Comparable[x.length];
 		sortWrapped(x, lo, hi, gc, aux);
 	}
 	
