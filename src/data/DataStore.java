@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import search.kdt.KDT;
 import sort.GeneralCompare;
+import utils.Stopwatch;
 
 /**
  * Module for storing Record objects in a central place.
@@ -14,6 +15,7 @@ public class DataStore {
 	public static KDT<Record> records;
 	
 	public static void init(Record[] recs) {
+		Stopwatch sw = new Stopwatch();
 		GeneralCompare<Record> ax0 = (r0,r1) -> ((Record) r0).getDate().compareTo(((Record) r1).getDate());
 		GeneralCompare<Record> ax1 = (r0,r1) -> ((Record) r0).getTaxonId() - ((Record) r1).getTaxonId();
 		GeneralCompare<Record> ax2 = (r0,r1) -> Float.compare(((Record) r0).getLatitude(), ((Record) r1).getLatitude());
@@ -22,7 +24,8 @@ public class DataStore {
 		axes.add(ax0);axes.add(ax1);axes.add(ax2);axes.add(ax3);
 		
 		records = new KDT<Record>(axes, recs);
-
+		System.out.println(sw.elapsedTime());
+		
 		System.out.println("K:" + records.getK());
 		System.out.println("H:" + records.height());
 		System.out.println("S:" + records.size());

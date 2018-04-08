@@ -13,6 +13,11 @@ public class BST<Key extends Comparable<Key>, Value> implements Serializable {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1060023741123623349L;
+
+	/**
+	 * 
+	 */
 	public static void main(String[] args) {
 		//BST<Integer,Integer> bst = new BST<Integer, Integer>();
 		//bst.put(75, 9);
@@ -22,7 +27,6 @@ public class BST<Key extends Comparable<Key>, Value> implements Serializable {
 		System.out.println(bst.get(75));
 	}
 	
-	private static final long serialVersionUID = 8775155124761510511L;
 	private Node root;
 	
 	public BST(String fn) {
@@ -51,6 +55,9 @@ public class BST<Key extends Comparable<Key>, Value> implements Serializable {
 		 * 
 		 */
 		private static final long serialVersionUID = -8145778479611668151L;
+		/**
+		 * 
+		 */
 		private Key key;
 		private Value val;
 		private Node left, right;

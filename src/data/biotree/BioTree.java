@@ -1,6 +1,8 @@
 package data.biotree;
 
 import java.io.File;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -59,43 +61,48 @@ public class BioTree implements Serializable {
 	 * @param fn
 	 *            Filename to read from
 	 * @return 
+	 * @throws IOException 
 	 */
-	public static void init(String fn) {
-		BST<Integer, TaxonNode> idNodes = null;
+	public static void init(String fn) throws IOException {
+		idNodes = null;
+		strNodes = null;
+		incorrectNames = null;
+		
+		
+		BST<Integer, TaxonNode> newIdNodes = null;
 		try {
-	         FileInputStream fileIn = new FileInputStream(fn+"/idnodes.ser");
+	         FileInputStream fileIn = new FileInputStream(fn+"/idNodes.ser");
 	         ObjectInputStream in = new ObjectInputStream(fileIn);
-	         idNodes = (BST<Integer, TaxonNode>) in.readObject();
+	         newIdNodes = (BST<Integer, TaxonNode>) in.readObject();
 	         in.close();
 	         fileIn.close();
 	      } catch (IOException i) {
 	         i.printStackTrace();
 	      } catch (ClassNotFoundException c) {
-	         System.out.println("Employee class not found");
 	         c.printStackTrace();
 	      }
-		BioTree.idNodes = idNodes;
+		BioTree.idNodes = newIdNodes;
 		
-		BST<String, TaxonNode> strNodes = null;
+		
+		BST<String, TaxonNode> newStrNodes = null;
 		try {
 	         FileInputStream fileIn = new FileInputStream(fn+"/strNodes.ser");
 	         ObjectInputStream in = new ObjectInputStream(fileIn);
-	         strNodes = (BST<String, TaxonNode>) in.readObject();
+	         newStrNodes = (BST<String, TaxonNode>) in.readObject();
 	         in.close();
 	         fileIn.close();
 	      } catch (IOException i) {
 	         i.printStackTrace();
 	      } catch (ClassNotFoundException c) {
-	         System.out.println("Employee class not found");
 	         c.printStackTrace();
 	      }
-		BioTree.strNodes = strNodes;
+		BioTree.strNodes = newStrNodes;
 		
-		BST<String, Integer> incorrectNames = null;
+		BST<String, Integer> newIncorrectNames = null;
 		try {
 	         FileInputStream fileIn = new FileInputStream(fn+"/incorNames.ser");
 	         ObjectInputStream in = new ObjectInputStream(fileIn);
-	         incorrectNames = (BST<String, Integer>) in.readObject();
+	         newIncorrectNames = (BST<String, Integer>) in.readObject();
 	         in.close();
 	         fileIn.close();
 	      } catch (IOException i) {
@@ -103,7 +110,7 @@ public class BioTree implements Serializable {
 	      } catch (ClassNotFoundException c) {
 	         c.printStackTrace();
 	      }
-		BioTree.incorrectNames = incorrectNames;
+		BioTree.incorrectNames = newIncorrectNames;
 	}
 
 	/**
@@ -356,5 +363,9 @@ public class BioTree implements Serializable {
 		System.out.format(padd + "%s %d\n", tx.getName(), tx.getCount());
 		for (TaxonNode tx2: tx.getChildren())
 			printTree(tx2, level + 1);
+	}
+	
+	public static int n() {
+		return idNodes.size();
 	}
 }

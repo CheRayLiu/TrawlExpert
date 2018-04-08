@@ -125,9 +125,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		
 		int mid = (lo + hi) / 2;
 		
-		Stopwatch sw = new Stopwatch();
-		MergeSort.sort(keyvals, lo, hi, axes.get(axis));
-		System.out.println(sw.elapsedTime());
+		QuickSelect.median(keyvals, lo, hi, axes.get(axis));
 		KeyVal median = (KeyVal) keyvals[mid];
 		
 		//TODO: fix size
