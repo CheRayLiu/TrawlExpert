@@ -19,6 +19,8 @@ function resolveAny(obj) {
     }
 }
 
+// Updates the dropdown menus
+// Called whenever a dropdown menu changes and on init
 function callUpdateSci(object){
     var tagID = object.id;
     var taxID = Number(object.value);
@@ -32,9 +34,10 @@ function callUpdateSci(object){
     reqBioLookup(tagID, taxID);
 }
 
+//  Populates a menu's innerHTML with options
 function populateDropdown(childTagID, nodeList, subnode){
     var x, y, content="";
-    console.log(nodeList[subnode]);
+    // console.log(nodeList[subnode]);
     if(nodeList[subnode] != null){
         for (var i in nodeList[subnode]["taxonName"]){
             x = nodeList[subnode]["taxonId"][i];
@@ -42,13 +45,10 @@ function populateDropdown(childTagID, nodeList, subnode){
             content += '"<option value="' + x + '">' + y + '</option>';
         }
     }
-    // else {
-    //     content
-    // }
-
     document.getElementById(childTagID).innerHTML = content;
 }
 
+// Calls populate dropdown for all menus based off what has changed.
 function updateSci(tagID, nodeList) {
     while (tagID !== "END"){
         switch (tagID){
@@ -184,7 +184,7 @@ function getTaxGroup() {
     }
 }
 
-
+// Requests info window map from the server
 function reqMap(params){
     var path = 'doMap.do';
     var xhr = new XMLHttpRequest();
@@ -205,6 +205,7 @@ function reqMap(params){
     xhr.send(params);                       //send request to server
 }
 
+// Requests heatmap from the server
 function reqHeat(params){
 var path = 'doMap.do';
 var xhr = new XMLHttpRequest();
@@ -224,6 +225,7 @@ xhr.onreadystatechange = function() {//Call a function when the state changes (i
 xhr.send(params);                       //send request to server
 }
 
+// Requests cluster map from the server
 function reqCluster(params){
     var path = 'doCluster.do';
     var xhr = new XMLHttpRequest();
@@ -243,6 +245,7 @@ function reqCluster(params){
     xhr.send(params);                       //send request to server
 }
 
+// Requests list of individual results from the server
 function reqResults(params, lo, hi){
     var path = 'doList.do';
     var xhr = new XMLHttpRequest();
@@ -266,6 +269,10 @@ function reqResults(params, lo, hi){
     xhr.send(params);                       //send request to server
 }
 
+// Finds which output option is selected
+// Creates JSON object from input form values
+// Clears current innerHTML of output elements
+// Calls the appropriate server request function
 function callOutput(){
     var pickOutputType = document.getElementsByName('pickOutput');
     var outType, taxGroup, yearFrom, yearTo, clusterSize;
@@ -287,6 +294,7 @@ function callOutput(){
     document.getElementById("outputBox").innerHTML = "";
     document.getElementById("outputDetails").innerHTML = "";
 
+    // Find the type of output selected and call the respective function
     if(outType === "histogram"){
         document.getElementById("outputBox").innerHTML='<div id="histogram"></div>';
         reqHistogram(params);
@@ -309,7 +317,8 @@ function callOutput(){
     }
 }
 
-// JQuery for Range Slider
+// JQuery Range Slider
+// Used for year range input
 $( function() {
     $( "#slider-range" ).slider({
         range: true,
@@ -323,4 +332,5 @@ $( function() {
     $( "#fromtoYear" ).html($( "#slider-range" ).slider( "values", 0 ) + " - " + $( "#slider-range" ).slider( "values", 1 ))
 } );
 
+// When the window initializes, call init().
 window.onload = init;

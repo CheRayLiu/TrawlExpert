@@ -3,7 +3,7 @@
 
 // Displays markers on a map centred at the Laurentian Great Lakes 
 // When the user clicks the marker, an info window opens
-var openWindow;
+var openWindow; // Keeps track of the current opened infowindow
 
 function initInfo(lati, longi,name, date, individualCount) {
     // Generate map centred at Great Lakes
