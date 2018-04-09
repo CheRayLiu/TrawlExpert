@@ -1,0 +1,14 @@
+\begin {longtable}{@{}ll>{\hsize =\vhAuthorColWidth }X>{\hsize =\vhChangeColWidth }X@{}}
+\textbf {\vhversionname }
+ & \textbf {\vhdatename }
+ & \textbf {\vhauthorname }
+ & \textbf {\vhchangename }\\[1ex]
+1.0
+ & 05.04.18
+ & \listset {HG}
+ & created\\
+1.1
+ & 08.04.18
+ & \listset {HG}
+ & algorithmic analysis added\\
+\end {longtable}

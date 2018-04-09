@@ -23,7 +23,7 @@
 
 \begin{document}
 
-\title{TrawlExpert: Tool for Watershed Biological Research}
+\title{\textbf{TrawlExpert: Tool for Watershed Biological Research}}
 \author{Trawlstars Inc. (Group 11) \\ Lab section: L01  \\ Version: 1.0 \\ SFWRENG 2XB3 \\ \\ Christopher W. Schankula, 400026650, schankuc \\ Haley Glavina, 001412343, glavinhc \\ Winnie Liang, 400074498, liangw15 \\ Ray Liu, 400055250, liuc40 \\ Lawrence Chung, 400014482, chungl1}
 
 \maketitle
@@ -32,16 +32,44 @@
 
 \begin{versionhistory}
   \vhEntry{1.0}{05.04.18}{HG}{created}
-\end{versionhistory}
+  \vhEntry{1.1}{08.04.18}{HG}{algorithmic analysis added}
+\end{versionhistory} 
 
 \noindent\textit{By virtue of submitting this document we electronically sign and date that the work being submitted by all the individuals in the group is their exclusive work as a group and we consent to make available the application being developed through SE-2XB3 project, the reports, presentations, and assignments (not including my name and student number) for future teaching purposes.}
 
 \newpage
 
+\textbf{\Large{Team Contributions}}\\ \\
+The individual contributions of each team member are described below. Subteam B indicates an algorithmic focus in a member's efforts while Subteam A indicates a focus on data parsing and user interface development. Although the contributions have been separated such that each task is recorded under one contributor, members often overlapped duties and designed modules together. \\
 
-
-% ============================= CONTRIBUTION PAGE GOES HERE (TABLE) =======================================
-
+\begin{table}[h]
+	\centering
+	\begin{tabular}{p{0.16\hsize}p{0.38\hsize}p{0.38\hsize}}
+		\toprule
+		\textbf{Name} & \textbf{Role} & \textbf{Contributions}\\
+		\midrule
+		Lawrence Chung\\
+		& Head of Room Booking \newline Subteam B Member
+		& Implemented the depth first search and connected components algorithms. \\
+		\midrule
+		Haley Glavina\\
+		& Meeting Minutes Administrator \newline Subteam B Member
+		& Implemented the red-black tree, quickselect, and mergesort algorithms. Designed the final presentation powerpoint, recorded and submitted all meeting minutes, and assembled the final design specification in LaTeX.\\
+		\midrule
+		Winnie Liang\\
+		& Project Log Administrator \newline Subteam A Member
+		& Implemented the module responsible for parsing out data to create related objects, implemented taxonNode ADT. Led user interface development, set up tomcat files and directory structure,  handled communication between the Google Maps APIs and javascript code. Overlooked project log entries.\\
+		\midrule
+		Ray Liu\\
+		& TA \& Professor Liaison \newline Subteam A Member
+		& Implemented Record ADT, Date ADT, parsing API calls for WORM API, RangeHelper for Basic Search, Histogram.\\
+		\midrule
+		Christopher Schankula\\
+		& Team Leader \newline Subteam A Member
+		& Determined the goals for each meeting, implemented the k-d tree algorithm, and handled server communication. \\		
+		\bottomrule
+	\end{tabular}
+\end{table}
 
 
 \newpage
@@ -69,6 +97,22 @@ The focus of the project will be to develop these unique data searching and quer
 
 \subsection{Dataset}\label{sec:out}
 The test dataset that will be used for purposes of this project is the \textit{USGS Great Lakes Science Center Research Vessel Catch Information System Trawl} published by the United States Geological Survey \citep{usgs2018}. Compiled on yearly operations taking place from early spring to late fall from 1958 until 2016, the dataset contains over 283,000 trawl survey records in the five Great Lakes, including the latitude and longitude co-ordinates and biological classification such as family, genus and species.
+
+\section{Implementation}
+\subsection{Classes and Modules}
+The implementation involved over 30 classes implemented in Java. Additional JavaScript and html files were used to create a sophisticated user interface. For a description of each class and module used, Java documentation can be viewed at %INSERT JAVA DOC LINK% 
+
+\subsection{Class Organization}
+The following UML diagrams depict the organization and use-relations of all classes in the program. Two UML state machine diagrams are included to describe the states and transitions within the \textit{BioTree.java} and \textit{Main.java} class. Since the \textit{Main.java} class is a console version of the final server implementation, the states shown in its UML state machine diagram are analogous to the states of the final \textit{TrawlExpert} product.
+
+\begin{figure}[h]
+\includegraphics[width=16cm]{MainDotJava.jpg}
+
+\caption{Although not necessarily representative of the species in the dataset, this figure shows an example classification tree that TrawlExpert will build in order to allow searching of data in an intelligent way}
+\label{fig:Tree}
+\end{figure}
+
+
 
 \section{Algorithmic Opportunities}
 This project provides several algorithmic challenges and opportunities, which can be broken into the categories of searching, sorting and graph algorithms. These algorithms and their use for the project are described in this section.
