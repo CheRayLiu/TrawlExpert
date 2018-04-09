@@ -3,6 +3,7 @@
 \usepackage{hyperref}
 \usepackage{fancyvrb}
 \usepackage{vhistory}
+\usepackage{float}
 \hypersetup{colorlinks,urlcolor=red}
 \usepackage[margin=1in]{geometry}
 \usepackage{listing}
@@ -105,28 +106,39 @@ The implementation involved over 30 classes implemented in Java. Additional Java
 \subsection{Class Organization}
 The following UML diagrams depict the organization and use-relations of all classes in the program. Two UML state machine diagrams are included to describe the states and transitions within the \textit{BioTree.java} and \textit{Main.java} class. Since the \textit{Main.java} class is a console version of the final server implementation, the states shown in its UML state machine diagram are analogous to the states of the final \textit{TrawlExpert} product.
 
-\begin{figure}[h]
-\includegraphics[width=16cm]{MainDotJava.jpg}
+% Include explanations of why we divided it into some of its main sections/classes
 
-\caption{Although not necessarily representative of the species in the dataset, this figure shows an example classification tree that TrawlExpert will build in order to allow searching of data in an intelligent way}
+\begin{figure}[H]
+\includegraphics[width=18cm, trim={6cm 0 6cm 0}, clip]{MainDotJava.pdf}
+\caption{UML State machine diagram for \textit{Main.java}, a class that provides console access to the \textit{TrawlExpert}'s main functions. This class accepts search criteria from a user to produce a list of search results, depict a histogram of the records in that result, and compute a count of the search hits.}
 \label{fig:Tree}
 \end{figure}
 
+\subsection{Maintaining Generality}
+\subsubsection{General Compare}
+A common theme among \textit{TrawlExpert} classes is the use of lambda functions. Lambda functions provide the capacity for parameterized object comparison or parameterized value access. This maintains the generality, and therefore reusability, of each class. 
 
+The \textit{GeneralCompare} interface can be found at \textit{/sort/GeneralCompare.java}. The interface includes a compare function that takes two generally typed inputs and produces an integer output. When \textit{GeneralCompare} is used in other classes, a compare function (the lambda function) is used to instantiate the expected input type and designate how the integer result must be calculated. This allows reuse of the interface among modules that perform comparisons of differently typed objects. Two records consisting of a fish species, date of observation, and geographic location can be compared based on lexicographic order of their names, date, or proximity to some location. \textit{GeneralCompare} enables the comparison of record objects based on any of these parameters. 
+
+\subsubsection{Field}
+
+\subsubsection{General Range}
+% Similar to gc but 
+% The range itself is the lambda function
+% Input is a single object
+% Returns int describing if obj is in that range (-1 = below lower bound, 0 = in bounds, or 1 = above upper bound)
 
 \section{Algorithmic Opportunities}
-This project provides several algorithmic challenges and opportunities, which can be broken into the categories of searching, sorting and graph algorithms. These algorithms and their use for the project are described in this section.
-
-\subsection{Searching Algorithms}
+\subsection{Quick Select Algorithm}
 A modified form of binary search will be used for quickly locating the first of a given key in the large dataset and will be a crucial building block of all three main types of output. This will allow all entries of a given query to be found.
 
-\subsection{Sorting Algorithms}
-Sorting will be crucial for both ordering data in chronological order as well as supporting binary search, given that it requires sorted data. The mergesort algorithm will be advantageous due to its fast and predictable runtime.
+\subsection{K-d Tree Algorithm}
+% Chris will write :) 
 
-\subsection{Graph Algorithms}\label{sec:graphalgs}
-Graph algorithms will support advanced searching features. Firstly, the biological classification of each organism forms a tree (see figure \ref{fig:Tree}) from which species in the same genus, for example, can be located. 
+\subsection{Graph Algorithms}
+Graph algorithms were used to support advanced searching features. Firstly, the biological classification of each organism forms a tree from which species in the same genus, for example, can be located. 
 
-Secondly, a graph algorithm will be used to find connected components for generating output of type 4 described in section \ref{sec:subgroup}. Nodes are connected together based on their distance to surrounding points \citep{tom10}. Breadth-first search will be used to determine connected components \citep{broder2000graph} (see figure \ref{fig:Groupings}).
+Secondly, a graph algorithm was used to find connected components among search results. Nodes are connected together based on their distance to surrounding points \citep{tom10}. Depth-first search was used to determine connected components \citep{broder2000graph}.
 
 \clearpage
 \section{Project Plan}
