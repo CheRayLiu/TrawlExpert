@@ -115,22 +115,29 @@ The following UML diagrams depict the organization and use-relations of all clas
 \end{figure}
 
 \subsection{Maintaining Generality}
-\subsubsection{General Compare}
-A common theme among \textit{TrawlExpert} classes is the use of lambda functions. Lambda functions provide the capacity for parameterized object comparison or parameterized value access. This maintains the generality, and therefore reusability, of each class. 
+A common theme among \textit{TrawlExpert} classes is the use of lambda functions. Lambda functions provide the capacity for parameterized object comparison or parameterized value access. This maintains the generality, and therefore reusability, of each class by allowing for generic types in class definitions. Type(s) of the input(s) and the how input object(s) are used only become assigned when the function is used.
 
-The \textit{GeneralCompare} interface can be found at \textit{/sort/GeneralCompare.java}. The interface includes a compare function that takes two generally typed inputs and produces an integer output. When \textit{GeneralCompare} is used in other classes, a compare function (the lambda function) is used to instantiate the expected input type and designate how the integer result must be calculated. This allows reuse of the interface among modules that perform comparisons of differently typed objects. Two records consisting of a fish species, date of observation, and geographic location can be compared based on lexicographic order of their names, date, or proximity to some location. \textit{GeneralCompare} enables the comparison of record objects based on any of these parameters. 
+\subsubsection{General Compare}
+The \textit{GeneralCompare} interface can be found at \textit{/sort/GeneralCompare.java}. This interface includes a \textit{compare} function that takes two generically typed inputs and produces an integer output. When \textit{GeneralCompare} is used in other classes, a compare function (the lambda function) is used to instantiate the expected input type and designate how the integer result must be calculated. This allows reuse of the interface among modules that perform comparisons of differently typed objects. Two records consisting of a fish species, date of observation, and geographic location can be compared based on lexicographic order of their names, date, or proximity to some location. \textit{GeneralCompare} enables the comparison of record objects based on any of these parameters. 
 
 \subsubsection{Field}
+The \textit{Field} interface can be found at \textit{/search/Field.java}. This interface includes a \textit{field} function that retrieves a key (a generic type) from a generically typed input object. Similar to \textit{GeneralCompare}'s \textit{compare} function, \textit{field} is a lambda function. The field interface is used to perform searches in a tree of records that have been sorted by variable attributes from each record. The lambda function specifies which attribute to access when searching through the tree.
 
 \subsubsection{General Range}
-% Similar to gc but 
-% The range itself is the lambda function
-% Input is a single object
-% Returns int describing if obj is in that range (-1 = below lower bound, 0 = in bounds, or 1 = above upper bound)
+The \textit{GeneralRange} interface can be found at \textit{/sort/GeneralRange.java}. This interface includes a \textit{isInBounds} function returns an integer to describe if a record is member to a subset of the search results. The input has a generic type, rather than \textit{Record} type, to satisfy reusability. The lambda function uses the range itself to perform conditional checks about whether the input object is below, within, or above the range. A return value of -1 indicates it is below, 0 indicates it is within, and 1 indicates it is above the range.
 
 \section{Algorithmic Opportunities}
+The \textit{TrawlExpert} was made possible by the use of vaious algorithms studied in \textit{SFWRENG 2C03: Algorithms} offered at McMaster University. These algorithms include \textit{Red-Black Tree} for searching and \textit{Merge Sort} for sorting objects. Additional algorithms outside of the course scope were implemented to optimize the program, they are described below. 
+
 \subsection{Quick Select Algorithm}
-A modified form of binary search will be used for quickly locating the first of a given key in the large dataset and will be a crucial building block of all three main types of output. This will allow all entries of a given query to be found.
+A modified form of the \textit{Quick Sort} algorithm that returns the $k^{th}$ largest element of an unsorted array. Similar to \textit{Quick Sort}, \textit{Quick Select} randomly chooses a partitioning element to sort the array such that all elements smaller than the partition are left of it, and larger elements are to the right. However, rather than recursively sorting both halves of the partitioned array, \textit{Quick Select} only sorts the half containing the $k^{th}$ index. The algorithm terminates once the partitioning element ends up at the $k^{th}$ index of the array, the value of this element is returned.
+
+This algorithm is implemented in \textit{/sort/QuickSelect.java}. It is used during the construction of \textit{k-d tree}s which require the frequent division of an array into two equally sized halves. By finding the median element of an array, it is partially sorted into equally sized small and large halves. The \textit{Quick Select} class implements a \textit{median} method to simplify its usage in \textit{k-d tree} construction. 
+
+Using \textit{Quick Select} rather than \textit{Merge Sort} has optimized the \textit{TrawlExpert}. When using \textit{Merge Sort} during \textit{k-d tree} construction, an array must be fully sorted before retrieving the median element. \textit{Quick Select} only partially sorts the array before reaching the median and has reduced \textit{k-d tree} construction from 40.083 s to 0.56 s 
+
+
+% Mention optimization for Worms API
 
 \subsection{K-d Tree Algorithm}
 % Chris will write :) 
@@ -140,71 +147,6 @@ Graph algorithms were used to support advanced searching features. Firstly, the 
 
 Secondly, a graph algorithm was used to find connected components among search results. Nodes are connected together based on their distance to surrounding points \citep{tom10}. Depth-first search was used to determine connected components \citep{broder2000graph}.
 
-\clearpage
-\section{Project Plan}
-\subsection{Milestones}
-The following milestones will help inform our progress towards completing the goals. Given that the team contains 5 people, the team will be divided up into two subteams of 2-3 people for maximum efficiency. Individual members' tasks can be decided by the subteams based on the progress of that team towards completing the next milestone's goal(s). Subteams should be in constant communication and in agreement about the inputs and outputs of modules to avoid the need rewriting of code.
-
-
-\begin{table}[h]
-	\centering
-	\begin{tabular}{p{0.16\hsize}p{0.38\hsize}p{0.38\hsize}}
-		\toprule
-		\textbf{Milestone} & \textbf{Subteam A} & \textbf{Subteam B}\\
-		\midrule
-		Milestone 1 \newline (``Bedrock'') \newline(End of Week 1)
-		& Finished parsing module for .csv data to create Java objects that can be used for analysis; start data cleansing
-		& General binary search module underway \\
-		\midrule
-		Milestone 2 \newline (``Quartz'') \newline(End of Week 2)
-		& Cleansed the data to remove or correct entries not containing all of the columns; start generating biological classification tree module
-		& Finished and tested binary search; start mergesort \\
-		\midrule
-		Milestone 3 \newline (``Granite'') \newline(End of Week 4)
-		& Finished and tested biological classification tree; start formatted text output
-		& Finished and tested mergesort; start writing query module for output type 1, 2 and 3 making use of the biological classification tree, mergesort and binary search to get results from data \\
-		\midrule
-		Milestone 4 \newline (``Sandstone'') \newline(End of Week 6)
-		& Continue text output tools. Google Maps API should be explored if time allows, otherwise it can be omitted to keep the project within scope
-		& Continue query module: finished output 1,  2 \& 2; start output type 4\\
-		\midrule
-		Milestone 5 \newline (``Diamond'') \newline(End of Week 8)
-		& Finished data visualization or text output tools; prepare keynote presentation
-		& Finished output type 4; prepare keynote presentation \\		
-		\bottomrule
-	\end{tabular}
-\end{table}
-
-\noindent While this schedule provides a good reference and a way to monitor progress, team members should be flexible and remain in communication to ensure the project is kept on schedule. For example, if a milestone is reached before its given date, the next milestone should start development early. Approximately 1-2 weeks have been purposely left as padding at the end in case of unforeseen circumstances.
-
-
-\subsection{Team Roles}
-\begin{table}[h]
-	\centering
-	\begin{tabular}{p{0.20\hsize}p{0.30\hsize}p{0.10\hsize}}
-		\toprule
-		\textbf{Member} & \textbf{Role} & \textbf{Subteam}\\
-		\midrule
-		Christoper Schankula & Team Lead & A\\		
-		\midrule
-		Ray Liu & TA \& Professor Liaison & A\\	
-		\midrule
-		Winning Liang & Project Log Admin & A\\		
-		\midrule
-		Haley Glavina & Meeting Minutes Admin & B\\	
-		\midrule
-		Lawrence Chung & Head of Booking & B\\
-		\bottomrule
-	\end{tabular}
-\end{table}
-
-\subsection{Workflow}
-
-The team will use \textbf{GitLab} as the primary way of sharing code and keeping up to date. The Git repository will be split into two branches, in addition to the \textit{master} branch: \textit{TeamA} and \textit{TeamB}. Each Subteam will develop on their respective branch, then issue merge requests so the team can evaluate and approve merges into the \textit{master} branch.
-
-\subsection{Communication}
-
-The team will use \textbf{Slack} and \textbf{Facebook Messenger} as primary and secondary means of communication. A Slack group has been created and each of the members were invited to it. \textbf{Google Drive} will be used to keep track of documentation such as the \textit{Project Log} and meeting minutes.
 
 \clearpage
 \bibliographystyle{apa}

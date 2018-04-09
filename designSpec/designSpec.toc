@@ -7,14 +7,9 @@
 \contentsline {subsection}{\numberline {2.2}Class Organization}{5}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Maintaining Generality}{6}{subsection.2.3}
 \contentsline {subsubsection}{\numberline {2.3.1}General Compare}{6}{subsubsection.2.3.1}
-\contentsline {subsubsection}{\numberline {2.3.2}Field}{7}{subsubsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.2}Field}{6}{subsubsection.2.3.2}
 \contentsline {subsubsection}{\numberline {2.3.3}General Range}{7}{subsubsection.2.3.3}
 \contentsline {section}{\numberline {3}Algorithmic Opportunities}{7}{section.3}
 \contentsline {subsection}{\numberline {3.1}Quick Select Algorithm}{7}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}K-d Tree Algorithm}{7}{subsection.3.2}
 \contentsline {subsection}{\numberline {3.3}Graph Algorithms}{7}{subsection.3.3}
-\contentsline {section}{\numberline {4}Project Plan}{8}{section.4}
-\contentsline {subsection}{\numberline {4.1}Milestones}{8}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Team Roles}{8}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Workflow}{9}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Communication}{9}{subsection.4.4}
