@@ -57,7 +57,7 @@ public class CC {
 	 * Boolean method to checked if two components are connected
 	 * @param v First value to be checked
 	 * @param w Second value to be checked
-	 * @return True if connected, else False
+	 * @return True if connected (same component id), else False
 	 */
 	public boolean connected(int v, int w){
 		return id[v] == id[w];
@@ -72,6 +72,9 @@ public class CC {
 		return id[v];
 	}
 	
+	/**
+	 * @return number of connected clusters
+	 */
 	public int count(){
 		return count;
 	}
