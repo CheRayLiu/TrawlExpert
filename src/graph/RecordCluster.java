@@ -4,10 +4,24 @@ import java.util.ArrayList;
 
 import data.Record;
 
+/**
+ * A cluster of records clustered by the Cluster class.
+ * @author TrawlStars, Inc.
+ *
+ */
 public class RecordCluster {
-	private ArrayList<Record> records; //list of records
-	private Point centroid; //Middle point of square in question
-	private int individualCount; //Number of data points in cluster
+	/**
+	 * List of records in cluster.
+	 */
+	private ArrayList<Record> records;
+	/**
+	 * Average 2D position of records in cluster.
+	 */
+	private Point centroid;
+	/**
+	 * Total number of inidividual fish in the cluster.
+	 */
+	private int individualCount;
 	
 	/**
 	 * Constructor for a cluster of fish data points
