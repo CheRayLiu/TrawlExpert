@@ -28,7 +28,6 @@
 \author{Trawlstars Inc. (Group 11) \\ Lab section: L01  \\ Version: 1.0 \\ SFWRENG 2XB3 \\ \\ Christopher W. Schankula, 400026650, schankuc \\ Haley Glavina, 001412343, glavinhc \\ Winnie Liang, 400074498, liangw15 \\ Ray Liu, 400055250, liuc40 \\ Lawrence Chung, 400014482, chungl1}
 
 
-
 \maketitle
 
 \begin{center}
@@ -118,10 +117,32 @@ Apache tomcat was used to create a webserver which uses the internal functionali
 
 \section{Implementation}
 \subsection{Classes and Modules}
-The implementation involved over 30 classes implemented in Java. Additional JavaScript and HTML files were used to create a sophisticated web-based user interface. For a description of each class and module used, JavaDoc documentation can be viewed at %INSERT JAVA DOC LINK% 
+The implementation involved over 30 classes implemented in Java. Additional JavaScript and HTML files were used to create a sophisticated web-based user interface. For a description of each class and module used, JavaDoc documentation can be viewed by opening the \texttt{doc/index.html} folder in the submission archive or by visiting \url{http://trawl.schankula.ca/Trawl/doc}.
 
 \subsection{Class Organization}
-The \textit{Trawl Expert} implementation efforts were divided into two subteams: Subteam A and Subteam B. 
+An overview of the modules included in the \textit{TrawlExpert} is shown in figure \ref{fig:UML}. The \textit{Trawl Expert} implementation efforts were divided into two subteams: Subteam A and Subteam B. Tasks were assigned so as to maximize the parallelization of the development process. As a biproduct, modules were designed to uphold the principles of information hiding, modularity and separation of concerns.
+
+\subsubsection{model Package}
+This class represents the model of the \textit{TrawlExpert} platform. It provides wrapper hooks to functionality deeper inside the codebase, which allows different views to be used separately from the internal functionality. Two such views are the command-line interface in \texttt{main/Main.java} and the tomcat server. This design allows any such view to be built upon the foundation of the model, without needing to edit any underlying code.
+
+\subsubsection{data Package}
+
+\subsubsection{search Package}
+
+\subsubsection{sort Package}
+
+\subsubsection{graph Package}
+
+\subsubsection{utils Package}
+
+\subsubsection{web Package}
+
+\begin{figure}
+\centering
+\includegraphics[angle=90,width=14cm]{ClassUML.png}
+\caption{The UML class diagram of TrawlExpert, showing the relationships amongst modules. The full-resolution version is available in the root directory of the submission archive as \texttt{UML.png}.}
+\label{fig:UML}
+\end{figure}
 
 
 \subsection{UML State Diagrams}

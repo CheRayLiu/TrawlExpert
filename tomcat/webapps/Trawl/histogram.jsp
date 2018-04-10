@@ -1,4 +1,4 @@
-<%@ page import="java.util.*, data.Record, model.TrawlExpert, search.BST,search.trawl.BasicSearchResult" %>
+<%@ page import="java.util.*, data.Record, model.TrawlExpert, search.RedBlackTree, search.trawl.BasicSearchResult" %>
 <%@page import="org.json.simple.JSONArray"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.parser.JSONParser"%>
@@ -14,7 +14,7 @@
 
 		BasicSearchResult result = te.rangeSearch(taxonId, yearLo, yearHi);
 
-		BST<Integer, Integer> histogram = result.histogram();
+		RedBlackTree<Integer, Integer> histogram = result.histogram();
 		Iterable<Integer> results = histogram.keys();
 		
 		
