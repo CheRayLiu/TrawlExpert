@@ -29,8 +29,10 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Seriali
 	 * @param key Key pointing to the desired node
 	 * @return A node containing who's key matches the input
 	 */
-	public RBNode<Key, Value> get(Key key) {
-		return get(this.root, key);
+	public Value get(Key key) {
+		RBNode<Key, Value> node = get(this.root, key);
+		if (node == null) return null;
+		else return get(this.root, key).val();
 	}
 	
 	/**
@@ -147,7 +149,6 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Seriali
 	 * @return New root of the rotated segment
 	 */
 	public RBNode<Key, Value> rotateLeft(RBNode<Key, Value> h){
-		System.out.println("Rotate left!");
 		RBNode<Key, Value> x = h.right();
 		h.right(x.left());
 		x.left(h);
@@ -205,5 +206,9 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Seriali
 			h.right().color(false);
 			h.color(true);
 		}
+	}
+	
+	public int size() {
+		return root.n();
 	}
 }

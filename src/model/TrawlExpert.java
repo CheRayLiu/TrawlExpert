@@ -27,8 +27,9 @@ public class TrawlExpert {
 		//load data
 		try {
 			BioTree.init("data/biotree/");
-			DataStore.records = new KDT<Record>("data/kdt.ser");
+			DataStore.records = new KDT<Record>("data/records.kdtree");
 		} catch (Exception e0) {
+			e0.printStackTrace();
 			try {
 				BioTree.init();
 				FileProcessor.initProcessing();
@@ -37,7 +38,7 @@ public class TrawlExpert {
 				e.printStackTrace();
 			}
 			BioTree.write("data/biotree/");
-			DataStore.records.writeToFile("data/kdt.ser");
+			DataStore.records.writeToFile("data/records.kdtree");
 		};
 	}
 	

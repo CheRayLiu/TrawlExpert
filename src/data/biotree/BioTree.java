@@ -1,10 +1,7 @@
 package data.biotree;
 
 import java.io.File;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,34 +12,24 @@ import java.util.ArrayList;
 import org.json.simple.parser.ParseException;
 
 import data.WormsAPI;
-import search.BST;
-import search.Field;
-import search.kdt.KDT;
 import search.RedBlackTree;
-import sort.GeneralCompare;
 
 public class BioTree implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4291273291916906661L;
-	//FIXME: replace with a single kd-tree
-	private static KDT<TaxonNode> nodes;
-	private static BST<Integer, TaxonNode> idNodes = new BST<Integer, TaxonNode>();
-	private static BST<String, TaxonNode> strNodes = new BST<String, TaxonNode>();;
-	private static RedBlackTree<String, Integer> incorrectNames =  new RedBlackTree<String, Integer>(a -> "", (s0,s1) -> s0.compareTo(s1));
+	private static RedBlackTree<Integer, TaxonNode> idNodes;
+	private static RedBlackTree<String, TaxonNode> strNodes;
+	private static RedBlackTree<String, Integer> incorrectNames;
 	
 	/**
 	 * Initialize species abstract object
 	 */
-	public static void init() {
-		GeneralCompare<TaxonNode> compName = (tn0, tn1) -> tn0.getName().compareTo(tn1.getName());
-		GeneralCompare<TaxonNode> compTxId = (tn0, tn1) -> tn0.getTaxonId() - tn1.getTaxonId();
-		
-		//nodes = new KDT<>(axes, keyvals);
-		
-		BioTree.idNodes = new BST<Integer, TaxonNode>();
-		BioTree.strNodes = new BST<String, TaxonNode>();
+	public static void init() {		
+		//initialize searches by id and string
+		BioTree.idNodes = new RedBlackTree<Integer, TaxonNode>(tx -> tx.getTaxonId() , (s0,s1) -> s0.compareTo(s1));
+		BioTree.strNodes = new RedBlackTree<String, TaxonNode>(tx -> tx.getName(), (s0,s1) -> s0.compareTo(s1));
 		//initialize incorrect names database -- will be abusing the field and always supplying a custom key
 		//instead.
 		BioTree.incorrectNames = new RedBlackTree<String, Integer>(a -> "", (s0,s1) -> s0.compareTo(s1));
@@ -55,56 +42,27 @@ public class BioTree implements Serializable {
 	 * @param fn
 	 *            Filename to read from
 	 * @return 
-	 * @throws IOException 
+	 * @throws IOException The file cannot be found.
+	 * @throws ClassNotFoundException There was a problem loading the serialized data from the disc.
 	 */
-	public static void init(String fn) throws IOException {
-		idNodes = null;
-		strNodes = null;
-		incorrectNames = null;
+	public static void init(String fn) throws IOException, ClassNotFoundException {
+		FileInputStream fileIn = new FileInputStream(fn+"/idNodes.rbtree");
+		ObjectInputStream in = new ObjectInputStream(fileIn);
+		idNodes = (RedBlackTree<Integer, TaxonNode>) in.readObject();
+		in.close();
+		fileIn.close();
 		
+		fileIn = new FileInputStream(fn+"/strNodes.rbtree");
+		in = new ObjectInputStream(fileIn);
+		strNodes = (RedBlackTree<String, TaxonNode>) in.readObject();
+		in.close();
+		fileIn.close();
 		
-		BST<Integer, TaxonNode> newIdNodes = null;
-		try {
-	         FileInputStream fileIn = new FileInputStream(fn+"/idNodes.ser");
-	         ObjectInputStream in = new ObjectInputStream(fileIn);
-	         newIdNodes = (BST<Integer, TaxonNode>) in.readObject();
-	         in.close();
-	         fileIn.close();
-	      } catch (IOException i) {
-	         i.printStackTrace();
-	      } catch (ClassNotFoundException c) {
-	         c.printStackTrace();
-	      }
-		BioTree.idNodes = newIdNodes;
-		
-		
-		BST<String, TaxonNode> newStrNodes = null;
-		try {
-	         FileInputStream fileIn = new FileInputStream(fn+"/strNodes.ser");
-	         ObjectInputStream in = new ObjectInputStream(fileIn);
-	         newStrNodes = (BST<String, TaxonNode>) in.readObject();
-	         in.close();
-	         fileIn.close();
-	      } catch (IOException i) {
-	         i.printStackTrace();
-	      } catch (ClassNotFoundException c) {
-	         c.printStackTrace();
-	      }
-		BioTree.strNodes = newStrNodes;
-		
-		RedBlackTree<String, Integer> newIncorrectNames = null;
-		try {
-	         FileInputStream fileIn = new FileInputStream(fn+"/incorNames.biotree");
-	         ObjectInputStream in = new ObjectInputStream(fileIn);
-	         newIncorrectNames = (RedBlackTree<String, Integer>) in.readObject();
-	         in.close();
-	         fileIn.close();
-	      } catch (IOException i) {
-	         i.printStackTrace();
-	      } catch (ClassNotFoundException c) {
-	         c.printStackTrace();
-	      }
-		BioTree.incorrectNames = newIncorrectNames;
+		fileIn = new FileInputStream(fn+"/incorNames.rbtree");
+		in = new ObjectInputStream(fileIn);
+		incorrectNames = (RedBlackTree<String, Integer>) in.readObject();
+		in.close();
+		fileIn.close();
 	}
 
 	/**
@@ -121,36 +79,36 @@ public class BioTree implements Serializable {
 			d.mkdirs();
 		try {
 	         FileOutputStream fileOut =
-	        		 new FileOutputStream(dir+"/idNodes.ser");
+	        		 new FileOutputStream(dir+"/idNodes.rbtree");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(BioTree.idNodes);
 	         out.close();
 	         fileOut.close();
-	         System.out.printf("Serialized data is saved in /tmp/kdtree.ser");
+	         System.out.printf("Serialized data is saved in /tmp/kdtree.rbtree");
 	      } catch (IOException i) {
 	         i.printStackTrace();
 	      }
 		
 		try {
 	         FileOutputStream fileOut =
-	        		 new FileOutputStream(dir+"/strNodes.ser");
+	        		 new FileOutputStream(dir+"/strNodes.rbtree");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(BioTree.strNodes);
 	         out.close();
 	         fileOut.close();
-	         System.out.printf("Serialized data is saved in /tmp/kdtree.ser");
+	         System.out.printf("Serialized data is saved in /tmp/kdtree.rbtree");
 	      } catch (IOException i) {
 	         i.printStackTrace();
 	      }
 		
 		try {
 	         FileOutputStream fileOut =
-	        		 new FileOutputStream(dir+"/incorNames.biotree");
+	        		 new FileOutputStream(dir+"/incorNames.rbtree");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(BioTree.incorrectNames);
 	         out.close();
 	         fileOut.close();
-	         System.out.printf("Serialized data is saved in " + dir + "/incorNames.biotree");
+	         System.out.printf("Serialized data is saved in " + dir + "/incorNames.rbtree");
 	      } catch (IOException i) {
 	         i.printStackTrace();
 	      }
@@ -282,10 +240,7 @@ public class BioTree implements Serializable {
 		if (tx != null) return tx.getTaxonId();
 		else System.out.println(scientificName + " not in local db");
 		//look up in local incorrect names database, return if it exists
-		if (incorrectNames.get(scientificName) != null) {
-			System.out.println(incorrectNames.get(scientificName));
-			taxonId = incorrectNames.get(scientificName).val();
-		}
+		taxonId = incorrectNames.get(scientificName);
 		if (taxonId != null) {
 			tx = idNodes.get(taxonId);
 			if (tx != null) return tx.getTaxonId();
