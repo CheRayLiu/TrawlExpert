@@ -163,19 +163,27 @@ This algorithm is implemented in \textit{/sort/QuickSelect.java}. It is used dur
 
 % Mention optimization for Worms API
 
-\subsection{K-d Tree}
+\subsection{kd Tree}
+A k-dimensional (kd) binary search tree was used to provide a fast range searching structure for the records. Given that the current size of the USGS dataset is over 280,000 entries and likely to grow with additional studies, it was crucial to have a structure to support fast searches. However, since the data contains many dimensions (taxon id, latitude, longitude, date), a simple binary search tree is not useful for this task. Instead, a kd-tree was employed.
+
+A kd-tree is like a binary search tree except that on each level $i$ of the tree, the comparison between nodes is made on the ($i\ \%\ d$)th axis of the data. For example, in a two-dimensional tree of ($x,y$) points, the first level of the tree would be compared on $x$, and the second level would be compared on $y$, the third level on $x$, and so on.
+
+This structure gives a fast way of range searching for values in the tree, with a search complexity of $\mathcal{O}(dn^{1-\frac{1}{d}})$ where $n$ is the number of nodes in the tree and $d$ is the number of splitting dimensions of the tree. In the \textit{TrawlExpert}, we use a 4-d tree to split on taxon id, date, latitude and longitude. Range searches for specific species are very fast, often on the order of 5-10ms and sometimes as fast as 1ms.
+
+In order to build the kd-tree in a balanced way, it's crucial to be able to find the median of the data, so that a balanced number of nodes are inserted on each left and right subtree within the tree. In order to support fast $kd$ tree building (which only needs to happen once when the dataset is first analyzed), the aforementioned \textit{QuickSelect} algorithm was used, which was able to allow building the whole kd-tree in about 0.6 seconds. The kd-tree class then contains methods for serializing the data of the kd-tree so that it can be reloaded quickly from the disc on subsequent launches of \textit{TrawlExpert}.
+
 %
 % Chris will write :) ============================ LOOK HERE CHRIS =================================
 %
 
 \subsection{Graphing}
-Graph algorithms were used to support advanced searching features. Firstly, the biological classification of each organism forms a tree from which species in the same genus, for example, can be located. 
+Graph algorithms were used to support advanced searching features. Firstly, the biological classification of each organism forms a tree from which species in the same genus, for example, can be located. This was accomplished by creating a BioTree node, which stores the taxon id number of the classification, the scientific name of the entry, the number of records with that taxon id contained in the dataset and pointers to the parent and the children of the node. This structure directly mimics the method that scientists use to classify species according to their similarities (into family, genus, species) and allows for intelligent filtering and searching of the dataset. For example, with this structure it is possible to find all descendants of a certain biological classification.
 
 Secondly, a graph algorithm was used to find connected components among search results. Nodes are connected together based on their distance to surrounding points \citep{tom10}. Depth-first search was used to determine connected components \citep{broder2000graph}.
 
 \section{Software Design Principles}
 \subsection{Robustness}
-Robustness is a non-functional requirement prioritized during the \textit{TrawlExpert}'s development. Considering all 278 000 records in the dataset were entered by humans, data entry errors were inevitable. The \textit{TrawlExpert} implementation had to ensure unexpected entries in the dataset were handled gracefully and could be recovered if possible. 
+Robustness is a non-functional requirement prioritized during the \textit{TrawlExpert}'s development. Considering all 280,000+ records in the dataset were entered by humans, data entry errors were inevitable. The \textit{TrawlExpert} implementation had to ensure unexpected entries in the dataset were handled gracefully and could be recovered if possible. 
 
 When building a BioTree from the dataset, the World Register of Marine Species (WORMS) database API was used to find the correct scientific name of slightly misspelled names. Unless a name was severely misspelled, the Worms API was able to salvage small data entry errors. This ensured records could be used when building the BioTree and protected the tool from raising exceptions from small input errors. While this introduces a dependance on an Internet connection to \textit{TrawlExpert}, it was assumed that the scientists working with \textit{TrawlExpert} would have access to an Internet connection, and the tradeoff is reasonable for the recovery of many errors in the dataset.
 
