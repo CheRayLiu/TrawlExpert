@@ -22,6 +22,7 @@ public class BioTree implements Serializable {
 	private static RedBlackTree<Integer, TaxonNode> idNodes;
 	private static RedBlackTree<String, TaxonNode> strNodes;
 	private static RedBlackTree<String, Integer> incorrectNames;
+	public static int incorrectRecords = 0;
 	
 	/**
 	 * Initialize species abstract object
@@ -243,6 +244,7 @@ public class BioTree implements Serializable {
 		taxonId = incorrectNames.get(scientificName);
 		if (taxonId != null) {
 			tx = idNodes.get(taxonId);
+			incorrectRecords++;
 			if (tx != null) return tx.getTaxonId();
 		} else {		//otherwise use Worms to look it up
 			System.out.println(scientificName + " not in incor db");
@@ -252,6 +254,7 @@ public class BioTree implements Serializable {
 			else {
 				System.out.println(scientificName + " found in Worms: " + taxonId);
 				incorrectNames.put(scientificName, taxonId);
+				incorrectRecords++;
 			}
 		}
 		return taxonId;

@@ -24,10 +24,16 @@
 
 \begin{document}
 
-\title{\textbf{TrawlExpert: Tool for Watershed Biological Research}}
+\title{\textbf{TrawlExpert: A Tool for Watershed Biological Research}}
 \author{Trawlstars Inc. (Group 11) \\ Lab section: L01  \\ Version: 1.0 \\ SFWRENG 2XB3 \\ \\ Christopher W. Schankula, 400026650, schankuc \\ Haley Glavina, 001412343, glavinhc \\ Winnie Liang, 400074498, liangw15 \\ Ray Liu, 400055250, liuc40 \\ Lawrence Chung, 400014482, chungl1}
 
+
+
 \maketitle
+
+\begin{center}
+\includegraphics{logo.png}
+\end{center}
 
 \newpage
 
@@ -49,25 +55,25 @@ The individual contributions of each team member are described below. Subteam B 
 		\toprule
 		\textbf{Name} & \textbf{Role} & \textbf{Contributions}\\
 		\midrule
-		Lawrence Chung\\
+		Lawrence Chung
 		& Head of Room Booking \newline Subteam B Member
 		& Implemented the depth first search and connected components algorithms. \\
 		\midrule
-		Haley Glavina\\
+		Haley Glavina
 		& Meeting Minutes Administrator \newline Subteam B Member
 		& Implemented the red-black tree, quickselect, and mergesort algorithms. Designed the final presentation powerpoint, recorded and submitted all meeting minutes, and assembled the final design specification in LaTeX. Generated UML state machine diagrams.\\
 		\midrule
-		Winnie Liang\\
+		Winnie Liang
 		& Project Log Administrator \newline Subteam A Member
-		& Implemented the module responsible for parsing out data to create related objects, implemented taxonNode ADT. Led user interface development, set up tomcat files and directory structure,  handled communication between the Google Maps APIs and javascript code. Overlooked project log entries.\\
+		& Implemented the module responsible for parsing out data to create related objects, implemented taxonNode ADT. Led user interface development, set up tomcat files and directory structure,  handled communication between the Google Maps APIs and JavaScript code. Overlooked project log entries.\\
 		\midrule
-		Ray Liu\\
+		Ray Liu
 		& TA \& Professor Liaison \newline Subteam A Member
-		& Implemented Record ADT, Date ADT, parsing API calls for WORM API, RangeHelper for Basic Search, Histogram.\\
+		& Implemented Record ADT, Date ADT, parsing API calls for WORMS API, RangeHelper for Basic Search, Histogram output for command line, histogram output for web interface.\\
 		\midrule
-		Christopher Schankula\\
+		Christopher Schankula
 		& Team Leader \newline Subteam A Member
-		& Determined the goals for each meeting, implemented the k-d tree algorithm, and handled server communication. \\		
+		& Determined the goals for each meeting, implemented the k-d tree algorithm, wrote backend of server, wrote command-line tool. \\		
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -100,17 +106,34 @@ The focus of the project will be to develop these unique data searching and quer
 The test dataset that will be used for purposes of this project is the \textit{USGS Great Lakes Science Center Research Vessel Catch Information System Trawl} published by the United States Geological Survey \citep{usgs2018}. Compiled on yearly operations taking place from early spring to late fall from 1958 until 2016, the dataset contains over 283,000 trawl survey records in the five Great Lakes, including the latitude and longitude co-ordinates and biological classification such as family, genus and species.
 
 \subsection{Final Product}
-The \textit{TrawlExpert} tool can be accessed at \url{http://trawl.schankula.ca/Trawl}. 
+\begin{figure}
+\centering
+\includegraphics[width=16cm]{UI.png}
+\caption{The final TrawlExpert web interface allows users to intelligently search for specific taxa and display several helpful statistical and data visualization tools such as maps and histograms.}
+\label{fig:UI}
+\end{figure}
+
+Apache tomcat was used to create a webserver which uses the internal functionality and model of TrawlExpert written in Java. The UI allows users to filter by using information about different taxa (their biological relationships to each other, such as family / genus / species, etc) and display several different data outputs such as histograms, heatmaps, maps and population clusters, in addition to viewing raw data in tabular form. The clustering function is shown in \ref{fig:UI}. The \textit{TrawlExpert} is hosted on Google Cloud Platform and can be accessed at \url{http://trawl.schankula.ca/Trawl}. 
 
 
 \section{Implementation}
 \subsection{Classes and Modules}
-The implementation involved over 30 classes implemented in Java. Additional JavaScript and html files were used to create a sophisticated user interface. For a description of each class and module used, Java documentation can be viewed at %INSERT JAVA DOC LINK% 
+The implementation involved over 30 classes implemented in Java. Additional JavaScript and HTML files were used to create a sophisticated web-based user interface. For a description of each class and module used, JavaDoc documentation can be viewed at %INSERT JAVA DOC LINK% 
 
 \subsection{Class Organization}
 The \textit{Trawl Expert} implementation efforts were divided into two subteams: Subteam A and Subteam B. 
 
-The following UML diagrams depict the organization and use-relations of all classes in the program. Two UML state machine diagrams are included to describe the states and transitions within the \textit{BioTree.java} and \textit{Main.java} class. Since the \textit{Main.java} class is a console version of the final server implementation, the states shown in its UML state machine diagram are analogous to the states of the final \textit{TrawlExpert} product.
+
+\subsection{UML State Diagrams}
+Two UML state machine diagrams are included to describe the states and transitions within the \textit{BioTree.java} and \textit{Main.java} class.
+
+\subsubsection{Main.java}
+The UML digrama for the Main.java class is shown in \ref{fig:MainUML}. This represents the \textit{TrawlExpert} console application's states, giving an overview of the types of queries and functions the user has access to. Since the \textit{Main.java} class is a console version of the final server implementation, the states shown in its UML state machine diagram are analogous to many of the states of the final \textit{TrawlExpert} website.
+ 
+\subsubsection{BioTree.java}
+The UML state diagram for the BioTree module is shown in figure \ref{fig:BioTreeUML}. The BioTree class is a singleton class which stores the information about the different taxa in the dataset. This method has a few advantages. Firstly, the string names and relationships amongst taxa (e.g. species, genus, family) are stored only once and accessed when needed, saving large amounts of memory compared to the original dataset. For example, the original .csv file of the dataset was approximately 130mb. After running through the TrawlExpert, the serialized dataset representing the same data is only 27mb. This is because there was a large amount of duplication of names on each line of the dataset.
+
+Secondly, this diagrams represents a key feature of \textit{TrawlExpert} in that it is able to recover corrupted data as the dataset is processed, which is very helpful for large datasets. In the USGS dataset, for example, there were 115 instances of different incorrectly named taxa, totalling 15,596 records (almost 6\% of the records in the dataset). Using this method, these records were able to be recovered for proper use by the scientist. Using smart caching of incorrect names described by this UML diagram, the number of API calls to WORMS is kept at a minimum and the dataset processing only takes about 3 minutes. After the initial processing, the BioTree and records are stored as serialized Java objects to the disc, and can be reloaded in less than 10 seconds.
 
 % Include explanations of why we divided it into some of its main sections/classes
 
@@ -118,15 +141,15 @@ The following UML diagrams depict the organization and use-relations of all clas
 \includegraphics[width=18cm, trim={6cm 0 6cm 0}, clip]{MainDotJava.pdf}
 
 \caption{UML State machine diagram for \textit{Main.java}, a class that provides console access to the \textit{TrawlExpert}'s main functions. This class accepts search criteria from a user to produce a list of search results, depict a histogram of the records in that result, and compute a count of the search hits.}
-\label{fig:Tree}
+\label{fig:MainUML}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=18cm, trim={0 0 0 0}, clip]{BioTreeDotJava.pdf}
 
-\caption{UML State machine diagram for \textit{/data/Biotree/BioTree.java}, a class that builds a tree data structure from the scientific name hierarchies (called taxa) of fish. Uses a World Register of Marine Species (Worms) API to identify the correct spelling of species names for misspelled scientific names in the dataset.}
-\label{fig:Tree}
+\caption{UML State machine diagram for \textit{/data/Biotree/BioTree.java}, a class that builds a tree data structure from the scientific name hierarchies (called taxa) of fish. Uses a World Register of Marine Species (Worms) API to identify the correct spelling of species names for misspelled scientific names in the dataset. }
+\label{fig:BioTreeUML}
 \end{figure}
 
 
@@ -152,19 +175,19 @@ Secondly, a graph algorithm was used to find connected components among search r
 
 \section{Software Design Principles}
 \subsection{Robustness}
-Robustness is a non-functional requirement prioritized during the \textit{TrawlExpert}'s development. Considering all 278 000 records in the dataset were entered by humans, data entry errors were inevitable. The \textit{TrawlExpert} implementation had to ensure unexpected entries in the dataset were handled gracefully. 
+Robustness is a non-functional requirement prioritized during the \textit{TrawlExpert}'s development. Considering all 278 000 records in the dataset were entered by humans, data entry errors were inevitable. The \textit{TrawlExpert} implementation had to ensure unexpected entries in the dataset were handled gracefully and could be recovered if possible. 
 
-When building a BioTree from the dataset, the World Register of Marine Species (Worms) API was used to find the correct scientific name of slightly misspelled names. Unless a name was severely misspelled, the Worms API was able to salvage small data entry errors. This ensured records could be used when building the BioTree and protected the tool from raising exceptions from small input errors. 
+When building a BioTree from the dataset, the World Register of Marine Species (WORMS) database API was used to find the correct scientific name of slightly misspelled names. Unless a name was severely misspelled, the Worms API was able to salvage small data entry errors. This ensured records could be used when building the BioTree and protected the tool from raising exceptions from small input errors. While this introduces a dependance on an Internet connection to \textit{TrawlExpert}, it was assumed that the scientists working with \textit{TrawlExpert} would have access to an Internet connection, and the tradeoff is reasonable for the recovery of many errors in the dataset.
 
 The use of drop-down boxes on the user interface helped limit invalid search criteria from being entered. From left to right, each box contains increasingly specific components of a scientific name for fish species. When any of the dropdown boxes were selected, all boxes to the left (representing more general components of that species name) were updated. This was to ensure the hierarchy formed by the more general components contained the newly adjusted value. Additionally, all boxes to the right were cleared. If a more general feature was adjusted, the resultant possible species no longer satisfies the hierarchy needed by values populating the right-most boxes. To prevent invalid scientific names from being used as search input, they had to be cleared. 
 
 \subsection{Scalability}
-The tool must be able to handle large amounts of data, all while being able to complete queries at a high speed. Currently, the tool uses a dataset of 200,000 lines of data, but it must be able to maintain its high performace for larger datasets. Using sorting algorithms such as \textit{Quick Select} to build a \textit{k-d tree}, the \textit{TrawlExpert} has been optimized to complete tree construction in linear time.
+The tool must be able to handle large amounts of data, all while being able to complete queries at a high speed. Currently, the tool uses a dataset of 200,000 lines of data, but it must be able to maintain its high performace for larger datasets. Using sorting algorithms such as \textit{Quick Select} to build a \textit{k-d tree}, the \textit{TrawlExpert} has been optimized to complete tree construction much faster.
 
-Implementing \textit{Quick Select} rather than \textit{Merge Sort} drastically improved the \textit{TrawlExpert}'s performance. When using \textit{Merge Sort} during \textit{k-d tree} construction, an array must be fully sorted before retrieving the median element. \textit{Quick Select} only partially sorts the array before reaching the median and has reduced \textit{k-d tree} construction from 40.083 s using \textit{Merge Sort} to 0.56 s. 
+Implementing \textit{Quick Select} rather than \textit{Merge Sort} drastically improved the \textit{TrawlExpert}'s performance. When using \textit{Merge Sort} during \textit{k-d tree} construction, an array must be fully sorted before retrieving the median element, taking $\mathcal{O}(n\lg n)$ time where $n$ is the size of the dataset. \textit{Quick Select} only partially sorts the array before reaching the median, taking $\mathcal{O}(n)$ time, and it reduced \textit{k-d tree} construction from 40.083 s using \textit{Merge Sort} to 0.56 s, representing a 72x improvement. 
 
 \subsection{Generality}
-A common theme among \textit{TrawlExpert} classes is the use of lambda functions. Lambda functions provide the capacity for parameterized object comparison or parameterized value access. This maintains the generality, and therefore reusability, of each class by allowing for generic types in class definitions. Type(s) of the input(s) and the how input object(s) are used only become assigned when the function is used.
+A common theme among \textit{TrawlExpert} classes is the use of lambda functions characterized by Java interfaces which describe their syntax as well as their semantic meaning. Lambda functions provide the capacity for parameterized object comparison or parameterized value access. This maintains the generality, and therefore reusability, of each class by allowing for generic types in class definitions. Type(s) of the input(s) and the how input object(s) are used only become assigned when the function is used.
 
 \subsubsection{General Compare}
 The \textit{GeneralCompare} interface can be found at \textit{/sort/GeneralCompare.java}. This interface includes a \textit{compare} function that takes two generically typed inputs and produces an integer output. When \textit{GeneralCompare} is used in other classes, a compare function (the lambda function) is used to instantiate the expected input type and designate how the integer result must be calculated. This allows reuse of the interface among modules that perform comparisons of differently typed objects. Two records consisting of a fish species, date of observation, and geographic location can be compared based on lexicographic order of their names, date, or proximity to some location. \textit{GeneralCompare} enables the comparison of record objects based on any of these parameters. 
@@ -190,7 +213,13 @@ There were some algorithmic changes that were realized during development. Two k
 Another algorithmic change involved the client code for Connected Components when determining fish clusters. Initially, every node was visited multiple times to determine whether other nodes were within a given radius. The running time was unacceptable using this approach, and as a result, the algorithm was changed such that visited nodes were not revisited. This decreased running time significantly and was considered acceptable by the team. 
 
 \subsection{Future Changes}
+While \textit{TrawlExpert} met all of its original goals for this stage of its development, there are several points for improvement and future development of the platform as an all-in-one research tool for watershed research.
+
+\subsubsection{Improvements on Development Process}
 Most of the changes that would benefit the \textit{TrawlExpert} involve its development requirements. The original goals for this section were quite extensive, however one aspect that was overlooked was file organization. Although GitLab was used for version control, confusion still occurred over which packages certain classes belonged to. For example, there were instances in the project where a search class would be located in the graph package. Adding a requirement for file organization would make the project more easily accessible in the development process and would also yield more efficient workflow because less time would be dedicated to searching for a desired class. 
+
+\subsubsection{Future Functionality}
+Functionally, there are many future goals in the development of \textit{TrawlExpert}. This phase of the development process was aimed at providing scientists with an effective tool to search and filter data relevant to their research, as well as some basic statistical tools. However, this only represents the first stage in a larger scientific research pipeline. Often, more advanced tools such as stratified statistical analysis is needed to properly take into account the many variables in trawl survey expeditions (FIXME: ref). The future work includes building these tools into \textit{TrawlExpert} in order to create an all-in-one research platform for trawl surveys.
 
 \clearpage
 \bibliographystyle{apa}

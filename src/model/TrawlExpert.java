@@ -40,6 +40,8 @@ public class TrawlExpert {
 			BioTree.write("data/biotree/");
 			DataStore.records.writeToFile("data/records.kdtree");
 		};
+		
+		System.out.println("Recovered records: " + BioTree.incorrectRecords);
 	}
 	
 	/**
