@@ -49,10 +49,6 @@ public class Main {
 	public static void init() {
 		System.out.println("Welcome!");
 		
-		BasicSearchResult bsr = te.rangeSearch(159512, 1960, 2016);
-		ArrayList<RecordCluster> rc = (ArrayList<RecordCluster>) bsr.cluster(1000000);
-		System.out.println(rc.size());
-		
 		while(true) {
 			System.out.println("Main Menu");
 			System.out.println("Available commands:");

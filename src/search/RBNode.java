@@ -1,13 +1,16 @@
 package search;
 
+import java.io.Serializable;
+
 // An abstract data type that represents a node in a Red Black Search Tree
-public class Node<Key extends Comparable<Key>, Value>{
+public class RBNode<Key extends Comparable<Key>, Value> implements Serializable{
 	
 	private final Key key;
 	private Value val;
-	private Node<Key, Value> left, right;
+	private RBNode<Key, Value> left, right;
 	private int n; 
 	private boolean color;
+	private static final long serialVersionUID = -5243859485408524039L;
 
 	/**
 	 * Constructor
@@ -16,7 +19,7 @@ public class Node<Key extends Comparable<Key>, Value>{
 	 * @param n How many nodes are in the subtree beneath this node (inclusive)
 	 * @param color True represents a red connection between the current node and its parent, black represents false
 	 */
-	public Node(Key key, Value val, int n, boolean color){
+	public RBNode(Key key, Value val, int n, boolean color){
 		this.key = key;
 		this.val = val;
 		this.n = n;
@@ -51,7 +54,7 @@ public class Node<Key extends Comparable<Key>, Value>{
 	 * Getter for a node's left child
 	 * @return The node's left child
 	 */
-	public Node<Key, Value> left(){
+	public RBNode<Key, Value> left(){
 		return this.left;
 	}
 	
@@ -59,7 +62,7 @@ public class Node<Key extends Comparable<Key>, Value>{
 	 * Setter for a node's left child
 	 * @param left The node's new left child
 	 */
-	public void left(Node<Key, Value> left){
+	public void left(RBNode<Key, Value> left){
 		this.left = left;
 	}
 	
@@ -67,7 +70,7 @@ public class Node<Key extends Comparable<Key>, Value>{
 	 * Getter for a node's right child
 	 * @return The node's right child
 	 */
-	public Node<Key, Value> right(){
+	public RBNode<Key, Value> right(){
 		return this.right;
 	}
 	
@@ -75,7 +78,7 @@ public class Node<Key extends Comparable<Key>, Value>{
 	 * Setter for a node's right child
 	 * @param left The node's new right child
 	 */
-	public void right(Node<Key, Value> right){
+	public void right(RBNode<Key, Value> right){
 		this.right = right;
 	}
 	

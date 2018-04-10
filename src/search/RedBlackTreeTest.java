@@ -87,7 +87,7 @@ public class RedBlackTreeTest {
 		for(int i = 0; i < x.length; i++){
 			myTree.put(x[i]);
 		}
-		Node h = myTree.root(); 
+		RBNode h = myTree.root(); 
 		
 		// Check if right-most branch of tree matches what is expected
 		Integer[] expect = {4, 6, 7, 8, 9};
@@ -98,7 +98,7 @@ public class RedBlackTreeTest {
 	}
 
 	/**
-	 * Test method for {@link search.RedBlackTree#rotateLeft(search.Node)}.
+	 * Test method for {@link search.RedBlackTree#rotateLeft(search.RBNode)}.
 	 */
 	@Test
 	public void testRotateLeft() {
@@ -116,7 +116,7 @@ public class RedBlackTreeTest {
 	}
 
 	/**
-	 * Test method for {@link search.RedBlackTree#rotateRight(search.Node)}.
+	 * Test method for {@link search.RedBlackTree#rotateRight(search.RBNode)}.
 	 */
 	@Test
 	public void testRotateRight() {

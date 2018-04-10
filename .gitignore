@@ -14,3 +14,5 @@
 logs/
 tomcat/work/*
 *.zip
+/docs
+/data

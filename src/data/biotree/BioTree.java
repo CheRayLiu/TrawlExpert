@@ -18,6 +18,7 @@ import data.WormsAPI;
 import search.BST;
 import search.Field;
 import search.kdt.KDT;
+import search.RedBlackTree;
 import sort.GeneralCompare;
 
 public class BioTree implements Serializable {
@@ -28,16 +29,8 @@ public class BioTree implements Serializable {
 	//FIXME: replace with a single kd-tree
 	private static KDT<TaxonNode> nodes;
 	private static BST<Integer, TaxonNode> idNodes = new BST<Integer, TaxonNode>();
-	private static BST<String, TaxonNode> strNodes = new BST<String, TaxonNode>();
-	private static BST<String, Integer> incorrectNames = new BST<String, Integer>();
-	
-	public static void main(String[] args) throws IOException, ParseException {
-		BioTree.init("data/biotree");
-		System.out.println(idNodes.get(2));
-		Iterable<Integer> children = getNonEmptyChildren(159512);
-		for (Integer i: children)
-			System.out.println(i);
-	}
+	private static BST<String, TaxonNode> strNodes = new BST<String, TaxonNode>();;
+	private static RedBlackTree<String, Integer> incorrectNames =  new RedBlackTree<String, Integer>(a -> "", (s0,s1) -> s0.compareTo(s1));
 	
 	/**
 	 * Initialize species abstract object
@@ -45,13 +38,14 @@ public class BioTree implements Serializable {
 	public static void init() {
 		GeneralCompare<TaxonNode> compName = (tn0, tn1) -> tn0.getName().compareTo(tn1.getName());
 		GeneralCompare<TaxonNode> compTxId = (tn0, tn1) -> tn0.getTaxonId() - tn1.getTaxonId();
-		Field<String, TaxonNode> fld = tn -> tn.getName();
 		
 		//nodes = new KDT<>(axes, keyvals);
 		
-		idNodes = new BST<Integer, TaxonNode>();
-		strNodes = new BST<String, TaxonNode>();
-		incorrectNames = new BST<String, Integer>();
+		BioTree.idNodes = new BST<Integer, TaxonNode>();
+		BioTree.strNodes = new BST<String, TaxonNode>();
+		//initialize incorrect names database -- will be abusing the field and always supplying a custom key
+		//instead.
+		BioTree.incorrectNames = new RedBlackTree<String, Integer>(a -> "", (s0,s1) -> s0.compareTo(s1));
 	}
 
 	/**
@@ -98,11 +92,11 @@ public class BioTree implements Serializable {
 	      }
 		BioTree.strNodes = newStrNodes;
 		
-		BST<String, Integer> newIncorrectNames = null;
+		RedBlackTree<String, Integer> newIncorrectNames = null;
 		try {
-	         FileInputStream fileIn = new FileInputStream(fn+"/incorNames.ser");
+	         FileInputStream fileIn = new FileInputStream(fn+"/incorNames.biotree");
 	         ObjectInputStream in = new ObjectInputStream(fileIn);
-	         newIncorrectNames = (BST<String, Integer>) in.readObject();
+	         newIncorrectNames = (RedBlackTree<String, Integer>) in.readObject();
 	         in.close();
 	         fileIn.close();
 	      } catch (IOException i) {
@@ -151,12 +145,12 @@ public class BioTree implements Serializable {
 		
 		try {
 	         FileOutputStream fileOut =
-	        		 new FileOutputStream(dir+"/incorNames.ser");
+	        		 new FileOutputStream(dir+"/incorNames.biotree");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(BioTree.incorrectNames);
 	         out.close();
 	         fileOut.close();
-	         System.out.printf("Serialized data is saved in /tmp/kdtree.ser");
+	         System.out.printf("Serialized data is saved in " + dir + "/incorNames.biotree");
 	      } catch (IOException i) {
 	         i.printStackTrace();
 	      }
@@ -282,13 +276,16 @@ public class BioTree implements Serializable {
 	 * @throws IOException 
 	 */
 	public static Integer nameToTaxonId(String scientificName) throws IOException, ParseException {
-		Integer taxonId;
+		Integer taxonId = null;
 		//look up based on string literal, return if found
 		TaxonNode tx = strNodes.get(scientificName);
 		if (tx != null) return tx.getTaxonId();
 		else System.out.println(scientificName + " not in local db");
 		//look up in local incorrect names database, return if it exists
-		taxonId = incorrectNames.get(scientificName);
+		if (incorrectNames.get(scientificName) != null) {
+			System.out.println(incorrectNames.get(scientificName));
+			taxonId = incorrectNames.get(scientificName).val();
+		}
 		if (taxonId != null) {
 			tx = idNodes.get(taxonId);
 			if (tx != null) return tx.getTaxonId();

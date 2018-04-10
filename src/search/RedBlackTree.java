@@ -1,47 +1,17 @@
 package search;
 
+import java.io.Serializable;
+
 import sort.GeneralCompare;
 
-public class RedBlackTree<Key extends Comparable<Key>, Value> {
-	private Node<Key, Value> root; // Root of the tree
+public class RedBlackTree<Key extends Comparable<Key>, Value> implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3108663423969613687L;
+	private RBNode<Key, Value> root; // Root of the tree
 	private GeneralCompare<Key> compare;
 	private Field<Key, Value> field;
-	
-	// Main method only used for testing
-	
-	public static void main(String[] args) {
-		GeneralCompare<Integer> b1;
-		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
-		Field<Integer, Integer[]> fld;
-		fld = (a1) -> (Integer) a1[0];
-		
-		
-		Integer[][] x = {{1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 5}, {6, 6}, {7, 7}, {8, 8}, {9, 9}};
-		RedBlackTree<Integer, Integer[]> myTree = new RedBlackTree<Integer, Integer[]>(fld, b1);
-
-		// Add first 5 nodes, expected get(6) result is null
-		for(int i = 0; i < 4; i++){
-			myTree.put(x[i]);
-		}
-		assert(myTree.get(6) == null);
-
-		// Add remaining nodes, expected get(6) result is {6, 6} 
-		for(int i = 5; i < x.length; i++){
-			//System.out.println(x[i][0]);
-			myTree.put(x[i]);
-		}
-		
-		System.out.println("Root: " + myTree.root().key());
-		System.out.println("myTree.get(6).key(): " + (Integer) myTree.get(6).key());
-
-		Node h = myTree.root(); 
-		System.out.println(h.key());
-		while (h.left() != null) {
-			System.out.println(h.left().key());
-			h = h.left();
-		}
-	}
-	
 	
 	/**
 	 * Constructor for a red black tree object
@@ -51,6 +21,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> {
 	public RedBlackTree(Field<Key, Value> fld, GeneralCompare<Key> gc) {
 		compare = gc;
 		field = fld;
+		root = null;
 	}
 	
 	/**
@@ -58,7 +29,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> {
 	 * @param key Key pointing to the desired node
 	 * @return A node containing who's key matches the input
 	 */
-	public Node<Key, Value> get(Key key) {
+	public RBNode<Key, Value> get(Key key) {
 		return get(this.root, key);
 	}
 	
@@ -68,8 +39,9 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> {
 	 * @param key Desired key to be searched for in a tree
 	 * @return The node containing the key, returns null if the key is not found
 	 */
-	private Node<Key, Value> get(Node<Key, Value> node, Key key) {
-		if (node.key() == key)
+	private RBNode<Key, Value> get(RBNode<Key, Value> node, Key key) {
+		if (node == null) return null;
+		if (node.key().equals(key))
 			return node; 
 		// If key is greater than current node, look right
 		if (this.compare.compare(node.key(), key) < 0)
@@ -86,22 +58,25 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> {
 		// If node == null, key does not exist in the tree
 		return null;
 	}
-	
-	
+
 	/**
-	 * Getter method for the root of a tree
-	 * @return The root of a tree object
+	 * Put a new node in the tree with a custom key. Allows the client to override the key
+	 * in the node if they wish.
+	 * @param key A custom key to assign to the node
+	 * @param val A new record
 	 */
-	public Node<Key, Value> root() {
-		return root;
+	public void put(Key key, Value val){
+		RBNode<Key, Value> newNode = new RBNode<Key, Value>(key, val, 1, true);
+		root = put(root, newNode);
 	}
 	
 	/**
-	 * Wrapper method for adding a new node
+	 * Put a new node in the tree. Uses the field getter supplied upon the creation
+	 * of the tree to extract the key from the given value.
 	 * @param val A new record
 	 */
 	public void put(Value val){
-		Node<Key, Value> newNode = new Node<Key, Value>(field.field(val), val, 1, true);
+		RBNode<Key, Value> newNode = new RBNode<Key, Value>(field.field(val), val, 1, true);
 		root = put(root, newNode);
 	}
 	
@@ -111,7 +86,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> {
 	 * @param newNode A node to be added to the tree
 	 * @return
 	 */
-	private Node<Key, Value> put(Node<Key, Value> h, Node<Key, Value> newNode){
+	private RBNode<Key, Value> put(RBNode<Key, Value> h, RBNode<Key, Value> newNode){
 		// Placing the first node in a tree
 		if (root == null) {
 			root = newNode;
@@ -160,7 +135,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> {
 	 * @param x Node in a tree
 	 * @return Boolean result of whether the node is red or not
 	 */
-	private boolean isRed(Node<Key, Value> x){
+	private boolean isRed(RBNode<Key, Value> x){
 		if (x == null)
 			return false; 
 		return x.color();
@@ -171,9 +146,9 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> {
 	 * @param h Root of a tree segment to be rotated
 	 * @return New root of the rotated segment
 	 */
-	public Node<Key, Value> rotateLeft(Node<Key, Value> h){
+	public RBNode<Key, Value> rotateLeft(RBNode<Key, Value> h){
 		System.out.println("Rotate left!");
-		Node<Key, Value> x = h.right();
+		RBNode<Key, Value> x = h.right();
 		h.right(x.left());
 		x.left(h);
 		x.color(h.color());
@@ -198,8 +173,8 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> {
 	 * @param h Root of a tree segment to be rotated
 	 * @return New root of the rotated segment
 	 */
-	public Node<Key, Value> rotateRight(Node<Key, Value> h){
-		Node<Key, Value> x = h.left();
+	public RBNode<Key, Value> rotateRight(RBNode<Key, Value> h){
+		RBNode<Key, Value> x = h.left();
 		h.left(x.right());
 		x.right(h);
 		x.color(h.color());
@@ -224,7 +199,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> {
 	 * Changes two red connections from a single node to black
 	 * @param h Root of tree segment whose colors are to be switched
 	 */
-	private void flipColors(Node<Key, Value> h){
+	private void flipColors(RBNode<Key, Value> h){
 		if(h.left() != null && h.right() != null){
 			h.left().color(false);
 			h.right().color(false);
