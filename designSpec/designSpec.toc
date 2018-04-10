@@ -5,11 +5,11 @@
 \contentsline {section}{\numberline {2}Implementation}{5}{section.2}
 \contentsline {subsection}{\numberline {2.1}Classes and Modules}{5}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Class Organization}{5}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Maintaining Generality}{6}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {2.3.1}General Compare}{6}{subsubsection.2.3.1}
-\contentsline {subsubsection}{\numberline {2.3.2}Field}{6}{subsubsection.2.3.2}
-\contentsline {subsubsection}{\numberline {2.3.3}General Range}{7}{subsubsection.2.3.3}
-\contentsline {section}{\numberline {3}Algorithmic Opportunities}{7}{section.3}
-\contentsline {subsection}{\numberline {3.1}Quick Select Algorithm}{7}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}K-d Tree Algorithm}{7}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Graph Algorithms}{7}{subsection.3.3}
+\contentsline {subsection}{\numberline {2.3}Maintaining Generality}{7}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}General Compare}{7}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Field}{7}{subsubsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.3}General Range}{8}{subsubsection.2.3.3}
+\contentsline {section}{\numberline {3}Algorithmic Opportunities}{8}{section.3}
+\contentsline {subsection}{\numberline {3.1}Quick Select Algorithm}{8}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}K-d Tree Algorithm}{8}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Graph Algorithms}{8}{subsection.3.3}

@@ -104,13 +104,24 @@ The test dataset that will be used for purposes of this project is the \textit{U
 The implementation involved over 30 classes implemented in Java. Additional JavaScript and html files were used to create a sophisticated user interface. For a description of each class and module used, Java documentation can be viewed at %INSERT JAVA DOC LINK% 
 
 \subsection{Class Organization}
+The \textit{Trawl Expert} implementation efforts were divided into two subteams: Subteam A and Subteam B. 
+
 The following UML diagrams depict the organization and use-relations of all classes in the program. Two UML state machine diagrams are included to describe the states and transitions within the \textit{BioTree.java} and \textit{Main.java} class. Since the \textit{Main.java} class is a console version of the final server implementation, the states shown in its UML state machine diagram are analogous to the states of the final \textit{TrawlExpert} product.
 
 % Include explanations of why we divided it into some of its main sections/classes
 
 \begin{figure}[H]
 \includegraphics[width=18cm, trim={6cm 0 6cm 0}, clip]{MainDotJava.pdf}
+
 \caption{UML State machine diagram for \textit{Main.java}, a class that provides console access to the \textit{TrawlExpert}'s main functions. This class accepts search criteria from a user to produce a list of search results, depict a histogram of the records in that result, and compute a count of the search hits.}
+\label{fig:Tree}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=18cm, trim={0 0 0 0}, clip]{BioTreeDotJava.pdf}
+
+\caption{UML State machine diagram for \textit{/data/Biotree/BioTree.java}, a class that builds a tree-like data structure from the scientific name hierarchies of fish. }
 \label{fig:Tree}
 \end{figure}
 
@@ -126,16 +137,18 @@ The \textit{Field} interface can be found at \textit{/search/Field.java}. This i
 \subsubsection{General Range}
 The \textit{GeneralRange} interface can be found at \textit{/sort/GeneralRange.java}. This interface includes a \textit{isInBounds} function returns an integer to describe if a record is member to a subset of the search results. The input has a generic type, rather than \textit{Record} type, to satisfy reusability. The lambda function uses the range itself to perform conditional checks about whether the input object is below, within, or above the range. A return value of -1 indicates it is below, 0 indicates it is within, and 1 indicates it is above the range.
 
+
+
+
 \section{Algorithmic Opportunities}
-The \textit{TrawlExpert} was made possible by the use of vaious algorithms studied in \textit{SFWRENG 2C03: Algorithms} offered at McMaster University. These algorithms include \textit{Red-Black Tree} for searching and \textit{Merge Sort} for sorting objects. Additional algorithms outside of the course scope were implemented to optimize the program, they are described below. 
+The \textit{TrawlExpert} was made possible by the use of vaious algorithms studied in \textit{SFWRENG 2C03: Algorithms} offered at McMaster University. These algorithms include \textit{Red-Black Tree} for searching and \textit{Merge Sort} for sorting objects. Additional algorithms outside of the course scope were implemented to optimize the program; they are described below. 
 
 \subsection{Quick Select Algorithm}
 A modified form of the \textit{Quick Sort} algorithm that returns the $k^{th}$ largest element of an unsorted array. Similar to \textit{Quick Sort}, \textit{Quick Select} randomly chooses a partitioning element to sort the array such that all elements smaller than the partition are left of it, and larger elements are to the right. However, rather than recursively sorting both halves of the partitioned array, \textit{Quick Select} only sorts the half containing the $k^{th}$ index. The algorithm terminates once the partitioning element ends up at the $k^{th}$ index of the array, the value of this element is returned.
 
 This algorithm is implemented in \textit{/sort/QuickSelect.java}. It is used during the construction of \textit{k-d tree}s which require the frequent division of an array into two equally sized halves. By finding the median element of an array, it is partially sorted into equally sized small and large halves. The \textit{Quick Select} class implements a \textit{median} method to simplify its usage in \textit{k-d tree} construction. 
 
-Using \textit{Quick Select} rather than \textit{Merge Sort} has optimized the \textit{TrawlExpert}. When using \textit{Merge Sort} during \textit{k-d tree} construction, an array must be fully sorted before retrieving the median element. \textit{Quick Select} only partially sorts the array before reaching the median and has reduced \textit{k-d tree} construction from 40.083 s to 0.56 s 
-
+Using \textit{Quick Select} rather than \textit{Merge Sort} has drastically improved the \textit{TrawlExpert}'s performance. When using \textit{Merge Sort} during \textit{k-d tree} construction, an array must be fully sorted before retrieving the median element. \textit{Quick Select} only partially sorts the array before reaching the median and has reduced \textit{k-d tree} construction from 40.083 s using \textit{Merge Sort} to 0.56 s. 
 
 % Mention optimization for Worms API
 
