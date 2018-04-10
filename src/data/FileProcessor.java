@@ -68,7 +68,7 @@ public class FileProcessor {
 			fr.close();
 		}
 		catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Fatal Error: Cannot find dataset at " + path + ".");
 		}
 	}
 	

@@ -76,10 +76,10 @@ public class Cluster {
 	}
 
 	private static double lngRange(double dist, double lat){
-		return dist/(Math.cos(lat)*222);
+		return dist/(Math.cos(Math.toRadians(lat))*222);
 	}
 	
 	private static double latRange(double dist){
-		return (dist/111)/2;
+		return (dist/222);
 	}
 }

@@ -26,10 +26,10 @@ public class TrawlExpert {
 	public TrawlExpert() {
 		//load data
 		try {
+			//try loading from disc, otherwise load from dataset
 			BioTree.init("data/biotree/");
 			DataStore.records = new KDT<Record>("data/records.kdtree");
 		} catch (Exception e0) {
-			e0.printStackTrace();
 			try {
 				BioTree.init();
 				FileProcessor.initProcessing();

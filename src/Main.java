@@ -112,7 +112,7 @@ public class Main {
 		System.out.println("Found " + result.n() + " records in " + result.time() + " seconds.");
 		
 		while(true) {
-			System.out.println("Available commands: list, histogram, sum, exit");
+			System.out.println("Available commands: list, histogram, sum, cluster (area), exit");
 			System.out.print("> ");
 			
 			Scanner s = new Scanner(System.in);
@@ -126,7 +126,15 @@ public class Main {
 				return;
 			else if (command.equals("sum")) {
 				System.out.println(result.sum());
-			}
+			} else if (command.startsWith("cluster")) {
+				String[] strSpl = command.split(" ");
+				try {
+					doCluster(result.cluster(Double.parseDouble(strSpl[1])));
+				} catch (NumberFormatException e) {
+					
+				}
+			} else
+				System.out.println("Invalid command " + command);
 		}
 	}
 	
@@ -180,5 +188,47 @@ public class Main {
 			System.out.println("| " + record.get(year));
 		}
 		System.out.format("Scale: one = is %d individuals.\n", max / scale);
+	}
+	
+	/**
+	 * Prints a histogram based on a BST of records
+	 * 
+	 * @param record -An BST of records
+	 */
+	public static void doCluster(ArrayList<RecordCluster> clusters) {
+		System.out.println("Found " + clusters.size() + " clusters.");
+		String format = "|%1$-15s|%2$-15s|%3$-15s|%4$-15s|%5$-15s\n";
+		System.out.format(format, "Cluster #", "Latitude", "Longitude", "Record Count", "Individual Count");
+		for(int i = 0; i < clusters.size(); i++)
+			System.out.format(format, (i+1), String.format("%.5f", clusters.get(i).centroid().getY()), String.format("%.5f", clusters.get(i).centroid().getX()), clusters.get(i).N(), clusters.get(i).getCount());
+		
+		while(true) {
+			System.out.println("Available commands: list (cluster #), clusters, exit");
+			
+			Scanner s = new Scanner(System.in);
+			String command = s.nextLine();
+			
+			if (command.startsWith("list")){
+				String[] strSpl = command.split(" ");
+				int clusterNum = 0;
+				try {
+					clusterNum = Integer.parseInt(strSpl[1]);
+				} catch (Exception e) {
+					System.out.println("Invalid command.");
+					continue;
+				}
+				try {
+					printRecords(clusters.get(clusterNum-1).records());
+				} catch (Exception e) {
+					System.out.println("Invalid cluster #");
+				}
+			} else if (command.equals("exit"))
+				return;
+			else if (command.equals("clusters")) {
+				doCluster(clusters);
+				return;
+			} else 
+				System.out.println("Invalid command.");
+		}
 	}
 }
