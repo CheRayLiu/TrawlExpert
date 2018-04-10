@@ -14,18 +14,33 @@ import org.json.simple.parser.ParseException;
 import data.WormsAPI;
 import search.RedBlackTree;
 
+/**
+ * Stores the biological information of the records in the dataset. These are
+ * stored in a tree structure corresponding to the scientific classification 
+ * of the taxa in the dataset.
+ * @author Christopher W. Schankula
+ *
+ */
 public class BioTree implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4291273291916906661L;
+	/**
+	 * Storage of nodes by taxon id.
+	 */
 	private static RedBlackTree<Integer, TaxonNode> idNodes;
+	/**
+	 * Storage of nodes by scientific name.
+	 */
 	private static RedBlackTree<String, TaxonNode> strNodes;
+	/**
+	 * Cache of names found to be incorrect while scanning the dataset.
+	 */
 	private static RedBlackTree<String, Integer> incorrectNames;
-	public static int incorrectRecords = 0;
 	
 	/**
-	 * Initialize species abstract object
+	 * Initialize BioTree with no entries.
 	 */
 	public static void init() {		
 		//initialize searches by id and string
@@ -164,8 +179,7 @@ public class BioTree implements Serializable {
 			try {
 				newNodes = WormsAPI.idToClassification(taxonId);
 			} catch (IOException | ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			}
 			if (newNodes == null) return true;
 			newNodes[newNodes.length - 1].incCount();	//one of the new nodes exists
@@ -244,7 +258,6 @@ public class BioTree implements Serializable {
 		taxonId = incorrectNames.get(scientificName);
 		if (taxonId != null) {
 			tx = idNodes.get(taxonId);
-			incorrectRecords++;
 			if (tx != null) return tx.getTaxonId();
 		} else {		//otherwise use Worms to look it up
 			System.out.println(scientificName + " not in incor db");
@@ -254,7 +267,6 @@ public class BioTree implements Serializable {
 			else {
 				System.out.println(scientificName + " found in Worms: " + taxonId);
 				incorrectNames.put(scientificName, taxonId);
-				incorrectRecords++;
 			}
 		}
 		return taxonId;
@@ -301,8 +313,7 @@ public class BioTree implements Serializable {
 				int taxonId = WormsAPI.nameToRecordID(scientificName);
 				txNode = idNodes.get(taxonId);
 			} catch (IOException | ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			}
 		if (txNode == null) return;
 		printTree(txNode, 0);

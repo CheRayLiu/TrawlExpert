@@ -33,7 +33,6 @@ public class TestBioTree {
 			//System.out.println(String.format("%-26s %s", nodes.get(i).getName(), nodes.get(i).getTaxonType()));
 		//}
 		BioTree.printTree();
-		System.out.println(WormsAPI.nameToID("Hello"));
 	}
 	
 

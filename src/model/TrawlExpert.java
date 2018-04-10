@@ -34,14 +34,11 @@ public class TrawlExpert {
 				BioTree.init();
 				FileProcessor.initProcessing();
 			} catch (NumberFormatException | ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			}
 			BioTree.write("data/biotree/");
 			DataStore.records.writeToFile("data/records.kdtree");
 		};
-		
-		System.out.println("Recovered records: " + BioTree.incorrectRecords);
 	}
 	
 	/**
@@ -81,8 +78,7 @@ public class TrawlExpert {
 		try {
 			return BioTree.getTaxonRecord(scientificName);
 		} catch (IOException | ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 		return null;
 	}
@@ -90,7 +86,7 @@ public class TrawlExpert {
 	/**
 	 * Helper function for returning all of the non-empty children of a given taxon Id.
 	 * @param taxonId The taxonId to search for.
-	 * @return An iterable of all the taxonIds which are descendents of the given taxonId and
+	 * @return An iterable of all the taxonIds which are descendants of the given taxonId and
 	 * have at least one record in the dataset.
 	 */
 	public Iterable<Integer> getNonEmptyChildren(int taxonId){
@@ -100,7 +96,7 @@ public class TrawlExpert {
 	/**
 	 * Helper function for returning all of the children of a given taxon Id.
 	 * @param taxonId The taxonId to search for.
-	 * @return An iterable of all the taxonIds which are descendents of the given taxonId.
+	 * @return An iterable of all the taxonIds which are descendants of the given taxonId.
 	 */
 	public Iterable<Integer> getAllChildren(int taxonId){
 		return BioTree.getAllChildren(taxonId);

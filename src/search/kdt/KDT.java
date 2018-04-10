@@ -40,39 +40,8 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	/**
 	 * 
 	 */
-	private KDNode root;
+	private KDNode<KeyVal> root;
 	private ArrayList<GeneralCompare<KeyVal>> axes;
-	
-	/**
-	 * A node in a serializable KD-tree.
-	 * @author Christopher W. Schankula
-	 *
-	 */
-	private class KDNode implements Serializable{
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 320302736359757688L;
-		/**
-		 * 
-		 */
-		/**
-		 * 
-		 */
-		private KeyVal keyval;
-		private KDNode left, right;
-		private int n;
-		
-		/**
-		 * Constructor for KDNode. Creates a new KD-tree node.
-		 * @param keyval
-		 * @param n
-		 */
-		public KDNode(KeyVal keyval, int n) {
-			this.keyval = keyval;
-			this.n = n;
-		}
-	}
 	
 	/**
 	 * Load a kd-tree from a serialized file.
@@ -119,7 +88,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	 * @param depth The depth of the new node to be created
 	 * @return The new node
 	 */
-	private KDNode buildTree(KeyVal[] keyvals, int lo, int hi, int depth) {
+	private KDNode<KeyVal> buildTree(KeyVal[] keyvals, int lo, int hi, int depth) {
 		if (lo > hi) return null;
 		int axis = depth % getK();
 		
@@ -128,8 +97,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		QuickSelect.median(keyvals, lo, hi, axes.get(axis));
 		KeyVal median = (KeyVal) keyvals[mid];
 		
-		//TODO: fix size
-		KDNode newNode = new KDNode(median, 0);
+		KDNode<KeyVal> newNode = new KDNode<KeyVal>(median, 0);
 		newNode.left = buildTree(keyvals, lo, mid - 1, depth + 1);
 		newNode.right = buildTree(keyvals, mid + 1, hi, depth + 1);
 		
@@ -154,7 +122,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	}
 	
 	//recursive private range search function
-	private void rangeSearch(KDNode x, ArrayList<GeneralRange<KeyVal>> range, ArrayList<KeyVal> result, int depth) {
+	private void rangeSearch(KDNode<KeyVal> x, ArrayList<GeneralRange<KeyVal>> range, ArrayList<KeyVal> result, int depth) {
 		if (x == null) return;
 		int axis = depth % getK();
 		GeneralRange<KeyVal> rg = range.get(axis);
@@ -207,12 +175,12 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		return height(root);
 	}
 	
-	private int height(KDNode x) {
+	private int height(KDNode<KeyVal> x) {
 		if (x == null) return 0;
 		return 1 + Math.max(height(x.left), height(x.right));
 	}
 	
-	private int size(KDNode x) {
+	private int size(KDNode<KeyVal> x) {
 		if (x == null) return 0;
 		else return x.n;
 	}
@@ -242,7 +210,7 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	      }
 	}
 	
-	private String toString(KDNode x, String depth) {
+	private String toString(KDNode<KeyVal> x, String depth) {
 		if (x == null) return depth + "null\n";
 		String result = "";
 		result += depth + x.keyval.toString() + "\n";

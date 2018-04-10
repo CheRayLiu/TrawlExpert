@@ -2,9 +2,14 @@ package search;
 
 import java.io.Serializable;
 
-// An abstract data type that represents a node in a Red Black Search Tree
+/**
+ * An abstract data type that represents a node in a Red Black Search Tree.
+ * @author HaleyGlavina
+ *
+ * @param <Key> The key to sort by, must be something with an ordering (Comparable).
+ * @param <Value> The value to store in the tree.
+ */
 public class RBNode<Key extends Comparable<Key>, Value> implements Serializable{
-	
 	private final Key key;
 	private Value val;
 	private RBNode<Key, Value> left, right;

@@ -208,6 +208,8 @@ public class Main {
 			Scanner s = new Scanner(System.in);
 			String command = s.nextLine();
 			
+			
+			//check command that the user typed
 			if (command.startsWith("list")){
 				String[] strSpl = command.split(" ");
 				int clusterNum = 0;

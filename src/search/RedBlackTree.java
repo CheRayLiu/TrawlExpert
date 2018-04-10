@@ -4,6 +4,13 @@ import java.io.Serializable;
 
 import sort.GeneralCompare;
 
+/**
+ * 
+ * @author HaleyGlavina
+ *
+ * @param <Key>
+ * @param <Value>
+ */
 public class RedBlackTree<Key extends Comparable<Key>, Value> implements Serializable {
 	/**
 	 * 
@@ -208,6 +215,20 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Seriali
 		}
 	}
 	
+	/**
+	 * Getter method for the root of a tree, used for testing the module. Only available
+	 * to methods in this package (for testing).
+	 * @return The root of a tree object.
+	 */
+	protected RBNode<Key, Value> root() {
+		return root;
+	}
+
+	
+	/**
+	 * Get the size of the tree.
+	 * @return The total number number of nodes in the red-black tree. 
+	 */
 	public int size() {
 		return root.n();
 	}

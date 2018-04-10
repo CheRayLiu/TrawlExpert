@@ -13,8 +13,9 @@ import sort.RangeHelper;
 
 public class Cluster {
 	/**
-	 * 
-	 * @param area
+	 * Cluster the results of a basic search into groupings based on an area.
+	 * @param area Kilometer-squared area of similarity. Records within a square area 
+	 * @return List of Record clusters.
 	 */
 	public static ArrayList<RecordCluster> cluster(double area, BasicSearchResult basicSearch){
 		Integer taxonId = basicSearch.taxonId();

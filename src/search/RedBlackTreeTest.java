@@ -73,7 +73,7 @@ public class RedBlackTreeTest {
 		for(int i = 5; i < x.length; i++){
 			myTree.put(x[i]);
 		}
-		assert(myTree.get(6).key() == (Comparable<Integer>) 6);
+		assert(myTree.get(6)[0] == 6);
 		
 	}
 
@@ -87,7 +87,7 @@ public class RedBlackTreeTest {
 		for(int i = 0; i < x.length; i++){
 			myTree.put(x[i]);
 		}
-		RBNode h = myTree.root(); 
+		RBNode<Integer, Integer[]> h = myTree.root(); 
 		
 		// Check if right-most branch of tree matches what is expected
 		Integer[] expect = {4, 6, 7, 8, 9};
