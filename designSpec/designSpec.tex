@@ -4,7 +4,7 @@
 \usepackage{fancyvrb}
 \usepackage{vhistory}
 \usepackage{float}
-\hypersetup{colorlinks,urlcolor=red}
+\hypersetup{colorlinks,urlcolor=cyan}
 \usepackage[margin=1in]{geometry}
 \usepackage{listing}
 \usepackage{url}
@@ -55,7 +55,7 @@ The individual contributions of each team member are described below. Subteam B 
 		\midrule
 		Haley Glavina\\
 		& Meeting Minutes Administrator \newline Subteam B Member
-		& Implemented the red-black tree, quickselect, and mergesort algorithms. Designed the final presentation powerpoint, recorded and submitted all meeting minutes, and assembled the final design specification in LaTeX.\\
+		& Implemented the red-black tree, quickselect, and mergesort algorithms. Designed the final presentation powerpoint, recorded and submitted all meeting minutes, and assembled the final design specification in LaTeX. Generated UML state machine diagrams.\\
 		\midrule
 		Winnie Liang\\
 		& Project Log Administrator \newline Subteam A Member
@@ -99,6 +99,10 @@ The focus of the project will be to develop these unique data searching and quer
 \subsection{Dataset}\label{sec:out}
 The test dataset that will be used for purposes of this project is the \textit{USGS Great Lakes Science Center Research Vessel Catch Information System Trawl} published by the United States Geological Survey \citep{usgs2018}. Compiled on yearly operations taking place from early spring to late fall from 1958 until 2016, the dataset contains over 283,000 trawl survey records in the five Great Lakes, including the latitude and longitude co-ordinates and biological classification such as family, genus and species.
 
+\subsection{Final Product}
+The \textit{TrawlExpert} tool can be accessed at \url{http://trawl.schankula.ca/Trawl}. 
+
+
 \section{Implementation}
 \subsection{Classes and Modules}
 The implementation involved over 30 classes implemented in Java. Additional JavaScript and html files were used to create a sophisticated user interface. For a description of each class and module used, Java documentation can be viewed at %INSERT JAVA DOC LINK% 
@@ -121,11 +125,45 @@ The following UML diagrams depict the organization and use-relations of all clas
 \centering
 \includegraphics[width=18cm, trim={0 0 0 0}, clip]{BioTreeDotJava.pdf}
 
-\caption{UML State machine diagram for \textit{/data/Biotree/BioTree.java}, a class that builds a tree-like data structure from the scientific name hierarchies of fish. }
+\caption{UML State machine diagram for \textit{/data/Biotree/BioTree.java}, a class that builds a tree data structure from the scientific name hierarchies (called taxa) of fish. Uses a World Register of Marine Species (Worms) API to identify the correct spelling of species names for misspelled scientific names in the dataset.}
 \label{fig:Tree}
 \end{figure}
 
-\subsection{Maintaining Generality}
+
+\section{Algorithmic Opportunities}
+The \textit{TrawlExpert} was made possible by the use of vaious algorithms studied in \textit{SFWRENG 2C03: Algorithms} offered at McMaster University. These algorithms include \textit{Red-Black Tree} for searching and \textit{Merge Sort} for sorting objects. Additional algorithms outside of the course scope were implemented to optimize the program; they are described below. 
+
+\subsection{Quick Select}
+A modified form of the \textit{Quick Sort} algorithm that returns the $k^{th}$ largest element of an unsorted array. Similar to \textit{Quick Sort}, \textit{Quick Select} randomly chooses a partitioning element to sort the array such that all elements smaller than the partition are left of it, and larger elements are to the right. However, rather than recursively sorting both halves of the partitioned array, \textit{Quick Select} only sorts the half containing the $k^{th}$ index. The algorithm terminates once the partitioning element ends up at the $k^{th}$ index of the array, the value of this element is returned.
+
+This algorithm is implemented in \textit{/sort/QuickSelect.java}. It is used during the construction of \textit{k-d tree}s which require the frequent division of an array into two equally sized halves. By finding the median element of an array, it is partially sorted into equally sized small and large halves. The \textit{Quick Select} class implements a \textit{median} method to simplify its usage in \textit{k-d tree} construction. 
+
+% Mention optimization for Worms API
+
+\subsection{K-d Tree}
+%
+% Chris will write :) ============================ LOOK HERE CHRIS =================================
+%
+
+\subsection{Graphing}
+Graph algorithms were used to support advanced searching features. Firstly, the biological classification of each organism forms a tree from which species in the same genus, for example, can be located. 
+
+Secondly, a graph algorithm was used to find connected components among search results. Nodes are connected together based on their distance to surrounding points \citep{tom10}. Depth-first search was used to determine connected components \citep{broder2000graph}.
+
+\section{Software Design Principles}
+\subsection{Robustness}
+Robustness is a non-functional requirement prioritized during the \textit{TrawlExpert}'s development. Considering all 278 000 records in the dataset were entered by humans, data entry errors were inevitable. The \textit{TrawlExpert} implementation had to ensure unexpected entries in the dataset were handled gracefully. 
+
+When building a BioTree from the dataset, the World Register of Marine Species (Worms) API was used to find the correct scientific name of slightly misspelled names. Unless a name was severely misspelled, the Worms API was able to salvage small data entry errors. This ensured records could be used when building the BioTree and protected the tool from raising exceptions from small input errors. 
+
+The use of drop-down boxes on the user interface helped limit invalid search criteria from being entered. From left to right, each box contains increasingly specific components of a scientific name for fish species. When any of the dropdown boxes were selected, all boxes to the left (representing more general components of that species name) were updated. This was to ensure the hierarchy formed by the more general components contained the newly adjusted value. Additionally, all boxes to the right were cleared. If a more general feature was adjusted, the resultant possible species no longer satisfies the hierarchy needed by values populating the right-most boxes. To prevent invalid scientific names from being used as search input, they had to be cleared. 
+
+\subsection{Scalability}
+The tool must be able to handle large amounts of data, all while being able to complete queries at a high speed. Currently, the tool uses a dataset of 200,000 lines of data, but it must be able to maintain its high performace for larger datasets. Using sorting algorithms such as \textit{Quick Select} to build a \textit{k-d tree}, the \textit{TrawlExpert} has been optimized to complete tree construction in linear time.
+
+Implementing \textit{Quick Select} rather than \textit{Merge Sort} drastically improved the \textit{TrawlExpert}'s performance. When using \textit{Merge Sort} during \textit{k-d tree} construction, an array must be fully sorted before retrieving the median element. \textit{Quick Select} only partially sorts the array before reaching the median and has reduced \textit{k-d tree} construction from 40.083 s using \textit{Merge Sort} to 0.56 s. 
+
+\subsection{Generality}
 A common theme among \textit{TrawlExpert} classes is the use of lambda functions. Lambda functions provide the capacity for parameterized object comparison or parameterized value access. This maintains the generality, and therefore reusability, of each class by allowing for generic types in class definitions. Type(s) of the input(s) and the how input object(s) are used only become assigned when the function is used.
 
 \subsubsection{General Compare}
@@ -137,29 +175,22 @@ The \textit{Field} interface can be found at \textit{/search/Field.java}. This i
 \subsubsection{General Range}
 The \textit{GeneralRange} interface can be found at \textit{/sort/GeneralRange.java}. This interface includes a \textit{isInBounds} function returns an integer to describe if a record is member to a subset of the search results. The input has a generic type, rather than \textit{Record} type, to satisfy reusability. The lambda function uses the range itself to perform conditional checks about whether the input object is below, within, or above the range. A return value of -1 indicates it is below, 0 indicates it is within, and 1 indicates it is above the range.
 
+\section{Internal Review}
+\subsection{Meeting Functional Requirements}
+The first challenge in developing this tool was parsing the data. One requirement was to read and clean the data, then produce a data structure of Record objects. The software tool performed this task as planned, and even exceeded expectations by using a \textit{k-d tree} to store the Records in an easily accessible manner. Another requirement was to accomplish basic searching capabilities based on input criteria. This aspect was achieved through efficient sorting and searching algorithms, the results were verified using JUnit test cases of all searching and sorting algorithms.
 
+\subsection{Meeting Non-Functional Requirements}
+In terms of meeting non-functional requirements, the team met expectations. The use of the Worms API when parsing the dataset improved robustness and algorithmic choices such as \textit{Quick Select} and \textit{k-d tree}s improved performance. The final product achieved the requirement of being user-friendly since it is easily accessible via the Google Cloud server and prevents the user from entering invalid search criteria. 
 
+Additional goals included using less than 1 GB of RAM, this was achieved since the \textit{TrawlExpert} used approximately 0.5 GB of RAM. An additional goal was to perform queries in less than 1 second, this was achieved. A positive team dynamic throughout the development process ensured collaboration and help were always offered, this was a large contributing factor to the success of the final product. 
 
-\section{Algorithmic Opportunities}
-The \textit{TrawlExpert} was made possible by the use of vaious algorithms studied in \textit{SFWRENG 2C03: Algorithms} offered at McMaster University. These algorithms include \textit{Red-Black Tree} for searching and \textit{Merge Sort} for sorting objects. Additional algorithms outside of the course scope were implemented to optimize the program; they are described below. 
+\subsection{Changes During Development}
+There were some algorithmic changes that were realized during development. Two key algorithmic changes were the change from \textit{Merge Sort} to using \textit{Quick Select}, and changing cluster groups of Connected Components. As discussed in Algorithmic Opportunities, the use of \textit{Quick Select} dramatically improved performance. 
 
-\subsection{Quick Select Algorithm}
-A modified form of the \textit{Quick Sort} algorithm that returns the $k^{th}$ largest element of an unsorted array. Similar to \textit{Quick Sort}, \textit{Quick Select} randomly chooses a partitioning element to sort the array such that all elements smaller than the partition are left of it, and larger elements are to the right. However, rather than recursively sorting both halves of the partitioned array, \textit{Quick Select} only sorts the half containing the $k^{th}$ index. The algorithm terminates once the partitioning element ends up at the $k^{th}$ index of the array, the value of this element is returned.
+Another algorithmic change involved the client code for Connected Components when determining fish clusters. Initially, every node was visited multiple times to determine whether other nodes were within a given radius. The running time was unacceptable using this approach, and as a result, the algorithm was changed such that visited nodes were not revisited. This decreased running time significantly and was considered acceptable by the team. 
 
-This algorithm is implemented in \textit{/sort/QuickSelect.java}. It is used during the construction of \textit{k-d tree}s which require the frequent division of an array into two equally sized halves. By finding the median element of an array, it is partially sorted into equally sized small and large halves. The \textit{Quick Select} class implements a \textit{median} method to simplify its usage in \textit{k-d tree} construction. 
-
-Using \textit{Quick Select} rather than \textit{Merge Sort} has drastically improved the \textit{TrawlExpert}'s performance. When using \textit{Merge Sort} during \textit{k-d tree} construction, an array must be fully sorted before retrieving the median element. \textit{Quick Select} only partially sorts the array before reaching the median and has reduced \textit{k-d tree} construction from 40.083 s using \textit{Merge Sort} to 0.56 s. 
-
-% Mention optimization for Worms API
-
-\subsection{K-d Tree Algorithm}
-% Chris will write :) 
-
-\subsection{Graph Algorithms}
-Graph algorithms were used to support advanced searching features. Firstly, the biological classification of each organism forms a tree from which species in the same genus, for example, can be located. 
-
-Secondly, a graph algorithm was used to find connected components among search results. Nodes are connected together based on their distance to surrounding points \citep{tom10}. Depth-first search was used to determine connected components \citep{broder2000graph}.
-
+\subsection{Future Changes}
+Most of the changes that would benefit the \textit{TrawlExpert} involve its development requirements. The original goals for this section were quite extensive, however one aspect that was overlooked was file organization. Although GitLab was used for version control, confusion still occurred over which packages certain classes belonged to. For example, there were instances in the project where a search class would be located in the graph package. Adding a requirement for file organization would make the project more easily accessible in the development process and would also yield more efficient workflow because less time would be dedicated to searching for a desired class. 
 
 \clearpage
 \bibliographystyle{apa}
