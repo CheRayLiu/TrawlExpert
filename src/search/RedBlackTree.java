@@ -1,6 +1,7 @@
 package search;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import sort.GeneralCompare;
 
@@ -223,7 +224,28 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Seriali
 	protected RBNode<Key, Value> root() {
 		return root;
 	}
-
+	
+	/**
+	 * Returns all the keys in the red-black tree.
+	 * @return An iterable of all keys in the red-black tree.
+	 */
+	public Iterable<Key> keys(){
+		return keys(root, new ArrayList<Key>());
+	}
+	
+	/**
+	 * Private recursive method for finding all keys in the subtree of a given node.
+	 * @param x The root node to get the subtree keys of.
+	 * @param results The ArrayList to populate the keys with.
+	 * @return An ArrayList of keys in this subtree.
+	 */
+	private ArrayList<Key> keys(RBNode x, ArrayList<Key> results){
+		if (x == null) return results;
+		keys(x.left(), results);
+		results.add((Key) x.key());
+		keys(x.right(), results);
+		return results;		
+	}
 	
 	/**
 	 * Get the size of the tree.

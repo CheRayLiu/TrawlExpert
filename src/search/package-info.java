@@ -1,8 +1,6 @@
 /**
  * Contains search structures for efficient searches of data.
- */
-/**
- * @author TrawlStars
+ * @author TrawlStars, Inc.
  *
  */
 package search;

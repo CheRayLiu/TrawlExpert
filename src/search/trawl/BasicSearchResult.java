@@ -1,19 +1,10 @@
 package search.trawl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import data.Record;
-import graph.CC;
 import graph.Cluster;
 import graph.RecordCluster;
-import search.BST;
-import search.Graph;
-import sort.Bound;
-import sort.GeneralRange;
-import sort.RangeHelper;
-
-import java.lang.Math;
+import search.RedBlackTree;
 
 /**
  * Class for storing the results of a Basic Search, including the 
@@ -23,12 +14,33 @@ import java.lang.Math;
  *
  */
 public class BasicSearchResult {
+	/**
+	 * The taxonId of the search.
+	 */
 	private final Integer taxonId;
+	/**
+	 * The starting year of the search.
+	 */
 	private final Integer yearLo;
+	/**
+	 * The ending year of the search.
+	 */
 	private final Integer yearHi;
+	/**
+	 * The records found in the search.
+	 */
 	private ArrayList<Record> results;
+	/**
+	 * The time that the search took.
+	 */
 	private final double time;
-	private BST<Integer, Integer> histogram;
+	/**
+	 * The histogram of the search. Caches after first time the histogram() method is called.
+	 */
+	private RedBlackTree<Integer, Integer> histogram;
+	/**
+	 * The total number of fish in the search. Caches after the first time the sum() method is called.
+	 */
 	private Integer sum;
 	
 	/**
@@ -47,36 +59,62 @@ public class BasicSearchResult {
 		this.time = time;
 	}
 	
+	/**
+	 * @return The taxon id of the search
+	 */
 	public Integer taxonId() {
 		return taxonId;
 	}
 	
+	/**
+	 * @return The starting year of the search
+	 */	
 	public Integer yearLo() {
 		return yearLo;
 	}	
 	
+	/**
+	 * @return The ending year of the search
+	 */
 	public Integer yearHi() {
 		return yearHi;
 	}
 
+	/**
+	 * @return The results of the search
+	 */
 	public ArrayList<Record> results() {
 		return results; 
 	}
 	
+	/**
+	 * @return The number of records returned by the search.
+	 */
 	public int n() {
 		return results.size();
 	}
 	
+	/**
+	 * @return The time the search took.
+	 */
 	public double time() {
 		return time;
 	}
 	
-	public BST<Integer, Integer> histogram() {
+	/**
+	 * Generates a histogram of the search results.
+	 * @return A red-black tree where the key is a year and the value is the corresponding number of individuals.
+	 */
+	public RedBlackTree<Integer, Integer> histogram() {
 		if (this.histogram == null)
 			this.histogram = Histogram.histogram(results());
 		return histogram;
 	}
 	
+	/**
+	 * The total number of individuals in this search.
+	 * @return
+	 */
 	public int sum() {
 		if (sum == null) {
 			sum = 0;
@@ -87,8 +125,9 @@ public class BasicSearchResult {
 	}
 	
 	/**
-	 * 
-	 * @param area
+	 * Cluster the current search into clusters based on area of similarity.
+	 * @param area The area of similarity. Two records are considered to be in the same cluster
+	 * if the square area around the records overlaps.
 	 */
 	public ArrayList<RecordCluster> cluster(double area){
 		return Cluster.cluster(area, this);

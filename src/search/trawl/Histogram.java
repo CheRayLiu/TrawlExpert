@@ -1,9 +1,7 @@
 package search.trawl;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 import data.Record;
-import search.BST;
+import search.RedBlackTree;
 
 public class Histogram {
 
@@ -15,8 +13,8 @@ public class Histogram {
 	 *            - An iterable of records
 	 * @return - The BST
 	 */
-	public static BST<Integer, Integer> histogram(Iterable<Record> record) {
-		BST<Integer, Integer> tree = new BST<Integer, Integer>();
+	public static RedBlackTree<Integer, Integer> histogram(Iterable<Record> record) {
+		RedBlackTree<Integer, Integer> tree = new RedBlackTree<Integer, Integer>(a -> 0, (n0, n1) -> n0.compareTo(n1));
 		for (Record rec : record) {
 			int year = rec.getDate().getYear();
 			int count = 0;
@@ -35,7 +33,7 @@ public class Histogram {
 	 * 
 	 * @param record -An BST of records
 	 */
-	public static void printHistogram(BST<Integer,Integer> record) {
+	public static void printHistogram(RedBlackTree<Integer,Integer> record) {
 		int max = 0;
 		int scale = 100;
 		Iterable<Integer> results = record.keys();

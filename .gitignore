@@ -16,3 +16,4 @@ tomcat/work/*
 *.zip
 /doc
 /data
+/tomcat/webapps/Trawl/doc

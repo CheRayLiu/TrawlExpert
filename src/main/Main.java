@@ -1,3 +1,4 @@
+package main;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,19 +11,34 @@ import data.Record;
 import data.biotree.BioTree;
 import graph.RecordCluster;
 import model.TrawlExpert;
-import search.BST;
+import search.RedBlackTree;
 import search.trawl.BasicSearchResult;
 
+/**
+ * Provides the TrawlExpert command-line interface.
+ * @author Christopher W. Schankula
+ *
+ */
 public class Main {
+	/**
+	 * The model of the TrawlExpert.
+	 */
 	public static TrawlExpert te;
 	
-	public static void main(String[] args) {
+	/**
+	 * The main method to start up the program.
+	 */
+	public static void main() {
 		printLogo();
 		te = new TrawlExpert();
 		init();
 	}
 
+	/**
+	 * Prints the ASCII fish loading screen.
+	 */
 	private static void printLogo() {
+		//fish art from http://www.ascii-art.de/ascii/def/fish.txt
 		System.out.println("======== TRAWLEXPERT ALPHA v1 ========");
 		System.out.println("                                   _...----.\r\n" + 
 				"                       _,      _,-'_...--'`/\r\n" + 
@@ -46,6 +62,9 @@ public class Main {
 		System.out.println("Loading.......");
 	}
 	
+	/**
+	 * Initializes the command line interface.
+	 */
 	public static void init() {
 		System.out.println("Welcome!");
 		
@@ -76,8 +95,8 @@ public class Main {
 	}
 	
 	/**
-	 * 
-	 * @param matcher
+	 * Called when a range search is performed.
+	 * @param matcher The regex matcher defining the command issued by the user.
 	 */
 	private static void rangeSearch(Matcher matcher) {
 		Integer start = null;
@@ -98,11 +117,7 @@ public class Main {
 				try {
 					taxonId = BioTree.nameToTaxonId(matcher.group(2));
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 			}
 		}
@@ -138,6 +153,10 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Prints the records returned by a basic search.
+	 * @param results An iterable of records to print on the command line.
+	 */
 	private static void printRecords(Iterable<Record> results) {
 		String format = "|%1$-45s|%2$-15s|%3$-15s|%4$-15s|%5$-15s|%6$-15s\n";
 		System.out.format(format, "Scientific Name", "IndividualCount", "Latitude", "Longitude","Year","Month","Day");
@@ -146,6 +165,10 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Prints the biological tree or subtree thereof.
+	 * @param matcher The regex matcher defining the command issued by the user.
+	 */
 	private static void printTree(Matcher matcher) {
 		Integer taxonId;
 		String name;
@@ -166,9 +189,9 @@ public class Main {
 	/**
 	 * Prints a histogram based on a BST of records
 	 * 
-	 * @param record -An BST of records
+	 * @param record A Red-Black tree of records (mapping from year to count).
 	 */
-	public static void printHistogram(BST<Integer,Integer> record) {
+	public static void printHistogram(RedBlackTree<Integer,Integer> record) {
 		int max = 0;
 		int scale = 100;
 		Iterable<Integer> results = record.keys();
@@ -191,9 +214,9 @@ public class Main {
 	}
 	
 	/**
-	 * Prints a histogram based on a BST of records
+	 * Clusters the data and returns the cluster screen so the user can view the clusters, etc.
 	 * 
-	 * @param record -An BST of records
+	 * @param clusters An ArrayList of RecordCluster objects found by clustering the data.
 	 */
 	public static void doCluster(ArrayList<RecordCluster> clusters) {
 		System.out.println("Found " + clusters.size() + " clusters.");

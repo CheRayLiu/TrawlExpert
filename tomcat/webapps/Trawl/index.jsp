@@ -1,6 +1,5 @@
 <%@page import="search.trawl.BasicSearchResult"%>
 <%@page import="search.trawl.BasicSearch"%>
-<%@page import="search.BST"%>
 <%@page import="data.biotree.TaxonNode"%>
 <%@page import="data.biotree.BioTree"%>
 <%@page import="data.DataStore"%>
@@ -49,7 +48,8 @@
             <a href="index.jsp" >TrawlExpert</a>
             <span class="nav-bar">
                 <a href="about.html">About</a> |
-                <a href="index.html" target="_blank">GitHub</a>
+                <a href="doc/" target="_blank">TrawlExpert API</a> |
+                <a href="https://gitlab.cas.mcmaster.ca/schankuc/2XB3" target="_blank">Git</a>
             </span>
         </div>
     </header>

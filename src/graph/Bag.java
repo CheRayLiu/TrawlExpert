@@ -4,11 +4,11 @@ import java.util.Iterator;
 
 public class Bag<Integer> implements Iterable<Integer> {
 
-	private Node first; //pointer to head of linked list
+	private BagNode first; //pointer to head of linked list
 	
-	private class Node{
+	private class BagNode{
 		Integer item;
-		Node next;
+		BagNode next;
 	}
 	
 	/**
@@ -16,8 +16,8 @@ public class Bag<Integer> implements Iterable<Integer> {
 	 * @param item the item to be added to the linked list
 	 */
 	public void add(Integer item){
-		Node oldfirst = first;
-		first = new Node();
+		BagNode oldfirst = first;
+		first = new BagNode();
 		first.item = item;
 		first.next = oldfirst;
 	}
@@ -29,7 +29,7 @@ public class Bag<Integer> implements Iterable<Integer> {
 	
 	private class ListIterator implements Iterator<Integer>{
 		
-		private Node current = first;
+		private BagNode current = first;
 		
 		public boolean hasNext(){
 			return current != null;
