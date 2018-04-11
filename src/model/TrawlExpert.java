@@ -15,7 +15,9 @@ import search.trawl.BasicSearchResult;
 
 /**
  * The model of the TrawlExpert codebase. Gives hooks to views such as the server
- * and the command-line interface.
+ * and the command-line interface. Attempts to load serialized data from the disc,
+ * but if that fails it will regenerate the BioTree and Record kd-tree from the
+ * original dataset, then save the serialized data when it's done.
  * @author Christopher W. Schankula
  *
  */
@@ -77,7 +79,7 @@ public class TrawlExpert {
 	public TaxonNode getTaxonRecord(String scientificName) {
 		try {
 			return BioTree.getTaxonRecord(scientificName);
-		} catch (IOException | ParseException e) {
+		} catch (ParseException e) {
 
 		}
 		return null;

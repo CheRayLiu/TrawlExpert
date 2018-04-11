@@ -32,7 +32,7 @@ public class FileProcessor {
 	/**
 	 * Sets a new path string
 	 */
-	public void setPath(String newPath) {
+	public static void setPath(String newPath) {
 		path = newPath;
 	}
 	

@@ -23,7 +23,7 @@ import search.RedBlackTree;
  */
 public class BioTree implements Serializable {
 	/**
-	 * 
+	 * Serializable version ID. Requires by Serializable interface.
 	 */
 	private static final long serialVersionUID = 4291273291916906661L;
 	/**
@@ -232,8 +232,14 @@ public class BioTree implements Serializable {
 	 * @throws ParseException 
 	 * @throws IOException 
 	 */
-	public static TaxonNode getTaxonRecord(String scientificName) throws IOException, ParseException {
-		return idNodes.get(nameToTaxonId(scientificName));
+	public static TaxonNode getTaxonRecord(String scientificName) {
+		try {
+			Integer taxonId = nameToTaxonId(scientificName);
+			if (taxonId == null) return null;
+			return idNodes.get(taxonId);
+		} catch (IOException | ParseException e0) {
+			return null;
+		}
 	}
 	
 	/**
