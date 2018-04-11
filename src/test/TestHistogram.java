@@ -16,7 +16,6 @@ import search.trawl.BasicSearchResult;
  */
 public class TestHistogram {
 	public static TrawlExpert te;
-	public static RedBlackTree<Integer, Integer> histo;
 
 	@Before
 	public void setUp() throws Exception {
