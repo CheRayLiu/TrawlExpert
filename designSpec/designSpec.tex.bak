@@ -125,7 +125,7 @@ The implementation involved over 30 classes implemented in Java. Additional Java
 The requirements in the Requirement Specification Document are achieved by applying modularity and seperation of concerns, which will be shown in the UML diagrams. The table below traces back to requirements for each class interface:\\
 
 
-\begin{adjustbox}{width= 16.5cm}
+\begin{adjustbox}{width= 16cm}
 \centering
 \begin{tabular}{| l | l |}
 \hline
