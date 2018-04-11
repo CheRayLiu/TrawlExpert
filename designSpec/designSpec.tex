@@ -25,7 +25,7 @@
 \begin{document}
 
 \title{\textbf{TrawlExpert: A Tool for Watershed Biological Research}}
-\author{Trawlstars Inc. (Group 11) \\ Lab section: L01  \\ Version: 1.0 \\ SFWRENG 2XB3 \\ \\ Christopher W. Schankula, 400026650, schankuc \\ Haley Glavina, 001412343, glavinhc \\ Winnie Liang, 400074498, liangw15 \\ Ray Liu, 400055250, liuc40 \\ Lawrence Chung, 400014482, chungl1}
+\author{Trawlstars Inc. (Group 11) \\ Lab section: L01  \\ Version: 1.0 \\ SFWRENG 2XB3 \\ \\ Christopher W. Schankula, 400026650, schankuc \\ Haley Glavina, 001412343, glavinhc \\ Winnie Liang, 400074498, liangw15 \\ Ray Liu, 400055250, liuc40 \\ Lawrence Chung, 400014482, chungl1\\}
 
 
 \maketitle
@@ -114,7 +114,7 @@ The test dataset that will be used for purposes of this project is the \textit{U
 \label{fig:UI}
 \end{figure}
 
-Apache tomcat was used to create a webserver which uses the internal functionality and model of TrawlExpert written in Java. The UI allows users to filter by using information about different taxa (their biological relationships to each other, such as family / genus / species, etc) and display several different data outputs such as histograms, heatmaps, maps and population clusters, in addition to viewing raw data in tabular form. The clustering function is shown in \ref{fig:UI}. The \textit{TrawlExpert} is hosted on Google Cloud Platform and can be accessed at \url{http://trawl.schankula.ca/Trawl}. 
+Apache tomcat was used to create a webserver which uses the internal functionality and model of \textit{TrawlExpert} written in Java. The UI allows users to filter by using information about different taxa (their biological relationships to each other, such as family / genus / species, etc) and display several different data outputs such as histograms, heatmaps, maps and population clusters, in addition to viewing raw data in tabular form. The clustering function is shown in figure \ref{fig:UI}. The \textit{TrawlExpert} is hosted on Google Cloud Platform and can be accessed at \url{http://trawl.schankula.ca/Trawl}. 
 
 \subsection{Glossary of Terms}
 \noindent\textbf{Classification tree:} Tree describing the relationships between taxa (for example, a species is the child of its genus).
@@ -235,10 +235,10 @@ Most of the other Java Server Pages (.jsp) files are contained in \texttt{tomcat
 Two UML state machine diagrams are included to describe the states and transitions within the \textit{BioTree.java} and \textit{Main.java} class.
 
 \subsubsection{Main.java}
-The UML digrama for the Main.java class is shown in \ref{fig:MainUML}. This represents the \textit{TrawlExpert} console application's states, giving an overview of the types of queries and functions the user has access to. Since the \textit{Main.java} class is a console version of the final server implementation, the states shown in its UML state machine diagram are analogous to many of the states of the final \textit{TrawlExpert} website.
+The UML diagram for the Main.java class is shown in figure \ref{fig:MainUML}. This represents the \textit{TrawlExpert} console application's states, giving an overview of the types of queries and functions the user has access to. Since the \textit{Main.java} class is a console version of the final server implementation, the states shown in its UML state machine diagram are analogous to many of the states of the final \textit{TrawlExpert} website.
  
 \subsubsection{BioTree.java}
-The UML state diagram for the BioTree module is shown in figure \ref{fig:BioTreeUML}. The BioTree class is a singleton class which stores the information about the different taxa in the dataset. This method has a few advantages. Firstly, the string names and relationships amongst taxa (e.g. species, genus, family) are stored only once and accessed when needed, saving large amounts of memory. After running through the TrawlExpert, the serialized dataset representing the same data is only 27mb, requiring very little storage on the user's computer.
+The UML state diagram for the BioTree module is shown in figure \ref{fig:BioTreeUML}. The BioTree class is a singleton class which stores the information about the different taxa in the dataset. This method has a few advantages. Firstly, the string names and relationships amongst taxa (e.g. species, genus, family) are stored only once and accessed when needed, saving large amounts of memory. After running through the \textit{TrawlExpert}, the serialized dataset representing the same data is only 27mb, requiring very little storage on the user's computer.
 
 Secondly, this diagrams represents a key feature of \textit{TrawlExpert} in that it is able to recover corrupted data as the dataset is processed, which is very helpful for large datasets. In the USGS dataset, for example, there were 115 instances of different incorrectly named taxa, totalling 15,596 records (almost 6\% of the records in the dataset). Using this method, these records were able to be recovered for proper use by the scientist. Using smart caching of incorrect names described by this UML diagram, the number of API calls to WORMS is kept at a minimum and the dataset processing only takes about 3 minutes. After the initial processing, the BioTree and records are stored as serialized Java objects to the disc, and can be reloaded in less than 10 seconds.
 
