@@ -33,7 +33,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Seriali
 	}
 	
 	/**
-	 * Wrapper method for retrieving the node that matches a desired key
+	 * Finds the node in a tree whose key matches a desired key (if the matching node exists)
 	 * @param key Key pointing to the desired node
 	 * @return A node containing who's key matches the input
 	 */
@@ -44,7 +44,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Seriali
 	}
 	
 	/**
-	 * Finds the node in a tree whose key matches a desired key (if the matching node exists)
+	 * Recursively finds the node in a tree whose key matches a desired key (if the matching node exists)
 	 * @param node Root of the subtree being searched
 	 * @param key Desired key to be searched for in a tree
 	 * @return The node containing the key, returns null if the key is not found

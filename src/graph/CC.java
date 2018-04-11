@@ -66,7 +66,7 @@ public class CC {
 	/**
 	 * accesses the value of component id
 	 * @param v indexed value
-	 * @return value at index v
+	 * @return The component id
 	 */
 	public int id(int v){
 		return id[v];

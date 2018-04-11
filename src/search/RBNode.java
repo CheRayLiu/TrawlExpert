@@ -25,6 +25,7 @@ public class RBNode<Key extends Comparable<Key>, Value> implements Serializable{
 	 * @param color True represents a red connection between the current node and its parent, black represents false
 	 */
 	public RBNode(Key key, Value val, int n, boolean color){
+
 		this.key = key;
 		this.val = val;
 		this.n = n;
