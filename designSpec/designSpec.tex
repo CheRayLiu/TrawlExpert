@@ -114,6 +114,8 @@ The test dataset that will be used for purposes of this project is the \textit{U
 \label{fig:UI}
 \end{figure}
 
+The final product included a command-line interface as well as a web interface using Apache tomcat. For information on launching the console, please refer to the \texttt{DEPLOYMENT.txt} document in the submission archive.
+
 Apache tomcat was used to create a webserver which uses the internal functionality and model of \textit{TrawlExpert} written in Java. The UI allows users to filter by using information about different taxa (their biological relationships to each other, such as family / genus / species, etc) and display several different data outputs such as histograms, heatmaps, maps and population clusters, in addition to viewing raw data in tabular form. The clustering function is shown in figure \ref{fig:UI}. The \textit{TrawlExpert} is hosted on Google Cloud Platform and can be accessed at \url{http://trawl.schankula.ca/Trawl}. 
 
 \subsection{Glossary of Terms}
@@ -130,11 +132,11 @@ Apache tomcat was used to create a webserver which uses the internal functionali
 \noindent\textbf{WORMS}: World Register of Marine Species, an openly accessible online database.
 
 \section{Implementation}
-The implementation involved over 30 classes implemented in Java. Additional JavaScript and HTML files were used to create a sophisticated web-based user interface. For a complete description of each class and module used, JavaDoc documentation can be viewed by opening the \texttt{doc/index.html} folder in the submission archive or by visiting \url{http://trawl.schankula.ca/Trawl/doc}.
+The implementation involved over 30 classes implemented in Java. Additional JavaScript and HTML files were used to create a sophisticated web-based user interface. For a complete description of each class and module used, JavaDoc documentation can be viewed by opening the \texttt{doc/index.html} file in the submission archive or by visiting \url{http://trawl.schankula.ca/Trawl/doc}.
 
 
 \subsection {Modular Structure and Uses}
-The requirements in the Requirement Specification Document are achieved by applying modularity and seperation of concerns, which will be shown in the UML diagrams. Table 1 maps requirements to each class supporting that requirement.\\
+The requirements in the Requirement Specification Document are achieved by designing modules with modularity and separation of concerns as a guiding principle. The relationship amongst modules is shown in the UML diagram in figure \ref{fig:UML}. Table 1 maps requirements to each class supporting that requirement. For a complete description of uses relation and public and private methods and modules, please refer to the JavaDoc documentation which can be viewed by opening the \texttt{doc/index.html} file in the submission archive or by visiting \url{http://trawl.schankula.ca/Trawl/doc}.\\
 
 \newpage
 \begin{center}
@@ -224,7 +226,7 @@ The \texttt{web} package contains the controller (\texttt{Director.java}) and th
 Most of the other Java Server Pages (.jsp) files are contained in \texttt{tomcat/webapps/Trawl/}. Since this is not a focus of the project, these are not covered further in this design document.
 
 \subsubsection{test Package}
-The \texttt{test} package contains JUnit test cases for all of the modules in the program.
+The \texttt{test} package contains JUnit test cases for modules in the program which help to show that the various functionality is functioning as intended.
 
 \begin{figure}
 \centering
