@@ -3,8 +3,8 @@
 In order to launch the command-line version of the TrawlExpert, launch src/main/Main.java
 in Eclipse. This will load the command line tool with all the data needed to run the
 program. Try typing "tree" and pressing Enter to see all of the possible searches in the
-dataset. Then type "records Cottus cognates" for example to search for a certain species.
-Then you can type "histogram", "sum", "list" or "cluster 3000" for example to see different
+dataset. Then type "records Cottus cognatus" for example to search for a certain species.
+Then you can type "histogram", "sum", "list" or "cluster 10000" for example to see different
 results.
 
 ==== TOMCAT ====
