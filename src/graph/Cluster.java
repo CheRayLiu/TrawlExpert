@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import data.Record;
-import search.Graph;
 import search.trawl.BasicSearch;
 import search.trawl.BasicSearchResult;
 import sort.Bound;

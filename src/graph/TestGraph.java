@@ -1,6 +1,5 @@
 package graph;
 
-import search.Graph;
 import static org.junit.Assert.*;
 import org.junit.*;
 

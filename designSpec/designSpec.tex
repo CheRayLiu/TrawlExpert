@@ -149,12 +149,20 @@ Scalable (Non-functional) & KDT.java, Quickselect.java, and RedBlackTree.java \\
 \subsection{Class Organization}
 An overview of the modules included in the \textit{TrawlExpert} is shown in figure \ref{fig:UML}. The \textit{Trawl Expert} implementation efforts were divided into two subteams: Subteam A and Subteam B. Tasks were assigned so as to maximize the parallelization of the development process. As a biproduct, modules were designed to uphold the principles of information hiding, modularity and separation of concerns.
 
+Using Java packages, related modules were grouped together to form packages of closely-related logic, as well as to ensure that modules were organized and easy to find. This section describes a package-level description of each one and justification for this modular decomposition.
+
 \subsubsection{model Package}
 This class represents the model of the \textit{TrawlExpert} platform. It provides wrapper hooks to functionality deeper inside the codebase, which allows different views to be used separately from the internal functionality. Two such views are the command-line interface in \texttt{main/Main.java} and the tomcat server. This design allows any such view to be built upon the foundation of the model, without needing to edit any underlying code.
 
 \subsubsection{data Package}
+The top-level data package contains three main types of modules: abstract data types (e.g. Record, TaxonNode, Date), abstract objects (e.g. BioTree, DataStore) and supporting modules such as WormsAPI.
+
+Abstract data types such as Record are classes for representing and accessing certain types of information in our dataset. For example, Record is the representation of a single line of the dataset (including Taxon ID, latitude, longitude and date). Each ADT was designed to uphold the principle of encapsulation and provides methods for accessing data relevant to the ADT.
+
+Abstract singleton objects were used to provide a central storage location for data. For example, BioTree contains information about the biological classification within the dataset. Since they are singleton objects, data can always be accessed from anywhere else in the program which needs it (see figure \ref{fig:UML}) without needing to pass references to objects. Similarly, DataStore provides a central location for the storage of Records in the dataset in a kd-tree structure.
 
 \subsubsection{search Package}
+The search package provides several generic search structures such as Red-Black Tree and kd-tree
 
 \subsubsection{sort Package}
 

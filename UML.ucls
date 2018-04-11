@@ -73,8 +73,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="search.Graph" project="Project" file="/Project/src/search/Graph.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="graph.Graph" project="Project" file="/Project/src/graph/Graph.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-1414" y="98"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

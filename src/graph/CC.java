@@ -2,8 +2,6 @@ package graph;
 
 import java.util.ArrayList;
 
-import search.Graph;
-
 public class CC {
 
 	private boolean[] marked;

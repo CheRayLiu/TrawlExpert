@@ -1,6 +1,4 @@
-package search;
-
-import graph.Bag;
+package graph;
 
 public class Graph {
 	
