@@ -28,7 +28,7 @@ public class Main {
 	/**
 	 * The main method to start up the program.
 	 */
-	public static void main() {
+	public static void main(String[] args) {
 		printLogo();
 		te = new TrawlExpert();
 		init();

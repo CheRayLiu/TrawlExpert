@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 class RBNode<Key extends Comparable<Key>, Value> implements Serializable{
 	private final Key key;
-	private Value val;
+	Value val;
 	private RBNode<Key, Value> left, right;
 	private int n; 
 	private boolean color;

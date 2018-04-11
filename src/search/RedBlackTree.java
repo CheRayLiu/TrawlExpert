@@ -108,14 +108,14 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Seriali
 		int cmp = compare.compare(newNode.key(), h.key());
 		if (cmp < 0 && (h.left() == null))
 				h.left(newNode);
-		else if (cmp < 0 )
+		else if (cmp < 0)
 			h.left(put(h.left(), newNode));
 		else if (cmp > 0 && (h.right() == null))
 			h.right(newNode);
 		else if (cmp > 0)
 			h.right(put(h.right(), newNode));
 		else
-			h = newNode;
+			h.val = newNode.val;
 
 		// Rearrange the tree to maintain balance
 		if(h.n() > 2){
@@ -239,10 +239,10 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Seriali
 	 * @param results The ArrayList to populate the keys with.
 	 * @return An ArrayList of keys in this subtree.
 	 */
-	private ArrayList<Key> keys(RBNode x, ArrayList<Key> results){
+	private ArrayList<Key> keys(RBNode<Key,Value> x, ArrayList<Key> results){
 		if (x == null) return results;
 		keys(x.left(), results);
-		results.add((Key) x.key());
+		results.add(x.key());
 		keys(x.right(), results);
 		return results;		
 	}

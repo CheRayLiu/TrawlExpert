@@ -11,7 +11,7 @@ public class Histogram {
 	 * 
 	 * @param record
 	 *            - An iterable of records
-	 * @return - The BST
+	 * @return - The Red-Black tree representing the histogram (key - year, value - individual count)
 	 */
 	public static RedBlackTree<Integer, Integer> histogram(Iterable<Record> record) {
 		RedBlackTree<Integer, Integer> tree = new RedBlackTree<Integer, Integer>(a -> 0, (n0, n1) -> n0.compareTo(n1));
