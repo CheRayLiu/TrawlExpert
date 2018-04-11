@@ -57,7 +57,7 @@ The individual contributions of each team member are described below. Subteam B 
 		\midrule
 		Lawrence Chung
 		& Head of Room Booking \newline Subteam B Member
-		& Implemented the depth first search and connected components algorithms. \\
+		& Implemented the depth first search, connected components algorithms, client code for connected components, Graph building, Node class and Bag class. \\
 		\midrule
 		Haley Glavina
 		& Meeting Minutes Administrator \newline Subteam B Member
@@ -65,7 +65,7 @@ The individual contributions of each team member are described below. Subteam B 
 		\midrule
 		Winnie Liang
 		& Project Log Administrator \newline Subteam A Member
-		& Implemented the module responsible for parsing out data to create related objects, implemented taxonNode ADT. Led user interface development, set up tomcat files and directory structure,  handled communication between the Google Maps APIs and JavaScript code. Overlooked project log entries.\\
+		& Implemented the module responsible for parsing our data to create related objects, implemented taxonNode ADT. Led user interface development, set up tomcat files and directory structure,  handled communication between the Google Maps APIs and JavaScript code. Overlooked project log entries.\\
 		\midrule
 		Ray Liu
 		& TA \& Professor Liaison \newline Subteam A Member
@@ -152,10 +152,10 @@ Scalable (Non-functional) & KDT.java, Quickselect.java, and RedBlackTree.java \\
 
 
 \subsection{Class Organization}
-An overview of the modules included in the \textit{TrawlExpert} is shown in figure \ref{fig:UML}. The \textit{Trawl Expert} implementation efforts were divided into two subteams: Subteam A and Subteam B. Tasks were assigned so as to maximize the parallelization of the development process. As a biproduct, modules were designed to uphold the principles of information hiding, modularity and separation of concerns.
+An overview of the modules included in the \textit{TrawlExpert} is shown in figure \ref{fig:UML}. The \textit{Trawl Expert} implementation efforts were divided into two subteams: Subteam A and Subteam B. Tasks were assigned so as to maximize the parallelization of the development process. As a byproduct, modules were designed to uphold the principles of information hiding, modularity and separation of concerns.
 
 \subsubsection{model Package}
-This class represents the model of the \textit{TrawlExpert} platform. It provides wrapper hooks to functionality deeper inside the codebase, which allows different views to be used separately from the internal functionality. Two such views are the command-line interface in \texttt{main/Main.java} and the tomcat server. This design allows any such view to be built upon the foundation of the model, without needing to edit any underlying code.
+This class represents the model of the \textit{TrawlExpert} platform. It provides wrapper hooks to function deeper inside the codebase, which allows different views to be used separately from the internal functionality. Two such views are the command-line interface in \texttt{main/Main.java} and the web interface through the tomcat server. This design allows any such view to be built upon the foundation of the model, without needing to edit any underlying code.
 
 \subsubsection{data Package}
 
