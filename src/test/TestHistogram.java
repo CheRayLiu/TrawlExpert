@@ -1,20 +1,12 @@
 package test;
 
 import search.trawl.*;
-import static org.junit.Assert.*;
 
-import org.json.simple.parser.ParseException;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import data.FileProcessor;
-import data.Record;
-import data.biotree.BioTree;
-import data.biotree.TaxonNode;
 import model.TrawlExpert;
 import search.RedBlackTree;
-import search.trawl.BasicSearch;
 import search.trawl.BasicSearchResult;
 
 /**
