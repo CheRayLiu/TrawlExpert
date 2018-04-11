@@ -2,7 +2,7 @@ package test;
 
 import search.trawl.*;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import model.TrawlExpert;
@@ -10,25 +10,19 @@ import search.RedBlackTree;
 import search.trawl.BasicSearchResult;
 
 /**
- * Testing was performed on a small dataset for which we know the correct numbers of data for each
- * taxon. Takes a while to process the dataset since most of the species in the set are unique and
- * thus require API calls.
+ * Test cases for Histogram.java
  * @author TrawlStars, Inc.
  *
  */
 public class TestHistogram {
 	public static TrawlExpert te;
 	public static RedBlackTree<Integer, Integer> histo;
-	/**
-	 * Loads the small dataset into memory using the FileProcessor.
-	 * @throws Exception Cannot find dataset given.
-	 */
-	@BeforeClass
-	public static void setUp() throws Exception {
+
+	@Before
+	public void setUp() throws Exception {
 		// Assumes serialized data is present
 		te = new TrawlExpert();
 	}
-
 
 	@Test
 	public void testSum1() {
