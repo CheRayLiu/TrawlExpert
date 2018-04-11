@@ -1,4 +1,4 @@
-package data.biotree;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import data.FileProcessor;
+import data.biotree.BioTree;
+import data.biotree.TaxonNode;
 import search.trawl.BasicSearch;
 
 /**

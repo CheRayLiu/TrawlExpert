@@ -19,7 +19,7 @@ public class RecordCluster {
 	 */
 	private Point centroid;
 	/**
-	 * Total number of inidividual fish in the cluster.
+	 * Total number of individual fish in the cluster.
 	 */
 	private int individualCount;
 	
@@ -33,6 +33,7 @@ public class RecordCluster {
 	}
 	
 	/**
+	 * Add a record to the dataset.
 	 * @param r Record for a species of fish
 	 */
 	public void addRecord(Record r) {
@@ -41,28 +42,29 @@ public class RecordCluster {
 	}
 	
 	/**
-	 * @return A record for a species of fish
+	 * @return An iterable of records in the cluster
 	 */
 	public Iterable<Record> records(){
 		return records;
 	}
 	
 	/**
-	 * @return Amount of records to be separated into clusters
+	 * @return Amount of records in the current cluster
 	 */
 	public int N() {
 		return records.size();
 	}
 	
 	/**
-	 * @return Number of data points in cluster
+	 * @return Number of individuals in the records in the cluster
 	 */
 	public int getCount() {
 		return individualCount;
 	}
 	
 	/**
-	 * @return The middle point of the studied radius
+	 * Calculates the centroid of the records in the cluster.
+	 * @return The average point (centroid) of the current cluster.
 	 */
 	public Point centroid() {
 		double x = 0;

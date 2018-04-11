@@ -1,7 +1,5 @@
 package model;
 
-import java.io.IOException;
-
 import org.json.simple.parser.ParseException;
 
 import data.DataStore;
@@ -77,12 +75,7 @@ public class TrawlExpert {
 	 * @return An object representing information about the scientific name requested.
 	 */
 	public TaxonNode getTaxonRecord(String scientificName) {
-		try {
-			return BioTree.getTaxonRecord(scientificName);
-		} catch (ParseException e) {
-
-		}
-		return null;
+		return BioTree.getTaxonRecord(scientificName);
 	}
 	
 	/**

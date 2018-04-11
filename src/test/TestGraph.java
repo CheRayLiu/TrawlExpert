@@ -1,7 +1,9 @@
-package graph;
+package test;
 
 import static org.junit.Assert.*;
 import org.junit.*;
+
+import graph.Graph;
 
 public class TestGraph {
 
