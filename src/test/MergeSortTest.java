@@ -1,13 +1,16 @@
 /**
  * 
  */
-package sort;
+package test;
 
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import sort.GeneralCompare;
+import sort.MergeSort;
 
 /**
  * @author HaleyGlavina
