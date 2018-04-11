@@ -10,6 +10,11 @@ import sort.Bound;
 import sort.GeneralRange;
 import sort.RangeHelper;
 
+/**
+ * Class for clustering TrawlExpert Records according to an area of similarity.
+ * @author TrawlStars, Inc.
+ *
+ */
 public class Cluster {
 	/**
 	 * Cluster the results of a basic search into groupings based on an area.
@@ -64,6 +69,13 @@ public class Cluster {
 		return clusters;
 	}
 	
+	/**
+	 * Generate range functions for the search around a given node.
+	 * @param lat The latitude about which to search.
+	 * @param lon The longitude about which to search.
+	 * @param area The area of searching.
+	 * @return The GeneralRange functions for performing the range search.
+	 */
 	private static ArrayList<GeneralRange<Record>> ranges(double lat, double lon, double area){
 		double dist = Math.sqrt(area);
 		
@@ -75,10 +87,21 @@ public class Cluster {
 		return range;
 	}
 
+	/**
+	 * Convert a distance to a range in terms of longitude (depends on latitude).
+	 * @param dist The distance
+	 * @param lat The current latitude.
+	 * @return The amount of longitude degrees in half that distance.
+	 */
 	private static double lngRange(double dist, double lat){
 		return dist/(Math.cos(Math.toRadians(lat))*222);
 	}
 	
+	/**
+	 * Convert a distance to a range in terms of latitude (not dependant on longitude).
+	 * @param dist The distance
+	 * @return The amount of latitude degrees in half that distance.
+	 */
 	private static double latRange(double dist){
 		return (dist/222);
 	}

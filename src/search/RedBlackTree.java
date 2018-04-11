@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import sort.GeneralCompare;
 
 /**
- * 
- * @author HaleyGlavina
+ * Implements a Red-Black tree for maintaining a balanced binary tree.
+ * @author Haley Glavina
  *
- * @param <Key>
- * @param <Value>
+ * @param <Key> The type of key to search by, must be comparable as defined by the GeneralCompare function given.
+ * @param <Value> The type of value to store in the tree.
  */
 public class RedBlackTree<Key extends Comparable<Key>, Value> implements Serializable {
 	/**

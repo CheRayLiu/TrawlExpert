@@ -1,5 +1,10 @@
 package sort;
 
+/**
+ * An implementation of the MergeSort algorithm.
+ * @author Haley Glavina
+ *
+ */
 public class MergeSort{
 	/*// Main Function for Testing Purposes Only
 	public static void main(String[] args) {

@@ -1,29 +1,31 @@
+/*
+ * Based on implementation from Sedgewick & Wayne, Algorithms 4th Edition (2011).
+ */
+
 package graph;
 
 import java.util.ArrayList;
 
+/**
+ * Find the connected components in an undirected graph.
+ * @author TrawlStars, Inc.
+ *
+ */
 public class CC {
 
+	/**
+	 * Whether a node has been visited by the DFS.
+	 */
 	private boolean[] marked;
+	/**
+	 * A mapping from node to its component id.
+	 */
 	private int[] id;
+	/**
+	 * The number of connected components in the graph.
+	 */
 	private int count;
-	
-	public static void main(String[] args) {
-		Graph g = new Graph(7);
-		g.addEdge(4, 3);
-		g.addEdge(2, 3);
-		g.addEdge(1, 2);
-		g.addEdge(0, 2);
-		g.addEdge(5, 6);
-		CC component = new CC(g);
-		System.out.println(component.connected(2, 0)); //true
-		System.out.println(component.connected(0,1)); //true
-		System.out.println(component.connected(1, 5)); //false
-		//System.out.println(component.connected(1,6)); //throws exception (supposed to)
-		System.out.println(component.id(0));
-		System.out.println(component.id(5));
-		System.out.println(component.id(6));
-	}
+
 	/**
 	 * Constructor for Connected Component 
 	 * @param G Graph object consisting of a completed graph

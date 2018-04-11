@@ -1,15 +1,29 @@
+/*
+ * Based on code from Sedgewick & Wayne, Algorithms 4th Edition (2011).
+ */
+
 package graph;
 
+/**
+ * An ADT for representing an undirected, unweighted graph.
+ * @author TrawlStars, Inc.
+ *
+ */
 public class Graph {
 	
-	private final int V; // Number of nodes
-	private int E; // Number of edges
-	private Bag<Integer>[] adj; // Adjacency list for a node
+	/**
+	 * Number of nodes in graph.
+	 */
+	private final int V;
+	/**
+	 * Number of edges in graph
+	 */
+	private int E;
+	/**
+	 *  Adjacency list for all nodes.
+	 */
+	private Bag<Integer>[] adj;
 	
-	public static void main(String[] args) {
-		
-		
-	}
 	/**
 	 * Constructor used to build a graph of a specified size
 	 * @param V The size of graph, or, the number of nodes in graph
