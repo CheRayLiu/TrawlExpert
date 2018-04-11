@@ -226,7 +226,8 @@ public class Main {
 			System.out.format(format, (i+1), String.format("%.5f", clusters.get(i).centroid().getY()), String.format("%.5f", clusters.get(i).centroid().getX()), clusters.get(i).N(), clusters.get(i).getCount());
 		
 		while(true) {
-			System.out.println("Available commands: list (cluster #), clusters, exit");
+			System.out.println("Available commands: list (cluster #), clusters, exit\n");
+			System.out.print("> ");
 			
 			Scanner s = new Scanner(System.in);
 			String command = s.nextLine();

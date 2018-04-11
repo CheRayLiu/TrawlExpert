@@ -1,0 +1,23 @@
+==== COMMAND LINE ====
+
+In order to launch the command-line version of the TrawlExpert, launch src/main/Main.java
+in Eclipse. This will load the command line tool with all the data needed to run the
+program. Try typing "tree" and pressing Enter to see all of the possible searches in the
+dataset. Then type "records Cottus cognates" for example to search for a certain species.
+Then you can type "histogram", "sum", "list" or "cluster 3000" for example to see different
+results.
+
+==== TOMCAT ====
+Tomcat is significantly more tricky. There is a makefile that when run from the main project
+directory should allow the server to start. Accessing http://localhost:8080/Trawl should 
+then load the website. However, the amount of time needed to properly configure tomcat on
+your machine will not be worth taking the time to figure out. As such, a live version of the
+website is available at http://trawl.schankula.ca/Trawl. This runs the exact same code as
+would run locally if you ran tomcat. For example, try selecting a species and then clicking 
+"load" on the "list" and seeing how many results there are. Then try viewing histogram,
+heat map, map, etc. For results greater than ~20,000 results, don't attempt to view the
+heat map or map as this will likely lag your browser (the server-side code handles this fine;
+the client can get laggy). Try out the clustering by typing in a value of at least 1,000km^2
+for any size of search (even "any" for all fields). You can also try out filtering by year
+and seeing that there are only results in those years. Lastly, for "cluster" and "map"
+options, try clicking the map markers to see more information.
