@@ -5,7 +5,7 @@
 <%@page import="search.Field"%>
 <%@page import="data.biotree.TaxonType"%>
 <%@page import="org.json.simple.parser.JSONParser"%>
-<%@ page import="java.util.*, data.Record, model.TrawlExpert, search.BST,search.trawl.BasicSearchResult, org.json.simple.JSONObject,data.biotree.TaxonNode" %>
+<%@ page import="java.util.*, data.Record, model.TrawlExpert, search.trawl.BasicSearchResult, org.json.simple.JSONObject,data.biotree.TaxonNode" %>
 <%
 	TrawlExpert te = (TrawlExpert)request.getServletContext().getAttribute("trawl");
 	JSONParser parser = new JSONParser();
@@ -21,7 +21,7 @@
 	//Field<String, ArrayList<TaxonNode>> fld = tn -> ((ArrayList<TaxonNode>) tn).get(0).getName().toString().toLowerCase();
 	//RedBlackTree<String, ArrayList<TaxonNode>> tt = new RedBlackTree<String, ArrayList<TaxonNode>>(fld, gc);
 
-	BST<TaxonType, ArrayList<TaxonNode>> tt = new BST<TaxonType, ArrayList<TaxonNode>>();
+	RedBlackTree<TaxonType, ArrayList<TaxonNode>> tt = new RedBlackTree<TaxonType, ArrayList<TaxonNode>>((t) -> TaxonType.Class, (t0,t1) -> t0.compareTo(t1));
 	
 	//add to BST in bins
 	for (Integer txId: txIds){
