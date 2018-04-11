@@ -49,6 +49,7 @@
             <span class="nav-bar">
                 <a href="about.html">About</a> |
                 <a href="doc/" target="_blank">TrawlExpert API</a> |
+                <a href="designSpec.pdf" target="_blank">Design Report</a> |
                 <a href="https://gitlab.cas.mcmaster.ca/schankuc/2XB3" target="_blank">Git</a>
             </span>
         </div>

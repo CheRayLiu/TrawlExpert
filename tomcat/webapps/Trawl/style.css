@@ -143,6 +143,10 @@ a:hover{
     width:100%;
 }
 
+#about{ /*about.html*/
+    margin: 3% 5%;
+}
+
 /*300/400/600/700*/
 /*font-family: 'Open Sans', sans-serif;*/
 
