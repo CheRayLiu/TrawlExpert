@@ -267,7 +267,7 @@ public class BioTree implements Serializable {
 			if (tx != null) return tx.getTaxonId();
 		} else {		//otherwise use Worms to look it up
 			System.out.println(scientificName + " not in incor db");
-			taxonId = WormsAPI.nameToRecordID(scientificName);
+			taxonId = WormsAPI.likeNameToID(scientificName);
 			if (taxonId == null) //if nothing is found, mark this species as not existing.
 				incorrectNames.put(scientificName, -1);
 			else {
@@ -316,7 +316,7 @@ public class BioTree implements Serializable {
 		TaxonNode txNode = strNodes.get(scientificName);
 		if (txNode == null)
 			try {
-				int taxonId = WormsAPI.nameToRecordID(scientificName);
+				int taxonId = WormsAPI.likeNameToID(scientificName);
 				txNode = idNodes.get(taxonId);
 			} catch (IOException | ParseException e) {
 				

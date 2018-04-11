@@ -3,21 +3,13 @@ package sort;
 // Code from "Algorithms: 4th Edition" by Robert Sedgewick
 // Adapted from the Sedgewick Quicksort implementation
 
+/**
+ * Implementation of the QuickSelect algorithm for selecting the kth largest data point in
+ * a given array according to some GeneralCompare function.
+ * @author TrawlStars, Inc.
+ *
+ */
 public class QuickSelect {
-
-	/*
-	// Main function for testing purposes only
-	public static void main(String[] args) {
-		//{1, 2, 3, 4, 5, 6, 7, 8, 9} 5 is median. 
-		Integer[] test = {4, 6, 7, 2, 2, 2, 2,2, 2, 2,2 ,2 ,2, 2, 2};
-		GeneralCompare<Integer> b1;
-		b1 = (a1, a2) -> (Integer) a1 - (Integer) a2;
-		
-		median(test, b1);
-		System.out.println(test[test.length/2]);
-	}
-	*/
-	
 	/**
 	 * Partially sorts a comparable array such that elements smaller than the median occur in
 	 * the first half of the array, and elements larger than the median occur in the second half

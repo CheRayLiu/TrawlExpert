@@ -21,22 +21,13 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Provides functions for communicating with the World Register of Marine Species (WORMS) database.
+ * @author TrawlStars, Inc.
+ *
+ */
 public class WormsAPI {
 
-	public static void main(String[] args) throws IOException, ParseException {
-		// small test
-		//System.out.println(nameToID("Neogobius melanostomus"));
-		//System.out.println(nameToRecordID("Neogobius melanostomus"));
-		/*
-		 * TaxonNode[] taxnodes = idToClassification(126916);
-		 * 
-		 * for (int i =0; i < taxnodes.length;i++) {
-		 * System.out.println(taxnodes[i].getTaxonId());
-		 * System.out.println(taxnodes[i].getTaxonType());
-		 * System.out.println(taxnodes[i].getName()); }
-		 */
-		System.out.println(nameToRecordID("Hello"));
-	}
 
 	/**
 	 * Search the WORMS database by scientific name to return Aphia (taxon) ID. This
@@ -90,14 +81,14 @@ public class WormsAPI {
 	
 	
 	/**
-	 * Search the WORMS database by a scientific name from multiple records  
+	 * Search the WORMS database by a approximate scientific name.
 	 * 
-	 * @param Name
+	 * @param Name Name to look up.
 	 * @return Aphia (taxon) ID of given scientific name.
 	 * @throws IOException
 	 * @throws ParseException 
 	 */
-	public static Integer nameToRecordID(String Name) throws IOException, ParseException {
+	public static Integer likeNameToID(String Name) throws IOException, ParseException {
 		//System.out.println( Name);
 		Name = repSpaces(Name);
 		String resp = makeRequest(String.format(

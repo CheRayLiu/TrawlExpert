@@ -1,12 +1,15 @@
 /**
  * 
  */
-package search;
+package test;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import search.Field;
+import search.RBNode;
+import search.RedBlackTree;
 import sort.GeneralCompare;
 
 /**

@@ -4,31 +4,47 @@ import java.io.Serializable;
 
 import data.biotree.BioTree;
 
+/**
+ * Represents a single record in the dataset.
+ * @author TrawlStars, Inc.
+ *
+ */
 public class Record implements Comparable<Record>, Serializable {
 	/**
-	 * 
+	 * Serializable version id of the current class.
 	 */
 	private static final long serialVersionUID = 3564218991166319058L;
+	/**
+	 * The event ID of the record.
+	 */
 	private final int eventId;
+	/**
+	 * The unique occurance id of the record.
+	 */
 	private final String occurId;
+	/**
+	 * The taxon id of the record.
+	 */
 	private final int taxonId;
+	/**
+	 * The number of individuals found in this record.
+	 */
 	private final int individualCount;
-	
+	/**
+	 * The latitude of the record.
+	 */
 	private final float latitude;
+	/**
+	 * The longitude of the record.
+	 */
 	private final float longitude;
-	
-
+	/**
+	 * The date the record was recorded.
+	 */
 	private final Date recDate;
-	
-	
-//	public static void main(String[] args) {
-//		///test main
-//		Record record = new Record(1111,"11",11,111,(float) 94.56, 94,1998,1,9);
-//		System.out.println(record.toString());
-//	}
 
 	/**
-	 * Initialize Record abstract object
+	 * Initialize Record abstract data type
 	 */
 	public Record( int eventId, String occurId, int taxonId, int individualCount, float latitude, float longitude, int year, int month, int day) {
 		this.eventId = eventId;
@@ -47,7 +63,7 @@ public class Record implements Comparable<Record>, Serializable {
 	/**
 	 * Gets the event ID
 	 * 
-	 * @return The eventid of the record
+	 * @return The event ID of the record
 	 */
 	public int getEventId() {
 		return eventId;
@@ -102,6 +118,10 @@ public class Record implements Comparable<Record>, Serializable {
 		return recDate;
 	}
 	
+	/**
+	 * Converts the record to its string representation for printing to the console.
+	 * @return The string representation of the record in a table row format.
+	 */
 	public String toString() {
 		String format = "|%1$-45s|%2$-15s|%3$-15s|%4$-15s|%5$-15s|%6$-15s\n";
 		String num = String.format(format, BioTree.getTaxonRecord(this.taxonId).getName(),this.individualCount,this.longitude, this.latitude, this.recDate.getYear(),this.recDate.getMonth(),this.recDate.getDay());
@@ -113,9 +133,12 @@ public class Record implements Comparable<Record>, Serializable {
 		return num;
 		}
 
+	/**
+	 * Compare two records. At present, always returns 0. Should always be used with the GeneralCompare
+	 * to select the proper comparison method.
+	 */
 	@Override
 	public int compareTo(Record arg0) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	

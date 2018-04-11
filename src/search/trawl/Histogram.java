@@ -3,10 +3,15 @@ package search.trawl;
 import data.Record;
 import search.RedBlackTree;
 
+/**
+ * Provides methods for generating histograms of data from a given iterable of records.
+ * @author TrawlStars, Inc.
+ *
+ */
 public class Histogram {
 
 	/**
-	 * Generates a BST where each node contains the number of occurrences (value) in
+	 * Generates a red-black tree where each node contains the number of occurrences (value) in
 	 * a year (key)
 	 * 
 	 * @param record

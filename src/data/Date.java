@@ -6,9 +6,21 @@ import java.io.Serializable;
 	 */
 public class Date implements Comparable<Date>, Serializable {
 	
+	/**
+	 * Version id for serilization.
+	 */
 	private static final long serialVersionUID = -5256185778691324647L;
+	/**
+	 * The year of the date
+	 */
 	private final int year;
+	/**
+	 * The month of the date
+	 */
 	private final int month;
+	/**
+	 * The day of the date
+	 */
 	private final int day;
 	
 	/**

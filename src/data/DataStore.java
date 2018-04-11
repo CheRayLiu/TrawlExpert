@@ -7,13 +7,21 @@ import sort.GeneralCompare;
 import utils.Stopwatch;
 
 /**
- * Module for storing Record objects in a central place.
+ * Singleton module for storing Record objects in a central place.
  * @author Christopher W. Schankula
  *
  */
 public class DataStore {
+	/**
+	 * The records in the current instance of the program.
+	 */
 	public static KDT<Record> records;
 	
+	/**
+	 * Initialize the DataStore with the given array of records.
+	 * @param recs An array of records to be inserted into the kd-tree-based database
+	 * of record objects for future querying.
+	 */
 	public static void init(Record[] recs) {
 		GeneralCompare<Record> ax0 = (r0,r1) -> ((Record) r0).getDate().compareTo(((Record) r1).getDate());
 		GeneralCompare<Record> ax1 = (r0,r1) -> ((Record) r0).getTaxonId() - ((Record) r1).getTaxonId();

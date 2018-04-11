@@ -17,7 +17,13 @@ import search.trawl.BasicSearch;
  * Class contains methods for reading and parsing files in the format of occurences.csv
  */
 public class FileProcessor {
+	/**
+	 * The path to file the .csv file containing the records.
+	 */
 	private static String path = "src/occurrence.csv";
+	/**
+	 * A temporary list of records to add to as they are processed.
+	 */
 	private static ArrayList<Record> tempRecords = new ArrayList<Record>(1000); //temporary storage for records
 	
 	/**
@@ -30,7 +36,7 @@ public class FileProcessor {
 	}
 	
 	/**
-	 * Sets a new path string
+	 * Sets a new path string to the .csv file.
 	 */
 	public static void setPath(String newPath) {
 		path = newPath;
@@ -40,8 +46,8 @@ public class FileProcessor {
 	 * Initiates the processing of the file on path when called
 	 *  Reads file and calls parse() for each line
 	 *  
-	 * @throws ParseException 
-	 * @throws NumberFormatException 
+	 * @throws ParseException Could not parse the text
+	 * @throws NumberFormatException Found an incorrectly formatted number in the text.
 	 */
 	public static void initProcessing() throws NumberFormatException, ParseException {
 		FileReader fr;
@@ -76,10 +82,10 @@ public class FileProcessor {
 	 * Parses data from string
 	 * Calls createObject on successful regex matching
 	 * 
-	 * @param currentLine, a line/row of data
-	 * @throws IOException
-	 * @throws ParseException 
-	 * @throws NumberFormatException 
+	 * @param currentLine a line/row of data
+	 * @throws IOException Could not read file
+	 * @throws ParseException Could not parse the text
+	 * @throws NumberFormatException Found an incorrectly formatted number in the text.
 	 */
 	private static void parse(String currentLine) throws IOException, NumberFormatException, ParseException {
 		/* Regex Pattern Grouping Guide
@@ -110,9 +116,9 @@ public class FileProcessor {
 	/**
 	 * Passes scientific name to BioTree and creates a record object from the returned taxonId. 
 	 * 
-	 * @param matchEventId
-	 * @throws ParseException 
-	 * @throws NumberFormatException 
+	 * @param matchEventId The regex matcher
+	 * @throws ParseException Could not parse the text
+	 * @throws NumberFormatException Found an incorrectly formatted number in the text.
 	 */
 	public static void createObjects(Matcher matchEventId) throws NumberFormatException, ParseException {
 		// If a scientific name exists
@@ -130,18 +136,18 @@ public class FileProcessor {
 	}
 	
 	/**
-	 * Creates and returns a Record Object
+	 * Helper that creates and returns a Record Object
 	 * 
-	 * @param eventId
-	 * @param occurId
-	 * @param taxonId
-	 * @param individualCount
-	 * @param latitude
-	 * @param longitude
-	 * @param year
-	 * @param month
-	 * @param day
-	 * @return
+	 * @param eventId The event id of the record.
+	 * @param occurId The occurance id of the record
+	 * @param taxonId The record's taxon id
+	 * @param individualCount The individual count in that record
+	 * @param latitude The latitude of the record
+	 * @param longitude The longitude of the record
+	 * @param year The year of the record
+	 * @param month The month of the record
+	 * @param day The day of the record
+	 * @return A new Record object with these parameters.
 	 */
 	public static Record createRecord(int eventId, String occurId, int taxonId, int individualCount, float latitude, float longitude, int year, int month, int day) {
 		return new Record(eventId, occurId, taxonId, individualCount, latitude, longitude, year, month, day);
@@ -151,8 +157,8 @@ public class FileProcessor {
 	 * The main method initiates file processing of occurrances.csv located in the src folder.
 	 * 
 	 * @param args
-	 * @throws NumberFormatException
-	 * @throws ParseException
+	 * @throws NumberFormatException An incorrectly formatted number was found in the file.
+	 * @throws ParseException A part of the file could not be parsed.
 	 */
 	public static void main(String[] args) throws NumberFormatException, ParseException {
 		initProcessing();
