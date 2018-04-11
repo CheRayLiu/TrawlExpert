@@ -5,17 +5,18 @@
 \contentsline {subsection}{\numberline {1.4}Final Product}{5}{subsection.1.4}
 \contentsline {section}{\numberline {2}Implementation}{6}{section.2}
 \contentsline {subsection}{\numberline {2.1}Classes and Modules}{6}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Class Organization}{6}{subsection.2.2}
-\contentsline {subsubsection}{\numberline {2.2.1}model Package}{6}{subsubsection.2.2.1}
-\contentsline {subsubsection}{\numberline {2.2.2}data Package}{7}{subsubsection.2.2.2}
-\contentsline {subsubsection}{\numberline {2.2.3}search Package}{7}{subsubsection.2.2.3}
-\contentsline {subsubsection}{\numberline {2.2.4}sort Package}{7}{subsubsection.2.2.4}
-\contentsline {subsubsection}{\numberline {2.2.5}graph Package}{7}{subsubsection.2.2.5}
-\contentsline {subsubsection}{\numberline {2.2.6}utils Package}{7}{subsubsection.2.2.6}
-\contentsline {subsubsection}{\numberline {2.2.7}web Package}{7}{subsubsection.2.2.7}
-\contentsline {subsection}{\numberline {2.3}UML State Diagrams}{7}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {2.3.1}Main.java}{7}{subsubsection.2.3.1}
-\contentsline {subsubsection}{\numberline {2.3.2}BioTree.java}{7}{subsubsection.2.3.2}
+\contentsline {subsection}{\numberline {2.2}Modular Structure and Uses}{6}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Class Organization}{6}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}model Package}{7}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}data Package}{7}{subsubsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.3}search Package}{7}{subsubsection.2.3.3}
+\contentsline {subsubsection}{\numberline {2.3.4}sort Package}{7}{subsubsection.2.3.4}
+\contentsline {subsubsection}{\numberline {2.3.5}graph Package}{7}{subsubsection.2.3.5}
+\contentsline {subsubsection}{\numberline {2.3.6}utils Package}{7}{subsubsection.2.3.6}
+\contentsline {subsubsection}{\numberline {2.3.7}web Package}{7}{subsubsection.2.3.7}
+\contentsline {subsection}{\numberline {2.4}UML State Diagrams}{7}{subsection.2.4}
+\contentsline {subsubsection}{\numberline {2.4.1}Main.java}{7}{subsubsection.2.4.1}
+\contentsline {subsubsection}{\numberline {2.4.2}BioTree.java}{7}{subsubsection.2.4.2}
 \contentsline {section}{\numberline {3}Algorithmic Opportunities}{10}{section.3}
 \contentsline {subsection}{\numberline {3.1}Quick Select}{10}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}kd Tree}{11}{subsection.3.2}
