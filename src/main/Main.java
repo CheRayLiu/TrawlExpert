@@ -227,6 +227,7 @@ public class Main {
 		
 		while(true) {
 			System.out.println("Available commands: list (cluster #), clusters, exit");
+			System.out.print("> ");
 			
 			Scanner s = new Scanner(System.in);
 			String command = s.nextLine();
