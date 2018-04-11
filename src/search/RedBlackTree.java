@@ -14,11 +14,20 @@ import sort.GeneralCompare;
  */
 public class RedBlackTree<Key extends Comparable<Key>, Value> implements Serializable {
 	/**
-	 * 
+	 * The serializable version id of the RB-tree
 	 */
 	private static final long serialVersionUID = -3108663423969613687L;
-	private RBNode<Key, Value> root; // Root of the tree
+	/**
+	 * The root of the current tree.
+	 */
+	private RBNode<Key, Value> root;
+	/**
+	 * The GeneralCompare instance for searching and adding new values.
+	 */
 	private GeneralCompare<Key> compare;
+	/**
+	 * The field extractor for adding new values without specifying a key.
+	 */
 	private Field<Key, Value> field;
 	
 	/**

@@ -3,8 +3,6 @@
  */
 package sort;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,13 +56,13 @@ public class QuickSelectTest {
 	 */
 	@Test
 	public void testPartialSort() {		
-		QuickSelect.partialSort((Comparable<Integer>[]) test1, 5, b1);
+		QuickSelect.partialSort(test1, 5, b1);
 		assert(test1[test1.length - 5] == 2);
 		
-		QuickSelect.partialSort((Comparable<Integer>[]) test2, 1, b1);
+		QuickSelect.partialSort(test2, 1, b1);
 		assert(test2[test2.length - 1] == 10);
 		
-		QuickSelect.partialSort((Comparable<Integer>[]) test3, 4, b1);
+		QuickSelect.partialSort(test3, 4, b1);
 		assert(test3[test3.length - 4] == -200);
 	}
 }

@@ -1,7 +1,10 @@
-package search;
+package test;
 
 import static org.junit.Assert.*;
 import org.junit.*;
+
+import graph.CC;
+import graph.Graph;
 
 public class CCTest {
 	
