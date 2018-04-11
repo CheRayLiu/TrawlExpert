@@ -14,5 +14,9 @@
 1.2
  & 10.04.18
  & \listset {RL}
- & Added Modular structure and uses\\
+ & added Modular structure and uses\\
+1.3
+ & 11.04.18
+ & \listset {CS}
+ & added 2.3.x subsections\\
 \end {longtable}
