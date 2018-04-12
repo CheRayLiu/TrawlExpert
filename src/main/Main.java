@@ -39,7 +39,7 @@ public class Main {
 	 */
 	private static void printLogo() {
 		//fish art from http://www.ascii-art.de/ascii/def/fish.txt
-		System.out.println("======== TRAWLEXPERT ALPHA v1 ========");
+		System.out.println("======== TRAWLEXPERT BETA v1.0 ========");
 		System.out.println("                                   _...----.\r\n" + 
 				"                       _,      _,-'_...--'`/\r\n" + 
 				"                     ,^__\\__ ,'  ,'      /(\r\n" + 

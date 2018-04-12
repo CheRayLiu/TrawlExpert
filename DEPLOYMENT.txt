@@ -8,12 +8,19 @@ Then you can type "histogram", "sum", "list" or "cluster 10000" for example to s
 results.
 
 ==== TOMCAT ====
-Tomcat is significantly more tricky. There is a makefile that when run from the main project
-directory should allow the server to start. Accessing http://localhost:8080/Trawl should 
-then load the website. However, the amount of time needed to properly configure tomcat on
-your machine will not be worth taking the time to figure out. As such, a live version of the
-website is available at http://trawl.schankula.ca/Trawl. This runs the exact same code as
-would run locally if you ran tomcat. For example, try selecting a species and then clicking 
+Tomcat is significantly more tricky. It may not work depending on the local computer setup. 
+There is a makefile that when run from the main project directory should allow the server to 
+start. On Mac or Linux run go to the project directory and type `make start`. On Windows,
+from the home directory of the project, run the command "tomcat\bin\startup.bat".
+
+Accessing http://localhost:8080/Trawl should then load the website. 
+
+However, the amount of time needed to properly configure tomcat on
+your machine may not be worth taking the time to figure out. As such, a live version of the
+website has been made available at http://trawl.schankula.ca/Trawl. This runs the exact same 
+code as would run locally if you ran tomcat. 
+
+For example, try selecting a species and then clicking 
 "load" on the "list" and seeing how many results there are. Then try viewing histogram,
 heat map, map, etc. For results greater than ~20,000 results, don't attempt to view the
 heat map or map as this will likely lag your browser (the server-side code handles this fine;
