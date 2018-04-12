@@ -20,7 +20,7 @@ public class FileProcessor {
 	/**
 	 * The path to file the .csv file containing the records.
 	 */
-	private static String path = "src/occurrence.csv";
+	private static String path = "occurrence.csv";
 	/**
 	 * A temporary list of records to add to as they are processed.
 	 */

@@ -230,7 +230,7 @@ public class RedBlackTree<Key extends Comparable<Key>, Value> implements Seriali
 	 * to methods in this package (for testing).
 	 * @return The root of a tree object.
 	 */
-	public RBNode<Key, Value> root() {
+	protected RBNode<Key, Value> root() {
 		return root;
 	}
 	

@@ -91,6 +91,8 @@ public class Main {
 				rangeSearch(matcher);
 			else if (command.equals("tree"))
 				printTree(matcher);
+			else
+				System.out.println("Invalid command.");
 		}
 	}
 	

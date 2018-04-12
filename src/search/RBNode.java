@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @param <Key> The key to sort by, must be something with an ordering (Comparable).
  * @param <Value> The value to store in the tree.
  */
-public class RBNode<Key extends Comparable<Key>, Value> implements Serializable{
+class RBNode<Key extends Comparable<Key>, Value> implements Serializable{
 	private final Key key;
 	Value val;
 	private RBNode<Key, Value> left, right;
