@@ -50,7 +50,7 @@ public class Point implements Comparable<Point>, Serializable {
 	 * @return A string representation of the point in the format (x,y).
 	 */
 	public String toString() {
-		return String.format("(%d,%d)", x, y);
+		return String.format("(%f,%f)", x, y);
 	}
 
 	/**

@@ -31,21 +31,21 @@ import utils.Stopwatch;
  */
 public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	/**
-	 * 
+	 * The serialization version id
 	 */
 	private static final long serialVersionUID = -5494252458136566820L;
 	/**
-	 * 
-	 */
-	/**
-	 * 
+	 * The root of the kd-tree.
 	 */
 	private KDNode<KeyVal> root;
+	/**
+	 * The GeneralCompare functions determining the splitting axes of the data.
+	 */
 	private ArrayList<GeneralCompare<KeyVal>> axes;
 	
 	/**
 	 * Load a kd-tree from a serialized file.
-	 * @param fn
+	 * @param fn The filname of the serialized data.
 	 */
 	public KDT(String fn) {
 		KDT<KeyVal> kdt = null;
@@ -94,19 +94,25 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		
 		int mid = (lo + hi) / 2;
 		
+		//find the median of this portion of the array using quickselect
 		QuickSelect.median(keyvals, lo, hi, axes.get(axis));
 		KeyVal median = (KeyVal) keyvals[mid];
 		
+		//add median to this node
 		KDNode<KeyVal> newNode = new KDNode<KeyVal>(median, 0);
+		
+		//recursively construct the two subtrees
 		newNode.left = buildTree(keyvals, lo, mid - 1, depth + 1);
 		newNode.right = buildTree(keyvals, mid + 1, hi, depth + 1);
 		
+		//set this node's number of subtree nodes
 		newNode.n = size(newNode.left) + size(newNode.right) + 1;
 		return newNode;
 	}
 	
 	/**
-	 * Perform a range search for nodes in the tree.
+	 * Perform a range search for nodes in the tree. Assumes number of axes in the range
+	 * variable is equal to the current tree's number of axes.
 	 * @param range	An ArrayList of GeneralRange instances. This must take a value of type
 	 * KeyVal and return whether that value is in the range for the given axis. Must provide
 	 * an ArrayList with a size equal to the current tree's number of axes, k.
@@ -121,7 +127,13 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		return result;
 	}
 	
-	//recursive private range search function
+	/**
+	 * Recursively build a balanced kd-tree from an array of objects.
+	 * @param x The current node to build under.
+	 * @param range The ranges to search on
+	 * @param result The ArrayList pointer to build the result list.
+	 * @param depth The current depth of the search.
+	 */
 	private void rangeSearch(KDNode<KeyVal> x, ArrayList<GeneralRange<KeyVal>> range, ArrayList<KeyVal> result, int depth) {
 		if (x == null) return;
 		int axis = depth % getK();
@@ -175,11 +187,21 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 		return height(root);
 	}
 	
+	/**
+	 * Recursively determine the height of the kd-tree.
+	 * @param x The current node being examined
+	 * @return The height of this part of the tree
+	 */
 	private int height(KDNode<KeyVal> x) {
 		if (x == null) return 0;
 		return 1 + Math.max(height(x.left), height(x.right));
 	}
 	
+	/**
+	 * Determine the number of nodes in the kd-tree.
+	 * @param x The node to examine.
+	 * @return The nubmer of nodes in the node x's subtree.
+	 */
 	private int size(KDNode<KeyVal> x) {
 		if (x == null) return 0;
 		else return x.n;
@@ -192,10 +214,18 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	public int getK() {
 		return axes.size();
 	}
+	
+	/**
+	 * Return a string representation of the kd-tree.
+	 */
 	public String toString() {
 		return toString(root, "");
 	}
 	
+	/**
+	 * Write the current kd-tree to the filesystem.
+	 * @param fn The filename to which to write the kd-tree.
+	 */
 	public void writeToFile(String fn) {
 		try {
 	         FileOutputStream fileOut =
@@ -210,6 +240,12 @@ public class KDT<KeyVal extends Comparable<KeyVal>> implements Serializable {
 	      }
 	}
 	
+	/**
+	 * Private recursive function to build kd-tree string
+	 * @param x The current node being examined / added to the string
+	 * @param depth The depth of the tree
+	 * @return The string representing this part of the tree (returned recursively).
+	 */
 	private String toString(KDNode<KeyVal> x, String depth) {
 		if (x == null) return depth + "null\n";
 		String result = "";
