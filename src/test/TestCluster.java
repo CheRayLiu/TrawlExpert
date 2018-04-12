@@ -3,13 +3,15 @@ package test;
 import search.trawl.*;
 
 import java.util.ArrayList;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
-import data.FileProcessor;
-import data.biotree.BioTree;
+
 import search.trawl.BasicSearchResult;
 import graph.Cluster;
 import graph.RecordCluster;
+import data.biotree.*;
+import data.FileProcessor;
 
 /**
  * Test cases for Cluster.java
@@ -61,5 +63,4 @@ public class TestCluster {
 		System.out.println(clus.get(0).N());
 		assert(clus.get(0).N() == 4);
 	}
-	
 }
