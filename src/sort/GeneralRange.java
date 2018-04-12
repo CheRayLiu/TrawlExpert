@@ -10,9 +10,9 @@ package sort;
  */
 public interface GeneralRange<T extends Comparable<T>> {
 	/**
-	 * Compare two Comparable elements based on an arbitrary ordering definition.
-	 * @param a1 The first value to be compared.
+	 * Return whether a given comparable element is in a bound according to some field in that object.
+	 * @param a The value to be compared to the range.
 	 * @return Integer < 0 if it is less than the range, = 0 if it is in the range and > 0 if it is bigger than the range.
 	 */
-	public int isInBounds(T a1);
+	public int isInBounds(T a);
 }
