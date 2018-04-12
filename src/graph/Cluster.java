@@ -16,6 +16,12 @@ import sort.RangeHelper;
  *
  */
 public class Cluster {
+	
+	public static void main(String[] args) {
+		System.out.println(lngRange(5.48,43.38960));
+		System.out.println(latRange(5.48));
+	}
+	
 	/**
 	 * Cluster the results of a basic search into groupings based on an area.
 	 * @param area Kilometer-squared area of similarity. Records within a square area 
@@ -27,7 +33,9 @@ public class Cluster {
 		Integer yearHi = basicSearch.yearHi();
 		ArrayList<Record> results = basicSearch.results();
 		
+		//mapping from string occurrence id to integer node
 		HashMap<String, Integer> nodeMap = new HashMap<String, Integer>();
+		//mapping from string occurrence id to whether that node has been marked
 		HashMap<String, Boolean> marked = new HashMap<String, Boolean>();
 		
 		int i = 0;
@@ -40,27 +48,30 @@ public class Cluster {
 		
 		double dist = Math.sqrt(area);
 	
-		
+		//iterate through all unmarked nodes and attach 
 		for (Record r: results) {
 			if (marked.get(r.getOccurId()) != null) continue;
 			double lat = r.getLatitude();
 			double lon = r.getLongitude();
+			//perform a range search around this current node
 			BasicSearchResult res = BasicSearch.range(taxonId, yearLo, yearHi, lat - latRange(dist), lat + latRange(dist), lon - lngRange(dist,lat), lon + lngRange(dist,lat));
+			System.out.println("Result size: " + res.n());
+			//for all nodes around the current node, add an edge between the nodes
 			for (Record r1: res.results()) {
 				marked.put(r1.getOccurId(), true);
 				G.addEdge(nodeMap.get(r.getOccurId()), nodeMap.get(r1.getOccurId()));
 			}
 		}
 		
-		System.out.println("Edges found");
-		
 		CC cc = new CC(G);
 		
+		//add clusters for each component
 		ArrayList<RecordCluster> clusters = new ArrayList<RecordCluster>();
 		for(int j = 0; j < cc.count(); j++) {
 			clusters.add(new RecordCluster());
 		}
 		
+		//add all records to its proper cluster
 		for (int j = 0; j < G.V(); j++) {
 			Integer component = cc.id(j);
 			clusters.get(component).addRecord(results.get(j));

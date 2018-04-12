@@ -5,9 +5,12 @@ import search.trawl.*;
 import java.util.ArrayList;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import data.FileProcessor;
 import data.Record;
+import data.biotree.BioTree;
 import model.TrawlExpert;
 import search.RedBlackTree;
 import search.trawl.BasicSearchResult;
@@ -24,11 +27,14 @@ public class TestCluster {
 	public static BasicSearchResult bsr;
 	public static ArrayList<RecordCluster> clus;
 	
-	@Before
-	public void setUp() throws Exception {
+	@BeforeClass
+	public static void setUp() throws Exception {
 		// Assumes serialized data is present
-		te = new TrawlExpert();
-		bsr = te.rangeSearch(154210, 1990, 2008);	// Esox lucius
+		//te = new TrawlExpert();
+		BioTree.init();
+		FileProcessor.setPath("smalldata.csv");
+		FileProcessor.initProcessing();
+		bsr = BasicSearch.range(154210, 1990, 2008);	// Esox lucius
 	}
 	
 	// Check if a cluster is returned for each object
@@ -49,7 +55,7 @@ public class TestCluster {
 	// Check if a cluster contains the correct amount of points
 	@Test
 	public void testCluster3() {
-		bsr = te.rangeSearch(448306, 1990, 2008);
+		bsr = BasicSearch.range(448306, 1990, 2008);
 		clus = Cluster.cluster(30.0, bsr);
 		System.out.println(clus.get(0).N());
 		assert(clus.get(0).N() == 3);
@@ -58,7 +64,8 @@ public class TestCluster {
 	// Check if a cluster contains the correct amount of points
 	@Test
 	public void testCluster4() {
-		bsr = te.rangeSearch(154210, 1990, 2008);
+		bsr = BasicSearch.range(154210, 1990, 2008);
+		System.out.println(bsr.n());
 		clus = Cluster.cluster(300.0, bsr);
 		System.out.println(clus.get(0).N());
 		assert(clus.get(0).N() == 4);
