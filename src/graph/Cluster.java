@@ -55,7 +55,6 @@ public class Cluster {
 			double lon = r.getLongitude();
 			//perform a range search around this current node
 			BasicSearchResult res = BasicSearch.range(taxonId, yearLo, yearHi, lat - latRange(dist), lat + latRange(dist), lon - lngRange(dist,lat), lon + lngRange(dist,lat));
-			System.out.println("Result size: " + res.n());
 			//for all nodes around the current node, add an edge between the nodes
 			for (Record r1: res.results()) {
 				marked.put(r1.getOccurId(), true);
