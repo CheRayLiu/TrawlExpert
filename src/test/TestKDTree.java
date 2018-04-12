@@ -10,6 +10,11 @@ import search.kdt.KDT;
 import sort.GeneralCompare;
 import sort.GeneralRange;
 
+/**
+ * Testing the kd-tree with 2-d data.
+ * @author TrawlStars, Inc.
+ *
+ */
 public class TestKDTree {
 	
 	private static KDT<Point> kdt;

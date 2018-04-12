@@ -6,6 +6,11 @@ import org.junit.*;
 import graph.CC;
 import graph.Graph;
 
+/**
+ * Tests for connected components.
+ * @author TrawlStars, Inc.
+ *
+ */
 public class CCTest {
 	
 	@Before
@@ -67,4 +72,35 @@ public class CCTest {
 		CC cc1 = new CC(g);
 		assertEquals(cc1.count(), 3);//3 sets of clusters
 	}
+	
+	@Test
+	public void testConnected2() {
+		Graph g = new Graph(7);
+		g.addEdge(4, 3);
+		g.addEdge(2, 3);
+		g.addEdge(1, 2);
+		g.addEdge(0, 2);
+		g.addEdge(5, 6);
+		CC component = new CC(g);
+		
+		assert(component.connected(2, 0)); //true
+		assert(component.connected(0,1)); //true
+		assert(!component.connected(1, 5)); //false
+	}
+	
+	@Test
+	public void testComponentId2() {
+		Graph g = new Graph(7);
+		g.addEdge(4, 3);
+		g.addEdge(2, 3);
+		g.addEdge(1, 2);
+		g.addEdge(0, 2);
+		g.addEdge(5, 6);
+		CC component = new CC(g);
+		
+		assert(component.id(0) == 0);
+		assert(component.id(5) == 1);
+		assert(component.id(6) == 1);
+	}
+
 }

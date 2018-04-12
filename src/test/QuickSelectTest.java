@@ -11,6 +11,7 @@ import sort.GeneralCompare;
 import sort.QuickSelect;
 
 /**
+ * Test quickselect.
  * @author HaleyGlavina
  *
  */

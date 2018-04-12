@@ -5,6 +5,11 @@ import org.junit.*;
 
 import graph.Graph;
 
+/**
+ * Test cases for the Graph class.
+ * @author TrawlStars, Inc.
+ *
+ */
 public class TestGraph {
 
 	@Before

@@ -3,8 +3,6 @@
  */
 package test;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +13,7 @@ import search.RedBlackTree;
 import sort.GeneralCompare;
 
 /**
+ * Test red-black tree.
  * @author HaleyGlavina
  *
  */

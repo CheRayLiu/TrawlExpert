@@ -12,6 +12,11 @@ import data.WormsAPI;
 import data.biotree.TaxonNode;
 import data.biotree.TaxonType;
 
+/**
+ * Test cases for the World Register of Marine Species (WORMS) database API module.
+ * @author macoutreachadmin
+ *
+ */
 public class TestWORMS {
 	@Before
 	public void setUp() throws Exception {

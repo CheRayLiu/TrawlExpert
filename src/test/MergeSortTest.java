@@ -13,6 +13,7 @@ import sort.GeneralCompare;
 import sort.MergeSort;
 
 /**
+ * Test mergesort.
  * @author HaleyGlavina
  *
  */

@@ -8,6 +8,11 @@ import org.junit.Test;
 import graph.CC;
 import graph.Graph;
 
+/**
+ * Tests for connected components.
+ * @author TrawlStars, Inc.
+ *
+ */
 public class TestConnectedComponents {
 	Graph g;
 	CC component;
@@ -23,18 +28,5 @@ public class TestConnectedComponents {
 		component = new CC(g);
 	}
 
-	@Test
-	public void testConnected() {
-		assert(component.connected(2, 0)); //true
-		assert(component.connected(0,1)); //true
-		assert(!component.connected(1, 5)); //false
-	}
-	
-	@Test
-	public void testComponentId() {
-		assert(component.id(0) == 0);
-		assert(component.id(5) == 1);
-		assert(component.id(6) == 1);
-	}
 
 }
