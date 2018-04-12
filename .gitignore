@@ -17,3 +17,4 @@ tomcat/work/*
 /doc
 /data
 /tomcat/webapps/Trawl/doc
+*.kdtree
