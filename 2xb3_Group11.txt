@@ -1,0 +1,12 @@
+SFWR ENG 2XB3
+
+Group 11:
+Christopher W. Schankula, 400026650, schankuc - Team Leader
+Haley Glavina, 001412343, glavinhc - Meeting Minutes Administrator
+Winnie Liang, 400074498, liangw15 - Project Log Administrator
+Ray Liu, 400055250, liuc40 - TA & Professor Liaison
+Lawrence Chung, 400014482, chungl1 - Head of Room Booking
+
+By virtue of submitting this work. We attest that the work submitted here is 
+the work of the group. Any content or information used from other sources is 
+referenced in comments in the headers of the methods or files.
