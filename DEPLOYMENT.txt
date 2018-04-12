@@ -1,5 +1,4 @@
 ==== COMMAND LINE ====
-
 In order to launch the command-line version of the TrawlExpert, launch src/main/Main.java
 in Eclipse. This will load the command line tool with all the data needed to run the
 program. Try typing "tree" and pressing Enter to see all of the possible searches in the
@@ -11,9 +10,11 @@ results.
 Tomcat is significantly more tricky. It may not work depending on the local computer setup. 
 There is a makefile that when run from the main project directory should allow the server to 
 start. On Mac or Linux run go to the project directory and type `make start`. On Windows,
-from the home directory of the project, run the command "tomcat\bin\startup.bat".
+navigate to the tomcat\bin directory in cmd and run the command `startup.bat`.
 
 Accessing http://localhost:8080/Trawl should then load the website. 
+
+The `make stop` and `shutdown.bat` commands respectively will then shut down the server.
 
 However, the amount of time needed to properly configure tomcat on
 your machine may not be worth taking the time to figure out. As such, a live version of the
