@@ -51,7 +51,7 @@ public class TestCluster {
 	public void testCluster3() {
 		bsr = BasicSearch.range(448306, 1990, 2008);	// Anura
 		clus = Cluster.cluster(30.0, bsr);
-		System.out.println(clus.get(4).N());
+		System.out.println(clus.get(2).N());
 		assert(clus.get(0).N() == 3);
 	}
 	
