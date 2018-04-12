@@ -33,7 +33,7 @@ public class TestCluster {
 	@Test
 	public void testCluster1() {
 		bsr = BasicSearch.range(154210, 1990, 2008);	// Esox lucius
-		clus = Cluster.cluster(1.0, bsr);
+		clus = Cluster.cluster(0.0, bsr);
 		assert(clus.size() == bsr.n());
 	}
 	
@@ -51,7 +51,7 @@ public class TestCluster {
 	public void testCluster3() {
 		bsr = BasicSearch.range(448306, 1990, 2008);	// Anura
 		clus = Cluster.cluster(30.0, bsr);
-		System.out.println(clus.get(2).N());
+		System.out.println(clus.get(0).N());
 		assert(clus.get(0).N() == 3);
 	}
 	
@@ -59,8 +59,11 @@ public class TestCluster {
 	@Test
 	public void testCluster4() {
 		bsr = BasicSearch.range(154210, 1990, 2008);	// Esox lucius
-		clus = Cluster.cluster(300.0, bsr);
+		clus = Cluster.cluster(9000.0, bsr);
+		String format = "|%1$-15s|%2$-15s|%3$-15s|%4$-15s|%5$-15s\n";
+		for(int i = 0; i < clus.size(); i++)
+			System.out.format(format, (i+1), String.format("%.5f", clus.get(i).centroid().getY()), String.format("%.5f", clus.get(i).centroid().getX()), clus.get(i).N(), clus.get(i).getCount());
 		System.out.println(clus.get(0).N());
-		assert(clus.get(0).N() == 4);
+		assert(clus.get(0).N() == 2);
 	}
 }
